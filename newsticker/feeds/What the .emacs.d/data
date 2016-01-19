@@ -1,0 +1,3560 @@
+;; -*- coding: utf-8 -*-
+(("What the .emacs.d!?" nil nil (22105 53145 750863 636000) feed 0 nil nil ((id nil "urn:whattheemacsd-com:feed") (updated nil "2014-11-15T09:34:36.000Z") (title ((type . "text")) "What the .emacs.d!?") (link ((href . "http://whattheemacsd.com/atom.xml") (rel . "self"))) (entry nil (title nil "build-emacs") (updated nil "2014-11-15T09:34:36.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/build-emacs.html"))) (id nil "urn:whattheemacsd-com:feed:post:build-emacs") (content ((type . "html")) "<!-- 1416044076 -->
+
+<p>
+  Now that Emacs has <a href=\"\">moved to git</a>, maybe it's time to start
+  contributing directly? Here's how you build Emacs from source on OS X:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+git clone git://git.savannah.gnu.org/emacs.git
+cd emacs
+./autogen.sh
+./configure --with-ns
+make install
+cd nextstep
+open Emacs.app </pre>
+
+<hr/>
+
+<p>
+  For more info and instructions for other distros,
+  see <a href=\"http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/\">Lars'
+  post</a>.
+</p>
+")) (entry nil (title nil "setup-magit.el-05") (updated nil "2013-10-07T07:26:32.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-magit.el-05.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-magit.el-05") (content ((type . "html")) "<!-- 1381130792 -->
+
+<p>I mess up a lot, and often want to do a quick amend to the last commit.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">C-c C-a to amend without any prompt
+</span>
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-just-amend</span> ()
+  (interactive)
+  (<span class=\"keyword\">save-window-excursion</span>
+    (magit-with-refresh
+      (shell-command <span class=\"string\">\"git --no-pager commit --amend --reuse-message=HEAD\"</span>))))
+
+(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"magit\"</span>
+  '(define-key magit-status-mode-map (kbd <span class=\"string\">\"C-c C-a\"</span>) 'magit-just-amend))</pre>
+
+<hr/>
+
+<p>
+  This code will let me just press <kbd>C-c C-a</kbd> and it amends
+  with no fuss at all.
+</p>
+
+<p>
+  Thanks
+  to <a href=\"http://www.reddit.com/r/emacs/comments/1nv7uc/magit_how_to_do_amend_reusemessagehead/\">this
+  post</a> for the inspiration.
+</p>
+
+<hr>
+
+<p>
+  <strong>Update!</strong> As noted by Kyle Meyer in the comments
+  below, this no longer works in the newest magit. Instead you should
+  be using the built in Extend Commit command: <kbd>c e</kbd>.
+</p>
+")) (entry nil (title nil "setup-html-mode.el-05") (updated nil "2013-05-24T14:27:16.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-html-mode.el-05.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-html-mode.el-05") (content ((type . "html")) "<!-- 1369405636 -->
+
+<p>Ever been annoyed at the lack of reindentation after using <code>
+    sgml-delete-tag?
+</code></p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">after deleting a tag, indent properly
+</span>(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">sgml-delete-tag</span> (after reindent activate)
+  (indent-region (point-min) (point-max)))</pre>
+
+<hr/>
+
+<p>Be annoyed no more!</p>
+
+<p>This blogpost brought to you live from WebRebels 2013.</p>
+")) (entry nil (title nil "appearance.el-01") (updated nil "2013-05-22T14:12:44.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/appearance.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:appearance.el-01") (content ((type . "html")) "<!-- 1369231964 -->
+
+<p>
+  I already covered the awesomely
+  commented <a href=\"http://whattheemacsd.com/init.el-04.html\">diminish.el</a>.
+  Here's another trick to reduce the cruft in your modeline:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">rename-modeline</span> (package-name mode new-name)
+  `(<span class=\"keyword\">eval-after-load</span> ,package-name
+     '(<span class=\"keyword\">defadvice</span> ,mode (after rename-modeline activate)
+        (setq mode-name ,new-name))))
+
+(rename-modeline <span class=\"string\">\"js2-mode\"</span> js2-mode <span class=\"string\">\"JS2\"</span>)
+(rename-modeline <span class=\"string\">\"clojure-mode\"</span> clojure-mode <span class=\"string\">\"Clj\"</span>)</pre>
+
+<hr/>
+
+<p>With this, I reduce the <code>js2-mode</code> modeline lighter from \"JavaScript IDE\" to just \"JS2\".</p>
+
+<p>
+  I stole it from <a href=\"https://github.com/bodil/emacs.d\">Bodil's
+    .emacs.d</a> and macroified it a little.
+
+  The first argument is the package name, the second is the mode in
+  question, and the third is the new lighter for the mode.
+</p>
+
+
+
+")) (entry nil (title nil "my-misc.el-02") (updated nil "2013-04-21T00:04:27.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/my-misc.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:my-misc.el-02") (content ((type . "html")) "<!-- 1366502667 -->
+
+<p>
+  Undo in region is one of those mind-blowing things about emacs.
+  However, the region keeps jumping about when I use it. So I added this:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Keep region when undoing in region
+</span>(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">undo-tree-undo</span> (around keep-region activate)
+  (<span class=\"keyword\">if</span> (use-region-p)
+      (<span class=\"keyword\">let</span> ((m (set-marker (make-marker) (mark)))
+            (p (set-marker (make-marker) (point))))
+        ad-do-it
+        (goto-char p)
+        (set-mark m)
+        (set-marker p nil)
+        (set-marker m nil))
+    ad-do-it))</pre>
+
+<hr/>
+
+<p>Now the region stays in place while I'm undoing.</p>
+
+<p>
+  Since I use undo-tree, that's what it advises, but I would guess it
+  works the same for regular old undo too.
+</p>
+")) (entry nil (title nil "project-defuns.el-01") (updated nil "2013-04-19T10:03:27.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/project-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:project-defuns.el-01") (content ((type . "html")) "<!-- 1366365807 -->
+
+<p>Where do you put your project specific settings?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">project-specifics</span> (name <span class=\"type\">&amp;rest</span> body)
+  (<span class=\"keyword\">declare</span> (indent 1))
+  `(<span class=\"keyword\">progn</span>
+     (add-hook 'find-file-hook
+               (<span class=\"keyword\">lambda</span> ()
+                 (<span class=\"keyword\">when</span> (string-match-p ,name (buffer-file-name))
+                   ,@body)))
+     (add-hook 'dired-after-readin-hook
+               (<span class=\"keyword\">lambda</span> ()
+                 (<span class=\"keyword\">when</span> (string-match-p ,name (dired-current-directory))
+                   ,@body)))))
+
+(project-specifics <span class=\"string\">\"projects/zombietdd\"</span>
+  (set (make-local-variable 'slime-js-target-url) <span class=\"string\">\"http://localhost:3000/\"</span>)
+  (ffip-local-patterns <span class=\"string\">\"*.js\"</span> <span class=\"string\">\"*.jade\"</span> <span class=\"string\">\"*.css\"</span> <span class=\"string\">\"*.json\"</span> <span class=\"string\">\"*.md\"</span>))</pre>
+
+<hr/>
+
+<p>
+  I created this macro to help me set up local vars. So in the
+  example, any files in <code>projects/zombietdd</code> will see
+  these slime-js-target-url and the find-file-in-projects patterns.
+</p>
+
+<p>
+  I keep these in a projects-folder to keep track of all the different
+  settings for my projects.
+</p>
+")) (entry nil (title nil "setup-org.el-01") (updated nil "2013-02-28T21:05:20.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-org.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-org.el-01") (content ((type . "html")) "<!-- 1362085520 -->
+
+<p>I mainly use org-mode for a collection of TODO-lists.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">myorg-update-parent-cookie</span> ()
+  (<span class=\"keyword\">when</span> (equal major-mode 'org-mode)
+    (<span class=\"keyword\">save-excursion</span>
+      (<span class=\"keyword\">ignore-errors</span>
+        (org-back-to-heading)
+        (org-update-parent-todo-statistics)))))
+
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">org-kill-line</span> (after fix-cookies activate)
+  (myorg-update-parent-cookie))
+
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">kill-whole-line</span> (after fix-cookies activate)
+  (myorg-update-parent-cookie))</pre>
+
+<hr/>
+
+<p>
+  So I get a little annoyed when the <code>[17/23]</code> cookies at
+  the parent level aren't updated when I remove an item.
+</p>
+
+<p>
+  This code fixes that.
+</p>
+")) (entry nil (title nil "setup-html-mode.el-01") (updated nil "2013-02-16T07:01:37.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-html-mode.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-html-mode.el-01") (content ((type . "html")) "<!-- 1360998097 -->
+
+<p>In html-mode, forward/backward-paragraph is infuriatingly slow.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">skip-to-next-blank-line</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((inhibit-changing-match-data t))
+    (skip-syntax-forward <span class=\"string\">\" &gt;\"</span>)
+    (<span class=\"keyword\">unless</span> (search-forward-regexp <span class=\"string\">\"^\\\\s *$\"</span> nil t)
+      (goto-char (point-max)))))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">skip-to-previous-blank-line</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((inhibit-changing-match-data t))
+    (skip-syntax-backward <span class=\"string\">\" &gt;\"</span>)
+    (<span class=\"keyword\">unless</span> (search-backward-regexp <span class=\"string\">\"^\\\\s *$\"</span> nil t)
+      (goto-char (point-min)))))
+
+(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"sgml-mode\"</span>
+  '(<span class=\"keyword\">progn</span>
+     (define-key html-mode-map
+       [remap forward-paragraph] 'skip-to-next-blank-line)
+
+     (define-key html-mode-map
+       [remap backward-paragraph] 'skip-to-previous-blank-line)))</pre>
+
+<hr/>
+
+<p>I use them a lot for quick navigation. In html-mode, they are anything but quick.</p>
+
+<p>
+  Defining paragraphs in Emacs is black magic, and I'm not sure it's a
+  good idea to change that in case something else relies on its erratic behavior.
+</p>
+
+<p>
+  Instead I just remap the commands to my home brewed
+  skip-to-next/previous-blank-line. Ahh, speedy and predictable
+  navigation once more.
+</p>
+")) (entry nil (title nil "setup-ido.el-02") (updated nil "2013-02-08T04:48:45.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-ido.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-ido.el-02") (content ((type . "html")) "<!-- 1360298925 -->
+
+<p>Okay, this is a bad idea if your files are prefixed with <code>~</code>.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(add-hook 'ido-setup-hook
+ (<span class=\"keyword\">lambda</span> ()
+   <span class=\"comment-delimiter\">;; </span><span class=\"comment\">Go straight home
+</span>   (define-key ido-file-completion-map
+     (kbd <span class=\"string\">\"~\"</span>)
+     (<span class=\"keyword\">lambda</span> ()
+       (interactive)
+       (<span class=\"keyword\">if</span> (looking-back <span class=\"string\">\"/\"</span>)
+           (insert <span class=\"string\">\"~/\"</span>)
+         (call-interactively 'self-insert-command))))))</pre>
+
+<hr/>
+
+<p>
+  But if they're not, this keybinding lets you even more quickly reach
+  your home folder when in ido-find-file.
+</p>
+
+<p>
+  It doesn't matter if you're a million directories in, just
+  press <kbd>~</kbd> to go home.
+</p>
+")) (entry nil (title nil "setup-dired.el-02") (updated nil "2013-02-01T07:12:37.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-dired.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-dired.el-02") (content ((type . "html")) "<!-- 1359702757 -->
+
+<p>In dired, <kbd>M-></kbd> and <kbd>M-<</kbd> never take me where I want to go.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">dired-back-to-top</span> ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 4))
+
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">dired-jump-to-bottom</span> ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)</pre>
+
+<hr/>
+
+<p>
+  That is, now they do.
+</p>
+
+<p>
+  Instead of taking me to the very beginning or very end, they now
+  take me to the first or last file.
+</p>
+")) (entry nil (title nil "key-bindings.el-04") (updated nil "2013-01-29T07:56:02.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-04.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-04") (content ((type . "html")) "<!-- 1359446162 -->
+
+<p>
+  I use <a href=\"https://twitter.com/technomancy\">Phil
+  Hagelberg</a>s' <a href=\"https://github.com/technomancy/find-file-in-project\">find-file-in-project</a>,
+  but fuzzy matching with LOTS of files can be suboptimal.
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Function to create new functions that look for a specific pattern
+</span>(<span class=\"keyword\">defun</span> <span class=\"function-name\">ffip-create-pattern-file-finder</span> (<span class=\"type\">&amp;rest</span> patterns)
+  (<span class=\"keyword\">lexical-let</span> ((patterns patterns))
+    (<span class=\"keyword\">lambda</span> ()
+      (interactive)
+      (<span class=\"keyword\">let</span> ((ffip-patterns patterns))
+        (find-file-in-project)))))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Find file in project, with specific patterns
+</span>(global-unset-key (kbd <span class=\"string\">\"C-x C-o\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o ja\"</span>)
+                (ffip-create-pattern-file-finder <span class=\"string\">\"*.java\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o js\"</span>)
+                (ffip-create-pattern-file-finder <span class=\"string\">\"*.js\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o jp\"</span>)
+                (ffip-create-pattern-file-finder <span class=\"string\">\"*.jsp\"</span>))</pre>
+
+<hr/>
+
+<p>
+  This function limits the search to files of a specific file type.
+  I've got loads more of these keybindings, all of them with the
+  two-letter mnemonic shortcut.
+</p>
+
+<p>
+  It really speeds up finding files. Both
+  because <code>ido-completing-read</code> has less matches to worry
+  about, because there are fewer similarly named files, and especially
+  when the .java, the .js and the .jsp share a name.
+</p>
+")) (entry nil (title nil "key-bindings.el-03") (updated nil "2013-01-26T06:22:42.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-03") (content ((type . "html")) "<!-- 1359181362 -->
+
+<p>Here's one keybinding I could not live without.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(global-set-key (kbd <span class=\"string\">\"M-j\"</span>)
+            (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (join-line -1)))</pre>
+
+<hr/>
+
+<p>It joins the following line onto this one.</p>
+
+<p>
+  Let's say I want to collapse this paragraph-tag to one line:
+</p>
+
+<pre class=\"code-snippet\">
+  &lt;<span class=\"function-name\">p</span> <span class=\"variable-name\">class</span>=<span class=\"string\">\"example\"</span>&gt;
+    Some text
+    over multiple
+    lines.
+  &lt;/<span class=\"function-name\">p</span>&gt;</pre>
+
+<p>
+  With point anywhere on the first line, I simply press <kbd>M-j</kbd>
+  multiple times to pull the lines up.
+</p>
+")) (entry nil (title nil "key-bindings.el-02") (updated nil "2013-01-25T10:49:44.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-02") (content ((type . "html")) "<!-- 1359110984 -->
+
+<p>There are lots of neat ways of moving around quickly in a buffer.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Move more quickly
+</span>(global-set-key (kbd <span class=\"string\">\"C-S-n\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (next-line 5))))
+
+(global-set-key (kbd <span class=\"string\">\"C-S-p\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (previous-line 5))))
+
+(global-set-key (kbd <span class=\"string\">\"C-S-f\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (forward-char 5))))
+
+(global-set-key (kbd <span class=\"string\">\"C-S-b\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (backward-char 5))))</pre>
+
+<hr/>
+
+<p>
+  For instance, check
+  out <a href=\"http://emacsrocks.com/e10.html\">Emacs Rocks e10:
+  Jumping Around</a>.
+</p>
+
+<p>
+  But sometimes I just want to browse a little. Or move a few lines
+  down. These keybindings let me do that more quickly
+  than <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd>
+  ...
+</p>
+
+<p>
+  In fact, with these I can navigate to any line within a distance of
+  11 in 3 keystrokes or less. Or close enough to count. Two of them
+  require 4 keystrokes. Can you figure out which ones?
+</p>
+")) (entry nil (title nil "mac.el-01") (updated nil "2013-01-21T18:37:43.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/mac.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:mac.el-01") (content ((type . "html")) "<!-- 1358793463 -->
+
+<p>
+  Everybody knows about moving Control to Caps Lock. These are my
+  extra neat tricks for my MacBook Pro:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+(setq ns-function-modifier 'hyper)</pre>
+
+<hr/>
+
+<p>
+  First of all, Meta <kbd>M-</kbd> needs to be really easy to hit. On a Mac
+  keyboard, that means Command - and not the default Option - since
+  we want the key that is right next to Space.
+</p>
+
+<p>
+  The good news is that now Option is available for
+  Super <kbd>s-</kbd>. And even more amazing, you can also bind the
+  Function-key to Hyper <kbd>H-</kbd> - without losing the ability to
+  change the volume or pause/play.
+</p>
+
+<p>
+  So now I can use crazy keybindings
+  like <kbd>H-SPC</kbd> <em>hyperspace</em>. I haven't entirely
+  decided what I should be using this newfound superpower for, but one
+  thing I've done is reserve all the <kbd>C-s-</kbd> prefixed letters for
+  refactorings with <a href=\"https://github.com/magnars/js2-refactor.el\">js2-refactor</a>,
+  as you can <a href=\"https://github.com/magnars/.emacs.d/blob/master/users/fimasvee/js2r-keys.el\">see here</a>.
+</p>
+")) (entry nil (title nil "setup-paredit.el-03") (updated nil "2013-01-20T12:43:24.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-paredit.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-03") (content ((type . "html")) "<!-- 1358685804 -->
+
+<p>I love the symbiosis between expand-region and delete-selection-mode.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">making paredit work with delete-selection-mode
+</span>(put 'paredit-forward-delete 'delete-selection 'supersede)
+(put 'paredit-backward-delete 'delete-selection 'supersede)
+(put 'paredit-open-round 'delete-selection t)
+(put 'paredit-open-square 'delete-selection t)
+(put 'paredit-doublequote 'delete-selection t)
+(put 'paredit-newline 'delete-selection t)</pre>
+
+<hr/>
+
+<p>
+  This makes paredit-mode work with delete-selection-mode, replacing
+  its wrapping behavior. If I want to wrap, I'll do it with the
+  paredit-wrap-* commands explicitly.
+</p>
+")) (entry nil (title nil "setup-paredit.el-02") (updated nil "2013-01-19T18:01:09.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-paredit.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-02") (content ((type . "html")) "<!-- 1358618469 -->
+
+<p>Yesterday Kototama commented about another neat paredit addition: duplicating sexps. This is my take on that:</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit--is-at-start-of-sexp</span> ()
+  (and (looking-at <span class=\"string\">\"(</span><span class=\"regexp-grouping-backslash\"><span class=\"string\">\\\\</span></span><span class=\"regexp-grouping-construct\"><span class=\"string\">|</span></span><span class=\"string\">\\\\[\"</span>)
+       (not (nth 3 (syntax-ppss))) <span class=\"comment-delimiter\">;; </span><span class=\"comment\">inside string
+</span>       (not (nth 4 (syntax-ppss))))) <span class=\"comment-delimiter\">;; </span><span class=\"comment\">inside comment
+</span>
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit-duplicate-closest-sexp</span> ()
+  (interactive)
+  <span class=\"comment-delimiter\">;; </span><span class=\"comment\">skips to start of current sexp
+</span>  (<span class=\"keyword\">while</span> (not (paredit--is-at-start-of-sexp))
+    (paredit-backward))
+  (set-mark-command nil)
+  <span class=\"comment-delimiter\">;; </span><span class=\"comment\">while we find sexps we move forward on the line
+</span>  (<span class=\"keyword\">while</span> (and (bounds-of-thing-at-point 'sexp)
+              (&lt;= (point) (car (bounds-of-thing-at-point 'sexp)))
+              (not (= (point) (line-end-position))))
+    (forward-sexp)
+    (<span class=\"keyword\">while</span> (looking-at <span class=\"string\">\" \"</span>)
+      (forward-char)))
+  (kill-ring-save (mark) (point))
+  <span class=\"comment-delimiter\">;; </span><span class=\"comment\">go to the next line and copy the sexprs we encountered
+</span>  (paredit-newline)
+  (yank)
+  (exchange-point-and-mark))</pre>
+
+<hr/>
+
+<p>
+  Like Kototama
+  says <a href=\"http://inclojurewetrust.blogspot.de/2013/01/duplicating-s-expressions-on-line.html\">in
+  his blogpost</a>, duplicating a line is very useful, but sometimes
+  it leads to invalid sexps. In the blogpost he shows a snippet that
+  will duplicate the sexp after point. I immediately realized I had
+  really been wanting this.
+</p>
+
+<p>
+  The version listed here is a little modified: It will duplicate the
+  sexp you are currently inside, or looking at, or looking behind at.
+  So basically, point can be in any of these positions:
+</p>
+
+<pre class=\"code-snippet\">
+  |(my sexp) <span class=\"comment-delimiter\">;; in front</span>
+  (my| sexp) <span class=\"comment-delimiter\">;; inside</span>
+  (my sexp)| <span class=\"comment-delimiter\">;; at the end</span>
+</pre>
+
+<p>
+  Insta-useful!
+</p>
+")) (entry nil (title nil "setup-paredit.el-01") (updated nil "2013-01-18T09:41:31.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-paredit.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-01") (content ((type . "html")) "<!-- 1358502091 -->
+
+<p>Programming any lisp? Then this paredit-inspired snippet may be for you.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit-wrap-round-from-behind</span> ()
+  (interactive)
+  (forward-sexp -1)
+  (paredit-wrap-round)
+  (insert <span class=\"string\">\" \"</span>)
+  (forward-char -1))
+
+(define-key paredit-mode-map (kbd <span class=\"string\">\"M-)\"</span>)
+  'paredit-wrap-round-from-behind)</pre>
+
+<hr/>
+
+<p>
+  With point in front of a sexp, <code>paredit-wrap-round</code>
+  (bound to <kbd>M-(</kbd>), will open a paren in front the the sexp,
+  and place the closing paren at the end of it. That's pretty handy.
+</p>
+
+<p>
+  This snippet does the same, but from the other end. It saves me
+  a <kbd>C-M-b</kbd> ever so often. I like it.
+</p>
+")) (entry nil (title nil "buffer-defuns.el-03") (updated nil "2013-01-08T10:31:50.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/buffer-defuns.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-03") (content ((type . "html")) "<!-- 1357641110 -->
+
+<p>Annoyed when Emacs opens the window below instead at the side?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">toggle-window-split</span> ()
+  (interactive)
+  (<span class=\"keyword\">if</span> (= (count-windows) 2)
+      (<span class=\"keyword\">let*</span> ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (&lt;= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (&lt;= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (<span class=\"keyword\">if</span> (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (<span class=\"keyword\">let</span> ((first-win (selected-window)))
+          (funcall splitter)
+          (<span class=\"keyword\">if</span> this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (<span class=\"keyword\">if</span> this-win-2nd (other-window 1))))))</pre>
+
+<hr/>
+
+<p>This snippet toggles between horizontal and vertical layout of two windows.</p>
+
+<p>
+  Neat.
+</p>
+")) (entry nil (title nil "buffer-defuns.el-02") (updated nil "2013-01-07T06:10:58.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/buffer-defuns.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-02") (content ((type . "html")) "<!-- 1357539058 -->
+
+<p>Ever open a file in the wrong window?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">rotate-windows</span> ()
+  <span class=\"doc\">\"Rotate your windows\"</span>
+  (interactive)
+  (<span class=\"keyword\">cond</span> ((not (&gt; (count-windows)1))
+         (message <span class=\"string\">\"You can't rotate a single window!\"</span>))
+        (t
+         (setq i 1)
+         (setq numWindows (count-windows))
+         (<span class=\"keyword\">while</span>  (&lt; i numWindows)
+           (<span class=\"keyword\">let*</span> (
+                  (w1 (elt (window-list) i))
+                  (w2 (elt (window-list) (+ (% i numWindows) 1)))
+
+                  (b1 (window-buffer w1))
+                  (b2 (window-buffer w2))
+
+                  (s1 (window-start w1))
+                  (s2 (window-start w2))
+                  )
+             (set-window-buffer w1  b2)
+             (set-window-buffer w2 b1)
+             (set-window-start w1 s2)
+             (set-window-start w2 s1)
+             (setq i (1+ i)))))))</pre>
+
+<hr/>
+
+<p>
+  This snippet flips a two-window frame, so that left is right, or up
+  is down. It's sanity preserving if you've got a sliver of OCD.
+</p>
+")) (entry nil (title nil "setup-ido.el-01") (updated nil "2013-01-03T20:12:19.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-ido.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-ido.el-01") (content ((type . "html")) "<!-- 1357243939 -->
+
+<p>Ido gives fuzzy matching in my completing-read. I want that everywhere.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Use ido everywhere
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">ido-ubiquitous</span>)
+(ido-ubiquitous-mode 1)
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Fix ido-ubiquitous for newer packages
+</span>(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">ido-ubiquitous-use-new-completing-read</span> (cmd package)
+  `(<span class=\"keyword\">eval-after-load</span> ,package
+     '(<span class=\"keyword\">defadvice</span> ,cmd (around ido-ubiquitous-new activate)
+        (<span class=\"keyword\">let</span> ((ido-ubiquitous-enable-compatibility nil))
+          ad-do-it))))
+
+(ido-ubiquitous-use-new-completing-read webjump 'webjump)
+(ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
+(ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)</pre>
+
+<hr/>
+
+<p><code>ido-ubiquitous</code> delivers on that promise.</p>
+
+<p>
+  However, there is some discrepancies in
+  the <code>completing-read</code> API between newer and older
+  versions regarding the case where you just press enter to choose the
+  first item.
+</p>
+
+<p>
+  To fix these, some of the newer usages of completing read need a
+  slightly different implementation. These tweaks fix that problem.
+</p>
+")) (entry nil (title nil "buffer-defuns.el-01") (updated nil "2013-01-02T17:45:09.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/buffer-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-01") (content ((type . "html")) "<!-- 1357148709 -->
+
+<p>Uneven application of white-space is bad, m'kay?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">cleanup-buffer-safe</span> ()
+  <span class=\"doc\">\"Perform a bunch of safe operations on the whitespace content of a buffer.
+Does not indent buffer, because it is used for a before-save-hook, and that
+might be bad.\"</span>
+  (interactive)
+  (untabify (point-min) (point-max))
+  (delete-trailing-whitespace)
+  (set-buffer-file-coding-system 'utf-8))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Various superfluous white-space. Just say no.
+</span>(add-hook 'before-save-hook 'cleanup-buffer-safe)
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">cleanup-buffer</span> ()
+  <span class=\"doc\">\"Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save.\"</span>
+  (interactive)
+  (cleanup-buffer-safe)
+  (indent-region (point-min) (point-max)))
+
+(global-set-key (kbd <span class=\"string\">\"C-c n\"</span>) 'cleanup-buffer)</pre>
+
+<hr/>
+
+<p>
+  I use these two literally all the time. The first one removes
+  trailing whitespace and replaces all tabs with spaces before save.
+</p>
+
+<p>
+  The last one I've got on a key - it also indents the entire buffer.
+</p>
+
+<p>
+  These might not be for everybody. Sometimes you do want tabs (I'm looking at
+  you <code>Makefile</code> <em>grrrrr</em>). Then this isn't optimal.
+  The same can be said for when Emacs doesn't indent correctly. But
+  that is a horrid, unacceptable situation in any case. I always fix
+  those as soon as I can.
+</p>
+")) (entry nil (title nil "setup-dired.el-01") (updated nil "2012-12-31T12:31:59.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-dired.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-dired.el-01") (content ((type . "html")) "<!-- 1356957119 -->
+
+<p>I find the default dired look a bit spammy, especially in narrow windows.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Make dired less verbose
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">dired-details</span>)
+(setq-default dired-details-hidden-string <span class=\"string\">\"--- \"</span>)
+(dired-details-install)</pre>
+
+<hr/>
+
+<p>
+  By installing <kbd>M-x</kbd> <code>package-install
+  dired-details</code> and using this snippet, we hide all the
+  unnecessary <code>ls</code>-details.
+</p>
+
+<p>
+  That rare occasion where you actually need that information, you can
+  show it with <kbd>)</kbd> and hide again with <kbd>(</kbd>.
+</p>
+")) (entry nil (title nil "file-defuns.el-02") (updated nil "2012-12-30T09:30:49.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/file-defuns.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:file-defuns.el-02") (content ((type . "html")) "<!-- 1356859849 -->
+
+<p>
+  Like <a href=\"/file-defuns.el-01.html\">rename yesterday</a>, I think
+  delete deserves a designated keybinding.
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">delete-current-buffer-file</span> ()
+  <span class=\"doc\">\"Removes file connected to current buffer and kills buffer.\"</span>
+  (interactive)
+  (<span class=\"keyword\">let</span> ((filename (buffer-file-name))
+        (buffer (current-buffer))
+        (name (buffer-name)))
+    (<span class=\"keyword\">if</span> (not (and filename (file-exists-p filename)))
+        (ido-kill-buffer)
+      (<span class=\"keyword\">when</span> (yes-or-no-p <span class=\"string\">\"Are you sure you want to remove this file? \"</span>)
+        (delete-file filename)
+        (kill-buffer buffer)
+        (message <span class=\"string\">\"File '%s' successfully removed\"</span> filename)))))
+
+(global-set-key (kbd <span class=\"string\">\"C-x C-k\"</span>) 'delete-current-buffer-file)</pre>
+
+<hr/>
+
+<p>This is it. <kbd>C-x C-k</kbd>: file begone!</p>
+
+<p>
+  I like the feel between <kbd>C-x k</kbd> to kill the buffer
+  and <kbd>C-x C-k</kbd> to kill the file. Release ctrl to kill it a little,
+  hold to kill it a lot.
+</p>
+")) (entry nil (title nil "file-defuns.el-01") (updated nil "2012-12-29T14:14:15.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/file-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:file-defuns.el-01") (content ((type . "html")) "<!-- 1356790455 -->
+
+<p>For some reason, renaming the current buffer file is a multi-step process in Emacs.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">rename-current-buffer-file</span> ()
+  <span class=\"doc\">\"Renames current buffer and file it is visiting.\"</span>
+  (interactive)
+  (<span class=\"keyword\">let</span> ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (<span class=\"keyword\">if</span> (not (and filename (file-exists-p filename)))
+        (<span class=\"warning\">error</span> <span class=\"string\">\"Buffer '%s' is not visiting a file!\"</span> name)
+      (<span class=\"keyword\">let</span> ((new-name (read-file-name <span class=\"string\">\"New name: \"</span> filename)))
+        (<span class=\"keyword\">if</span> (get-buffer new-name)
+            (<span class=\"warning\">error</span> <span class=\"string\">\"A buffer named '%s' already exists!\"</span> new-name)
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (message <span class=\"string\">\"File '%s' successfully renamed to '%s'\"</span>
+                   name (file-name-nondirectory new-name)))))))
+
+(global-set-key (kbd <span class=\"string\">\"C-x C-r\"</span>) 'rename-current-buffer-file)</pre>
+
+<hr/>
+
+<p>
+  This defun fixes that. And unlike some other alternatives to perform
+  this common task, you don't have to type the name out from scratch -
+  but get the current name to modify. Like it should be.
+</p>
+")) (entry nil (title nil "editing-defuns.el-02") (updated nil "2012-12-28T16:45:34.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/editing-defuns.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:editing-defuns.el-02") (content ((type . "html")) "<!-- 1356713134 -->
+
+<p>When programming I tend to shuffle lines around a lot.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">move-line-down</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((col (current-column)))
+    (<span class=\"keyword\">save-excursion</span>
+      (forward-line)
+      (transpose-lines 1))
+    (forward-line)
+    (move-to-column col)))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">move-line-up</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((col (current-column)))
+    (<span class=\"keyword\">save-excursion</span>
+      (forward-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-down&gt;\"</span>) 'move-line-down)
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-up&gt;\"</span>) 'move-line-up)</pre>
+
+<hr/>
+
+<p>
+  Maybe not when I program elisp, since that's sexp-based, but for
+  other programming languages these two come in very handy. They
+  simply move the current line one step up or down.
+</p>
+")) (entry nil (title nil "editing-defuns.el-01") (updated nil "2012-12-27T08:53:13.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/editing-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:editing-defuns.el-01") (content ((type . "html")) "<!-- 1356598393 -->
+
+<p>Opening new lines can be finicky.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">open-line-below</span> ()
+  (interactive)
+  (end-of-line)
+  (newline)
+  (indent-for-tab-command))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">open-line-above</span> ()
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (forward-line -1)
+  (indent-for-tab-command))
+
+(global-set-key (kbd <span class=\"string\">\"&lt;C-return&gt;\"</span>) 'open-line-below)
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-return&gt;\"</span>) 'open-line-above)</pre>
+
+<hr/>
+
+<p>
+  With these shortcuts you can open a new line above or below the
+  current one, even if the cursor is midsentence.
+</p>
+
+<p> Try it out, it's a nice convenience. </p>
+")) (entry nil (title nil "setup-shell.el-01") (updated nil "2012-12-26T21:14:20.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-shell.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-shell.el-01") (content ((type . "html")) "<!-- 1356556460 -->
+
+<p><kbd>C-d</kbd> on an empty line in the shell terminates the process.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">comint-delchar-or-eof-or-kill-buffer</span> (arg)
+  (interactive <span class=\"string\">\"p\"</span>)
+  (<span class=\"keyword\">if</span> (null (get-buffer-process (current-buffer)))
+      (kill-buffer)
+    (comint-delchar-or-maybe-eof arg)))
+
+(add-hook 'shell-mode-hook
+          (<span class=\"keyword\">lambda</span> ()
+            (define-key shell-mode-map
+              (kbd <span class=\"string\">\"C-d\"</span>) 'comint-delchar-or-eof-or-kill-buffer)))</pre>
+
+<hr/>
+
+<p>With this snippet, another press of <kbd>C-d</kbd> will kill the buffer.</p>
+
+<p>
+  It's pretty nice, since you then just tap <kbd>C-d</kbd> twice to
+  get rid of the shell and go on about your merry way.
+</p>
+")) (entry nil (title nil "setup-magit.el-02") (updated nil "2012-12-26T09:43:30.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-magit.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-magit.el-02") (content ((type . "html")) "<!-- 1356515010 -->
+
+<p>Actual changes lost in a sea of whitespace diffs?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-toggle-whitespace</span> ()
+  (interactive)
+  (<span class=\"keyword\">if</span> (member <span class=\"string\">\"-w\"</span> magit-diff-options)
+      (magit-dont-ignore-whitespace)
+    (magit-ignore-whitespace)))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-ignore-whitespace</span> ()
+  (interactive)
+  (add-to-list 'magit-diff-options <span class=\"string\">\"-w\"</span>)
+  (magit-refresh))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-dont-ignore-whitespace</span> ()
+  (interactive)
+  (setq magit-diff-options (remove <span class=\"string\">\"-w\"</span> magit-diff-options))
+  (magit-refresh))
+
+(define-key magit-status-mode-map (kbd <span class=\"string\">\"W\"</span>) 'magit-toggle-whitespace)</pre>
+
+<hr/>
+
+<p>This adds <kbd>W</kbd> to toggle ignoring whitespace in magit.</p>
+
+<p>
+  It has some weird interactions with the changed files list, in that
+  files with nothing but whitespace changes go missing. Toggle back to
+  find them again.
+</p>
+")) (entry nil (title nil "sane-defaults.el-01") (updated nil "2012-12-24T10:59:00.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/sane-defaults.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:sane-defaults.el-01") (content ((type . "html")) "<!-- 1356346740 -->
+
+<p>Tired of seeing stale dired buffers?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Auto refresh buffers
+</span>(global-auto-revert-mode 1)
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Also auto refresh dired, but be quiet about it
+</span>(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)</pre>
+
+<hr/>
+
+<p>Auto revert mode looks for changes to files, and updates them for you.</p>
+
+<p>
+  With these settings, dired buffers are also updated. The last
+  setting makes sure that you're not alerted every time this happens.
+  Which is every time you save something.
+</p>
+")) (entry nil (title nil "setup-magit.el-01") (updated nil "2012-12-23T11:22:29.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-magit.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-magit.el-01") (content ((type . "html")) "<!-- 1356261749 -->
+
+<p>You are using magit with your git, right?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">full screen magit-status
+</span>
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">magit-status</span> (around magit-fullscreen activate)
+  (window-configuration-to-register <span class=\"builtin\">:magit-fullscreen</span>)
+  ad-do-it
+  (delete-other-windows))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-quit-session</span> ()
+  <span class=\"doc\">\"Restores the previous window configuration and kills the magit buffer\"</span>
+  (interactive)
+  (kill-buffer)
+  (jump-to-register <span class=\"builtin\">:magit-fullscreen</span>))
+
+(define-key magit-status-mode-map (kbd <span class=\"string\">\"q\"</span>) 'magit-quit-session)</pre>
+
+<hr/>
+
+<p>
+  This code makes <code>magit-status</code> run alone in the frame,
+  and then restores the old window configuration when you quit out of magit.
+</p>
+
+<p>
+  No more juggling windows after commiting. It's magit bliss.
+</p>
+")) (entry nil (title nil "key-bindings.el-01") (updated nil "2012-12-23T07:35:09.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-01") (content ((type . "html")) "<!-- 1356248109 -->
+
+<p>What are those line numbers for anyway?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">goto-line-with-feedback</span> ()
+  <span class=\"doc\">\"Show line numbers temporarily, while prompting for the line number input\"</span>
+  (interactive)
+  (<span class=\"keyword\">unwind-protect</span>
+      (<span class=\"keyword\">progn</span>
+        (linum-mode 1)
+        (goto-line (read-number <span class=\"string\">\"Goto line: \"</span>)))
+    (linum-mode -1)))</pre>
+
+<hr/>
+
+<p>
+  I don't have line numbers visible in the fringe of my Emacs. If I
+  want to go to a line number, that is usually because it is
+  referenced in an error message somewhere. Showing them all the time
+  is just noise.
+</p>
+
+<p>
+  Still, many people want line numbers visible. I guess that is
+  because they use them for navigation. This snippet shows line
+  numbers temporarily just when you're going to a line number
+  with <code>goto-line</code>.
+</p>
+
+<p>
+  Notice the nice <code>remap</code>-trick in the key binding. It will
+  remap all key bindings from <code>goto-line</code> to
+  <code>goto-line-with-feedback</code>. Neat!
+</p>
+")) (entry nil (title nil "my-misc.el-01") (updated nil "2012-12-22T20:00:28.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/my-misc.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:my-misc.el-01") (content ((type . "html")) "<!-- 1356206428 -->
+
+<p>Searching the web can also be improved with Emacs.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(global-set-key (kbd <span class=\"string\">\"C-x g\"</span>) 'webjump)
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Add Urban Dictionary to webjump
+</span>(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"webjump\"</span>
+'(add-to-list 'webjump-sites
+              '(<span class=\"string\">\"Urban Dictionary\"</span> .
+                [simple-query
+                 <span class=\"string\">\"www.urbandictionary.com\"</span>
+                 <span class=\"string\">\"http://www.urbandictionary.com/define.php?term=\"</span>
+                 <span class=\"string\">\"\"</span>])))</pre>
+
+<hr/>
+
+<p>
+  Webjump let's you quickly search Google, Wikipedia, Emacs Wiki and
+  other pages. I've got it bound to <kbd>C-x g</kbd>.
+</p>
+
+<p>
+  This snippet adds Urban Dictionary to the list of pages, so the next
+  time you wonder what those dastardly kids mean when they write
+  faceroll or sassafrassa or Technotard or kthxbye or whatever else is
+  hip these days, well, then you can find out. With <code>webjump</code>.
+</p>
+")) (entry nil (title nil "init.el-06") (updated nil "2012-12-21T06:59:31.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-06.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-06") (content ((type . "html")) "<!-- 1356073171 -->
+
+<p>Need different settings for different machines?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Settings for currently logged in user
+</span>(setq user-settings-dir
+      (concat user-emacs-directory <span class=\"string\">\"users/\"</span> user-login-name))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Conclude init by setting up specifics for the current user
+</span>(<span class=\"keyword\">when</span> (file-exists-p user-settings-dir)
+  (mapc 'load (directory-files user-settings-dir nil <span class=\"string\">\"^[</span><span class=\"negation-char\"><span class=\"string\">^</span></span><span class=\"string\">#].*el$\"</span>)))</pre>
+
+<hr/>
+
+<p>
+  These are the last lines of my init.el. They will load
+  any <code>*.el</code> files in the
+  <code>~/.emacs.d/users/<small>user-login-name</small>/</code>
+  folder.
+</p>
+
+<p>
+  Anything specific for that machine goes there.
+</p>
+")) (entry nil (title nil "init.el-05") (updated nil "2012-12-19T09:37:38.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-05.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-05") (content ((type . "html")) "<!-- 1355909858 -->
+
+<p>Do you program any elisp, at all, ever?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Elisp go-to-definition with M-. and back again with M-,
+</span>(autoload 'elisp-slime-nav-mode <span class=\"string\">\"elisp-slime-nav\"</span>)
+(add-hook 'emacs-lisp-mode-hook (<span class=\"keyword\">lambda</span> () (elisp-slime-nav-mode t)))
+(<span class=\"keyword\">eval-after-load</span> 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))</pre>
+
+<hr/>
+
+<p>
+  Then you need to <kbd>M-x</kbd> <code class=\"small\">package-install
+  elisp-slime-nav-mode</code>.
+</p>
+
+<p>
+  It lets you jump to the definition of a function
+  with <kbd>M-.</kbd>, and back again afterwards with <kbd>M-,</kbd>.
+</p>
+
+<p>
+  That last line says that we want elisp-slime-nav-mode to continue
+  doing its work for us, but <a href=\"/init.el-04.html\">we no longer
+  want to be reminded of it</a>.
+</p>
+")) (entry nil (title nil "init.el-04") (updated nil "2012-12-18T19:51:42.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-04.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-04") (content ((type . "html")) "<!-- 1355860302 -->
+
+<p>Is your modeline chock full of minor-mode abbreviations and cruft?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Diminish modeline clutter
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">diminish</span>)
+(diminish 'wrap-region-mode)
+(diminish 'yas/minor-mode)</pre>
+
+<hr/>
+
+<p>
+  After a quick <kbd>M-x</kbd> <code class=\"small\">package-install diminish</code>, you too can
+  have the pleasure of using a lot of minor modes, without those minor
+  modes making a mess of the modeline. Mmm.
+</p>
+
+<p>
+  As for diminish.el itself, it contains the most beautifully poetic
+  code commentary of all time. Here's an excerpt:
+</p>
+
+<hr/>
+
+<div class=\"quote\">
+  <blockquote>
+    \"When we diminish a mode, we are saying we want it to continue doing its
+    work for us, but we no longer want to be reminded of it.  It becomes a
+    night worker, like a janitor; it becomes an invisible man; it remains a
+    component, perhaps an important one, sometimes an indispensable one, of
+    the mechanism that maintains the day-people's world, but its place in
+    their thoughts is diminished, usually to nothing.  As we grow old we
+    diminish more and more such thoughts, such people, usually to nothing.\"
+  </blockquote>
+  <p>
+    - Will Mengarini in
+    <a href=\"http://www.eskimo.com/~seldon/diminish.el\">
+      diminish.el
+    </a>
+  </p>
+</div>
+")) (entry nil (title nil "init.el-03") (updated nil "2012-12-18T07:15:57.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-03") (content ((type . "html")) "<!-- 1355814957 -->
+
+<p>
+  Tired of navigating back to where you were last in a file?
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Save point position between sessions
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">saveplace</span>)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name <span class=\"string\">\".places\"</span> user-emacs-directory))</pre>
+
+<hr/>
+
+<p>
+  The <code>saveplace</code> package is part of Emacs, and remembers the
+  position of point - even between emacs sessions.
+</p>
+
+<p>
+  The last line sets the path to where saveplace stores your position
+  data. Change it at your peril! <small>*</small>
+</p>
+
+<p>
+  <small>* Ahem, there really is no peril. That was just melodrama.</small>
+</p>
+")) (entry nil (title nil "init.el-02") (updated nil "2012-12-17T20:45:51.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-02") (content ((type . "html")) "<!-- 1355777151 -->
+
+<p>
+  Annoyed by those pesky <code>~</code> files?
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Write backup files to own directory
+</span>(setq backup-directory-alist
+      `((<span class=\"string\">\".\"</span> . ,(expand-file-name
+                 (concat user-emacs-directory <span class=\"string\">\"backups\"</span>)))))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Make backups of files, even when they're in version control
+</span>(setq vc-make-backup-files t)
+</pre>
+
+<hr/>
+
+<p>
+  Backup files are so very annoying, until the day they save your
+  hide. That's when you don't want to look back and say \"Man, I
+  really shouldn't have disabled those stupid backups.\"
+</p>
+
+<p>
+  These settings move all backup files to a central location.
+  <em>Bam!</em> No longer annoying.
+</p>
+
+<p>
+  As an added bonus, that last line makes sure your files are backed
+  up even when the files are in version control. Do it.
+</p>
+")) (entry nil (title nil "init.el-01") (updated nil "2012-12-17T20:45:46.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-01") (content ((type . "html")) "<!-- 1355777146 -->
+
+<p>
+  Behold the very first lines in my <code>.emacs.d/init.el</code>:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Turn off mouse interface early in startup to avoid momentary display
+</span>(<span class=\"keyword\">if</span> (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(<span class=\"keyword\">if</span> (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(<span class=\"keyword\">if</span> (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">No splash screen please ... jeez
+</span>(setq inhibit-startup-message t)</pre>
+
+<hr/>
+
+<p>
+  They hide the menu bar, tool bar, scroll bar and splash screen.
+  Doing so early avoids ever having to see them - not even for a brief
+  flash when starting Emacs.
+</p>
+<p>
+  These four lines move us into the tranquil zone of <em>nothing but
+    the text</em>. A raster interface can never hold the seeming
+  infinitude of Emacs functionality, so we just let it go.
+</p>
+
+<hr/>
+
+<div class=\"quote\">
+  <blockquote>
+    \"What I don't understand is: why should you ever care how your editor
+    looks, unless you're trying to win a screenshot competition? The
+    primary factor in looking good should be the choice of a good font
+    at a comfortable size, and a syntax coloring theme that you like.
+    And that is not something specific to an editor. Editors like Emacs
+    and vi have almost no UI! If Emacs is configured right, the only UI
+    it has is the modeline and the minibuffer.\"
+  </blockquote>
+  <p>
+    - Vivek Haldar in
+    <a href=\"http://blog.vivekhaldar.com/post/31970017734/new-frontiers-in-text-editing\">
+      New Frontiers In Text Editing
+    </a>
+  </p>
+</div>
+")))) ("build-emacs" "<!-- 1416044076 -->
+<p>
+Now that Emacs has <a href=\"\">moved to git</a>, maybe it's time to start
+contributing directly? Here's how you build Emacs from source on OS X:
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+git clone git://git.savannah.gnu.org/emacs.git
+cd emacs
+./autogen.sh
+./configure --with-ns
+make install
+cd nextstep
+open Emacs.app </pre>
+<hr/>
+<p>
+For more info and instructions for other distros,
+see <a href=\"http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/\">Lars'
+post</a>.
+</p>" "http://whattheemacsd.com/build-emacs.html" (21607 7724) old 1 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:build-emacs") (title nil "build-emacs") (updated nil "2014-11-15T09:34:36.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/build-emacs.html"))) (id nil "urn:whattheemacsd-com:feed:post:build-emacs") (content ((type . "html")) "<!-- 1416044076 -->
+
+<p>
+  Now that Emacs has <a href=\"\">moved to git</a>, maybe it's time to start
+  contributing directly? Here's how you build Emacs from source on OS X:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+git clone git://git.savannah.gnu.org/emacs.git
+cd emacs
+./autogen.sh
+./configure --with-ns
+make install
+cd nextstep
+open Emacs.app </pre>
+
+<hr/>
+
+<p>
+  For more info and instructions for other distros,
+  see <a href=\"http://lars.ingebrigtsen.no/2014/11/13/welcome-new-emacs-developers/\">Lars'
+  post</a>.
+</p>
+"))) ("setup-magit.el-05" "<!-- 1381130792 -->
+<p>I mess up a lot, and often want to do a quick amend to the last commit.</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">C-c C-a to amend without any prompt
+</span>
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-just-amend</span> ()
+(interactive)
+(<span class=\"keyword\">save-window-excursion</span>
+(magit-with-refresh
+(shell-command <span class=\"string\">\"git --no-pager commit --amend --reuse-message=HEAD\"</span>))))
+(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"magit\"</span>
+'(define-key magit-status-mode-map (kbd <span class=\"string\">\"C-c C-a\"</span>) 'magit-just-amend))</pre>
+<hr/>
+<p>
+This code will let me just press <kbd>C-c C-a</kbd> and it amends
+with no fuss at all.
+</p>
+<p>
+Thanks
+to <a href=\"http://www.reddit.com/r/emacs/comments/1nv7uc/magit_how_to_do_amend_reusemessagehead/\">this
+post</a> for the inspiration.
+</p>
+<hr>
+<p>
+<strong>Update!</strong> As noted by Kyle Meyer in the comments
+below, this no longer works in the newest magit. Instead you should
+be using the built in Extend Commit command: <kbd>c e</kbd>.
+</p>" "http://whattheemacsd.com/setup-magit.el-05.html" (21074 25128) old 2 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-magit.el-05") (title nil "setup-magit.el-05") (updated nil "2013-10-07T07:26:32.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-magit.el-05.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-magit.el-05") (content ((type . "html")) "<!-- 1381130792 -->
+
+<p>I mess up a lot, and often want to do a quick amend to the last commit.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">C-c C-a to amend without any prompt
+</span>
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-just-amend</span> ()
+  (interactive)
+  (<span class=\"keyword\">save-window-excursion</span>
+    (magit-with-refresh
+      (shell-command <span class=\"string\">\"git --no-pager commit --amend --reuse-message=HEAD\"</span>))))
+
+(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"magit\"</span>
+  '(define-key magit-status-mode-map (kbd <span class=\"string\">\"C-c C-a\"</span>) 'magit-just-amend))</pre>
+
+<hr/>
+
+<p>
+  This code will let me just press <kbd>C-c C-a</kbd> and it amends
+  with no fuss at all.
+</p>
+
+<p>
+  Thanks
+  to <a href=\"http://www.reddit.com/r/emacs/comments/1nv7uc/magit_how_to_do_amend_reusemessagehead/\">this
+  post</a> for the inspiration.
+</p>
+
+<hr>
+
+<p>
+  <strong>Update!</strong> As noted by Kyle Meyer in the comments
+  below, this no longer works in the newest magit. Instead you should
+  be using the built in Extend Commit command: <kbd>c e</kbd>.
+</p>
+"))) ("setup-html-mode.el-05" "<!-- 1369405636 -->
+<p>Ever been annoyed at the lack of reindentation after using <code>
+sgml-delete-tag?
+</code></p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">after deleting a tag, indent properly
+</span>(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">sgml-delete-tag</span> (after reindent activate)
+(indent-region (point-min) (point-max)))</pre>
+<hr/>
+<p>Be annoyed no more!</p>
+<p>This blogpost brought to you live from WebRebels 2013.</p>" "http://whattheemacsd.com/setup-html-mode.el-05.html" (20895 30916) old 3 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-html-mode.el-05") (title nil "setup-html-mode.el-05") (updated nil "2013-05-24T14:27:16.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-html-mode.el-05.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-html-mode.el-05") (content ((type . "html")) "<!-- 1369405636 -->
+
+<p>Ever been annoyed at the lack of reindentation after using <code>
+    sgml-delete-tag?
+</code></p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">after deleting a tag, indent properly
+</span>(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">sgml-delete-tag</span> (after reindent activate)
+  (indent-region (point-min) (point-max)))</pre>
+
+<hr/>
+
+<p>Be annoyed no more!</p>
+
+<p>This blogpost brought to you live from WebRebels 2013.</p>
+"))) ("appearance.el-01" "<!-- 1369231964 -->
+<p>
+I already covered the awesomely
+commented <a href=\"http://whattheemacsd.com/init.el-04.html\">diminish.el</a>.
+Here's another trick to reduce the cruft in your modeline:
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">rename-modeline</span> (package-name mode new-name)
+`(<span class=\"keyword\">eval-after-load</span> ,package-name
+'(<span class=\"keyword\">defadvice</span> ,mode (after rename-modeline activate)
+(setq mode-name ,new-name))))
+(rename-modeline <span class=\"string\">\"js2-mode\"</span> js2-mode <span class=\"string\">\"JS2\"</span>)
+(rename-modeline <span class=\"string\">\"clojure-mode\"</span> clojure-mode <span class=\"string\">\"Clj\"</span>)</pre>
+<hr/>
+<p>With this, I reduce the <code>js2-mode</code> modeline lighter from \"JavaScript IDE\" to just \"JS2\".</p>
+<p>
+I stole it from <a href=\"https://github.com/bodil/emacs.d\">Bodil's
+.emacs.d</a> and macroified it a little.
+The first argument is the package name, the second is the mode in
+question, and the third is the new lighter for the mode.
+</p>" "http://whattheemacsd.com/appearance.el-01.html" (20892 53852) old 4 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:appearance.el-01") (title nil "appearance.el-01") (updated nil "2013-05-22T14:12:44.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/appearance.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:appearance.el-01") (content ((type . "html")) "<!-- 1369231964 -->
+
+<p>
+  I already covered the awesomely
+  commented <a href=\"http://whattheemacsd.com/init.el-04.html\">diminish.el</a>.
+  Here's another trick to reduce the cruft in your modeline:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">rename-modeline</span> (package-name mode new-name)
+  `(<span class=\"keyword\">eval-after-load</span> ,package-name
+     '(<span class=\"keyword\">defadvice</span> ,mode (after rename-modeline activate)
+        (setq mode-name ,new-name))))
+
+(rename-modeline <span class=\"string\">\"js2-mode\"</span> js2-mode <span class=\"string\">\"JS2\"</span>)
+(rename-modeline <span class=\"string\">\"clojure-mode\"</span> clojure-mode <span class=\"string\">\"Clj\"</span>)</pre>
+
+<hr/>
+
+<p>With this, I reduce the <code>js2-mode</code> modeline lighter from \"JavaScript IDE\" to just \"JS2\".</p>
+
+<p>
+  I stole it from <a href=\"https://github.com/bodil/emacs.d\">Bodil's
+    .emacs.d</a> and macroified it a little.
+
+  The first argument is the package name, the second is the mode in
+  question, and the third is the new lighter for the mode.
+</p>
+
+
+
+"))) ("my-misc.el-02" "<!-- 1366502667 -->
+<p>
+Undo in region is one of those mind-blowing things about emacs.
+However, the region keeps jumping about when I use it. So I added this:
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Keep region when undoing in region
+</span>(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">undo-tree-undo</span> (around keep-region activate)
+(<span class=\"keyword\">if</span> (use-region-p)
+(<span class=\"keyword\">let</span> ((m (set-marker (make-marker) (mark)))
+(p (set-marker (make-marker) (point))))
+ad-do-it
+(goto-char p)
+(set-mark m)
+(set-marker p nil)
+(set-marker m nil))
+ad-do-it))</pre>
+<hr/>
+<p>Now the region stays in place while I'm undoing.</p>
+<p>
+Since I use undo-tree, that's what it advises, but I would guess it
+works the same for regular old undo too.
+</p>" "http://whattheemacsd.com/my-misc.el-02.html" (20851 11531) old 5 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:my-misc.el-02") (title nil "my-misc.el-02") (updated nil "2013-04-21T00:04:27.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/my-misc.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:my-misc.el-02") (content ((type . "html")) "<!-- 1366502667 -->
+
+<p>
+  Undo in region is one of those mind-blowing things about emacs.
+  However, the region keeps jumping about when I use it. So I added this:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Keep region when undoing in region
+</span>(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">undo-tree-undo</span> (around keep-region activate)
+  (<span class=\"keyword\">if</span> (use-region-p)
+      (<span class=\"keyword\">let</span> ((m (set-marker (make-marker) (mark)))
+            (p (set-marker (make-marker) (point))))
+        ad-do-it
+        (goto-char p)
+        (set-mark m)
+        (set-marker p nil)
+        (set-marker m nil))
+    ad-do-it))</pre>
+
+<hr/>
+
+<p>Now the region stays in place while I'm undoing.</p>
+
+<p>
+  Since I use undo-tree, that's what it advises, but I would guess it
+  works the same for regular old undo too.
+</p>
+"))) ("project-defuns.el-01" "<!-- 1366365807 -->
+<p>Where do you put your project specific settings?</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">project-specifics</span> (name <span class=\"type\">&amp;rest</span> body)
+(<span class=\"keyword\">declare</span> (indent 1))
+`(<span class=\"keyword\">progn</span>
+(add-hook 'find-file-hook
+(<span class=\"keyword\">lambda</span> ()
+(<span class=\"keyword\">when</span> (string-match-p ,name (buffer-file-name))
+,@body)))
+(add-hook 'dired-after-readin-hook
+(<span class=\"keyword\">lambda</span> ()
+(<span class=\"keyword\">when</span> (string-match-p ,name (dired-current-directory))
+,@body)))))
+(project-specifics <span class=\"string\">\"projects/zombietdd\"</span>
+(set (make-local-variable 'slime-js-target-url) <span class=\"string\">\"http://localhost:3000/\"</span>)
+(ffip-local-patterns <span class=\"string\">\"*.js\"</span> <span class=\"string\">\"*.jade\"</span> <span class=\"string\">\"*.css\"</span> <span class=\"string\">\"*.json\"</span> <span class=\"string\">\"*.md\"</span>))</pre>
+<hr/>
+<p>
+I created this macro to help me set up local vars. So in the
+example, any files in <code>projects/zombietdd</code> will see
+these slime-js-target-url and the find-file-in-projects patterns.
+</p>
+<p>
+I keep these in a projects-folder to keep track of all the different
+settings for my projects.
+</p>" "http://whattheemacsd.com/project-defuns.el-01.html" (20849 5743) old 6 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:project-defuns.el-01") (title nil "project-defuns.el-01") (updated nil "2013-04-19T10:03:27.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/project-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:project-defuns.el-01") (content ((type . "html")) "<!-- 1366365807 -->
+
+<p>Where do you put your project specific settings?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">project-specifics</span> (name <span class=\"type\">&amp;rest</span> body)
+  (<span class=\"keyword\">declare</span> (indent 1))
+  `(<span class=\"keyword\">progn</span>
+     (add-hook 'find-file-hook
+               (<span class=\"keyword\">lambda</span> ()
+                 (<span class=\"keyword\">when</span> (string-match-p ,name (buffer-file-name))
+                   ,@body)))
+     (add-hook 'dired-after-readin-hook
+               (<span class=\"keyword\">lambda</span> ()
+                 (<span class=\"keyword\">when</span> (string-match-p ,name (dired-current-directory))
+                   ,@body)))))
+
+(project-specifics <span class=\"string\">\"projects/zombietdd\"</span>
+  (set (make-local-variable 'slime-js-target-url) <span class=\"string\">\"http://localhost:3000/\"</span>)
+  (ffip-local-patterns <span class=\"string\">\"*.js\"</span> <span class=\"string\">\"*.jade\"</span> <span class=\"string\">\"*.css\"</span> <span class=\"string\">\"*.json\"</span> <span class=\"string\">\"*.md\"</span>))</pre>
+
+<hr/>
+
+<p>
+  I created this macro to help me set up local vars. So in the
+  example, any files in <code>projects/zombietdd</code> will see
+  these slime-js-target-url and the find-file-in-projects patterns.
+</p>
+
+<p>
+  I keep these in a projects-folder to keep track of all the different
+  settings for my projects.
+</p>
+"))) ("setup-org.el-01" "<!-- 1362085520 -->
+<p>I mainly use org-mode for a collection of TODO-lists.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">myorg-update-parent-cookie</span> ()
+(<span class=\"keyword\">when</span> (equal major-mode 'org-mode)
+(<span class=\"keyword\">save-excursion</span>
+(<span class=\"keyword\">ignore-errors</span>
+(org-back-to-heading)
+(org-update-parent-todo-statistics)))))
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">org-kill-line</span> (after fix-cookies activate)
+(myorg-update-parent-cookie))
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">kill-whole-line</span> (after fix-cookies activate)
+(myorg-update-parent-cookie))</pre>
+<hr/>
+<p>
+So I get a little annoyed when the <code>[17/23]</code> cookies at
+the parent level aren't updated when I remove an item.
+</p>
+<p>
+This code fixes that.
+</p>" "http://whattheemacsd.com/setup-org.el-01.html" (20783 50832) old 7 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-org.el-01") (title nil "setup-org.el-01") (updated nil "2013-02-28T21:05:20.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-org.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-org.el-01") (content ((type . "html")) "<!-- 1362085520 -->
+
+<p>I mainly use org-mode for a collection of TODO-lists.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">myorg-update-parent-cookie</span> ()
+  (<span class=\"keyword\">when</span> (equal major-mode 'org-mode)
+    (<span class=\"keyword\">save-excursion</span>
+      (<span class=\"keyword\">ignore-errors</span>
+        (org-back-to-heading)
+        (org-update-parent-todo-statistics)))))
+
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">org-kill-line</span> (after fix-cookies activate)
+  (myorg-update-parent-cookie))
+
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">kill-whole-line</span> (after fix-cookies activate)
+  (myorg-update-parent-cookie))</pre>
+
+<hr/>
+
+<p>
+  So I get a little annoyed when the <code>[17/23]</code> cookies at
+  the parent level aren't updated when I remove an item.
+</p>
+
+<p>
+  This code fixes that.
+</p>
+"))) ("setup-html-mode.el-01" "<!-- 1360998097 -->
+<p>In html-mode, forward/backward-paragraph is infuriatingly slow.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">skip-to-next-blank-line</span> ()
+(interactive)
+(<span class=\"keyword\">let</span> ((inhibit-changing-match-data t))
+(skip-syntax-forward <span class=\"string\">\" &gt;\"</span>)
+(<span class=\"keyword\">unless</span> (search-forward-regexp <span class=\"string\">\"^\\\\s *$\"</span> nil t)
+(goto-char (point-max)))))
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">skip-to-previous-blank-line</span> ()
+(interactive)
+(<span class=\"keyword\">let</span> ((inhibit-changing-match-data t))
+(skip-syntax-backward <span class=\"string\">\" &gt;\"</span>)
+(<span class=\"keyword\">unless</span> (search-backward-regexp <span class=\"string\">\"^\\\\s *$\"</span> nil t)
+(goto-char (point-min)))))
+(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"sgml-mode\"</span>
+'(<span class=\"keyword\">progn</span>
+(define-key html-mode-map
+[remap forward-paragraph] 'skip-to-next-blank-line)
+(define-key html-mode-map
+[remap backward-paragraph] 'skip-to-previous-blank-line)))</pre>
+<hr/>
+<p>I use them a lot for quick navigation. In html-mode, they are anything but quick.</p>
+<p>
+Defining paragraphs in Emacs is black magic, and I'm not sure it's a
+good idea to change that in case something else relies on its erratic behavior.
+</p>
+<p>
+Instead I just remap the commands to my home brewed
+skip-to-next/previous-blank-line. Ahh, speedy and predictable
+navigation once more.
+</p>" "http://whattheemacsd.com/setup-html-mode.el-01.html" (20767 11985) old 8 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-html-mode.el-01") (title nil "setup-html-mode.el-01") (updated nil "2013-02-16T07:01:37.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-html-mode.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-html-mode.el-01") (content ((type . "html")) "<!-- 1360998097 -->
+
+<p>In html-mode, forward/backward-paragraph is infuriatingly slow.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">skip-to-next-blank-line</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((inhibit-changing-match-data t))
+    (skip-syntax-forward <span class=\"string\">\" &gt;\"</span>)
+    (<span class=\"keyword\">unless</span> (search-forward-regexp <span class=\"string\">\"^\\\\s *$\"</span> nil t)
+      (goto-char (point-max)))))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">skip-to-previous-blank-line</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((inhibit-changing-match-data t))
+    (skip-syntax-backward <span class=\"string\">\" &gt;\"</span>)
+    (<span class=\"keyword\">unless</span> (search-backward-regexp <span class=\"string\">\"^\\\\s *$\"</span> nil t)
+      (goto-char (point-min)))))
+
+(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"sgml-mode\"</span>
+  '(<span class=\"keyword\">progn</span>
+     (define-key html-mode-map
+       [remap forward-paragraph] 'skip-to-next-blank-line)
+
+     (define-key html-mode-map
+       [remap backward-paragraph] 'skip-to-previous-blank-line)))</pre>
+
+<hr/>
+
+<p>I use them a lot for quick navigation. In html-mode, they are anything but quick.</p>
+
+<p>
+  Defining paragraphs in Emacs is black magic, and I'm not sure it's a
+  good idea to change that in case something else relies on its erratic behavior.
+</p>
+
+<p>
+  Instead I just remap the commands to my home brewed
+  skip-to-next/previous-blank-line. Ahh, speedy and predictable
+  navigation once more.
+</p>
+"))) ("setup-ido.el-02" "<!-- 1360298925 -->
+<p>Okay, this is a bad idea if your files are prefixed with <code>~</code>.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(add-hook 'ido-setup-hook
+(<span class=\"keyword\">lambda</span> ()
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Go straight home
+</span>   (define-key ido-file-completion-map
+(kbd <span class=\"string\">\"~\"</span>)
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(<span class=\"keyword\">if</span> (looking-back <span class=\"string\">\"/\"</span>)
+(insert <span class=\"string\">\"~/\"</span>)
+(call-interactively 'self-insert-command))))))</pre>
+<hr/>
+<p>
+But if they're not, this keybinding lets you even more quickly reach
+your home folder when in ido-find-file.
+</p>
+<p>
+It doesn't matter if you're a million directories in, just
+press <kbd>~</kbd> to go home.
+</p>" "http://whattheemacsd.com/setup-ido.el-02.html" (20756 33709) old 9 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-ido.el-02") (title nil "setup-ido.el-02") (updated nil "2013-02-08T04:48:45.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-ido.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-ido.el-02") (content ((type . "html")) "<!-- 1360298925 -->
+
+<p>Okay, this is a bad idea if your files are prefixed with <code>~</code>.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(add-hook 'ido-setup-hook
+ (<span class=\"keyword\">lambda</span> ()
+   <span class=\"comment-delimiter\">;; </span><span class=\"comment\">Go straight home
+</span>   (define-key ido-file-completion-map
+     (kbd <span class=\"string\">\"~\"</span>)
+     (<span class=\"keyword\">lambda</span> ()
+       (interactive)
+       (<span class=\"keyword\">if</span> (looking-back <span class=\"string\">\"/\"</span>)
+           (insert <span class=\"string\">\"~/\"</span>)
+         (call-interactively 'self-insert-command))))))</pre>
+
+<hr/>
+
+<p>
+  But if they're not, this keybinding lets you even more quickly reach
+  your home folder when in ido-find-file.
+</p>
+
+<p>
+  It doesn't matter if you're a million directories in, just
+  press <kbd>~</kbd> to go home.
+</p>
+"))) ("setup-dired.el-02" "<!-- 1359702757 -->
+<p>In dired, <kbd>M-></kbd> and <kbd>M-<</kbd> never take me where I want to go.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">dired-back-to-top</span> ()
+(interactive)
+(beginning-of-buffer)
+(dired-next-line 4))
+(define-key dired-mode-map
+(vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">dired-jump-to-bottom</span> ()
+(interactive)
+(end-of-buffer)
+(dired-next-line -1))
+(define-key dired-mode-map
+(vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)</pre>
+<hr/>
+<p>
+That is, now they do.
+</p>
+<p>
+Instead of taking me to the very beginning or very end, they now
+take me to the first or last file.
+</p>" "http://whattheemacsd.com/setup-dired.el-02.html" (20747 27365) old 10 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-dired.el-02") (title nil "setup-dired.el-02") (updated nil "2013-02-01T07:12:37.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-dired.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-dired.el-02") (content ((type . "html")) "<!-- 1359702757 -->
+
+<p>In dired, <kbd>M-></kbd> and <kbd>M-<</kbd> never take me where I want to go.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">dired-back-to-top</span> ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 4))
+
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">dired-jump-to-bottom</span> ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)</pre>
+
+<hr/>
+
+<p>
+  That is, now they do.
+</p>
+
+<p>
+  Instead of taking me to the very beginning or very end, they now
+  take me to the first or last file.
+</p>
+"))) ("key-bindings.el-04" "<!-- 1359446162 -->
+<p>
+I use <a href=\"https://twitter.com/technomancy\">Phil
+Hagelberg</a>s' <a href=\"https://github.com/technomancy/find-file-in-project\">find-file-in-project</a>,
+but fuzzy matching with LOTS of files can be suboptimal.
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Function to create new functions that look for a specific pattern
+</span>(<span class=\"keyword\">defun</span> <span class=\"function-name\">ffip-create-pattern-file-finder</span> (<span class=\"type\">&amp;rest</span> patterns)
+(<span class=\"keyword\">lexical-let</span> ((patterns patterns))
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(<span class=\"keyword\">let</span> ((ffip-patterns patterns))
+(find-file-in-project)))))
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Find file in project, with specific patterns
+</span>(global-unset-key (kbd <span class=\"string\">\"C-x C-o\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o ja\"</span>)
+(ffip-create-pattern-file-finder <span class=\"string\">\"*.java\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o js\"</span>)
+(ffip-create-pattern-file-finder <span class=\"string\">\"*.js\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o jp\"</span>)
+(ffip-create-pattern-file-finder <span class=\"string\">\"*.jsp\"</span>))</pre>
+<hr/>
+<p>
+This function limits the search to files of a specific file type.
+I've got loads more of these keybindings, all of them with the
+two-letter mnemonic shortcut.
+</p>
+<p>
+It really speeds up finding files. Both
+because <code>ido-completing-read</code> has less matches to worry
+about, because there are fewer similarly named files, and especially
+when the .java, the .js and the .jsp share a name.
+</p>" "http://whattheemacsd.com/key-bindings.el-04.html" (20743 32914) old 11 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:key-bindings.el-04") (title nil "key-bindings.el-04") (updated nil "2013-01-29T07:56:02.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-04.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-04") (content ((type . "html")) "<!-- 1359446162 -->
+
+<p>
+  I use <a href=\"https://twitter.com/technomancy\">Phil
+  Hagelberg</a>s' <a href=\"https://github.com/technomancy/find-file-in-project\">find-file-in-project</a>,
+  but fuzzy matching with LOTS of files can be suboptimal.
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Function to create new functions that look for a specific pattern
+</span>(<span class=\"keyword\">defun</span> <span class=\"function-name\">ffip-create-pattern-file-finder</span> (<span class=\"type\">&amp;rest</span> patterns)
+  (<span class=\"keyword\">lexical-let</span> ((patterns patterns))
+    (<span class=\"keyword\">lambda</span> ()
+      (interactive)
+      (<span class=\"keyword\">let</span> ((ffip-patterns patterns))
+        (find-file-in-project)))))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Find file in project, with specific patterns
+</span>(global-unset-key (kbd <span class=\"string\">\"C-x C-o\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o ja\"</span>)
+                (ffip-create-pattern-file-finder <span class=\"string\">\"*.java\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o js\"</span>)
+                (ffip-create-pattern-file-finder <span class=\"string\">\"*.js\"</span>))
+(global-set-key (kbd <span class=\"string\">\"C-x C-o jp\"</span>)
+                (ffip-create-pattern-file-finder <span class=\"string\">\"*.jsp\"</span>))</pre>
+
+<hr/>
+
+<p>
+  This function limits the search to files of a specific file type.
+  I've got loads more of these keybindings, all of them with the
+  two-letter mnemonic shortcut.
+</p>
+
+<p>
+  It really speeds up finding files. Both
+  because <code>ido-completing-read</code> has less matches to worry
+  about, because there are fewer similarly named files, and especially
+  when the .java, the .js and the .jsp share a name.
+</p>
+"))) ("key-bindings.el-03" "<!-- 1359181362 -->
+<p>Here's one keybinding I could not live without.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(global-set-key (kbd <span class=\"string\">\"M-j\"</span>)
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(join-line -1)))</pre>
+<hr/>
+<p>It joins the following line onto this one.</p>
+<p>
+Let's say I want to collapse this paragraph-tag to one line:
+</p>
+<pre class=\"code-snippet\">
+&lt;<span class=\"function-name\">p</span> <span class=\"variable-name\">class</span>=<span class=\"string\">\"example\"</span>&gt;
+Some text
+over multiple
+lines.
+&lt;/<span class=\"function-name\">p</span>&gt;</pre>
+<p>
+With point anywhere on the first line, I simply press <kbd>M-j</kbd>
+multiple times to pull the lines up.
+</p>" "http://whattheemacsd.com/key-bindings.el-03.html" (20739 30258) old 12 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:key-bindings.el-03") (title nil "key-bindings.el-03") (updated nil "2013-01-26T06:22:42.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-03") (content ((type . "html")) "<!-- 1359181362 -->
+
+<p>Here's one keybinding I could not live without.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(global-set-key (kbd <span class=\"string\">\"M-j\"</span>)
+            (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (join-line -1)))</pre>
+
+<hr/>
+
+<p>It joins the following line onto this one.</p>
+
+<p>
+  Let's say I want to collapse this paragraph-tag to one line:
+</p>
+
+<pre class=\"code-snippet\">
+  &lt;<span class=\"function-name\">p</span> <span class=\"variable-name\">class</span>=<span class=\"string\">\"example\"</span>&gt;
+    Some text
+    over multiple
+    lines.
+  &lt;/<span class=\"function-name\">p</span>&gt;</pre>
+
+<p>
+  With point anywhere on the first line, I simply press <kbd>M-j</kbd>
+  multiple times to pull the lines up.
+</p>
+"))) ("key-bindings.el-02" "<!-- 1359110984 -->
+<p>There are lots of neat ways of moving around quickly in a buffer.</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Move more quickly
+</span>(global-set-key (kbd <span class=\"string\">\"C-S-n\"</span>)
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(<span class=\"keyword\">ignore-errors</span> (next-line 5))))
+(global-set-key (kbd <span class=\"string\">\"C-S-p\"</span>)
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(<span class=\"keyword\">ignore-errors</span> (previous-line 5))))
+(global-set-key (kbd <span class=\"string\">\"C-S-f\"</span>)
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(<span class=\"keyword\">ignore-errors</span> (forward-char 5))))
+(global-set-key (kbd <span class=\"string\">\"C-S-b\"</span>)
+(<span class=\"keyword\">lambda</span> ()
+(interactive)
+(<span class=\"keyword\">ignore-errors</span> (backward-char 5))))</pre>
+<hr/>
+<p>
+For instance, check
+out <a href=\"http://emacsrocks.com/e10.html\">Emacs Rocks e10:
+Jumping Around</a>.
+</p>
+<p>
+But sometimes I just want to browse a little. Or move a few lines
+down. These keybindings let me do that more quickly
+than <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd>
+...
+</p>
+<p>
+In fact, with these I can navigate to any line within a distance of
+11 in 3 keystrokes or less. Or close enough to count. Two of them
+require 4 keystrokes. Can you figure out which ones?
+</p>" "http://whattheemacsd.com/key-bindings.el-02.html" (20738 25416) old 13 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:key-bindings.el-02") (title nil "key-bindings.el-02") (updated nil "2013-01-25T10:49:44.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-02") (content ((type . "html")) "<!-- 1359110984 -->
+
+<p>There are lots of neat ways of moving around quickly in a buffer.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Move more quickly
+</span>(global-set-key (kbd <span class=\"string\">\"C-S-n\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (next-line 5))))
+
+(global-set-key (kbd <span class=\"string\">\"C-S-p\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (previous-line 5))))
+
+(global-set-key (kbd <span class=\"string\">\"C-S-f\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (forward-char 5))))
+
+(global-set-key (kbd <span class=\"string\">\"C-S-b\"</span>)
+                (<span class=\"keyword\">lambda</span> ()
+                  (interactive)
+                  (<span class=\"keyword\">ignore-errors</span> (backward-char 5))))</pre>
+
+<hr/>
+
+<p>
+  For instance, check
+  out <a href=\"http://emacsrocks.com/e10.html\">Emacs Rocks e10:
+  Jumping Around</a>.
+</p>
+
+<p>
+  But sometimes I just want to browse a little. Or move a few lines
+  down. These keybindings let me do that more quickly
+  than <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd> <kbd>C-n</kbd>
+  ...
+</p>
+
+<p>
+  In fact, with these I can navigate to any line within a distance of
+  11 in 3 keystrokes or less. Or close enough to count. Two of them
+  require 4 keystrokes. Can you figure out which ones?
+</p>
+"))) ("mac.el-01" "<!-- 1358793463 -->
+<p>
+Everybody knows about moving Control to Caps Lock. These are my
+extra neat tricks for my MacBook Pro:
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+(setq ns-function-modifier 'hyper)</pre>
+<hr/>
+<p>
+First of all, Meta <kbd>M-</kbd> needs to be really easy to hit. On a Mac
+keyboard, that means Command - and not the default Option - since
+we want the key that is right next to Space.
+</p>
+<p>
+The good news is that now Option is available for
+Super <kbd>s-</kbd>. And even more amazing, you can also bind the
+Function-key to Hyper <kbd>H-</kbd> - without losing the ability to
+change the volume or pause/play.
+</p>
+<p>
+So now I can use crazy keybindings
+like <kbd>H-SPC</kbd> <em>hyperspace</em>. I haven't entirely
+decided what I should be using this newfound superpower for, but one
+thing I've done is reserve all the <kbd>C-s-</kbd> prefixed letters for
+refactorings with <a href=\"https://github.com/magnars/js2-refactor.el\">js2-refactor</a>,
+as you can <a href=\"https://github.com/magnars/.emacs.d/blob/master/users/fimasvee/js2r-keys.el\">see here</a>.
+</p>" "http://whattheemacsd.com/mac.el-01.html" (20733 35575) old 14 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:mac.el-01") (title nil "mac.el-01") (updated nil "2013-01-21T18:37:43.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/mac.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:mac.el-01") (content ((type . "html")) "<!-- 1358793463 -->
+
+<p>
+  Everybody knows about moving Control to Caps Lock. These are my
+  extra neat tricks for my MacBook Pro:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+(setq ns-function-modifier 'hyper)</pre>
+
+<hr/>
+
+<p>
+  First of all, Meta <kbd>M-</kbd> needs to be really easy to hit. On a Mac
+  keyboard, that means Command - and not the default Option - since
+  we want the key that is right next to Space.
+</p>
+
+<p>
+  The good news is that now Option is available for
+  Super <kbd>s-</kbd>. And even more amazing, you can also bind the
+  Function-key to Hyper <kbd>H-</kbd> - without losing the ability to
+  change the volume or pause/play.
+</p>
+
+<p>
+  So now I can use crazy keybindings
+  like <kbd>H-SPC</kbd> <em>hyperspace</em>. I haven't entirely
+  decided what I should be using this newfound superpower for, but one
+  thing I've done is reserve all the <kbd>C-s-</kbd> prefixed letters for
+  refactorings with <a href=\"https://github.com/magnars/js2-refactor.el\">js2-refactor</a>,
+  as you can <a href=\"https://github.com/magnars/.emacs.d/blob/master/users/fimasvee/js2r-keys.el\">see here</a>.
+</p>
+"))) ("setup-paredit.el-03" "<!-- 1358685804 -->
+<p>I love the symbiosis between expand-region and delete-selection-mode.</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">making paredit work with delete-selection-mode
+</span>(put 'paredit-forward-delete 'delete-selection 'supersede)
+(put 'paredit-backward-delete 'delete-selection 'supersede)
+(put 'paredit-open-round 'delete-selection t)
+(put 'paredit-open-square 'delete-selection t)
+(put 'paredit-doublequote 'delete-selection t)
+(put 'paredit-newline 'delete-selection t)</pre>
+<hr/>
+<p>
+This makes paredit-mode work with delete-selection-mode, replacing
+its wrapping behavior. If I want to wrap, I'll do it with the
+paredit-wrap-* commands explicitly.
+</p>" "http://whattheemacsd.com/setup-paredit.el-03.html" (20731 58988) old 15 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-03") (title nil "setup-paredit.el-03") (updated nil "2013-01-20T12:43:24.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-paredit.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-03") (content ((type . "html")) "<!-- 1358685804 -->
+
+<p>I love the symbiosis between expand-region and delete-selection-mode.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">making paredit work with delete-selection-mode
+</span>(put 'paredit-forward-delete 'delete-selection 'supersede)
+(put 'paredit-backward-delete 'delete-selection 'supersede)
+(put 'paredit-open-round 'delete-selection t)
+(put 'paredit-open-square 'delete-selection t)
+(put 'paredit-doublequote 'delete-selection t)
+(put 'paredit-newline 'delete-selection t)</pre>
+
+<hr/>
+
+<p>
+  This makes paredit-mode work with delete-selection-mode, replacing
+  its wrapping behavior. If I want to wrap, I'll do it with the
+  paredit-wrap-* commands explicitly.
+</p>
+"))) ("setup-paredit.el-02" "<!-- 1358618469 -->
+<p>Yesterday Kototama commented about another neat paredit addition: duplicating sexps. This is my take on that:</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit--is-at-start-of-sexp</span> ()
+(and (looking-at <span class=\"string\">\"(</span><span class=\"regexp-grouping-backslash\"><span class=\"string\">\\\\</span></span><span class=\"regexp-grouping-construct\"><span class=\"string\">|</span></span><span class=\"string\">\\\\[\"</span>)
+(not (nth 3 (syntax-ppss))) <span class=\"comment-delimiter\">;; </span><span class=\"comment\">inside string
+</span>       (not (nth 4 (syntax-ppss))))) <span class=\"comment-delimiter\">;; </span><span class=\"comment\">inside comment
+</span>
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit-duplicate-closest-sexp</span> ()
+(interactive)
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">skips to start of current sexp
+</span>  (<span class=\"keyword\">while</span> (not (paredit--is-at-start-of-sexp))
+(paredit-backward))
+(set-mark-command nil)
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">while we find sexps we move forward on the line
+</span>  (<span class=\"keyword\">while</span> (and (bounds-of-thing-at-point 'sexp)
+(&lt;= (point) (car (bounds-of-thing-at-point 'sexp)))
+(not (= (point) (line-end-position))))
+(forward-sexp)
+(<span class=\"keyword\">while</span> (looking-at <span class=\"string\">\" \"</span>)
+(forward-char)))
+(kill-ring-save (mark) (point))
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">go to the next line and copy the sexprs we encountered
+</span>  (paredit-newline)
+(yank)
+(exchange-point-and-mark))</pre>
+<hr/>
+<p>
+Like Kototama
+says <a href=\"http://inclojurewetrust.blogspot.de/2013/01/duplicating-s-expressions-on-line.html\">in
+his blogpost</a>, duplicating a line is very useful, but sometimes
+it leads to invalid sexps. In the blogpost he shows a snippet that
+will duplicate the sexp after point. I immediately realized I had
+really been wanting this.
+</p>
+<p>
+The version listed here is a little modified: It will duplicate the
+sexp you are currently inside, or looking at, or looking behind at.
+So basically, point can be in any of these positions:
+</p>
+<pre class=\"code-snippet\">
+|(my sexp) <span class=\"comment-delimiter\">;; in front</span>
+(my| sexp) <span class=\"comment-delimiter\">;; inside</span>
+(my sexp)| <span class=\"comment-delimiter\">;; at the end</span>
+</pre>
+<p>
+Insta-useful!
+</p>" "http://whattheemacsd.com/setup-paredit.el-02.html" (20730 57189) old 16 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-02") (title nil "setup-paredit.el-02") (updated nil "2013-01-19T18:01:09.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-paredit.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-02") (content ((type . "html")) "<!-- 1358618469 -->
+
+<p>Yesterday Kototama commented about another neat paredit addition: duplicating sexps. This is my take on that:</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit--is-at-start-of-sexp</span> ()
+  (and (looking-at <span class=\"string\">\"(</span><span class=\"regexp-grouping-backslash\"><span class=\"string\">\\\\</span></span><span class=\"regexp-grouping-construct\"><span class=\"string\">|</span></span><span class=\"string\">\\\\[\"</span>)
+       (not (nth 3 (syntax-ppss))) <span class=\"comment-delimiter\">;; </span><span class=\"comment\">inside string
+</span>       (not (nth 4 (syntax-ppss))))) <span class=\"comment-delimiter\">;; </span><span class=\"comment\">inside comment
+</span>
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit-duplicate-closest-sexp</span> ()
+  (interactive)
+  <span class=\"comment-delimiter\">;; </span><span class=\"comment\">skips to start of current sexp
+</span>  (<span class=\"keyword\">while</span> (not (paredit--is-at-start-of-sexp))
+    (paredit-backward))
+  (set-mark-command nil)
+  <span class=\"comment-delimiter\">;; </span><span class=\"comment\">while we find sexps we move forward on the line
+</span>  (<span class=\"keyword\">while</span> (and (bounds-of-thing-at-point 'sexp)
+              (&lt;= (point) (car (bounds-of-thing-at-point 'sexp)))
+              (not (= (point) (line-end-position))))
+    (forward-sexp)
+    (<span class=\"keyword\">while</span> (looking-at <span class=\"string\">\" \"</span>)
+      (forward-char)))
+  (kill-ring-save (mark) (point))
+  <span class=\"comment-delimiter\">;; </span><span class=\"comment\">go to the next line and copy the sexprs we encountered
+</span>  (paredit-newline)
+  (yank)
+  (exchange-point-and-mark))</pre>
+
+<hr/>
+
+<p>
+  Like Kototama
+  says <a href=\"http://inclojurewetrust.blogspot.de/2013/01/duplicating-s-expressions-on-line.html\">in
+  his blogpost</a>, duplicating a line is very useful, but sometimes
+  it leads to invalid sexps. In the blogpost he shows a snippet that
+  will duplicate the sexp after point. I immediately realized I had
+  really been wanting this.
+</p>
+
+<p>
+  The version listed here is a little modified: It will duplicate the
+  sexp you are currently inside, or looking at, or looking behind at.
+  So basically, point can be in any of these positions:
+</p>
+
+<pre class=\"code-snippet\">
+  |(my sexp) <span class=\"comment-delimiter\">;; in front</span>
+  (my| sexp) <span class=\"comment-delimiter\">;; inside</span>
+  (my sexp)| <span class=\"comment-delimiter\">;; at the end</span>
+</pre>
+
+<p>
+  Insta-useful!
+</p>
+"))) ("setup-paredit.el-01" "<!-- 1358502091 -->
+<p>Programming any lisp? Then this paredit-inspired snippet may be for you.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit-wrap-round-from-behind</span> ()
+(interactive)
+(forward-sexp -1)
+(paredit-wrap-round)
+(insert <span class=\"string\">\" \"</span>)
+(forward-char -1))
+(define-key paredit-mode-map (kbd <span class=\"string\">\"M-)\"</span>)
+'paredit-wrap-round-from-behind)</pre>
+<hr/>
+<p>
+With point in front of a sexp, <code>paredit-wrap-round</code>
+(bound to <kbd>M-(</kbd>), will open a paren in front the the sexp,
+and place the closing paren at the end of it. That's pretty handy.
+</p>
+<p>
+This snippet does the same, but from the other end. It saves me
+a <kbd>C-M-b</kbd> ever so often. I like it.
+</p>" "http://whattheemacsd.com/setup-paredit.el-01.html" (20729 6347) old 17 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-01") (title nil "setup-paredit.el-01") (updated nil "2013-01-18T09:41:31.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-paredit.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-paredit.el-01") (content ((type . "html")) "<!-- 1358502091 -->
+
+<p>Programming any lisp? Then this paredit-inspired snippet may be for you.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">paredit-wrap-round-from-behind</span> ()
+  (interactive)
+  (forward-sexp -1)
+  (paredit-wrap-round)
+  (insert <span class=\"string\">\" \"</span>)
+  (forward-char -1))
+
+(define-key paredit-mode-map (kbd <span class=\"string\">\"M-)\"</span>)
+  'paredit-wrap-round-from-behind)</pre>
+
+<hr/>
+
+<p>
+  With point in front of a sexp, <code>paredit-wrap-round</code>
+  (bound to <kbd>M-(</kbd>), will open a paren in front the the sexp,
+  and place the closing paren at the end of it. That's pretty handy.
+</p>
+
+<p>
+  This snippet does the same, but from the other end. It saves me
+  a <kbd>C-M-b</kbd> ever so often. I like it.
+</p>
+"))) ("buffer-defuns.el-03" "<!-- 1357641110 -->
+<p>Annoyed when Emacs opens the window below instead at the side?</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">toggle-window-split</span> ()
+(interactive)
+(<span class=\"keyword\">if</span> (= (count-windows) 2)
+(<span class=\"keyword\">let*</span> ((this-win-buffer (window-buffer))
+(next-win-buffer (window-buffer (next-window)))
+(this-win-edges (window-edges (selected-window)))
+(next-win-edges (window-edges (next-window)))
+(this-win-2nd (not (and (&lt;= (car this-win-edges)
+(car next-win-edges))
+(&lt;= (cadr this-win-edges)
+(cadr next-win-edges)))))
+(splitter
+(<span class=\"keyword\">if</span> (= (car this-win-edges)
+(car (window-edges (next-window))))
+'split-window-horizontally
+'split-window-vertically)))
+(delete-other-windows)
+(<span class=\"keyword\">let</span> ((first-win (selected-window)))
+(funcall splitter)
+(<span class=\"keyword\">if</span> this-win-2nd (other-window 1))
+(set-window-buffer (selected-window) this-win-buffer)
+(set-window-buffer (next-window) next-win-buffer)
+(select-window first-win)
+(<span class=\"keyword\">if</span> this-win-2nd (other-window 1))))))</pre>
+<hr/>
+<p>This snippet toggles between horizontal and vertical layout of two windows.</p>
+<p>
+Neat.
+</p>" "http://whattheemacsd.com/buffer-defuns.el-03.html" (20715 62870) old 18 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-03") (title nil "buffer-defuns.el-03") (updated nil "2013-01-08T10:31:50.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/buffer-defuns.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-03") (content ((type . "html")) "<!-- 1357641110 -->
+
+<p>Annoyed when Emacs opens the window below instead at the side?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">toggle-window-split</span> ()
+  (interactive)
+  (<span class=\"keyword\">if</span> (= (count-windows) 2)
+      (<span class=\"keyword\">let*</span> ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (&lt;= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (&lt;= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (<span class=\"keyword\">if</span> (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (<span class=\"keyword\">let</span> ((first-win (selected-window)))
+          (funcall splitter)
+          (<span class=\"keyword\">if</span> this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (<span class=\"keyword\">if</span> this-win-2nd (other-window 1))))))</pre>
+
+<hr/>
+
+<p>This snippet toggles between horizontal and vertical layout of two windows.</p>
+
+<p>
+  Neat.
+</p>
+"))) ("buffer-defuns.el-02" "<!-- 1357539058 -->
+<p>Ever open a file in the wrong window?</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">rotate-windows</span> ()
+<span class=\"doc\">\"Rotate your windows\"</span>
+(interactive)
+(<span class=\"keyword\">cond</span> ((not (&gt; (count-windows)1))
+(message <span class=\"string\">\"You can't rotate a single window!\"</span>))
+(t
+(setq i 1)
+(setq numWindows (count-windows))
+(<span class=\"keyword\">while</span>  (&lt; i numWindows)
+(<span class=\"keyword\">let*</span> (
+(w1 (elt (window-list) i))
+(w2 (elt (window-list) (+ (% i numWindows) 1)))
+(b1 (window-buffer w1))
+(b2 (window-buffer w2))
+(s1 (window-start w1))
+(s2 (window-start w2))
+)
+(set-window-buffer w1  b2)
+(set-window-buffer w2 b1)
+(set-window-start w1 s2)
+(set-window-start w2 s1)
+(setq i (1+ i)))))))</pre>
+<hr/>
+<p>
+This snippet flips a two-window frame, so that left is right, or up
+is down. It's sanity preserving if you've got a sliver of OCD.
+</p>" "http://whattheemacsd.com/buffer-defuns.el-02.html" (20714 26354) old 19 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-02") (title nil "buffer-defuns.el-02") (updated nil "2013-01-07T06:10:58.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/buffer-defuns.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-02") (content ((type . "html")) "<!-- 1357539058 -->
+
+<p>Ever open a file in the wrong window?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">rotate-windows</span> ()
+  <span class=\"doc\">\"Rotate your windows\"</span>
+  (interactive)
+  (<span class=\"keyword\">cond</span> ((not (&gt; (count-windows)1))
+         (message <span class=\"string\">\"You can't rotate a single window!\"</span>))
+        (t
+         (setq i 1)
+         (setq numWindows (count-windows))
+         (<span class=\"keyword\">while</span>  (&lt; i numWindows)
+           (<span class=\"keyword\">let*</span> (
+                  (w1 (elt (window-list) i))
+                  (w2 (elt (window-list) (+ (% i numWindows) 1)))
+
+                  (b1 (window-buffer w1))
+                  (b2 (window-buffer w2))
+
+                  (s1 (window-start w1))
+                  (s2 (window-start w2))
+                  )
+             (set-window-buffer w1  b2)
+             (set-window-buffer w2 b1)
+             (set-window-start w1 s2)
+             (set-window-start w2 s1)
+             (setq i (1+ i)))))))</pre>
+
+<hr/>
+
+<p>
+  This snippet flips a two-window frame, so that left is right, or up
+  is down. It's sanity preserving if you've got a sliver of OCD.
+</p>
+"))) ("setup-ido.el-01" "<!-- 1357243939 -->
+<p>Ido gives fuzzy matching in my completing-read. I want that everywhere.</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Use ido everywhere
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">ido-ubiquitous</span>)
+(ido-ubiquitous-mode 1)
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Fix ido-ubiquitous for newer packages
+</span>(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">ido-ubiquitous-use-new-completing-read</span> (cmd package)
+`(<span class=\"keyword\">eval-after-load</span> ,package
+'(<span class=\"keyword\">defadvice</span> ,cmd (around ido-ubiquitous-new activate)
+(<span class=\"keyword\">let</span> ((ido-ubiquitous-enable-compatibility nil))
+ad-do-it))))
+(ido-ubiquitous-use-new-completing-read webjump 'webjump)
+(ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
+(ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)</pre>
+<hr/>
+<p><code>ido-ubiquitous</code> delivers on that promise.</p>
+<p>
+However, there is some discrepancies in
+the <code>completing-read</code> API between newer and older
+versions regarding the case where you just press enter to choose the
+first item.
+</p>
+<p>
+To fix these, some of the newer usages of completing read need a
+slightly different implementation. These tweaks fix that problem.
+</p>" "http://whattheemacsd.com/setup-ido.el-01.html" (20709 58915) old 20 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-ido.el-01") (title nil "setup-ido.el-01") (updated nil "2013-01-03T20:12:19.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-ido.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-ido.el-01") (content ((type . "html")) "<!-- 1357243939 -->
+
+<p>Ido gives fuzzy matching in my completing-read. I want that everywhere.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Use ido everywhere
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">ido-ubiquitous</span>)
+(ido-ubiquitous-mode 1)
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Fix ido-ubiquitous for newer packages
+</span>(<span class=\"keyword\">defmacro</span> <span class=\"function-name\">ido-ubiquitous-use-new-completing-read</span> (cmd package)
+  `(<span class=\"keyword\">eval-after-load</span> ,package
+     '(<span class=\"keyword\">defadvice</span> ,cmd (around ido-ubiquitous-new activate)
+        (<span class=\"keyword\">let</span> ((ido-ubiquitous-enable-compatibility nil))
+          ad-do-it))))
+
+(ido-ubiquitous-use-new-completing-read webjump 'webjump)
+(ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
+(ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)</pre>
+
+<hr/>
+
+<p><code>ido-ubiquitous</code> delivers on that promise.</p>
+
+<p>
+  However, there is some discrepancies in
+  the <code>completing-read</code> API between newer and older
+  versions regarding the case where you just press enter to choose the
+  first item.
+</p>
+
+<p>
+  To fix these, some of the newer usages of completing read need a
+  slightly different implementation. These tweaks fix that problem.
+</p>
+"))) ("buffer-defuns.el-01" "<!-- 1357148709 -->
+<p>Uneven application of white-space is bad, m'kay?</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">cleanup-buffer-safe</span> ()
+<span class=\"doc\">\"Perform a bunch of safe operations on the whitespace content of a buffer.
+Does not indent buffer, because it is used for a before-save-hook, and that
+might be bad.\"</span>
+(interactive)
+(untabify (point-min) (point-max))
+(delete-trailing-whitespace)
+(set-buffer-file-coding-system 'utf-8))
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Various superfluous white-space. Just say no.
+</span>(add-hook 'before-save-hook 'cleanup-buffer-safe)
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">cleanup-buffer</span> ()
+<span class=\"doc\">\"Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save.\"</span>
+(interactive)
+(cleanup-buffer-safe)
+(indent-region (point-min) (point-max)))
+(global-set-key (kbd <span class=\"string\">\"C-c n\"</span>) 'cleanup-buffer)</pre>
+<hr/>
+<p>
+I use these two literally all the time. The first one removes
+trailing whitespace and replaces all tabs with spaces before save.
+</p>
+<p>
+The last one I've got on a key - it also indents the entire buffer.
+</p>
+<p>
+These might not be for everybody. Sometimes you do want tabs (I'm looking at
+you <code>Makefile</code> <em>grrrrr</em>). Then this isn't optimal.
+The same can be said for when Emacs doesn't indent correctly. But
+that is a horrid, unacceptable situation in any case. I always fix
+those as soon as I can.
+</p>" "http://whattheemacsd.com/buffer-defuns.el-01.html" (20708 29221) old 21 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-01") (title nil "buffer-defuns.el-01") (updated nil "2013-01-02T17:45:09.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/buffer-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:buffer-defuns.el-01") (content ((type . "html")) "<!-- 1357148709 -->
+
+<p>Uneven application of white-space is bad, m'kay?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">cleanup-buffer-safe</span> ()
+  <span class=\"doc\">\"Perform a bunch of safe operations on the whitespace content of a buffer.
+Does not indent buffer, because it is used for a before-save-hook, and that
+might be bad.\"</span>
+  (interactive)
+  (untabify (point-min) (point-max))
+  (delete-trailing-whitespace)
+  (set-buffer-file-coding-system 'utf-8))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Various superfluous white-space. Just say no.
+</span>(add-hook 'before-save-hook 'cleanup-buffer-safe)
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">cleanup-buffer</span> ()
+  <span class=\"doc\">\"Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save.\"</span>
+  (interactive)
+  (cleanup-buffer-safe)
+  (indent-region (point-min) (point-max)))
+
+(global-set-key (kbd <span class=\"string\">\"C-c n\"</span>) 'cleanup-buffer)</pre>
+
+<hr/>
+
+<p>
+  I use these two literally all the time. The first one removes
+  trailing whitespace and replaces all tabs with spaces before save.
+</p>
+
+<p>
+  The last one I've got on a key - it also indents the entire buffer.
+</p>
+
+<p>
+  These might not be for everybody. Sometimes you do want tabs (I'm looking at
+  you <code>Makefile</code> <em>grrrrr</em>). Then this isn't optimal.
+  The same can be said for when Emacs doesn't indent correctly. But
+  that is a horrid, unacceptable situation in any case. I always fix
+  those as soon as I can.
+</p>
+"))) ("setup-dired.el-01" "<!-- 1356957119 -->
+<p>I find the default dired look a bit spammy, especially in narrow windows.</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Make dired less verbose
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">dired-details</span>)
+(setq-default dired-details-hidden-string <span class=\"string\">\"--- \"</span>)
+(dired-details-install)</pre>
+<hr/>
+<p>
+By installing <kbd>M-x</kbd> <code>package-install
+dired-details</code> and using this snippet, we hide all the
+unnecessary <code>ls</code>-details.
+</p>
+<p>
+That rare occasion where you actually need that information, you can
+show it with <kbd>)</kbd> and hide again with <kbd>(</kbd>.
+</p>" "http://whattheemacsd.com/setup-dired.el-01.html" (20705 34239) old 22 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-dired.el-01") (title nil "setup-dired.el-01") (updated nil "2012-12-31T12:31:59.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-dired.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-dired.el-01") (content ((type . "html")) "<!-- 1356957119 -->
+
+<p>I find the default dired look a bit spammy, especially in narrow windows.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Make dired less verbose
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">dired-details</span>)
+(setq-default dired-details-hidden-string <span class=\"string\">\"--- \"</span>)
+(dired-details-install)</pre>
+
+<hr/>
+
+<p>
+  By installing <kbd>M-x</kbd> <code>package-install
+  dired-details</code> and using this snippet, we hide all the
+  unnecessary <code>ls</code>-details.
+</p>
+
+<p>
+  That rare occasion where you actually need that information, you can
+  show it with <kbd>)</kbd> and hide again with <kbd>(</kbd>.
+</p>
+"))) ("file-defuns.el-02" "<!-- 1356859849 -->
+<p>
+Like <a href=\"/file-defuns.el-01.html\">rename yesterday</a>, I think
+delete deserves a designated keybinding.
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">delete-current-buffer-file</span> ()
+<span class=\"doc\">\"Removes file connected to current buffer and kills buffer.\"</span>
+(interactive)
+(<span class=\"keyword\">let</span> ((filename (buffer-file-name))
+(buffer (current-buffer))
+(name (buffer-name)))
+(<span class=\"keyword\">if</span> (not (and filename (file-exists-p filename)))
+(ido-kill-buffer)
+(<span class=\"keyword\">when</span> (yes-or-no-p <span class=\"string\">\"Are you sure you want to remove this file? \"</span>)
+(delete-file filename)
+(kill-buffer buffer)
+(message <span class=\"string\">\"File '%s' successfully removed\"</span> filename)))))
+(global-set-key (kbd <span class=\"string\">\"C-x C-k\"</span>) 'delete-current-buffer-file)</pre>
+<hr/>
+<p>This is it. <kbd>C-x C-k</kbd>: file begone!</p>
+<p>
+I like the feel between <kbd>C-x k</kbd> to kill the buffer
+and <kbd>C-x C-k</kbd> to kill the file. Release ctrl to kill it a little,
+hold to kill it a lot.
+</p>" "http://whattheemacsd.com/file-defuns.el-02.html" (20704 2505) old 23 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:file-defuns.el-02") (title nil "file-defuns.el-02") (updated nil "2012-12-30T09:30:49.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/file-defuns.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:file-defuns.el-02") (content ((type . "html")) "<!-- 1356859849 -->
+
+<p>
+  Like <a href=\"/file-defuns.el-01.html\">rename yesterday</a>, I think
+  delete deserves a designated keybinding.
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">delete-current-buffer-file</span> ()
+  <span class=\"doc\">\"Removes file connected to current buffer and kills buffer.\"</span>
+  (interactive)
+  (<span class=\"keyword\">let</span> ((filename (buffer-file-name))
+        (buffer (current-buffer))
+        (name (buffer-name)))
+    (<span class=\"keyword\">if</span> (not (and filename (file-exists-p filename)))
+        (ido-kill-buffer)
+      (<span class=\"keyword\">when</span> (yes-or-no-p <span class=\"string\">\"Are you sure you want to remove this file? \"</span>)
+        (delete-file filename)
+        (kill-buffer buffer)
+        (message <span class=\"string\">\"File '%s' successfully removed\"</span> filename)))))
+
+(global-set-key (kbd <span class=\"string\">\"C-x C-k\"</span>) 'delete-current-buffer-file)</pre>
+
+<hr/>
+
+<p>This is it. <kbd>C-x C-k</kbd>: file begone!</p>
+
+<p>
+  I like the feel between <kbd>C-x k</kbd> to kill the buffer
+  and <kbd>C-x C-k</kbd> to kill the file. Release ctrl to kill it a little,
+  hold to kill it a lot.
+</p>
+"))) ("file-defuns.el-01" "<!-- 1356790455 -->
+<p>For some reason, renaming the current buffer file is a multi-step process in Emacs.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">rename-current-buffer-file</span> ()
+<span class=\"doc\">\"Renames current buffer and file it is visiting.\"</span>
+(interactive)
+(<span class=\"keyword\">let</span> ((name (buffer-name))
+(filename (buffer-file-name)))
+(<span class=\"keyword\">if</span> (not (and filename (file-exists-p filename)))
+(<span class=\"warning\">error</span> <span class=\"string\">\"Buffer '%s' is not visiting a file!\"</span> name)
+(<span class=\"keyword\">let</span> ((new-name (read-file-name <span class=\"string\">\"New name: \"</span> filename)))
+(<span class=\"keyword\">if</span> (get-buffer new-name)
+(<span class=\"warning\">error</span> <span class=\"string\">\"A buffer named '%s' already exists!\"</span> new-name)
+(rename-file filename new-name 1)
+(rename-buffer new-name)
+(set-visited-file-name new-name)
+(set-buffer-modified-p nil)
+(message <span class=\"string\">\"File '%s' successfully renamed to '%s'\"</span>
+name (file-name-nondirectory new-name)))))))
+(global-set-key (kbd <span class=\"string\">\"C-x C-r\"</span>) 'rename-current-buffer-file)</pre>
+<hr/>
+<p>
+This defun fixes that. And unlike some other alternatives to perform
+this common task, you don't have to type the name out from scratch -
+but get the current name to modify. Like it should be.
+</p>" "http://whattheemacsd.com/file-defuns.el-01.html" (20702 64183) old 24 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:file-defuns.el-01") (title nil "file-defuns.el-01") (updated nil "2012-12-29T14:14:15.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/file-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:file-defuns.el-01") (content ((type . "html")) "<!-- 1356790455 -->
+
+<p>For some reason, renaming the current buffer file is a multi-step process in Emacs.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">rename-current-buffer-file</span> ()
+  <span class=\"doc\">\"Renames current buffer and file it is visiting.\"</span>
+  (interactive)
+  (<span class=\"keyword\">let</span> ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (<span class=\"keyword\">if</span> (not (and filename (file-exists-p filename)))
+        (<span class=\"warning\">error</span> <span class=\"string\">\"Buffer '%s' is not visiting a file!\"</span> name)
+      (<span class=\"keyword\">let</span> ((new-name (read-file-name <span class=\"string\">\"New name: \"</span> filename)))
+        (<span class=\"keyword\">if</span> (get-buffer new-name)
+            (<span class=\"warning\">error</span> <span class=\"string\">\"A buffer named '%s' already exists!\"</span> new-name)
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (message <span class=\"string\">\"File '%s' successfully renamed to '%s'\"</span>
+                   name (file-name-nondirectory new-name)))))))
+
+(global-set-key (kbd <span class=\"string\">\"C-x C-r\"</span>) 'rename-current-buffer-file)</pre>
+
+<hr/>
+
+<p>
+  This defun fixes that. And unlike some other alternatives to perform
+  this common task, you don't have to type the name out from scratch -
+  but get the current name to modify. Like it should be.
+</p>
+"))) ("editing-defuns.el-02" "<!-- 1356713134 -->
+<p>When programming I tend to shuffle lines around a lot.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">move-line-down</span> ()
+(interactive)
+(<span class=\"keyword\">let</span> ((col (current-column)))
+(<span class=\"keyword\">save-excursion</span>
+(forward-line)
+(transpose-lines 1))
+(forward-line)
+(move-to-column col)))
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">move-line-up</span> ()
+(interactive)
+(<span class=\"keyword\">let</span> ((col (current-column)))
+(<span class=\"keyword\">save-excursion</span>
+(forward-line)
+(transpose-lines -1))
+(move-to-column col)))
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-down&gt;\"</span>) 'move-line-down)
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-up&gt;\"</span>) 'move-line-up)</pre>
+<hr/>
+<p>
+Maybe not when I program elisp, since that's sexp-based, but for
+other programming languages these two come in very handy. They
+simply move the current line one step up or down.
+</p>" "http://whattheemacsd.com/editing-defuns.el-02.html" (20701 52398) old 25 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:editing-defuns.el-02") (title nil "editing-defuns.el-02") (updated nil "2012-12-28T16:45:34.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/editing-defuns.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:editing-defuns.el-02") (content ((type . "html")) "<!-- 1356713134 -->
+
+<p>When programming I tend to shuffle lines around a lot.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">move-line-down</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((col (current-column)))
+    (<span class=\"keyword\">save-excursion</span>
+      (forward-line)
+      (transpose-lines 1))
+    (forward-line)
+    (move-to-column col)))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">move-line-up</span> ()
+  (interactive)
+  (<span class=\"keyword\">let</span> ((col (current-column)))
+    (<span class=\"keyword\">save-excursion</span>
+      (forward-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-down&gt;\"</span>) 'move-line-down)
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-up&gt;\"</span>) 'move-line-up)</pre>
+
+<hr/>
+
+<p>
+  Maybe not when I program elisp, since that's sexp-based, but for
+  other programming languages these two come in very handy. They
+  simply move the current line one step up or down.
+</p>
+"))) ("editing-defuns.el-01" "<!-- 1356598393 -->
+<p>Opening new lines can be finicky.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">open-line-below</span> ()
+(interactive)
+(end-of-line)
+(newline)
+(indent-for-tab-command))
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">open-line-above</span> ()
+(interactive)
+(beginning-of-line)
+(newline)
+(forward-line -1)
+(indent-for-tab-command))
+(global-set-key (kbd <span class=\"string\">\"&lt;C-return&gt;\"</span>) 'open-line-below)
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-return&gt;\"</span>) 'open-line-above)</pre>
+<hr/>
+<p>
+With these shortcuts you can open a new line above or below the
+current one, even if the cursor is midsentence.
+</p>
+<p> Try it out, it's a nice convenience. </p>" "http://whattheemacsd.com/editing-defuns.el-01.html" (20700 3193) old 26 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:editing-defuns.el-01") (title nil "editing-defuns.el-01") (updated nil "2012-12-27T08:53:13.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/editing-defuns.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:editing-defuns.el-01") (content ((type . "html")) "<!-- 1356598393 -->
+
+<p>Opening new lines can be finicky.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">open-line-below</span> ()
+  (interactive)
+  (end-of-line)
+  (newline)
+  (indent-for-tab-command))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">open-line-above</span> ()
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (forward-line -1)
+  (indent-for-tab-command))
+
+(global-set-key (kbd <span class=\"string\">\"&lt;C-return&gt;\"</span>) 'open-line-below)
+(global-set-key (kbd <span class=\"string\">\"&lt;C-S-return&gt;\"</span>) 'open-line-above)</pre>
+
+<hr/>
+
+<p>
+  With these shortcuts you can open a new line above or below the
+  current one, even if the cursor is midsentence.
+</p>
+
+<p> Try it out, it's a nice convenience. </p>
+"))) ("setup-shell.el-01" "<!-- 1356556460 -->
+<p><kbd>C-d</kbd> on an empty line in the shell terminates the process.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">comint-delchar-or-eof-or-kill-buffer</span> (arg)
+(interactive <span class=\"string\">\"p\"</span>)
+(<span class=\"keyword\">if</span> (null (get-buffer-process (current-buffer)))
+(kill-buffer)
+(comint-delchar-or-maybe-eof arg)))
+(add-hook 'shell-mode-hook
+(<span class=\"keyword\">lambda</span> ()
+(define-key shell-mode-map
+(kbd <span class=\"string\">\"C-d\"</span>) 'comint-delchar-or-eof-or-kill-buffer)))</pre>
+<hr/>
+<p>With this snippet, another press of <kbd>C-d</kbd> will kill the buffer.</p>
+<p>
+It's pretty nice, since you then just tap <kbd>C-d</kbd> twice to
+get rid of the shell and go on about your merry way.
+</p>" "http://whattheemacsd.com/setup-shell.el-01.html" (20699 26796) old 27 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-shell.el-01") (title nil "setup-shell.el-01") (updated nil "2012-12-26T21:14:20.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-shell.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-shell.el-01") (content ((type . "html")) "<!-- 1356556460 -->
+
+<p><kbd>C-d</kbd> on an empty line in the shell terminates the process.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">comint-delchar-or-eof-or-kill-buffer</span> (arg)
+  (interactive <span class=\"string\">\"p\"</span>)
+  (<span class=\"keyword\">if</span> (null (get-buffer-process (current-buffer)))
+      (kill-buffer)
+    (comint-delchar-or-maybe-eof arg)))
+
+(add-hook 'shell-mode-hook
+          (<span class=\"keyword\">lambda</span> ()
+            (define-key shell-mode-map
+              (kbd <span class=\"string\">\"C-d\"</span>) 'comint-delchar-or-eof-or-kill-buffer)))</pre>
+
+<hr/>
+
+<p>With this snippet, another press of <kbd>C-d</kbd> will kill the buffer.</p>
+
+<p>
+  It's pretty nice, since you then just tap <kbd>C-d</kbd> twice to
+  get rid of the shell and go on about your merry way.
+</p>
+"))) ("setup-magit.el-02" "<!-- 1356515010 -->
+<p>Actual changes lost in a sea of whitespace diffs?</p>
+<hr/>
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-toggle-whitespace</span> ()
+(interactive)
+(<span class=\"keyword\">if</span> (member <span class=\"string\">\"-w\"</span> magit-diff-options)
+(magit-dont-ignore-whitespace)
+(magit-ignore-whitespace)))
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-ignore-whitespace</span> ()
+(interactive)
+(add-to-list 'magit-diff-options <span class=\"string\">\"-w\"</span>)
+(magit-refresh))
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-dont-ignore-whitespace</span> ()
+(interactive)
+(setq magit-diff-options (remove <span class=\"string\">\"-w\"</span> magit-diff-options))
+(magit-refresh))
+(define-key magit-status-mode-map (kbd <span class=\"string\">\"W\"</span>) 'magit-toggle-whitespace)</pre>
+<hr/>
+<p>This adds <kbd>W</kbd> to toggle ignoring whitespace in magit.</p>
+<p>
+It has some weird interactions with the changed files list, in that
+files with nothing but whitespace changes go missing. Toggle back to
+find them again.
+</p>" "http://whattheemacsd.com/setup-magit.el-02.html" (20698 50882) old 28 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-magit.el-02") (title nil "setup-magit.el-02") (updated nil "2012-12-26T09:43:30.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-magit.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-magit.el-02") (content ((type . "html")) "<!-- 1356515010 -->
+
+<p>Actual changes lost in a sea of whitespace diffs?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-toggle-whitespace</span> ()
+  (interactive)
+  (<span class=\"keyword\">if</span> (member <span class=\"string\">\"-w\"</span> magit-diff-options)
+      (magit-dont-ignore-whitespace)
+    (magit-ignore-whitespace)))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-ignore-whitespace</span> ()
+  (interactive)
+  (add-to-list 'magit-diff-options <span class=\"string\">\"-w\"</span>)
+  (magit-refresh))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-dont-ignore-whitespace</span> ()
+  (interactive)
+  (setq magit-diff-options (remove <span class=\"string\">\"-w\"</span> magit-diff-options))
+  (magit-refresh))
+
+(define-key magit-status-mode-map (kbd <span class=\"string\">\"W\"</span>) 'magit-toggle-whitespace)</pre>
+
+<hr/>
+
+<p>This adds <kbd>W</kbd> to toggle ignoring whitespace in magit.</p>
+
+<p>
+  It has some weird interactions with the changed files list, in that
+  files with nothing but whitespace changes go missing. Toggle back to
+  find them again.
+</p>
+"))) ("sane-defaults.el-01" "<!-- 1356346740 -->
+<p>Tired of seeing stale dired buffers?</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Auto refresh buffers
+</span>(global-auto-revert-mode 1)
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Also auto refresh dired, but be quiet about it
+</span>(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)</pre>
+<hr/>
+<p>Auto revert mode looks for changes to files, and updates them for you.</p>
+<p>
+With these settings, dired buffers are also updated. The last
+setting makes sure that you're not alerted every time this happens.
+Which is every time you save something.
+</p>" "http://whattheemacsd.com/sane-defaults.el-01.html" (20696 13684) old 29 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:sane-defaults.el-01") (title nil "sane-defaults.el-01") (updated nil "2012-12-24T10:59:00.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/sane-defaults.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:sane-defaults.el-01") (content ((type . "html")) "<!-- 1356346740 -->
+
+<p>Tired of seeing stale dired buffers?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Auto refresh buffers
+</span>(global-auto-revert-mode 1)
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Also auto refresh dired, but be quiet about it
+</span>(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)</pre>
+
+<hr/>
+
+<p>Auto revert mode looks for changes to files, and updates them for you.</p>
+
+<p>
+  With these settings, dired buffers are also updated. The last
+  setting makes sure that you're not alerted every time this happens.
+  Which is every time you save something.
+</p>
+"))) ("setup-magit.el-01" "<!-- 1356261749 -->
+<p>You are using magit with your git, right?</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">full screen magit-status
+</span>
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">magit-status</span> (around magit-fullscreen activate)
+(window-configuration-to-register <span class=\"builtin\">:magit-fullscreen</span>)
+ad-do-it
+(delete-other-windows))
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-quit-session</span> ()
+<span class=\"doc\">\"Restores the previous window configuration and kills the magit buffer\"</span>
+(interactive)
+(kill-buffer)
+(jump-to-register <span class=\"builtin\">:magit-fullscreen</span>))
+(define-key magit-status-mode-map (kbd <span class=\"string\">\"q\"</span>) 'magit-quit-session)</pre>
+<hr/>
+<p>
+This code makes <code>magit-status</code> run alone in the frame,
+and then restores the old window configuration when you quit out of magit.
+</p>
+<p>
+No more juggling windows after commiting. It's magit bliss.
+</p>" "http://whattheemacsd.com/setup-magit.el-01.html" (20694 59765) old 30 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:setup-magit.el-01") (title nil "setup-magit.el-01") (updated nil "2012-12-23T11:22:29.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/setup-magit.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:setup-magit.el-01") (content ((type . "html")) "<!-- 1356261749 -->
+
+<p>You are using magit with your git, right?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">full screen magit-status
+</span>
+(<span class=\"keyword\">defadvice</span> <span class=\"function-name\">magit-status</span> (around magit-fullscreen activate)
+  (window-configuration-to-register <span class=\"builtin\">:magit-fullscreen</span>)
+  ad-do-it
+  (delete-other-windows))
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">magit-quit-session</span> ()
+  <span class=\"doc\">\"Restores the previous window configuration and kills the magit buffer\"</span>
+  (interactive)
+  (kill-buffer)
+  (jump-to-register <span class=\"builtin\">:magit-fullscreen</span>))
+
+(define-key magit-status-mode-map (kbd <span class=\"string\">\"q\"</span>) 'magit-quit-session)</pre>
+
+<hr/>
+
+<p>
+  This code makes <code>magit-status</code> run alone in the frame,
+  and then restores the old window configuration when you quit out of magit.
+</p>
+
+<p>
+  No more juggling windows after commiting. It's magit bliss.
+</p>
+"))) ("key-bindings.el-01" "<!-- 1356248109 -->
+<p>What are those line numbers for anyway?</p>
+<hr/>
+<pre class=\"code-snippet\">
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">goto-line-with-feedback</span> ()
+<span class=\"doc\">\"Show line numbers temporarily, while prompting for the line number input\"</span>
+(interactive)
+(<span class=\"keyword\">unwind-protect</span>
+(<span class=\"keyword\">progn</span>
+(linum-mode 1)
+(goto-line (read-number <span class=\"string\">\"Goto line: \"</span>)))
+(linum-mode -1)))</pre>
+<hr/>
+<p>
+I don't have line numbers visible in the fringe of my Emacs. If I
+want to go to a line number, that is usually because it is
+referenced in an error message somewhere. Showing them all the time
+is just noise.
+</p>
+<p>
+Still, many people want line numbers visible. I guess that is
+because they use them for navigation. This snippet shows line
+numbers temporarily just when you're going to a line number
+with <code>goto-line</code>.
+</p>
+<p>
+Notice the nice <code>remap</code>-trick in the key binding. It will
+remap all key bindings from <code>goto-line</code> to
+<code>goto-line-with-feedback</code>. Neat!
+</p>" "http://whattheemacsd.com/key-bindings.el-01.html" (20694 46125) old 31 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:key-bindings.el-01") (title nil "key-bindings.el-01") (updated nil "2012-12-23T07:35:09.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/key-bindings.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:key-bindings.el-01") (content ((type . "html")) "<!-- 1356248109 -->
+
+<p>What are those line numbers for anyway?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+(<span class=\"keyword\">defun</span> <span class=\"function-name\">goto-line-with-feedback</span> ()
+  <span class=\"doc\">\"Show line numbers temporarily, while prompting for the line number input\"</span>
+  (interactive)
+  (<span class=\"keyword\">unwind-protect</span>
+      (<span class=\"keyword\">progn</span>
+        (linum-mode 1)
+        (goto-line (read-number <span class=\"string\">\"Goto line: \"</span>)))
+    (linum-mode -1)))</pre>
+
+<hr/>
+
+<p>
+  I don't have line numbers visible in the fringe of my Emacs. If I
+  want to go to a line number, that is usually because it is
+  referenced in an error message somewhere. Showing them all the time
+  is just noise.
+</p>
+
+<p>
+  Still, many people want line numbers visible. I guess that is
+  because they use them for navigation. This snippet shows line
+  numbers temporarily just when you're going to a line number
+  with <code>goto-line</code>.
+</p>
+
+<p>
+  Notice the nice <code>remap</code>-trick in the key binding. It will
+  remap all key bindings from <code>goto-line</code> to
+  <code>goto-line-with-feedback</code>. Neat!
+</p>
+"))) ("my-misc.el-01" "<!-- 1356206428 -->
+<p>Searching the web can also be improved with Emacs.</p>
+<hr/>
+<pre class=\"code-snippet\">
+(global-set-key (kbd <span class=\"string\">\"C-x g\"</span>) 'webjump)
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Add Urban Dictionary to webjump
+</span>(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"webjump\"</span>
+'(add-to-list 'webjump-sites
+'(<span class=\"string\">\"Urban Dictionary\"</span> .
+[simple-query
+<span class=\"string\">\"www.urbandictionary.com\"</span>
+<span class=\"string\">\"http://www.urbandictionary.com/define.php?term=\"</span>
+<span class=\"string\">\"\"</span>])))</pre>
+<hr/>
+<p>
+Webjump let's you quickly search Google, Wikipedia, Emacs Wiki and
+other pages. I've got it bound to <kbd>C-x g</kbd>.
+</p>
+<p>
+This snippet adds Urban Dictionary to the list of pages, so the next
+time you wonder what those dastardly kids mean when they write
+faceroll or sassafrassa or Technotard or kthxbye or whatever else is
+hip these days, well, then you can find out. With <code>webjump</code>.
+</p>" "http://whattheemacsd.com/my-misc.el-01.html" (20694 4444) old 32 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:my-misc.el-01") (title nil "my-misc.el-01") (updated nil "2012-12-22T20:00:28.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/my-misc.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:my-misc.el-01") (content ((type . "html")) "<!-- 1356206428 -->
+
+<p>Searching the web can also be improved with Emacs.</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+(global-set-key (kbd <span class=\"string\">\"C-x g\"</span>) 'webjump)
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Add Urban Dictionary to webjump
+</span>(<span class=\"keyword\">eval-after-load</span> <span class=\"string\">\"webjump\"</span>
+'(add-to-list 'webjump-sites
+              '(<span class=\"string\">\"Urban Dictionary\"</span> .
+                [simple-query
+                 <span class=\"string\">\"www.urbandictionary.com\"</span>
+                 <span class=\"string\">\"http://www.urbandictionary.com/define.php?term=\"</span>
+                 <span class=\"string\">\"\"</span>])))</pre>
+
+<hr/>
+
+<p>
+  Webjump let's you quickly search Google, Wikipedia, Emacs Wiki and
+  other pages. I've got it bound to <kbd>C-x g</kbd>.
+</p>
+
+<p>
+  This snippet adds Urban Dictionary to the list of pages, so the next
+  time you wonder what those dastardly kids mean when they write
+  faceroll or sassafrassa or Technotard or kthxbye or whatever else is
+  hip these days, well, then you can find out. With <code>webjump</code>.
+</p>
+"))) ("init.el-06" "<!-- 1356073171 -->
+<p>Need different settings for different machines?</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Settings for currently logged in user
+</span>(setq user-settings-dir
+(concat user-emacs-directory <span class=\"string\">\"users/\"</span> user-login-name))
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Conclude init by setting up specifics for the current user
+</span>(<span class=\"keyword\">when</span> (file-exists-p user-settings-dir)
+(mapc 'load (directory-files user-settings-dir nil <span class=\"string\">\"^[</span><span class=\"negation-char\"><span class=\"string\">^</span></span><span class=\"string\">#].*el$\"</span>)))</pre>
+<hr/>
+<p>
+These are the last lines of my init.el. They will load
+any <code>*.el</code> files in the
+<code>~/.emacs.d/users/<small>user-login-name</small>/</code>
+folder.
+</p>
+<p>
+Anything specific for that machine goes there.
+</p>" "http://whattheemacsd.com/init.el-06.html" (20692 2259) old 33 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:init.el-06") (title nil "init.el-06") (updated nil "2012-12-21T06:59:31.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-06.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-06") (content ((type . "html")) "<!-- 1356073171 -->
+
+<p>Need different settings for different machines?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Settings for currently logged in user
+</span>(setq user-settings-dir
+      (concat user-emacs-directory <span class=\"string\">\"users/\"</span> user-login-name))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Conclude init by setting up specifics for the current user
+</span>(<span class=\"keyword\">when</span> (file-exists-p user-settings-dir)
+  (mapc 'load (directory-files user-settings-dir nil <span class=\"string\">\"^[</span><span class=\"negation-char\"><span class=\"string\">^</span></span><span class=\"string\">#].*el$\"</span>)))</pre>
+
+<hr/>
+
+<p>
+  These are the last lines of my init.el. They will load
+  any <code>*.el</code> files in the
+  <code>~/.emacs.d/users/<small>user-login-name</small>/</code>
+  folder.
+</p>
+
+<p>
+  Anything specific for that machine goes there.
+</p>
+"))) ("init.el-05" "<!-- 1355909858 -->
+<p>Do you program any elisp, at all, ever?</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Elisp go-to-definition with M-. and back again with M-,
+</span>(autoload 'elisp-slime-nav-mode <span class=\"string\">\"elisp-slime-nav\"</span>)
+(add-hook 'emacs-lisp-mode-hook (<span class=\"keyword\">lambda</span> () (elisp-slime-nav-mode t)))
+(<span class=\"keyword\">eval-after-load</span> 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))</pre>
+<hr/>
+<p>
+Then you need to <kbd>M-x</kbd> <code class=\"small\">package-install
+elisp-slime-nav-mode</code>.
+</p>
+<p>
+It lets you jump to the definition of a function
+with <kbd>M-.</kbd>, and back again afterwards with <kbd>M-,</kbd>.
+</p>
+<p>
+That last line says that we want elisp-slime-nav-mode to continue
+doing its work for us, but <a href=\"/init.el-04.html\">we no longer
+want to be reminded of it</a>.
+</p>" "http://whattheemacsd.com/init.el-05.html" (20689 35554) old 34 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:init.el-05") (title nil "init.el-05") (updated nil "2012-12-19T09:37:38.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-05.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-05") (content ((type . "html")) "<!-- 1355909858 -->
+
+<p>Do you program any elisp, at all, ever?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Elisp go-to-definition with M-. and back again with M-,
+</span>(autoload 'elisp-slime-nav-mode <span class=\"string\">\"elisp-slime-nav\"</span>)
+(add-hook 'emacs-lisp-mode-hook (<span class=\"keyword\">lambda</span> () (elisp-slime-nav-mode t)))
+(<span class=\"keyword\">eval-after-load</span> 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))</pre>
+
+<hr/>
+
+<p>
+  Then you need to <kbd>M-x</kbd> <code class=\"small\">package-install
+  elisp-slime-nav-mode</code>.
+</p>
+
+<p>
+  It lets you jump to the definition of a function
+  with <kbd>M-.</kbd>, and back again afterwards with <kbd>M-,</kbd>.
+</p>
+
+<p>
+  That last line says that we want elisp-slime-nav-mode to continue
+  doing its work for us, but <a href=\"/init.el-04.html\">we no longer
+  want to be reminded of it</a>.
+</p>
+"))) ("init.el-04" "<!-- 1355860302 -->
+<p>Is your modeline chock full of minor-mode abbreviations and cruft?</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Diminish modeline clutter
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">diminish</span>)
+(diminish 'wrap-region-mode)
+(diminish 'yas/minor-mode)</pre>
+<hr/>
+<p>
+After a quick <kbd>M-x</kbd> <code class=\"small\">package-install diminish</code>, you too can
+have the pleasure of using a lot of minor modes, without those minor
+modes making a mess of the modeline. Mmm.
+</p>
+<p>
+As for diminish.el itself, it contains the most beautifully poetic
+code commentary of all time. Here's an excerpt:
+</p>
+<hr/>
+<div class=\"quote\">
+<blockquote>
+\"When we diminish a mode, we are saying we want it to continue doing its
+work for us, but we no longer want to be reminded of it.  It becomes a
+night worker, like a janitor; it becomes an invisible man; it remains a
+component, perhaps an important one, sometimes an indispensable one, of
+the mechanism that maintains the day-people's world, but its place in
+their thoughts is diminished, usually to nothing.  As we grow old we
+diminish more and more such thoughts, such people, usually to nothing.\"
+</blockquote>
+<p>
+- Will Mengarini in
+<a href=\"http://www.eskimo.com/~seldon/diminish.el\">
+diminish.el
+</a>
+</p>
+</div>" "http://whattheemacsd.com/init.el-04.html" (20688 51534) old 35 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:init.el-04") (title nil "init.el-04") (updated nil "2012-12-18T19:51:42.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-04.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-04") (content ((type . "html")) "<!-- 1355860302 -->
+
+<p>Is your modeline chock full of minor-mode abbreviations and cruft?</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Diminish modeline clutter
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">diminish</span>)
+(diminish 'wrap-region-mode)
+(diminish 'yas/minor-mode)</pre>
+
+<hr/>
+
+<p>
+  After a quick <kbd>M-x</kbd> <code class=\"small\">package-install diminish</code>, you too can
+  have the pleasure of using a lot of minor modes, without those minor
+  modes making a mess of the modeline. Mmm.
+</p>
+
+<p>
+  As for diminish.el itself, it contains the most beautifully poetic
+  code commentary of all time. Here's an excerpt:
+</p>
+
+<hr/>
+
+<div class=\"quote\">
+  <blockquote>
+    \"When we diminish a mode, we are saying we want it to continue doing its
+    work for us, but we no longer want to be reminded of it.  It becomes a
+    night worker, like a janitor; it becomes an invisible man; it remains a
+    component, perhaps an important one, sometimes an indispensable one, of
+    the mechanism that maintains the day-people's world, but its place in
+    their thoughts is diminished, usually to nothing.  As we grow old we
+    diminish more and more such thoughts, such people, usually to nothing.\"
+  </blockquote>
+  <p>
+    - Will Mengarini in
+    <a href=\"http://www.eskimo.com/~seldon/diminish.el\">
+      diminish.el
+    </a>
+  </p>
+</div>
+"))) ("init.el-03" "<!-- 1355814957 -->
+<p>
+Tired of navigating back to where you were last in a file?
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Save point position between sessions
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">saveplace</span>)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name <span class=\"string\">\".places\"</span> user-emacs-directory))</pre>
+<hr/>
+<p>
+The <code>saveplace</code> package is part of Emacs, and remembers the
+position of point - even between emacs sessions.
+</p>
+<p>
+The last line sets the path to where saveplace stores your position
+data. Change it at your peril! <small>*</small>
+</p>
+<p>
+<small>* Ahem, there really is no peril. That was just melodrama.</small>
+</p>" "http://whattheemacsd.com/init.el-03.html" (20688 6189) old 36 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:init.el-03") (title nil "init.el-03") (updated nil "2012-12-18T07:15:57.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-03.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-03") (content ((type . "html")) "<!-- 1355814957 -->
+
+<p>
+  Tired of navigating back to where you were last in a file?
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Save point position between sessions
+</span>(<span class=\"keyword\">require</span> '<span class=\"constant\">saveplace</span>)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name <span class=\"string\">\".places\"</span> user-emacs-directory))</pre>
+
+<hr/>
+
+<p>
+  The <code>saveplace</code> package is part of Emacs, and remembers the
+  position of point - even between emacs sessions.
+</p>
+
+<p>
+  The last line sets the path to where saveplace stores your position
+  data. Change it at your peril! <small>*</small>
+</p>
+
+<p>
+  <small>* Ahem, there really is no peril. That was just melodrama.</small>
+</p>
+"))) ("init.el-02" "<!-- 1355777151 -->
+<p>
+Annoyed by those pesky <code>~</code> files?
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Write backup files to own directory
+</span>(setq backup-directory-alist
+`((<span class=\"string\">\".\"</span> . ,(expand-file-name
+(concat user-emacs-directory <span class=\"string\">\"backups\"</span>)))))
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Make backups of files, even when they're in version control
+</span>(setq vc-make-backup-files t)
+</pre>
+<hr/>
+<p>
+Backup files are so very annoying, until the day they save your
+hide. That's when you don't want to look back and say \"Man, I
+really shouldn't have disabled those stupid backups.\"
+</p>
+<p>
+These settings move all backup files to a central location.
+<em>Bam!</em> No longer annoying.
+</p>
+<p>
+As an added bonus, that last line makes sure your files are backed
+up even when the files are in version control. Do it.
+</p>" "http://whattheemacsd.com/init.el-02.html" (20687 33919) old 37 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:init.el-02") (title nil "init.el-02") (updated nil "2012-12-17T20:45:51.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-02.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-02") (content ((type . "html")) "<!-- 1355777151 -->
+
+<p>
+  Annoyed by those pesky <code>~</code> files?
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Write backup files to own directory
+</span>(setq backup-directory-alist
+      `((<span class=\"string\">\".\"</span> . ,(expand-file-name
+                 (concat user-emacs-directory <span class=\"string\">\"backups\"</span>)))))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Make backups of files, even when they're in version control
+</span>(setq vc-make-backup-files t)
+</pre>
+
+<hr/>
+
+<p>
+  Backup files are so very annoying, until the day they save your
+  hide. That's when you don't want to look back and say \"Man, I
+  really shouldn't have disabled those stupid backups.\"
+</p>
+
+<p>
+  These settings move all backup files to a central location.
+  <em>Bam!</em> No longer annoying.
+</p>
+
+<p>
+  As an added bonus, that last line makes sure your files are backed
+  up even when the files are in version control. Do it.
+</p>
+"))) ("init.el-01" "<!-- 1355777146 -->
+<p>
+Behold the very first lines in my <code>.emacs.d/init.el</code>:
+</p>
+<hr/>
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Turn off mouse interface early in startup to avoid momentary display
+</span>(<span class=\"keyword\">if</span> (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(<span class=\"keyword\">if</span> (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(<span class=\"keyword\">if</span> (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">No splash screen please ... jeez
+</span>(setq inhibit-startup-message t)</pre>
+<hr/>
+<p>
+They hide the menu bar, tool bar, scroll bar and splash screen.
+Doing so early avoids ever having to see them - not even for a brief
+flash when starting Emacs.
+</p>
+<p>
+These four lines move us into the tranquil zone of <em>nothing but
+the text</em>. A raster interface can never hold the seeming
+infinitude of Emacs functionality, so we just let it go.
+</p>
+<hr/>
+<div class=\"quote\">
+<blockquote>
+\"What I don't understand is: why should you ever care how your editor
+looks, unless you're trying to win a screenshot competition? The
+primary factor in looking good should be the choice of a good font
+at a comfortable size, and a syntax coloring theme that you like.
+And that is not something specific to an editor. Editors like Emacs
+and vi have almost no UI! If Emacs is configured right, the only UI
+it has is the modeline and the minibuffer.\"
+</blockquote>
+<p>
+- Vivek Haldar in
+<a href=\"http://blog.vivekhaldar.com/post/31970017734/new-frontiers-in-text-editing\">
+New Frontiers In Text Editing
+</a>
+</p>
+</div>" "http://whattheemacsd.com/init.el-01.html" (20687 33914) old 38 nil nil ((guid nil "urn:whattheemacsd-com:feed:post:init.el-01") (title nil "init.el-01") (updated nil "2012-12-17T20:45:46.000Z") (author nil (name nil "Magnar Sveen")) (link ((href . "http://whattheemacsd.com/init.el-01.html"))) (id nil "urn:whattheemacsd-com:feed:post:init.el-01") (content ((type . "html")) "<!-- 1355777146 -->
+
+<p>
+  Behold the very first lines in my <code>.emacs.d/init.el</code>:
+</p>
+
+<hr/>
+
+<pre class=\"code-snippet\">
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">Turn off mouse interface early in startup to avoid momentary display
+</span>(<span class=\"keyword\">if</span> (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(<span class=\"keyword\">if</span> (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(<span class=\"keyword\">if</span> (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+<span class=\"comment-delimiter\">;; </span><span class=\"comment\">No splash screen please ... jeez
+</span>(setq inhibit-startup-message t)</pre>
+
+<hr/>
+
+<p>
+  They hide the menu bar, tool bar, scroll bar and splash screen.
+  Doing so early avoids ever having to see them - not even for a brief
+  flash when starting Emacs.
+</p>
+<p>
+  These four lines move us into the tranquil zone of <em>nothing but
+    the text</em>. A raster interface can never hold the seeming
+  infinitude of Emacs functionality, so we just let it go.
+</p>
+
+<hr/>
+
+<div class=\"quote\">
+  <blockquote>
+    \"What I don't understand is: why should you ever care how your editor
+    looks, unless you're trying to win a screenshot competition? The
+    primary factor in looking good should be the choice of a good font
+    at a comfortable size, and a syntax coloring theme that you like.
+    And that is not something specific to an editor. Editors like Emacs
+    and vi have almost no UI! If Emacs is configured right, the only UI
+    it has is the modeline and the minibuffer.\"
+  </blockquote>
+  <p>
+    - Vivek Haldar in
+    <a href=\"http://blog.vivekhaldar.com/post/31970017734/new-frontiers-in-text-editing\">
+      New Frontiers In Text Editing
+    </a>
+  </p>
+</div>
+"))))

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+FILE=experiment.txt
+LENGTH=$(cat ${FILE} | wc -l)
+SOURCE=1
+SO_HEADER=$(sed -n "${SOURCE}s/^\([a-zA-Z]*\)\t.*$/\1/p" $FILE)
+LINE=2
+#WORDS=$(cut -f1 ${FILE})
+for (( LINE=2 ; $LINE <= $LENGTH ; LINE=$(($LINE+1)) )) ;
+do
+	HEADER=$(sed -n "${LINE}s/^\([a-zA-Z]*\)\t.*$/\1/p" $FILE)
+#	echo "Extracted Header"
+#	SO_HEADER=$(sed -n "${SOURCE}s/^\([a-zA-Z]*\)\t.*$/\1/p" $FILE)
+#	echo "Extracted Source Header"
+
+#	HEADER=$(echo -e "$WORDS" | sed -n "${LINE}p")
+#	SO_HEADER=$(echo -e "$WORDS" | sed -n "${SOURCE}p")
+	if [ "$HEADER" = "$SO_HEADER" ];
+	then
+#		sed "${LINE}s/^[a-zA-Z]*\t//" -i $FILE
+#		echo "Removed tab from start"
+#		sed "${SOURCE}N;s/\n/\\\n/" -i $FILE
+		sed "${SOURCE}N;s/\n[a-zA-Z]*\t/\\\n\\\n/" -i $FILE
+		
+		LINE=$(($LINE-1))
+		LENGTH=$(($LENGTH-1));
+		echo "Collapsed $LINE"
+	else
+		SOURCE=$LINE
+		SO_HEADER=$(sed -n "${SOURCE}s/^\([a-zA-Z]*\)\t.*$/\1/p" $FILE)
+		echo "Sourced $LINE";
+	fi;
+done

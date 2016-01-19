@@ -1,0 +1,230 @@
+;; -*- coding: utf-8 -*-
+(("Arch Linux: Recent news updates" "The latest and greatest news from the Arch Linux distribution." "https://www.archlinux.org/news/" (22153 27845 24973 542000) feed 0 nil nil ((title nil "Arch Linux: Recent news updates") (link nil "https://www.archlinux.org/news/") (description nil "The latest and greatest news from the Arch Linux distribution.") (link ((href . "https://www.archlinux.org/feeds/news/") (rel . "self"))) (language nil "en-us") (lastBuildDate nil "Fri, 14 Aug 2015 05:10:02 +0000") (item nil (title nil "openssh-7.0p1 deprecates ssh-dss keys") (link nil "https://www.archlinux.org/news/openssh-70p1-deprecates-ssh-dss-keys/") (description nil "<p>In light of recently discovered vulnerabilities, the new <code>openssh-7.0p1</code>
+release deprecates keys of <code>ssh-dss</code> type, also known as DSA keys. See
+the
+<a href=\"http://lists.mindrot.org/pipermail/openssh-unix-announce/2015-August/000122.html\">upstream announcement</a>
+for details.</p>
+<p>Before updating and restarting <code>sshd</code> on a remote host, make sure you do
+not rely on such keys for connecting to it. To enumerate DSA keys
+granting access to a given account, use:</p>
+<pre><code>    grep ssh-dss ~/.ssh/authorized_keys
+</code></pre>
+<p>If you have any, ensure you have alternative means of logging in, such
+as key pairs of a different type, or password authentication.</p>
+<p>Finally, host keys of <code>ssh-dss</code> type being deprecated too, you might
+have to confirm a new fingerprint (for a host key of a different type)
+when connecting to a freshly updated server.</p>") (creator nil "Gaetan Bisson") (pubDate nil "Fri, 14 Aug 2015 05:10:02 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-08-14:/news/openssh-70p1-deprecates-ssh-dss-keys/")) (item nil (title nil "Data corruption on software RAID 0 when discard is used") (link nil "https://www.archlinux.org/news/data-corruption-on-software-raid-0-when-discard-is-used/") (description nil "<p>Recent Linux kernels (4.0.2+, LTS 3.14.41+), pushed to the [core] repository in the past couple of weeks, suffered from a bug that can cause data corruption on file systems mounted with the <code>discard</code> option and residing on software RAID 0 arrays. Even if <code>discard</code> is not specified, the <code>fstrim</code> command can also trigger this bug. (<strong>If you do not use software RAID 0 or the <code>discard</code> option, then this issue does not affect you.</strong>)</p>
+<p>The issue has been addressed in the <code>linux 4.0.4-2</code> and <code>linux-lts 3.14.43-2</code> updates. Due to the nature of the bug, however, it is likely that data corruption has already occurred on systems running the aforementioned kernels. It is strongly advised to verify the integrity of affected file systems using <code>fsck</code> and/or restore their data from known good backups.</p>
+<p>For further information please read the <a href=\"https://lkml.org/lkml/2015/5/21/167\">LKML post</a> by Holger Kiehl, the <a href=\"http://www.phoronix.com/scan.php?page=news_item&amp;px=Linux-4-EXT4-RAID-Issue-Found\">related article</a> on Phoronix, as well as the <a href=\"http://git.neil.brown.name/?p=md.git;a=commitdiff;h=a81157768a00e8cf8a7b43b5ea5cac931262374f\">proposed fix</a> that was backported to the Arch kernels.</p>") (creator nil "Evangelos Foutras") (pubDate nil "Fri, 22 May 2015 20:32:25 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-05-22:/news/data-corruption-on-software-raid-0-when-discard-is-used/")) (item nil (title nil "Puppet 4.0 enters [community]") (link nil "https://www.archlinux.org/news/puppet-40-enters-community/") (description nil "<p>Puppet 4 has been released and breaks compatibility with version 3. Therefore users will need to upgrade a server to Puppet 4 before updating their clients. Note that if only a Puppet 4 server is available, Puppet 3 clients will not work. Also a number of locations for things have changed including the config, manifest and module files. You will need to follow upgrade instructions for your servers and clients:</p>
+<ul>
+<li><a href=\"https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_server.html\">https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_server.html</a></li>
+<li><a href=\"https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_agent.html\">https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_agent.html</a></li>
+</ul>") (creator nil "Lukas Fleischer") (pubDate nil "Sun, 17 May 2015 16:27:20 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-05-17:/news/puppet-40-enters-community/")) (item nil (title nil "PulseAudio split") (link nil "https://www.archlinux.org/news/pulseaudio-split/") (description nil "<p>Some modules have been split from the <code>pulseaudio</code> package to avoid having modules with missing dynamic libraries. Please check which modules you need and reinstall them.</p>
+<p>The split out modules are:</p>
+<ul>
+<li><code>pulseaudio-bluetooth</code>: Bluetooth (Bluez) support</li>
+<li><code>pulseaudio-equalizer</code>: Equalizer sink (qpaeq)</li>
+<li><code>pulseaudio-gconf</code>: GConf support (paprefs)</li>
+<li><code>pulseaudio-jack</code>: JACK sink, source and jackdbus detection</li>
+<li><code>pulseaudio-lirc</code>: Infrared (LIRC) volume control</li>
+<li><code>pulseaudio-xen</code>: Xen paravirtual sink</li>
+<li><code>pulseaudio-zeroconf</code>: Zeroconf (Avahi/DNS-SD) support</li>
+</ul>") (creator nil "Jan Steffens") (pubDate nil "Sat, 16 May 2015 07:39:48 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-05-16:/news/pulseaudio-split/")) (item nil (title nil "xorg-server 1.17.1 is now available") (link nil "https://www.archlinux.org/news/xorg-server-1171-is-now-available/") (description nil "<p>The new version comes with the following changes:</p>
+<ul>
+<li>
+<p>following ustream, xf86-video-modesetting is now provided with xorg-server package.</p>
+</li>
+<li>
+<p>These packages are deprecated and moved to AUR, some are replaced by modesetting driver:
+xf86-video-ast, xf86-video-cirrus, xf86-video-geode, xf86-video-mga, xf86-video-sisimedia, xf86-video-v4l</p>
+</li>
+</ul>") (creator nil "Laurent Carlier") (pubDate nil "Sun, 15 Feb 2015 13:06:46 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-02-15:/news/xorg-server-1171-is-now-available/")) (item nil (title nil "Transition of KDE software to the KDE Framework and Qt 5") (link nil "https://www.archlinux.org/news/transition-of-kde-software-to-the-kde-framework-and-qt-5/") (description nil "<p>The KDE Software Collection has been updated to KDE Applications 14.12.</p>
+<p>The KDE developers have started porting their software to KDE Frameworks and Qt 5. For a list of the software that has been ported see <a href=\"https://www.kde.org/announcements/announce-applications-14.12.0.php\">the announcement</a>.</p>
+<p>When a KDE Frameworks port of a KDE application is considered stable, it is released with KDE Applications and development and bug fixes are no longer applied to the Qt4/KDE4 version. This means that as ported versions of applications are released, we will switch to the newer version. At the same time, we are getting rid of KDE module prefixes (e.g. <em>kdebase-konsole -&gt; konsole</em>).</p>
+<p>The result of this transition is that some packages will be using Qt5 and some will be using Qt4. We are working hard to make the transition smooth for KDE4 users, but things might look different depending on your configuration. Please adjust themes and colors as necessary for the two toolkits. See <a href=\"https://wiki.archlinux.org/index.php/KDE#Personalization\">the wiki</a> for help.
+We also recommend switching to Plasma 5.2 which will be released this week.</p>
+<p>Please report upstream bugs to the KDE bugzilla. Feel free to CC me.</p>") (creator nil "Andrea Scarpino") (pubDate nil "Mon, 26 Jan 2015 10:20:13 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-01-26:/news/transition-of-kde-software-to-the-kde-framework-and-qt-5/")) (item nil (title nil "Packaging changes in lirc 0.9.2") (link nil "https://www.archlinux.org/news/packaging-changes-in-lirc-092/") (description nil "<p>For consistency with upstream naming, the lirc-utils package was renamed to lirc. The wpc8769l kernel drivers were dropped and can be obtained by installing <a href=\"https://aur.archlinux.org/packages/lirc-wpc8769l/\">lirc-wpc8769l from the AUR</a>.</p>
+<p>Note that 0.9.2 is a major release and comes along with several upstream and packaging changes. In particular, the <code>irexec.service</code> systemd unit was removed. Please edit and copy the template <code>/usr/share/lirc/contrib/irexec.service</code> if you want to keep using that service.</p>") (creator nil "Lukas Fleischer") (pubDate nil "Tue, 20 Jan 2015 17:36:50 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-01-20:/news/packaging-changes-in-lirc-092/")) (item nil (title nil "ca-certificates update") (link nil "https://www.archlinux.org/news/ca-certificates-update/") (description nil "<p>The way local CA certificates are handled has changed. If you have added any locally trusted certificates:</p>
+<ol>
+<li>Move /usr/local/share/ca-certificates/*.crt to
+   /etc/ca-certificates/trust-source/anchors/</li>
+<li>Do the same with all manually-added /etc/ssl/certs/*.pem files
+   and rename them to *.crt</li>
+<li>Instead of <code>update-ca-certificates</code>, run <code>trust extract-compat</code></li>
+</ol>
+<p>Also see <code>man 8 update-ca-trust</code> and <code>trust --help</code>.</p>") (creator nil "Jan Steffens") (pubDate nil "Thu, 11 Dec 2014 12:05:08 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2014-12-11:/news/ca-certificates-update/")) (item nil (title nil "GnuPG-2.1 and the pacman keyring") (link nil "https://www.archlinux.org/news/gnupg-21-and-the-pacman-keyring/") (description nil "<p>The upgrade to gnupg-2.1 ported the pacman keyring to a new upstream format but in the process rendered the local master key unable to sign other keys. This is only an issue if you ever intend to customize your pacman keyring. We nevertheless recommend all users fix this by generating a fresh keyring.</p>
+<p>In addition, we recommend installing haveged, a daemon that generates system entropy; this speeds up critical operations in cryptographic programs such as gnupg (including the generation of new keyrings).</p>
+<p>To do all the above, run as root:</p>
+<pre><code>pacman -Syu haveged
+systemctl start haveged
+systemctl enable haveged
+
+rm -fr /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux
+</code></pre>") (creator nil "Gaetan Bisson") (pubDate nil "Mon, 08 Dec 2014 02:13:14 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2014-12-08:/news/gnupg-21-and-the-pacman-keyring/")) (item nil (title nil "Changes to Intel microcode updates") (link nil "https://www.archlinux.org/news/changes-to-intel-microcodeupdates/") (description nil "<p>Microcode on Intel CPUs is no longer loaded automatically, as it needs
+to be loaded very early in the boot process. This requires adjustments
+in the bootloader. If you have an Intel CPU, please follow <a href=\"https://wiki.archlinux.org/index.php/Microcode#Enabling_Intel_Microcode_Updates\">the
+instructions in the
+wiki</a>.</p>") (creator nil "Thomas Bächler") (pubDate nil "Wed, 22 Oct 2014 21:29:10 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2014-10-22:/news/changes-to-intel-microcodeupdates/")))) ("openssh-7.0p1 deprecates ssh-dss keys" "<p>In light of recently discovered vulnerabilities, the new <code>openssh-7.0p1</code>
+release deprecates keys of <code>ssh-dss</code> type, also known as DSA keys. See
+the
+<a href=\"http://lists.mindrot.org/pipermail/openssh-unix-announce/2015-August/000122.html\">upstream announcement</a>
+for details.</p>
+<p>Before updating and restarting <code>sshd</code> on a remote host, make sure you do
+not rely on such keys for connecting to it. To enumerate DSA keys
+granting access to a given account, use:</p>
+<pre><code>    grep ssh-dss ~/.ssh/authorized_keys
+</code></pre>
+<p>If you have any, ensure you have alternative means of logging in, such
+as key pairs of a different type, or password authentication.</p>
+<p>Finally, host keys of <code>ssh-dss</code> type being deprecated too, you might
+have to confirm a new fingerprint (for a host key of a different type)
+when connecting to a freshly updated server.</p>" "https://www.archlinux.org/news/openssh-70p1-deprecates-ssh-dss-keys/" (21965 30762) old 7 nil nil ((title nil "openssh-7.0p1 deprecates ssh-dss keys") (link nil "https://www.archlinux.org/news/openssh-70p1-deprecates-ssh-dss-keys/") (description nil "<p>In light of recently discovered vulnerabilities, the new <code>openssh-7.0p1</code>
+release deprecates keys of <code>ssh-dss</code> type, also known as DSA keys. See
+the
+<a href=\"http://lists.mindrot.org/pipermail/openssh-unix-announce/2015-August/000122.html\">upstream announcement</a>
+for details.</p>
+<p>Before updating and restarting <code>sshd</code> on a remote host, make sure you do
+not rely on such keys for connecting to it. To enumerate DSA keys
+granting access to a given account, use:</p>
+<pre><code>    grep ssh-dss ~/.ssh/authorized_keys
+</code></pre>
+<p>If you have any, ensure you have alternative means of logging in, such
+as key pairs of a different type, or password authentication.</p>
+<p>Finally, host keys of <code>ssh-dss</code> type being deprecated too, you might
+have to confirm a new fingerprint (for a host key of a different type)
+when connecting to a freshly updated server.</p>") (creator nil "Gaetan Bisson") (pubDate nil "Fri, 14 Aug 2015 05:10:02 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-08-14:/news/openssh-70p1-deprecates-ssh-dss-keys/"))) ("Data corruption on software RAID 0 when discard is used" "<p>Recent Linux kernels (4.0.2+, LTS 3.14.41+), pushed to the [core] repository in the past couple of weeks, suffered from a bug that can cause data corruption on file systems mounted with the <code>discard</code> option and residing on software RAID 0 arrays. Even if <code>discard</code> is not specified, the <code>fstrim</code> command can also trigger this bug. (<strong>If you do not use software RAID 0 or the <code>discard</code> option, then this issue does not affect you.</strong>)</p>
+<p>The issue has been addressed in the <code>linux 4.0.4-2</code> and <code>linux-lts 3.14.43-2</code> updates. Due to the nature of the bug, however, it is likely that data corruption has already occurred on systems running the aforementioned kernels. It is strongly advised to verify the integrity of affected file systems using <code>fsck</code> and/or restore their data from known good backups.</p>
+<p>For further information please read the <a href=\"https://lkml.org/lkml/2015/5/21/167\">LKML post</a> by Holger Kiehl, the <a href=\"http://www.phoronix.com/scan.php?page=news_item&amp;px=Linux-4-EXT4-RAID-Issue-Found\">related article</a> on Phoronix, as well as the <a href=\"http://git.neil.brown.name/?p=md.git;a=commitdiff;h=a81157768a00e8cf8a7b43b5ea5cac931262374f\">proposed fix</a> that was backported to the Arch kernels.</p>" "https://www.archlinux.org/news/data-corruption-on-software-raid-0-when-discard-is-used/" (21855 37465) old 8 nil nil ((title nil "Data corruption on software RAID 0 when discard is used") (link nil "https://www.archlinux.org/news/data-corruption-on-software-raid-0-when-discard-is-used/") (description nil "<p>Recent Linux kernels (4.0.2+, LTS 3.14.41+), pushed to the [core] repository in the past couple of weeks, suffered from a bug that can cause data corruption on file systems mounted with the <code>discard</code> option and residing on software RAID 0 arrays. Even if <code>discard</code> is not specified, the <code>fstrim</code> command can also trigger this bug. (<strong>If you do not use software RAID 0 or the <code>discard</code> option, then this issue does not affect you.</strong>)</p>
+<p>The issue has been addressed in the <code>linux 4.0.4-2</code> and <code>linux-lts 3.14.43-2</code> updates. Due to the nature of the bug, however, it is likely that data corruption has already occurred on systems running the aforementioned kernels. It is strongly advised to verify the integrity of affected file systems using <code>fsck</code> and/or restore their data from known good backups.</p>
+<p>For further information please read the <a href=\"https://lkml.org/lkml/2015/5/21/167\">LKML post</a> by Holger Kiehl, the <a href=\"http://www.phoronix.com/scan.php?page=news_item&amp;px=Linux-4-EXT4-RAID-Issue-Found\">related article</a> on Phoronix, as well as the <a href=\"http://git.neil.brown.name/?p=md.git;a=commitdiff;h=a81157768a00e8cf8a7b43b5ea5cac931262374f\">proposed fix</a> that was backported to the Arch kernels.</p>") (creator nil "Evangelos Foutras") (pubDate nil "Fri, 22 May 2015 20:32:25 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-05-22:/news/data-corruption-on-software-raid-0-when-discard-is-used/"))) ("Puppet 4.0 enters [community]" "<p>Puppet 4 has been released and breaks compatibility with version 3. Therefore users will need to upgrade a server to Puppet 4 before updating their clients. Note that if only a Puppet 4 server is available, Puppet 3 clients will not work. Also a number of locations for things have changed including the config, manifest and module files. You will need to follow upgrade instructions for your servers and clients:</p>
+<ul>
+<li><a href=\"https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_server.html\">https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_server.html</a></li>
+<li><a href=\"https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_agent.html\">https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_agent.html</a></li>
+</ul>" "https://www.archlinux.org/news/puppet-40-enters-community/" (21848 49512) old 9 nil nil ((title nil "Puppet 4.0 enters [community]") (link nil "https://www.archlinux.org/news/puppet-40-enters-community/") (description nil "<p>Puppet 4 has been released and breaks compatibility with version 3. Therefore users will need to upgrade a server to Puppet 4 before updating their clients. Note that if only a Puppet 4 server is available, Puppet 3 clients will not work. Also a number of locations for things have changed including the config, manifest and module files. You will need to follow upgrade instructions for your servers and clients:</p>
+<ul>
+<li><a href=\"https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_server.html\">https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_server.html</a></li>
+<li><a href=\"https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_agent.html\">https://docs.puppetlabs.com/puppet/4.0/reference/upgrade_agent.html</a></li>
+</ul>") (creator nil "Lukas Fleischer") (pubDate nil "Sun, 17 May 2015 16:27:20 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-05-17:/news/puppet-40-enters-community/"))) ("PulseAudio split" "<p>Some modules have been split from the <code>pulseaudio</code> package to avoid having modules with missing dynamic libraries. Please check which modules you need and reinstall them.</p>
+<p>The split out modules are:</p>
+<ul>
+<li><code>pulseaudio-bluetooth</code>: Bluetooth (Bluez) support</li>
+<li><code>pulseaudio-equalizer</code>: Equalizer sink (qpaeq)</li>
+<li><code>pulseaudio-gconf</code>: GConf support (paprefs)</li>
+<li><code>pulseaudio-jack</code>: JACK sink, source and jackdbus detection</li>
+<li><code>pulseaudio-lirc</code>: Infrared (LIRC) volume control</li>
+<li><code>pulseaudio-xen</code>: Xen paravirtual sink</li>
+<li><code>pulseaudio-zeroconf</code>: Zeroconf (Avahi/DNS-SD) support</li>
+</ul>" "https://www.archlinux.org/news/pulseaudio-split/" (21846 62532) old 10 nil nil ((title nil "PulseAudio split") (link nil "https://www.archlinux.org/news/pulseaudio-split/") (description nil "<p>Some modules have been split from the <code>pulseaudio</code> package to avoid having modules with missing dynamic libraries. Please check which modules you need and reinstall them.</p>
+<p>The split out modules are:</p>
+<ul>
+<li><code>pulseaudio-bluetooth</code>: Bluetooth (Bluez) support</li>
+<li><code>pulseaudio-equalizer</code>: Equalizer sink (qpaeq)</li>
+<li><code>pulseaudio-gconf</code>: GConf support (paprefs)</li>
+<li><code>pulseaudio-jack</code>: JACK sink, source and jackdbus detection</li>
+<li><code>pulseaudio-lirc</code>: Infrared (LIRC) volume control</li>
+<li><code>pulseaudio-xen</code>: Xen paravirtual sink</li>
+<li><code>pulseaudio-zeroconf</code>: Zeroconf (Avahi/DNS-SD) support</li>
+</ul>") (creator nil "Jan Steffens") (pubDate nil "Sat, 16 May 2015 07:39:48 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-05-16:/news/pulseaudio-split/"))) ("D-Bus now launches user buses" "<p>The packages <code>systemd</code> 226-1 plus <code>dbus</code> 1.10.0-3 now launch <em>dbus-daemon</em> once per user; all sessions of a user will share the same D-Bus \"session\" bus. The <em>pam_systemd</em> module ensures that the right <code>DBUS_SESSION_BUS_ADDRESS</code> is set at login.</p>
+<p>This also permits dbus-daemon to defer to systemd for activation instead of spawning server processes itself. However, currently this is not commonly used for session services (as opposed to system services).</p>
+<p><em>kdbus</em> will only support this model, so this is also an opportunity to iron out some bugs and make a future transition to kernel buses easier. Please let us know of any issues.</p>" "https://www.archlinux.org/news/d-bus-now-launches-user-buses/" (22015 6027) old 6 nil nil ((title nil "D-Bus now launches user buses") (link nil "https://www.archlinux.org/news/d-bus-now-launches-user-buses/") (description nil "<p>The packages <code>systemd</code> 226-1 plus <code>dbus</code> 1.10.0-3 now launch <em>dbus-daemon</em> once per user; all sessions of a user will share the same D-Bus \"session\" bus. The <em>pam_systemd</em> module ensures that the right <code>DBUS_SESSION_BUS_ADDRESS</code> is set at login.</p>
+<p>This also permits dbus-daemon to defer to systemd for activation instead of spawning server processes itself. However, currently this is not commonly used for session services (as opposed to system services).</p>
+<p><em>kdbus</em> will only support this model, so this is also an opportunity to iron out some bugs and make a future transition to kernel buses easier. Please let us know of any issues.</p>") (creator nil "Jan Steffens") (pubDate nil "Sun, 20 Sep 2015 20:31:07 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-09-20:/news/d-bus-now-launches-user-buses/"))) ("Downtime (rsync, mail)" "<p>Update: All fixed now.</p>
+<p>I just installed a kernel update on our rsync and mail server and it seems we have broken hardware so it is unable to reboot right now. Mailing lists are running on a different system however you need to use the <code>lists.archlinux.org</code> domain rather than <code>archlinux.org</code>. So for arch-general you'd use <code>arch-general@lists.archlinux.org</code>. Mails sent to the normal domain will go through once the server is up again.</p>
+<p>The rsync master will stay unavailable for now.</p>
+<p>I've asked the hoster to look into the issue, but I can't currently estimate when I'll get a reply/fix.</p>
+<p>Sorry for the inconvenience,
+Florian</p>" "https://www.archlinux.org/news/downtime-rsync-mail/" (22038 9480) old 5 nil nil ((title nil "Downtime (rsync, mail)") (link nil "https://www.archlinux.org/news/downtime-rsync-mail/") (description nil "<p>Update: All fixed now.</p>
+<p>I just installed a kernel update on our rsync and mail server and it seems we have broken hardware so it is unable to reboot right now. Mailing lists are running on a different system however you need to use the <code>lists.archlinux.org</code> domain rather than <code>archlinux.org</code>. So for arch-general you'd use <code>arch-general@lists.archlinux.org</code>. Mails sent to the normal domain will go through once the server is up again.</p>
+<p>The rsync master will stay unavailable for now.</p>
+<p>I've asked the hoster to look into the issue, but I can't currently estimate when I'll get a reply/fix.</p>
+<p>Sorry for the inconvenience,
+Florian</p>") (creator nil "Florian Pritz") (pubDate nil "Thu, 08 Oct 2015 08:10:48 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-10-08:/news/downtime-rsync-mail/"))) ("Xorg 1.18.0 enters [testing]" "<p>Xorg 1.18.0 is entering [testing] with the following changes:</p>
+<ul>
+<li>
+<p>You can now choose between <code>xf86-input-evdev</code> and <code>xf86-input-libinput</code>.</p>
+</li>
+<li>
+<p><code>xf86-input-aiptek</code> will not be updated and will be removed when xorg-1.18.0 is moved to [extra]</p>
+</li>
+</ul>
+<p>Caveat:</p>
+<p>NVIDIA drivers are not yet compatible with 1.18.0. You can block the upgrade
+by appending --ignoregroup=xorg to the pacman command or adding 'xorg' to
+IgnoreGroup in pacman.conf </p>" "https://www.archlinux.org/news/xorg-1180-enters-testing/" (22085 56012) old 4 nil nil ((title nil "Xorg 1.18.0 enters [testing]") (link nil "https://www.archlinux.org/news/xorg-1180-enters-testing/") (description nil "<p>Xorg 1.18.0 is entering [testing] with the following changes:</p>
+<ul>
+<li>
+<p>You can now choose between <code>xf86-input-evdev</code> and <code>xf86-input-libinput</code>.</p>
+</li>
+<li>
+<p><code>xf86-input-aiptek</code> will not be updated and will be removed when xorg-1.18.0 is moved to [extra]</p>
+</li>
+</ul>
+<p>Caveat:</p>
+<p>NVIDIA drivers are not yet compatible with 1.18.0. You can block the upgrade
+by appending --ignoregroup=xorg to the pacman command or adding 'xorg' to 
+IgnoreGroup in pacman.conf </p>") (creator nil "Laurent Carlier") (pubDate nil "Fri, 13 Nov 2015 12:42:52 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-11-13:/news/xorg-1180-enters-testing/"))) ("C++ ABI change" "<p>GCC 5.x contains libstdc++ with <a href=\"https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html\">dual ABI</a> support and we have now switched to the new ABI.</p>
+<p>While the old C++ ABI is still available, it is recommended that you build all non-repo packages to have the new ABI. This is particularly important if they link to another library built against the new ABI. You can get a list of packages to rebuild using the following shell script:</p>
+<pre><code>#!/bin/bash
+while read pkg; do
+mapfile -t files &lt; &lt;(pacman -Qlq $pkg | grep -v /$)
+grep -Fq libstdc++.so.6 \"${files[@]}\" &lt;&amp;- 2&gt;/dev/null &amp;&amp; echo $pkg
+done &lt; &lt;(pacman -Qmq)
+</code></pre>
+<p>(Original announcement text by Allan McRae [<a href=\"https://lists.archlinux.org/pipermail/arch-dev-public/2015-December/027597.html\">link</a>])</p>" "https://www.archlinux.org/news/c-abi-change/" (22121 8258) old 3 nil nil ((title nil "C++ ABI change") (link nil "https://www.archlinux.org/news/c-abi-change/") (description nil "<p>GCC 5.x contains libstdc++ with <a href=\"https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html\">dual ABI</a> support and we have now switched to the new ABI.</p>
+<p>While the old C++ ABI is still available, it is recommended that you build all non-repo packages to have the new ABI. This is particularly important if they link to another library built against the new ABI. You can get a list of packages to rebuild using the following shell script:</p>
+<pre><code>#!/bin/bash
+
+while read pkg; do
+    mapfile -t files &lt; &lt;(pacman -Qlq $pkg | grep -v /$)
+    grep -Fq libstdc++.so.6 \"${files[@]}\" &lt;&amp;- 2&gt;/dev/null &amp;&amp; echo $pkg
+done &lt; &lt;(pacman -Qmq)
+</code></pre>
+<p>(Original announcement text by Allan McRae [<a href=\"https://lists.archlinux.org/pipermail/arch-dev-public/2015-December/027597.html\">link</a>])</p>") (creator nil "Evangelos Foutras") (pubDate nil "Thu, 10 Dec 2015 06:48:34 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-12-10:/news/c-abi-change/"))) ("Dropping Plasma 4" "<p>Since the KDE 4 desktop has been unmaintained for several months and it's becoming increasingly difficult to support two versions of Plasma, we are removing it from our repositories. Plasma 5.5 has just been released and should be stable enough to replace it.</p>
+<p>KDE 4 installations will not be automatically upgraded to Plasma 5. However, we recommend all users to upgrade or switch to a maintained alternative as soon as possible, since any future update may break the KDE 4 desktop without prior notice. See <a href=\"https://wiki.archlinux.org/index.php/KDE#Upgrading_from_Plasma_4_to_5\">the wiki</a> for instructions on how to upgrade to Plasma 5.</p>" "https://www.archlinux.org/news/dropping-plasma-4/" (22123 61727) old 2 nil nil ((title nil "Dropping Plasma 4") (link nil "https://www.archlinux.org/news/dropping-plasma-4/") (description nil "<p>Since the KDE 4 desktop has been unmaintained for several months and it's becoming increasingly difficult to support two versions of Plasma, we are removing it from our repositories. Plasma 5.5 has just been released and should be stable enough to replace it.</p>
+<p>KDE 4 installations will not be automatically upgraded to Plasma 5. However, we recommend all users to upgrade or switch to a maintained alternative as soon as possible, since any future update may break the KDE 4 desktop without prior notice. See <a href=\"https://wiki.archlinux.org/index.php/KDE#Upgrading_from_Plasma_4_to_5\">the wiki</a> for instructions on how to upgrade to Plasma 5.</p>") (creator nil "Antonio Rojas") (pubDate nil "Sat, 12 Dec 2015 10:04:15 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2015-12-12:/news/dropping-plasma-4/"))) ("PHP 7.0 packages released" "<p>Packages of the new major version of PHP have been released into the stable repositories. Besides the new <a href=\"http://php.net/archive/2015.php#id2015-12-03-1\">PHP 7 features</a> there are the following packaging changes. In general the package configuration is now closer to what was intended by the PHP project. Also refer to the <strong><a href=\"http://php.net/manual/en/migration70.php\">PHP 7 migration guide</a></strong> for upstream improvements.</p>
+<h4>Removed packages</h4>
+<ul>
+<li><strong>php-pear</strong></li>
+<li><strong>php-mssql</strong></li>
+<li><strong>php-ldap</strong> The module is now included in the <a href=\"https://www.archlinux.org/packages/extra/x86_64/php/\">php</a> package</li>
+<li><strong>php-mongo</strong> The new <strong><a href=\"https://www.archlinux.org/packages/community/x86_64/php-mongodb/\">php-mongodb</a></strong> might provide an alternative even though it is not a compatible drop-in replacement</li>
+<li><strong>php-xcache</strong> Consider using the included <a href=\"http://php.net/opcache\">OPcache</a> and optionally <a href=\"https://www.archlinux.org/packages/extra/x86_64/php-apcu/\">APCu</a> for user data cache</li>
+<li><strong><a href=\"https://www.archlinux.org/packages/extra/x86_64/graphviz/\">graphviz</a></strong> The PHP bindings had to be removed</li>
+</ul>
+<h4>New packages</h4>
+<ul>
+<li><strong><a href=\"https://www.archlinux.org/packages/extra/x86_64/php-apcu-bc/\">php-apcu-bc</a></strong> Install and enable this module if the <strong>apc_</strong>* functions are needed</li>
+<li><strong><a href=\"https://www.archlinux.org/packages/community/x86_64/php-mongodb/\">php-mongodb</a></strong></li>
+</ul>
+<h4>Configuration changes</h4>
+<ul>
+<li><strong>open_basedir</strong> is no longer set by default</li>
+<li><strong>openssl</strong>, <strong>phar</strong> and <strong>posix</strong> extensions are now built in</li>
+<li><a href=\"https://www.archlinux.org/packages/extra/x86_64/php-fpm/\">php-fpm</a> does no longer provide a <strong>logrotate</strong> configuration. Instead syslog/journald is used by default</li>
+<li><a href=\"https://www.archlinux.org/packages/extra/x86_64/php-fpm/\">php-fpm</a>'s service file does no longer set <strong>PrivateTmp=true</strong></li>
+<li>The configuration and module of <a href=\"https://www.archlinux.org/packages/extra/x86_64/php-apache/\">php-apache</a> have been renamed to <strong>php7_module.conf</strong> and <strong>libphp7.so</strong></li>
+</ul>" "https://www.archlinux.org/news/php-70-packages-released/" (22151 59685) new 1 nil nil ((title nil "PHP 7.0 packages released") (link nil "https://www.archlinux.org/news/php-70-packages-released/") (description nil "<p>Packages of the new major version of PHP have been released into the stable repositories. Besides the new <a href=\"http://php.net/archive/2015.php#id2015-12-03-1\">PHP 7 features</a> there are the following packaging changes. In general the package configuration is now closer to what was intended by the PHP project. Also refer to the <strong><a href=\"http://php.net/manual/en/migration70.php\">PHP 7 migration guide</a></strong> for upstream improvements.</p>
+<h4>Removed packages</h4>
+<ul>
+<li><strong>php-pear</strong></li>
+<li><strong>php-mssql</strong></li>
+<li><strong>php-ldap</strong> The module is now included in the <a href=\"https://www.archlinux.org/packages/extra/x86_64/php/\">php</a> package</li>
+<li><strong>php-mongo</strong> The new <strong><a href=\"https://www.archlinux.org/packages/community/x86_64/php-mongodb/\">php-mongodb</a></strong> might provide an alternative even though it is not a compatible drop-in replacement</li>
+<li><strong>php-xcache</strong> Consider using the included <a href=\"http://php.net/opcache\">OPcache</a> and optionally <a href=\"https://www.archlinux.org/packages/extra/x86_64/php-apcu/\">APCu</a> for user data cache</li>
+<li><strong><a href=\"https://www.archlinux.org/packages/extra/x86_64/graphviz/\">graphviz</a></strong> The PHP bindings had to be removed</li>
+</ul>
+<h4>New packages</h4>
+<ul>
+<li><strong><a href=\"https://www.archlinux.org/packages/extra/x86_64/php-apcu-bc/\">php-apcu-bc</a></strong> Install and enable this module if the <strong>apc_</strong>* functions are needed</li>
+<li><strong><a href=\"https://www.archlinux.org/packages/community/x86_64/php-mongodb/\">php-mongodb</a></strong></li>
+</ul>
+<h4>Configuration changes</h4>
+<ul>
+<li><strong>open_basedir</strong> is no longer set by default</li>
+<li><strong>openssl</strong>, <strong>phar</strong> and <strong>posix</strong> extensions are now built in</li>
+<li><a href=\"https://www.archlinux.org/packages/extra/x86_64/php-fpm/\">php-fpm</a> does no longer provide a <strong>logrotate</strong> configuration. Instead syslog/journald is used by default</li>
+<li><a href=\"https://www.archlinux.org/packages/extra/x86_64/php-fpm/\">php-fpm</a>'s service file does no longer set <strong>PrivateTmp=true</strong></li>
+<li>The configuration and module of <a href=\"https://www.archlinux.org/packages/extra/x86_64/php-apache/\">php-apache</a> have been renamed to <strong>php7_module.conf</strong> and <strong>libphp7.so</strong></li>
+</ul>") (creator nil "Pierre Schmitz") (pubDate nil "Sat, 02 Jan 2016 15:13:41 +0000") (guid ((isPermaLink . "false")) "tag:www.archlinux.org,2016-01-02:/news/php-70-packages-released/"))))

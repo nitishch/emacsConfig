@@ -1,0 +1,5 @@
+(
+ (:id "sha1:19361420289404cff823c6981e7cd6ae13df972e" :fingerprint "sha1:d0:4a:56:49:5f:4a:34:e3:59:ee:3a:08:2d:6b:cb:9d:20:1f:9e:36" :host "smtp-auth.iitb.ac.in:25" :conditions (:unknown-ca :invalid))
+ (:id "sha1:15aa8d0150e8e8b80962c4076ea1a4cbe0d5be5e" :fingerprint "sha1:b7:78:fc:c0:74:ea:22:c7:b2:c9:cf:67:f0:19:ce:a7:e4:ae:7a:47" :host "imap.iitb.ac.in:993" :conditions (:self-signed :unknown-ca :invalid))
+ (:id "sha1:85457c729378cc93c732b6a3941c8e4f9c2e60f3" :fingerprint "sha1:ab:a6:d7:6a:b3:d3:63:fa:19:0d:65:41:60:23:6e:ef:d3:2a:46:dc" :host "marmalade-repo.org:443" :conditions (:unknown-ca :invalid))
+)

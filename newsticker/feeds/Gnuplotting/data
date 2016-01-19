@@ -1,0 +1,1241 @@
+;; -*- coding: utf-8 -*-
+(("Gnuplotting" "Create scientific plots using gnuplot" "" (22105 53145 345896 597000) feed 0 nil nil ((title nil "Gnuplotting") (link ((href . "http://www.gnuplotting.org/feed/") (rel . "self") (type . "application/rss+xml"))) (link nil "http://www.gnuplotting.org") (description nil "Create scientific plots using gnuplot") (lastBuildDate nil "Tue, 20 Oct 2015 19:46:29 +0000") (language nil "en-US") (updatePeriod nil "hourly") (updateFrequency nil "1") (generator nil "http://wordpress.org/?v=4.3.1") (item nil (title nil "Labels with white background in LaTeX terminals") (link nil "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/") (comments nil "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/#comments") (pubDate nil "Mon, 13 Apr 2015 17:14:03 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "background") (category nil "cairolatex") (category nil "epslatex") (category nil "label") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=2008") (description nil "Instead of using a legend it is often a good idea to label your data directly in the graph. If you use a grid it can happen that you want to use a white background with your labels. This would improve the readability of the labels as it reduces interaction with the grid. To add [&#8230;]") (encoded nil "<p>Instead of using a legend it is often a good idea to <a href=\"http://www.gnuplotting.org/label-size-in-epslatex-terminal/\">label your data directly in the graph</a>. If you use a grid it can happen that you want to use a white background with your labels. This would improve the readability of the labels as it reduces interaction with the grid. To add a background is not straightforward, especially if you have rotated labels. In the following, we will have a look how to solve the problem for LaTeX terminals. Thanks to V. Mózer for the idea and the data for the plot. Fig. 1 presents the desired result.</p>
+<div class=\"figure\">
+    <a href=\"http://www.gnuplotting.org/figs/fire_severity1.pdf\"><img src=\"http://www.gnuplotting.org/figs/fire_severity1_small.png\" alt=\"Fire severity\"/></a>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong>Fire severity as given by the fire temperature over time for a real vs. normalized fire. Click on the figure to see the original PDF version. (<a href=\"http://www.gnuplotting.org/code/fire_severity1.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/fire_severity.txt\">data</a>)
+    </p>
+</div>
+<p>To add a background to the labels we use the <code>colorbox</code> command, which we include in our terminal definition via the <code>header</code> option.</p>
+<pre class=\"prettyprint\">
+set terminal cairolatex standalone pdf size 16cm,10.5cm dashed transparent \\
+monochrome header monochrome \\
+header '\\newcommand{\\hl}[1]{\\setlength{\\fboxsep}{0.75pt}\\colorbox{white}{#1}}'
+</pre>
+<p>In addition, we specify the size of the background area with the <code>\\setlength{\\fboxsep}{0.75pt}</code> command. This is quite handy as the default background size of <code>\\colorbox</code> is a little to large for labels.</p>
+<p>For the labels themselves, we only have to highlight them with the <code>\\hl{}</code> command to get the desired background.</p>
+<pre class=\"prettyprint\">
+set label 1 at  50, 250 '\\hl{\\small $t_\\textrm{Nc}$}' center rotate by 45 front
+</pre>
+<div class=\"figure\">
+    <a href=\"http://www.gnuplotting.org/figs/fire_severity2.pdf\"><img src=\"http://www.gnuplotting.org/figs/fire_severity2_small.png\" alt=\"Fire severity\"/></a>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong>Fire severity as given by the fire temperature over time for a real vs. normalized fire. Click on the figure to see the original PDF version.(<a href=\"http://www.gnuplotting.org/code/fire_severity2.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/fire_severity.txt\">data</a>)
+    </p>
+</div>
+<p>If you have a <a href=\"http://www.gnuplotting.org/line-breaks-in-labels/\">label with a line break</a>, you have to decide if you want to apply the background to every part of the line break, as shown in Fig. 1</p>
+<pre class=\"prettyprint\">
+set label 2 at  90, 100 '\\small \\shortstack[l]{\\hl{Temperature of reference '.\\
+                        'point} \\\\ \\hl{during construction $t_\\textrm{Nc} / '.\\
+                        't_\\textrm{rc}$}}' front
+</pre>
+<p>or if you want to highlight the whole label without seeing some grid between the lines</p>
+<pre class=\"prettyprint\">
+set label 2 at  90, 100 '\\hl{\\small \\shortstack[l]{Temperature of '.\\
+                        'reference point \\\\ during construction '.\\
+                        '$t_\\textrm{Nc} / t_\\textrm{rc}$}}' front
+</pre>
+<p>Fig. 2 shows the result for that one.</p>
+") (commentRss nil "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/feed/") (comments nil "2")) (item nil (title nil "Ease your plotting with config-snippets") (link nil "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/") (comments nil "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/#comments") (pubDate nil "Mon, 02 Mar 2015 15:28:51 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "arrow") (category nil "border") (category nil "configuration") (category nil "grid") (category nil "palette") (category nil "vectors") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1994") (description nil "If you are a regular gnuplot user you most probably want to reuse some common settings. I normally avoid it on this blog to have easy scripts that run as standalone files, but during my work I use a lot of small config files. Fig. 1 Bessel functions from order zero up to six plotted [&#8230;]") (encoded nil "<p>If you are a regular gnuplot user you most probably want to reuse some common settings. I normally avoid it on this blog to have easy scripts that run as standalone files, but during my work I use a lot of small config files.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/config-snippets1.png\" alt=\"Bessel functions\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong>Bessel functions from order zero up to six plotted with the dark2 line colors. (<a href=\"http://www.gnuplotting.org/code/config-snippets1.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/dark2.pal\">dark2.pal</a>, <a href=\"http://www.gnuplotting.org/code/xyborder.cfg\">xyborder.cfg</a>, <a href=\"http://www.gnuplotting.org/code/grid.cfg\">grid.cfg</a>, <a href=\"http://www.gnuplotting.org/code/mathematics.cfg\">mathematics.cfg</a>)
+    </p>
+</div>
+<p>Let us start with the Bessel function example from the <a href=\"http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/\">last blog entry</a>. As you can see in Fig. 1, it is a 2D plot, including axes, a grid, line colors, and definitions of higher order Bessel functions. All of those could be easily stored in small config files and reused in other plots.<br />
+As an example I will start with the axes. Here, I have four different config files, called <code>xyborder.cfg</code>, <code>xborder</code>, <code>yborder.cfg</code>, <code>noborder.cfg</code>, which do exactly what their names would suggest. Here are the first and last file:</p>
+<pre class=\"prettyprint\">
+# xyborder.cfg
+set style line 101 lc rgb '#808080' lt 1 lw 1
+set border 3 front ls 101
+set tics nomirror out scale 0.75
+set format '%g'
+</pre>
+<pre class=\"prettyprint\">
+# noborder.cfg
+set border 0
+set style line 101 lc rgb '#808080' lt 1 lw 1
+unset xlabel
+unset ylabel
+set format x ''
+set format y ''
+set tics scale 0
+</pre>
+<p>In the main plotting file I then just have to load the setting I like to have and I&#8217;m done. The same can be done for adding a grid, the right line color definitions and the extra Bessel functions leading to the following excerpt from the main plotting file:</p>
+<pre class=\"prettyprint\">
+# set path of config snippets
+set loadpath './config'
+# load config snippets
+load 'dark2.pal'
+load 'xyborder.cfg'
+load 'grid.cfg'
+load 'mathematics.cfg'
+</pre>
+<p>The <code>set loadpath</code> command tells gnuplot the directory where it can find all the configuration snippets. If you want to see an overview, look at my <a href=\"https://github.com/Gnuplotting/gnuplot-configs\">gnuplot configuration snippets</a> and at the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes\">collection of palettes and line colors</a>.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/config-snippets2.png\" alt=\"Vector Field\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> (<a href=\"http://www.gnuplotting.org/code/config-snippets2.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/moreland.pal\">moreland.pal</a>, <a href=\"http://www.gnuplotting.org/code/noborder.cfg\">noborder.cfg</a>, <a href=\"http://www.gnuplotting.org/code/arrows.cfg\">arrows.cfg</a>)
+    </p>
+</div>
+<p>If you want to include more complicated settings, you have to use the <code>macro</code> setting of gnuplot. Fig. 2 is a reproduction of an <a href=\"http://www.gnuplotting.org/vector-field-from-function/\">earlier entry</a> plotting a vector field with arrows. It included an lenghty definition of how to plot these arrows. If you want to do it several time and define the arrows in the same way every time you should also put it into a config file, this time as a variable (macro). In our example it looks like</p>
+<pre class=\"prettyprint\">
+color_arrows = 'u ($1-dx($1,$2)/2.0):($2-dy($1,$2)/2.0):(dx($1,$2)):(dy($1,$2)):\\
+(v($1,$2)) with vectors head size 0.08,20,60 filled lc palette'
+</pre>
+<p>In the main file the only thing we have then to do is</p>
+<pre class=\"prettyprint\">
+set macros
+load 'noborder.cfg'
+load 'moreland.pal'
+load 'arrows.cfg'
+
+# [...] 
+
+plot '++' @color_arrows
+</pre>
+<p>Important is the first line that enables the use of macros in gnuplot which is disabled by default.</p>
+") (commentRss nil "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/feed/") (comments nil "0")) (item nil (title nil "Matlab colorbar parula with gnuplot") (link nil "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/") (comments nil "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/#comments") (pubDate nil "Thu, 08 Jan 2015 13:53:57 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "colormap") (category nil "linestyle") (category nil "load") (category nil "Matlab") (category nil "palette") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1979") (description nil "Some time ago I discussed how to get the jet colormap from Matlab in gnuplot. Since Matlab R2014b jet is no longer the default colormap. Now parula is the new default colormap. It was introduced together with new default line colors. The changes in the default colormap address some of the points that were criticized [&#8230;]") (encoded nil "<p>Some time ago I discussed how to get the <a href=\"http://www.gnuplotting.org/matlab-colorbar-with-gnuplot/\">jet colormap from Matlab</a> in gnuplot. Since Matlab R2014b jet is no longer the default colormap. Now parula is the new default colormap. It was <a href=\"http://de.mathworks.com/products/matlab/matlab-graphics/#new_look_for_matlab_graphics\">introduced</a> together with new default line colors.</p>
+<p>The changes in the default colormap address some of the points that were criticized of jet by Moreland and corrected by <a href=\"http://www.gnuplotting.org/default-color-map/\"> his colormap</a>.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/parula_colormap.png\" alt=\"Matlab parula colormap\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong>Photoluminescence yield plotted with the parula colormap from Matlab (<a href=\"http://www.gnuplotting.org/code/parula_colormap.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/parula.pal\">parula.pal</a>, <a href=\"http://www.gnuplotting.org/data/matlab_colormap.txt\">data</a>)
+    </p>
+</div>
+<p>A colormap similar to the original is stored in the <code>parula.pal</code> file, which is also part of the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes\">gnuplot-palettes repository on github</a>. An example application of the colormap is presented in Fig. 1.</p>
+<p>In order to apply the colormap you can simply load the file.</p>
+<pre class=\"prettyprint\">
+load 'parula.pal'
+</pre>
+<p>The <code>parula.pal</code> file also includes definitions of line styles. The first line styles (1-9) corresponds to the colors of the parula palette, the line styles 11-17 correspond to the new Matlab line colors, see Fig. 2.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/matlab_line_colors_2014.png\" alt=\"Bessel functions\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong>Bessel functions from order zero up to six plotted with the new default Matlab line colors. (<a href=\"http://www.gnuplotting.org/code/matlab_line_colors_2014.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/parula.pal\">parula.pal</a>, <a href=\"http://www.gnuplotting.org/data/matlab_colormap.txt\">data</a>)
+    </p>
+</div>
+<pre class=\"prettyprint\">
+set style line 11 lt 1 lc rgb '#0072bd' # blue
+set style line 12 lt 1 lc rgb '#d95319' # orange
+set style line 13 lt 1 lc rgb '#edb120' # yellow
+set style line 14 lt 1 lc rgb '#7e2f8e' # purple
+set style line 15 lt 1 lc rgb '#77ac30' # green
+set style line 16 lt 1 lc rgb '#4dbeee' # light-blue
+set style line 17 lt 1 lc rgb '#a2142f' # red
+</pre>
+<p>If you want to use only the palette and not the line colors, you should remove them from the <code>parula.pal</code> file.</p>
+") (commentRss nil "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/feed/") (comments nil "5")) (item nil (title nil "Waterfall plots with changing color") (link nil "http://www.gnuplotting.org/waterfall-plots-with-changing-color/") (comments nil "http://www.gnuplotting.org/waterfall-plots-with-changing-color/#comments") (pubDate nil "Mon, 29 Sep 2014 10:58:09 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "fill") (category nil "filledcurves") (category nil "for") (category nil "iteration") (category nil "palette") (category nil "style") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1957") (description nil "Some time ago I introduced already a waterfall plot, which I named a pseudo-3D-plot. In the meantime, I have been asked several times for a colored version of such a plot. In this post we will revisit the waterfall plot and add some color to it. Fig. 1 Waterfall plot of head related impulse responses. [&#8230;]") (encoded nil "<p>Some time ago I introduced already a waterfall plot, which I named a <a href=\"http://www.gnuplotting.org/creating-pseudo-3d-plots/\">pseudo-3D-plot</a>. In the meantime, I have been asked several times for a colored version of such a plot. In this post we will revisit the waterfall plot and add some color to it.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall1.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Waterfall plot of head related impulse responses. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/moreland.pal\" rel=\"nofollow\">color palette</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>In Fig. 1 the same <a href=\"http://en.wikipedia.org/wiki/Head-related_transfer_function\">head related impulse responses</a> we <a href=\"http://www.gnuplotting.org/animation-iii-video-revisited/\">animated</a> already are displayed in a slightly different way. They describe the transmission of sound from a source to a receiver placed in the ear canal dependent on the position of the source. Here, we show the responses for all incident angles of the sound at once. At 0° the source was placed at the same side of the head as the receiver.</p>
+<p>The color is added by applying the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes/blob/master/moreland.pal\">Moreland</a> color palette, which we <a href=\"http://www.gnuplotting.org/default-color-map/\">discussed earlier</a>. The palette is defined in an extra file and loaded, this enables easy reuse of defined palettes. In the plotting command the palette is enabled with the <code>lc palette</code> command, that tells gnuplot to use the palette as line color depending on the value of the third column, which is given by <code>color(angle)</code>.</p>
+<pre class=\"prettyprint\">
+load 'moreland.pal'
+set style fill solid 0.0 border
+limit360(x) = x<1?x+360:x
+color(x) = x>180?360-x:x
+amplitude_scaling = 200
+plot for [angle=360:0:-2] 'head_related_impulse_responses.txt' \\
+    u 1:(amplitude_scaling*column(limit360(angle)+1)+angle):(color(angle)) \\
+    w filledcu y1=-360 lc palette lw 0.5
+</pre>
+<p>To achieve the waterfall plot, we start with the largest angle of 360° and loop through all angles until we reach 0°. The <code>column</code> command gives us the corresponding column the data is stored in the data file, <code>amplitude_scaling</code> modifies the amplitude of the single responses, and <code>+angle</code> shifts the data of the single responses along the y-axis to achieve the waterfall.</p>
+<p>Even though the changing color in the waterfall plot looks nice you should always think if it really adds some additional information to the plot. If not, a single color should be used. In the following the same plot is repeated, but only with black lines and different angle resolutions which also have a big influence on the final appearance of the plot.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall2.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Waterfall plot of head related impulse responses with a resolution of 5°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall3.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 3 </strong> Waterfall plot of head related impulse responses with a resolution of 2°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall3.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall4.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 4 </strong> Waterfall plot of head related impulse responses with a resolution of 1°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall4.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+") (commentRss nil "http://www.gnuplotting.org/waterfall-plots-with-changing-color/feed/") (comments nil "4")) (item nil (title nil "Zooming in with multiplot") (link nil "http://www.gnuplotting.org/zooming-in-with-multiplot/") (comments nil "http://www.gnuplotting.org/zooming-in-with-multiplot/#comments") (pubDate nil "Mon, 23 Jun 2014 14:35:30 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "grid") (category nil "multiplot") (category nil "object") (category nil "rectangle") (category nil "zoom") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1948") (description nil "Occasionally it is a good idea to create a zoom of some part of your main plot, especially if you have a small part of your plot where the data is hiding each other. Fig. 1 Including a zoom into your figure to emphasize some data. (code to produce this figure, data) In Fig. 1 [&#8230;]") (encoded nil "<p>Occasionally it is a good idea to create a zoom of some part of your main plot, especially if you have a small part of your plot where the data is hiding each other.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/zoom_plot.png\" alt=\"Including a zoom with multiplot\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Including a zoom into your figure to emphasize some data. (<a href=\"http://www.gnuplotting.org/code/zoom_plot.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/itd.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>In Fig. 1 the <a href=\"http://en.wikipedia.org/wiki/Interaural_time_difference\">interaural time difference</a> between a sound signal reaching the two ears of a listener is <a href=\"http://www.gnuplotting.org/multiple-lines-with-different-colors/\">plotted with different colors for different frequencies</a>. The data is very dense around 0°, so we include a zoom into this region in the same figure at a free place.</p>
+<p>This can be done via <code>multiplot</code> and the plotting of the same data in a smaller figure.</p>
+<pre class=\"prettyprint\">
+set origin 0.12,0.17
+set size 0.45,0.4
+set xrange [-10:0]
+set yrange [0:0.1]
+plot for [n=2:13] 'itd.txt' u 1:(column(n)*1000) w lines ls n
+</pre>
+<p>The tricky part is that we have a grid in our main figure and if we do nothing the grid will also be visible in the zoomed in version as shown in Fig. 2.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/zoom_plot_grid.png\" alt=\"Including a zoom with multiplot without grid correction\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Including a zoom into your figure, without correcting the grid. (<a href=\"http://www.gnuplotting.org/code/zoom_plot_grid.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/itd.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>To avoid this we have to hide the grid in the background of the zoomed graph. This is done with the trick of placing an empty white rectangle at the place the zoom plot should appear in the figure.</p>
+<pre class=\"prettyprint\">
+set object 1 rect from -88,0.03 to -49,0.41
+set object 1 rect fc rgb 'white' fillstyle solid 0.0 noborder
+</pre>
+<p>This will then finally lead to the desired result presented in Fig. 1.</p>
+") (commentRss nil "http://www.gnuplotting.org/zooming-in-with-multiplot/feed/") (comments nil "8")) (item nil (title nil "Plotting relative data") (link nil "http://www.gnuplotting.org/plotting-relative-data/") (comments nil "http://www.gnuplotting.org/plotting-relative-data/#comments") (pubDate nil "Tue, 03 Jun 2014 13:44:53 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "points") (category nil "relative") (category nil "steps") (category nil "variable") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1938") (description nil "Suppose we have a file containing the following data from the plotting data tutorial: # absolute_data.txt # X Y 1 2 2 3 3 2 4 1 Fig. 1 Plotting absolute data points. (code to produce this figure, data) This can be plotted in a straightforward manner and will result in Fig. 1. Now suppose [&#8230;]") (encoded nil "<p>Suppose we have a file containing the following data from the <a href=\"http://www.gnuplotting.org/plotting-data/\">plotting data tutorial</a>:</p>
+<pre>
+# absolute_data.txt
+# X   Y
+1   2
+2   3
+3   2
+4   1
+</pre>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/absolute_data.png\" alt=\"Plotting absolute data\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Plotting absolute data points. (<a href=\"http://www.gnuplotting.org/code/absolute_data.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/absolute_data.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>This can be plotted in a straightforward manner and will result in Fig. 1. Now suppose we have the same data points stored as relative coordinates in our data file, resulting in:</p>
+<pre>
+# relative_data.txt
+# deltaX deltaY
+1   2
+1   1
+1   -1
+1   -1
+</pre>
+<p>If we want to plot that data in gnuplot we have to keep track of the current position manually by storing its (x,y) value as variables by</p>
+<pre class=\"prettyprint\">
+x=0.; y=0.
+plot 'relative_data.txt' u (x=x+$1):(y=y+$2) w p ls 1
+</pre>
+<p>Here, we define the starting point to be (0,0) and add to it the values from the first and second column for every line of the data file. By doing so, this results again in Fig. 1. Note, that the addition is always performed first, before the resulting point is plotted which means we get no point at (0,0). Now assume that we also want to add steps going from point to point as shown in Fig. 2. Gnuplot has the <code>steps</code> plotting style to achieve this, but we have to be carefully regarding our (x,y) variables.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/relative_data.png\" alt=\"Plotting relative data\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Plotting relative data points. (<a href=\"http://www.gnuplotting.org/code/relative_data.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/relative_data.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>Every single line of a plotting command is executed after each other which means our (x,y) pair will not be set to (0,0), but to (4,1) at the beginning of the second line of the plotting command. To avoid this we introduce another (a,b) pair for the second line and get finally.</p>
+<pre class=\"prettyprint\">
+x=0.; y=0.
+a=0.; b=0.
+plot 'relative_data.txt' u (x=x+$1):(y=y+$2) w steps ls 2,\\
+     ''                  u (a=a+$1):(b=b+$2) w points ls 1
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/plotting-relative-data/feed/") (comments nil "0")) (item nil (title nil "Calculating histograms") (link nil "http://www.gnuplotting.org/calculating-histograms/") (comments nil "http://www.gnuplotting.org/calculating-histograms/#comments") (pubDate nil "Wed, 16 Apr 2014 09:59:48 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "boxes") (category nil "histogram") (category nil "index") (category nil "load") (category nil "macros") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1924") (description nil "Gnuplot comes with the possibility of plotting histograms, but this requires that the data in the individual bins was already calculated. Here, we start with an one dimensional set of data that we want to count and plot as an histogram, similar to the hist() function we find in Octave. Fig. 1 Two different distributions [&#8230;]") (encoded nil "<p>Gnuplot comes with the possibility of <a href=\"http://www.gnuplotting.org/manpage-gnuplot-4-6/#Q1-1-147\">plotting histograms</a>, but this requires that the data in the individual bins was already calculated. Here, we start with an one dimensional set of data that we want to count and plot as an histogram, similar to the <code>hist()</code> function we find in Octave.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/histogram1.png\" alt=\"Histogram of angle data\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Two different distributions of measured angles. (<a href=\"http://www.gnuplotting.org/code/histogram1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/hist.fct\" rel=\"nofollow\">hist.fct</a>, <a href=\"http://www.gnuplotting.org/data/histogram.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>In Fig. 1 you see two different distributions of measured angles. They were both given as one dimensional data and plotted with a defined macro that is doing the histogram calculation. The macro is defined in an additional file <code>hist.fct</code> and loaded before the plotting command.</p>
+<pre class=\"prettyprint\">
+binwidth = 4
+binstart = -100
+load 'hist.fct'
+plot 'histogram.txt' i 0 @hist ls 1,\\
+     ''              i 1 @hist ls 2
+</pre>
+<p>The content of <code>hist.fct</code>, including the definition of <code>@hist</code> looks like this</p>
+<pre class=\"prettyprint\">
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+# define macro for plotting the histogram
+hist = 'u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0) smooth freq w boxes'
+</pre>
+<p>For a detailed discussion on why <code>@hist</code> calculates a histogram you should have a look at <a href=\"http://stackoverflow.com/questions/2471884/histogram-using-gnuplot\">this discussion</a> and the documentation about the <a href=\"http://www.gnuplotting.org/manpage-gnuplot-4-6/#Q1-1-300\" class=\"manpage\">smooth freq</a> which basically counts points with the same x-value. The other settings in the file define the width of a single bin plotted as a box and its fill style.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/histogram2.png\" alt=\"Histogram of angle data\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Two different distributions of measured angles. The bins of the histograms are shifted to be centered around 0°. (<a href=\"http://www.gnuplotting.org/code/histogram2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/hist.fct\" rel=\"nofollow\">hist.fct</a>, <a href=\"http://www.gnuplotting.org/data/histogram.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>It is important that the two values <code>binwidth</code> and <code>binstart</code> are defined before loading the <code>hist.fct</code> file. These define the width of the single bins and at what position the left border of a single bin should be positioned. For example, let us assume that we want to have the bins centered around 0° as shown in Fig. 2. This can be achieved by settings the binstart to half the binwidth:</p>
+<pre class=\"prettyprint\">
+binwidth = 4
+binstart = -2
+load 'hist.fct'
+plot 'histogram.txt' i 0 @hist ls 1,\\
+     ''              i 1 @hist ls 2
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/calculating-histograms/feed/") (comments nil "5")) (item nil (title nil "Arrow with T-shaped head") (link nil "http://www.gnuplotting.org/arrow-with-t-shaped-head/") (comments nil "http://www.gnuplotting.org/arrow-with-t-shaped-head/#comments") (pubDate nil "Fri, 21 Feb 2014 22:17:40 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "arrow") (category nil "circle") (category nil "head") (category nil "italic") (category nil "object") (category nil "table") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1910") (description nil "For the measurement of distances T-shaped arrows are often used to highlight the length. In gnuplot there is an easy way to achieve this. Fig. 1 Diffraction of light for a slit with the length d. (code to produce this figure) Have a look at Fig. 1 which tries to explain the diffraction phenomenon of [&#8230;]") (encoded nil "<p>For the measurement of distances T-shaped arrows are often used to highlight the length. In gnuplot there is an easy way to achieve this.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/diffraction.png\" alt=\"Diffraction on a slit\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Diffraction of light for a slit with the length <em>d</em>. (<a href=\"http://www.gnuplotting.org/code/diffraction.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>)
+    </p>
+</div>
+<p>Have a look at Fig. 1 which tries to explain the diffraction phenomenon of a slit with the length <em>d</em>. At a distance <em>a</em> the diffraction pattern is drawn. The different distances, the distance between the first minima of the diffraction pattern, and the wave length are indicated by T-shaped arrows. This kind of arrays can be achieved in gnuplot with the following code.</p>
+<pre class=\"prettyprint\">
+Theads = 'heads size 0.5,90 front ls 201'
+set arrow from -24,-2 to -24, 2       @Theads
+set arrow from -22, 2 to -21.44,1.92  @Theads
+set arrow from 1.5,-pi to 1.5,pi      @Theads
+set arrow from -22,2.5*pi to 0,2.5*pi @Theads
+</pre>
+<p>Here, <code>90</code> is the relevant entry after <code>size</code> as it describes the opening angle of the arrow head.<br />
+In addition, an open circle is drawn to indicate the angle <em>&theta;</em>. This is achieved by specifying the opening angle for the circle object.</p>
+<pre class=\"prettyprint\">
+set object circle at -22,0 size 6 arc [-8:0]
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/arrow-with-t-shaped-head/feed/") (comments nil "5")) (item nil (title nil "Plotting raster data from Natural Earth") (link nil "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/") (comments nil "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/#comments") (pubDate nil "Fri, 31 Jan 2014 22:41:54 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "angles") (category nil "datafile") (category nil "pm3d") (category nil "rgb") (category nil "rgbimage") (category nil "sphere") (category nil "splot") (category nil "tif") (category nil "variable") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1877") (description nil "And another plot of the world. This time we are dealing with the raster data from Natural Earth. This data is normally available as tif-files. To use them in gnuplot we have to convert them first, then we can create a plot as shown in Fig. 1. Fig. 1 Cross-blended hypsometric tint plot of the [&#8230;]") (encoded nil "<p>And <a href=\"http://www.gnuplotting.org/plotting-the-world-revisited/\">another</a> plot of the world. This time we are dealing with the <a href=\"http://www.naturalearthdata.com/downloads/50m-raster-data/\">raster data</a> from Natural Earth. This data is normally available as tif-files. To use them in gnuplot we have to convert them first, then we can create a plot as shown in Fig. 1.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/world_color.png\" alt=\"Cross-blended Hypsometric Tints\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Cross-blended hypsometric tint plot of the world. (<a href=\"http://www.gnuplotting.org/code/world_color.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/HYP_50M_SR_W_350px.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>The conversion is done by the <a href=\"http://www.gnuplotting.org/code/convert_natural_earth\">convert_natural_earth</a> script. There the tif-file is first scaled down to the desired resolution using <a href=\"http://www.imagemagick.org\">imagemagick</a>. Afterwards it is converted to a text file and reordered for the <code>splot</code> command of gnuplot. The text file includes the longitude, latitude and three rgb color values.<br />
+You have to invoke the script in the following way.</p>
+<pre class=\"prettyprint\">
+$ ./convert_natural_earth $RES $FILE
+</pre>
+<p>where <code>$RES</code> is the desired resolution in pixel of your gnuplot plot and <code>$FILE</code> the input tif-file.<br />
+After finished we can plot the resulting text file simply by</p>
+<pre class=\"prettyprint\">
+set datafile separator ','
+set size ratio -1
+plot 'HYP_50M_SR_W_350px.txt' w rgbimage
+</pre>
+<p>which results in Fig. 1.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/world_color_3d.png\" alt=\"Natural Earth II Shaded Relief and Water\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Natural Earth II shaded relief and water plot of the world. (<a href=\"http://www.gnuplotting.org/code/world_color_3d.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/NE2_50M_SR_W_700px.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>The image can also be projected on a 3D figure of the world as shown in Fig. 2. To achieve this the three rgb values have to be summarized in one value and the <code>rgb variable</code> line color option has to be chosen together with <code>pm3d</code>.</p>
+<pre class=\"prettyprint\">
+rgb(r,g,b) = 65536 * int(r) + 256 * int(g) + int(b)
+set mapping spherical
+set angles degrees
+splot 'NE2_50M_SR_W_700px.txt' u 1:2:(1):(rgb($3,$4,$5)) w pm3d lc rgb variable
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/feed/") (comments nil "2")) (item nil (title nil "U.S. states and election results") (link nil "http://www.gnuplotting.org/us-states-and-election-results/") (comments nil "http://www.gnuplotting.org/us-states-and-election-results/#comments") (pubDate nil "Sat, 21 Dec 2013 22:53:08 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "filledcurves") (category nil "for") (category nil "index") (category nil "labels") (category nil "multiplot") (category nil "stats") (category nil "string") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1852") (description nil "After plotting the world several times we will concentrate on a smaller level this time. Ben Johnson was so kind to convert the part dealing with the USA of the 10m states and provinces data set from natural earth to something useful for gnuplot. The result is stored in the file usa.txt. Fig. 1 Election [&#8230;]") (encoded nil "<p>After <a href=\"http://www.gnuplotting.org/plotting-the-world-revisited/\">plotting the world</a> <a href=\"http://www.gnuplotting.org/mercator-projection/\">several times</a> we will concentrate on a smaller level this time. Ben Johnson was so kind to convert the part dealing with the USA of the <a href=\"http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/\">10m states and provinces data set from natural earth</a> to something useful for gnuplot. The result is stored in the file <a href=\"http://www.gnuplotting.org/data/usa.txt\">usa.txt</a>.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/election1.png\" alt=\"USA election\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Election results of single U.S. states. (<a href=\"http://www.gnuplotting.org/code/election1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/usa.txt\" rel=\"nofollow\">USA data</a>, <a href=\"http://www.gnuplotting.org/data/election.txt\" rel=\"nofollow\">election data</a>)
+    </p>
+</div>
+<p>Two double lines divide the single states. This allows us to plot a single state with the help of the <code>index</code> command. At the end of this post the corresponding index numbers for every state are listed.<br />
+In addition to the <a href=\"http://www.gnuplotting.org/data/usa.txt\">state border data</a> we have <a href=\"http://www.gnuplotting.org/data/election.txt\">another file</a> that includes results from an example election and strings with the names of the states. The election result can be 1 or 2 &#8211; corresponding to blue and red. With the help of these two data sets we are able to create Fig. 1 and Fig. 2.<br />
+For drawing a single state in red or blue we first collect the results for every single state in the string variable <code>ELEC</code>. The <code>stats</code> command is suitable for this, because it parses all the data but doesn&#8217;t try to plot any of them. During the parsing of every line the election result stored in the second column will be added at the end of the <code>ELEC</code> variable. </p>
+<pre class=\"prettyprint\">
+ELEC=''
+stats 'election.txt' u 1:(ELEC = ELEC.sprintf('%i',$2))
+</pre>
+<p>In a second step we plot the state borders and color the states with the help of the <code>ELEC</code>string. <code>ELEC[1:1]</code> will return the election result for the state with the index 0.</p>
+<pre class=\"prettyprint\">
+plot for [idx=0:48] 'usa.txt' i idx u 2:1 w filledcurves ls ELEC[idx+1:idx+1],\\
+                    ''              u 2:1 w l ls 3
+</pre>
+<p>Alaska and Hawaii are then added with additional plot commands and the help of <code>multiplot</code>.</p>
+<p>The <a href=\"http://www.gnuplotting.org/data/election.txt\">data file with the election results</a> includes also the names of the single states and a coordinates to place them. This allows us to put them in the map as well, as you can see in Fig. 2.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/election2.png\" alt=\"USA election\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Names and election results of single U.S. states. (<a href=\"http://www.gnuplotting.org/code/election2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/usa.txt\" rel=\"nofollow\">USA data</a>, <a href=\"http://www.gnuplotting.org/data/election.txt\" rel=\"nofollow\">election data</a>)
+    </p>
+</div>
+<p>The plotting of the state names is easily achieved by the <code>labels</code> plotting style:</p>
+<pre class=\"prettyprint\">
+plot for [idx=0:48] 'usa.txt' i idx u 2:1 w filledcurves ls ELEC[idx+1:idx+1],\\
+                    ''              u 2:1 w l ls 3,\\
+                    'election.txt'  u 6:5:3 w labels tc ls 3
+</pre>
+<p>At the end we provide the list with the index numbers and the corresponding states. If you want to plot a subset of states &#8211; as in Fig. 2 &#8211; you should adjust the <code>xrange</code> and <code>yrange</code> values accordingly.</p>
+<pre>
+0  Massachusetts
+1  Minnesota
+2  Montana
+3  North Dakota
+4  Idaho
+5  Washington
+6  Arizona
+7  California
+8  Colorado
+9  Nevada
+10 New Mexico
+11 Oregon
+12 Utah
+13 Wyoming
+14 Arkansas
+15 Iowa
+16 Kansas
+17 Missouri
+18 Nebraska
+19 Oklahoma
+20 South Dakota
+21 Louisiana
+22 Texas
+23 Connecticut
+24 New Hampshire
+25 Rhode Island
+26 Vermont
+27 Alabama
+28 Florida
+29 Georgia
+30 Mississippi
+31 South Carolina
+32 Illinois
+33 Indiana
+34 Kentucky
+35 North Carolina
+36 Ohio
+37 Tennessee
+38 Virginia
+39 Wisconsin
+40 West Virginia
+41 Delaware
+42 District of Columbia
+43 Maryland
+44 New Jersey
+45 New York
+46 Pennsylvania
+47 Maine
+48 Michigan
+49 Hawaii
+50 Alaska
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/us-states-and-election-results/feed/") (comments nil "2")))) ("Labels with white background in LaTeX terminals" "<p>Instead of using a legend it is often a good idea to <a href=\"http://www.gnuplotting.org/label-size-in-epslatex-terminal/\">label your data directly in the graph</a>. If you use a grid it can happen that you want to use a white background with your labels. This would improve the readability of the labels as it reduces interaction with the grid. To add a background is not straightforward, especially if you have rotated labels. In the following, we will have a look how to solve the problem for LaTeX terminals. Thanks to V. Mózer for the idea and the data for the plot. Fig. 1 presents the desired result.</p>
+<div class=\"figure\">
+<a href=\"http://www.gnuplotting.org/figs/fire_severity1.pdf\"><img src=\"http://www.gnuplotting.org/figs/fire_severity1_small.png\" alt=\"Fire severity\"/></a>
+<p class=\"caption\">
+<strong>Fig. 1 </strong>Fire severity as given by the fire temperature over time for a real vs. normalized fire. Click on the figure to see the original PDF version. (<a href=\"http://www.gnuplotting.org/code/fire_severity1.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/fire_severity.txt\">data</a>)
+</p>
+</div>
+<p>To add a background to the labels we use the <code>colorbox</code> command, which we include in our terminal definition via the <code>header</code> option.</p>
+<pre class=\"prettyprint\">
+set terminal cairolatex standalone pdf size 16cm,10.5cm dashed transparent \\
+monochrome header monochrome \\
+header '\\newcommand{\\hl}[1]{\\setlength{\\fboxsep}{0.75pt}\\colorbox{white}{#1}}'
+</pre>
+<p>In addition, we specify the size of the background area with the <code>\\setlength{\\fboxsep}{0.75pt}</code> command. This is quite handy as the default background size of <code>\\colorbox</code> is a little to large for labels.</p>
+<p>For the labels themselves, we only have to highlight them with the <code>\\hl{}</code> command to get the desired background.</p>
+<pre class=\"prettyprint\">
+set label 1 at  50, 250 '\\hl{\\small $t_\\textrm{Nc}$}' center rotate by 45 front
+</pre>
+<div class=\"figure\">
+<a href=\"http://www.gnuplotting.org/figs/fire_severity2.pdf\"><img src=\"http://www.gnuplotting.org/figs/fire_severity2_small.png\" alt=\"Fire severity\"/></a>
+<p class=\"caption\">
+<strong>Fig. 2 </strong>Fire severity as given by the fire temperature over time for a real vs. normalized fire. Click on the figure to see the original PDF version.(<a href=\"http://www.gnuplotting.org/code/fire_severity2.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/fire_severity.txt\">data</a>)
+</p>
+</div>
+<p>If you have a <a href=\"http://www.gnuplotting.org/line-breaks-in-labels/\">label with a line break</a>, you have to decide if you want to apply the background to every part of the line break, as shown in Fig. 1</p>
+<pre class=\"prettyprint\">
+set label 2 at  90, 100 '\\small \\shortstack[l]{\\hl{Temperature of reference '.\\
+'point} \\\\ \\hl{during construction $t_\\textrm{Nc} / '.\\
+'t_\\textrm{rc}$}}' front
+</pre>
+<p>or if you want to highlight the whole label without seeing some grid between the lines</p>
+<pre class=\"prettyprint\">
+set label 2 at  90, 100 '\\hl{\\small \\shortstack[l]{Temperature of '.\\
+'reference point \\\\ during construction '.\\
+'$t_\\textrm{Nc} / t_\\textrm{rc}$}}' front
+</pre>
+<p>Fig. 2 shows the result for that one.</p>" "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/" (21803 63835) old 1 nil nil ((title nil "Labels with white background in LaTeX terminals") (link nil "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/") (comments nil "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/#comments") (pubDate nil "Mon, 13 Apr 2015 17:14:03 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "background") (category nil "cairolatex") (category nil "epslatex") (category nil "label") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=2008") (description nil "Instead of using a legend it is often a good idea to label your data directly in the graph. If you use a grid it can happen that you want to use a white background with your labels. This would improve the readability of the labels as it reduces interaction with the grid. To add [&#8230;]") (encoded nil "<p>Instead of using a legend it is often a good idea to <a href=\"http://www.gnuplotting.org/label-size-in-epslatex-terminal/\">label your data directly in the graph</a>. If you use a grid it can happen that you want to use a white background with your labels. This would improve the readability of the labels as it reduces interaction with the grid. To add a background is not straightforward, especially if you have rotated labels. In the following, we will have a look how to solve the problem for LaTeX terminals. Thanks to V. Mózer for the idea and the data for the plot. Fig. 1 presents the desired result.</p>
+<div class=\"figure\">
+    <a href=\"http://www.gnuplotting.org/figs/fire_severity1.pdf\"><img src=\"http://www.gnuplotting.org/figs/fire_severity1_small.png\" alt=\"Fire severity\"/></a>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong>Fire severity as given by the fire temperature over time for a real vs. normalized fire. Click on the figure to see the original PDF version. (<a href=\"http://www.gnuplotting.org/code/fire_severity1.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/fire_severity.txt\">data</a>)
+    </p>
+</div>
+<p>To add a background to the labels we use the <code>colorbox</code> command, which we include in our terminal definition via the <code>header</code> option.</p>
+<pre class=\"prettyprint\">
+set terminal cairolatex standalone pdf size 16cm,10.5cm dashed transparent \\
+monochrome header monochrome \\
+header '\\newcommand{\\hl}[1]{\\setlength{\\fboxsep}{0.75pt}\\colorbox{white}{#1}}'
+</pre>
+<p>In addition, we specify the size of the background area with the <code>\\setlength{\\fboxsep}{0.75pt}</code> command. This is quite handy as the default background size of <code>\\colorbox</code> is a little to large for labels.</p>
+<p>For the labels themselves, we only have to highlight them with the <code>\\hl{}</code> command to get the desired background.</p>
+<pre class=\"prettyprint\">
+set label 1 at  50, 250 '\\hl{\\small $t_\\textrm{Nc}$}' center rotate by 45 front
+</pre>
+<div class=\"figure\">
+    <a href=\"http://www.gnuplotting.org/figs/fire_severity2.pdf\"><img src=\"http://www.gnuplotting.org/figs/fire_severity2_small.png\" alt=\"Fire severity\"/></a>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong>Fire severity as given by the fire temperature over time for a real vs. normalized fire. Click on the figure to see the original PDF version.(<a href=\"http://www.gnuplotting.org/code/fire_severity2.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/fire_severity.txt\">data</a>)
+    </p>
+</div>
+<p>If you have a <a href=\"http://www.gnuplotting.org/line-breaks-in-labels/\">label with a line break</a>, you have to decide if you want to apply the background to every part of the line break, as shown in Fig. 1</p>
+<pre class=\"prettyprint\">
+set label 2 at  90, 100 '\\small \\shortstack[l]{\\hl{Temperature of reference '.\\
+                        'point} \\\\ \\hl{during construction $t_\\textrm{Nc} / '.\\
+                        't_\\textrm{rc}$}}' front
+</pre>
+<p>or if you want to highlight the whole label without seeing some grid between the lines</p>
+<pre class=\"prettyprint\">
+set label 2 at  90, 100 '\\hl{\\small \\shortstack[l]{Temperature of '.\\
+                        'reference point \\\\ during construction '.\\
+                        '$t_\\textrm{Nc} / t_\\textrm{rc}$}}' front
+</pre>
+<p>Fig. 2 shows the result for that one.</p>
+") (commentRss nil "http://www.gnuplotting.org/labels-with-white-background-in-latex-terminals/feed/") (comments nil "2"))) ("Ease your plotting with config-snippets" "<p>If you are a regular gnuplot user you most probably want to reuse some common settings. I normally avoid it on this blog to have easy scripts that run as standalone files, but during my work I use a lot of small config files.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/config-snippets1.png\" alt=\"Bessel functions\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong>Bessel functions from order zero up to six plotted with the dark2 line colors. (<a href=\"http://www.gnuplotting.org/code/config-snippets1.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/dark2.pal\">dark2.pal</a>, <a href=\"http://www.gnuplotting.org/code/xyborder.cfg\">xyborder.cfg</a>, <a href=\"http://www.gnuplotting.org/code/grid.cfg\">grid.cfg</a>, <a href=\"http://www.gnuplotting.org/code/mathematics.cfg\">mathematics.cfg</a>)
+</p>
+</div>
+<p>Let us start with the Bessel function example from the <a href=\"http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/\">last blog entry</a>. As you can see in Fig. 1, it is a 2D plot, including axes, a grid, line colors, and definitions of higher order Bessel functions. All of those could be easily stored in small config files and reused in other plots.<br />
+As an example I will start with the axes. Here, I have four different config files, called <code>xyborder.cfg</code>, <code>xborder</code>, <code>yborder.cfg</code>, <code>noborder.cfg</code>, which do exactly what their names would suggest. Here are the first and last file:</p>
+<pre class=\"prettyprint\">
+# xyborder.cfg
+set style line 101 lc rgb '#808080' lt 1 lw 1
+set border 3 front ls 101
+set tics nomirror out scale 0.75
+set format '%g'
+</pre>
+<pre class=\"prettyprint\">
+# noborder.cfg
+set border 0
+set style line 101 lc rgb '#808080' lt 1 lw 1
+unset xlabel
+unset ylabel
+set format x ''
+set format y ''
+set tics scale 0
+</pre>
+<p>In the main plotting file I then just have to load the setting I like to have and I’m done. The same can be done for adding a grid, the right line color definitions and the extra Bessel functions leading to the following excerpt from the main plotting file:</p>
+<pre class=\"prettyprint\">
+# set path of config snippets
+set loadpath './config'
+# load config snippets
+load 'dark2.pal'
+load 'xyborder.cfg'
+load 'grid.cfg'
+load 'mathematics.cfg'
+</pre>
+<p>The <code>set loadpath</code> command tells gnuplot the directory where it can find all the configuration snippets. If you want to see an overview, look at my <a href=\"https://github.com/Gnuplotting/gnuplot-configs\">gnuplot configuration snippets</a> and at the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes\">collection of palettes and line colors</a>.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/config-snippets2.png\" alt=\"Vector Field\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> (<a href=\"http://www.gnuplotting.org/code/config-snippets2.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/moreland.pal\">moreland.pal</a>, <a href=\"http://www.gnuplotting.org/code/noborder.cfg\">noborder.cfg</a>, <a href=\"http://www.gnuplotting.org/code/arrows.cfg\">arrows.cfg</a>)
+</p>
+</div>
+<p>If you want to include more complicated settings, you have to use the <code>macro</code> setting of gnuplot. Fig. 2 is a reproduction of an <a href=\"http://www.gnuplotting.org/vector-field-from-function/\">earlier entry</a> plotting a vector field with arrows. It included an lenghty definition of how to plot these arrows. If you want to do it several time and define the arrows in the same way every time you should also put it into a config file, this time as a variable (macro). In our example it looks like</p>
+<pre class=\"prettyprint\">
+color_arrows = 'u ($1-dx($1,$2)/2.0):($2-dy($1,$2)/2.0):(dx($1,$2)):(dy($1,$2)):\\
+(v($1,$2)) with vectors head size 0.08,20,60 filled lc palette'
+</pre>
+<p>In the main file the only thing we have then to do is</p>
+<pre class=\"prettyprint\">
+set macros
+load 'noborder.cfg'
+load 'moreland.pal'
+load 'arrows.cfg'
+# [...]
+plot '++' @color_arrows
+</pre>
+<p>Important is the first line that enables the use of macros in gnuplot which is disabled by default.</p>" "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/" (21748 33203) old 2 nil nil ((title nil "Ease your plotting with config-snippets") (link nil "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/") (comments nil "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/#comments") (pubDate nil "Mon, 02 Mar 2015 15:28:51 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "arrow") (category nil "border") (category nil "configuration") (category nil "grid") (category nil "palette") (category nil "vectors") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1994") (description nil "If you are a regular gnuplot user you most probably want to reuse some common settings. I normally avoid it on this blog to have easy scripts that run as standalone files, but during my work I use a lot of small config files. Fig. 1 Bessel functions from order zero up to six plotted [&#8230;]") (encoded nil "<p>If you are a regular gnuplot user you most probably want to reuse some common settings. I normally avoid it on this blog to have easy scripts that run as standalone files, but during my work I use a lot of small config files.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/config-snippets1.png\" alt=\"Bessel functions\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong>Bessel functions from order zero up to six plotted with the dark2 line colors. (<a href=\"http://www.gnuplotting.org/code/config-snippets1.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/dark2.pal\">dark2.pal</a>, <a href=\"http://www.gnuplotting.org/code/xyborder.cfg\">xyborder.cfg</a>, <a href=\"http://www.gnuplotting.org/code/grid.cfg\">grid.cfg</a>, <a href=\"http://www.gnuplotting.org/code/mathematics.cfg\">mathematics.cfg</a>)
+    </p>
+</div>
+<p>Let us start with the Bessel function example from the <a href=\"http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/\">last blog entry</a>. As you can see in Fig. 1, it is a 2D plot, including axes, a grid, line colors, and definitions of higher order Bessel functions. All of those could be easily stored in small config files and reused in other plots.<br />
+As an example I will start with the axes. Here, I have four different config files, called <code>xyborder.cfg</code>, <code>xborder</code>, <code>yborder.cfg</code>, <code>noborder.cfg</code>, which do exactly what their names would suggest. Here are the first and last file:</p>
+<pre class=\"prettyprint\">
+# xyborder.cfg
+set style line 101 lc rgb '#808080' lt 1 lw 1
+set border 3 front ls 101
+set tics nomirror out scale 0.75
+set format '%g'
+</pre>
+<pre class=\"prettyprint\">
+# noborder.cfg
+set border 0
+set style line 101 lc rgb '#808080' lt 1 lw 1
+unset xlabel
+unset ylabel
+set format x ''
+set format y ''
+set tics scale 0
+</pre>
+<p>In the main plotting file I then just have to load the setting I like to have and I&#8217;m done. The same can be done for adding a grid, the right line color definitions and the extra Bessel functions leading to the following excerpt from the main plotting file:</p>
+<pre class=\"prettyprint\">
+# set path of config snippets
+set loadpath './config'
+# load config snippets
+load 'dark2.pal'
+load 'xyborder.cfg'
+load 'grid.cfg'
+load 'mathematics.cfg'
+</pre>
+<p>The <code>set loadpath</code> command tells gnuplot the directory where it can find all the configuration snippets. If you want to see an overview, look at my <a href=\"https://github.com/Gnuplotting/gnuplot-configs\">gnuplot configuration snippets</a> and at the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes\">collection of palettes and line colors</a>.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/config-snippets2.png\" alt=\"Vector Field\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> (<a href=\"http://www.gnuplotting.org/code/config-snippets2.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/moreland.pal\">moreland.pal</a>, <a href=\"http://www.gnuplotting.org/code/noborder.cfg\">noborder.cfg</a>, <a href=\"http://www.gnuplotting.org/code/arrows.cfg\">arrows.cfg</a>)
+    </p>
+</div>
+<p>If you want to include more complicated settings, you have to use the <code>macro</code> setting of gnuplot. Fig. 2 is a reproduction of an <a href=\"http://www.gnuplotting.org/vector-field-from-function/\">earlier entry</a> plotting a vector field with arrows. It included an lenghty definition of how to plot these arrows. If you want to do it several time and define the arrows in the same way every time you should also put it into a config file, this time as a variable (macro). In our example it looks like</p>
+<pre class=\"prettyprint\">
+color_arrows = 'u ($1-dx($1,$2)/2.0):($2-dy($1,$2)/2.0):(dx($1,$2)):(dy($1,$2)):\\
+(v($1,$2)) with vectors head size 0.08,20,60 filled lc palette'
+</pre>
+<p>In the main file the only thing we have then to do is</p>
+<pre class=\"prettyprint\">
+set macros
+load 'noborder.cfg'
+load 'moreland.pal'
+load 'arrows.cfg'
+
+# [...] 
+
+plot '++' @color_arrows
+</pre>
+<p>Important is the first line that enables the use of macros in gnuplot which is disabled by default.</p>
+") (commentRss nil "http://www.gnuplotting.org/ease-your-plotting-with-config-snippets/feed/") (comments nil "0"))) ("Matlab colorbar parula with gnuplot" "<p>Some time ago I discussed how to get the <a href=\"http://www.gnuplotting.org/matlab-colorbar-with-gnuplot/\">jet colormap from Matlab</a> in gnuplot. Since Matlab R2014b jet is no longer the default colormap. Now parula is the new default colormap. It was <a href=\"http://de.mathworks.com/products/matlab/matlab-graphics/#new_look_for_matlab_graphics\">introduced</a> together with new default line colors.</p>
+<p>The changes in the default colormap address some of the points that were criticized of jet by Moreland and corrected by <a href=\"http://www.gnuplotting.org/default-color-map/\"> his colormap</a>.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/parula_colormap.png\" alt=\"Matlab parula colormap\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong>Photoluminescence yield plotted with the parula colormap from Matlab (<a href=\"http://www.gnuplotting.org/code/parula_colormap.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/parula.pal\">parula.pal</a>, <a href=\"http://www.gnuplotting.org/data/matlab_colormap.txt\">data</a>)
+</p>
+</div>
+<p>A colormap similar to the original is stored in the <code>parula.pal</code> file, which is also part of the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes\">gnuplot-palettes repository on github</a>. An example application of the colormap is presented in Fig. 1.</p>
+<p>In order to apply the colormap you can simply load the file.</p>
+<pre class=\"prettyprint\">
+load 'parula.pal'
+</pre>
+<p>The <code>parula.pal</code> file also includes definitions of line styles. The first line styles (1-9) corresponds to the colors of the parula palette, the line styles 11-17 correspond to the new Matlab line colors, see Fig. 2.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/matlab_line_colors_2014.png\" alt=\"Bessel functions\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong>Bessel functions from order zero up to six plotted with the new default Matlab line colors. (<a href=\"http://www.gnuplotting.org/code/matlab_line_colors_2014.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/parula.pal\">parula.pal</a>, <a href=\"http://www.gnuplotting.org/data/matlab_colormap.txt\">data</a>)
+</p>
+</div>
+<pre class=\"prettyprint\">
+set style line 11 lt 1 lc rgb '#0072bd' # blue
+set style line 12 lt 1 lc rgb '#d95319' # orange
+set style line 13 lt 1 lc rgb '#edb120' # yellow
+set style line 14 lt 1 lc rgb '#7e2f8e' # purple
+set style line 15 lt 1 lc rgb '#77ac30' # green
+set style line 16 lt 1 lc rgb '#4dbeee' # light-blue
+set style line 17 lt 1 lc rgb '#a2142f' # red
+</pre>
+<p>If you want to use only the palette and not the line colors, you should remove them from the <code>parula.pal</code> file.</p>" "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/" (21678 35829) old 3 nil nil ((title nil "Matlab colorbar parula with gnuplot") (link nil "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/") (comments nil "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/#comments") (pubDate nil "Thu, 08 Jan 2015 13:53:57 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "colormap") (category nil "linestyle") (category nil "load") (category nil "Matlab") (category nil "palette") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1979") (description nil "Some time ago I discussed how to get the jet colormap from Matlab in gnuplot. Since Matlab R2014b jet is no longer the default colormap. Now parula is the new default colormap. It was introduced together with new default line colors. The changes in the default colormap address some of the points that were criticized [&#8230;]") (encoded nil "<p>Some time ago I discussed how to get the <a href=\"http://www.gnuplotting.org/matlab-colorbar-with-gnuplot/\">jet colormap from Matlab</a> in gnuplot. Since Matlab R2014b jet is no longer the default colormap. Now parula is the new default colormap. It was <a href=\"http://de.mathworks.com/products/matlab/matlab-graphics/#new_look_for_matlab_graphics\">introduced</a> together with new default line colors.</p>
+<p>The changes in the default colormap address some of the points that were criticized of jet by Moreland and corrected by <a href=\"http://www.gnuplotting.org/default-color-map/\"> his colormap</a>.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/parula_colormap.png\" alt=\"Matlab parula colormap\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong>Photoluminescence yield plotted with the parula colormap from Matlab (<a href=\"http://www.gnuplotting.org/code/parula_colormap.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/parula.pal\">parula.pal</a>, <a href=\"http://www.gnuplotting.org/data/matlab_colormap.txt\">data</a>)
+    </p>
+</div>
+<p>A colormap similar to the original is stored in the <code>parula.pal</code> file, which is also part of the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes\">gnuplot-palettes repository on github</a>. An example application of the colormap is presented in Fig. 1.</p>
+<p>In order to apply the colormap you can simply load the file.</p>
+<pre class=\"prettyprint\">
+load 'parula.pal'
+</pre>
+<p>The <code>parula.pal</code> file also includes definitions of line styles. The first line styles (1-9) corresponds to the colors of the parula palette, the line styles 11-17 correspond to the new Matlab line colors, see Fig. 2.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/matlab_line_colors_2014.png\" alt=\"Bessel functions\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong>Bessel functions from order zero up to six plotted with the new default Matlab line colors. (<a href=\"http://www.gnuplotting.org/code/matlab_line_colors_2014.gnu\" type=\"text/plain\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/parula.pal\">parula.pal</a>, <a href=\"http://www.gnuplotting.org/data/matlab_colormap.txt\">data</a>)
+    </p>
+</div>
+<pre class=\"prettyprint\">
+set style line 11 lt 1 lc rgb '#0072bd' # blue
+set style line 12 lt 1 lc rgb '#d95319' # orange
+set style line 13 lt 1 lc rgb '#edb120' # yellow
+set style line 14 lt 1 lc rgb '#7e2f8e' # purple
+set style line 15 lt 1 lc rgb '#77ac30' # green
+set style line 16 lt 1 lc rgb '#4dbeee' # light-blue
+set style line 17 lt 1 lc rgb '#a2142f' # red
+</pre>
+<p>If you want to use only the palette and not the line colors, you should remove them from the <code>parula.pal</code> file.</p>
+") (commentRss nil "http://www.gnuplotting.org/matlab-colorbar-parula-with-gnuplot/feed/") (comments nil "5"))) ("Waterfall plots with changing color" "<p>Some time ago I introduced already a waterfall plot, which I named a <a href=\"http://www.gnuplotting.org/creating-pseudo-3d-plots/\">pseudo-3D-plot</a>. In the meantime, I have been asked several times for a colored version of such a plot. In this post we will revisit the waterfall plot and add some color to it.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/colored_waterfall1.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Waterfall plot of head related impulse responses. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/moreland.pal\" rel=\"nofollow\">color palette</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>In Fig. 1 the same <a href=\"http://en.wikipedia.org/wiki/Head-related_transfer_function\">head related impulse responses</a> we <a href=\"http://www.gnuplotting.org/animation-iii-video-revisited/\">animated</a> already are displayed in a slightly different way. They describe the transmission of sound from a source to a receiver placed in the ear canal dependent on the position of the source. Here, we show the responses for all incident angles of the sound at once. At 0° the source was placed at the same side of the head as the receiver.</p>
+<p>The color is added by applying the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes/blob/master/moreland.pal\">Moreland</a> color palette, which we <a href=\"http://www.gnuplotting.org/default-color-map/\">discussed earlier</a>. The palette is defined in an extra file and loaded, this enables easy reuse of defined palettes. In the plotting command the palette is enabled with the <code>lc palette</code> command, that tells gnuplot to use the palette as line color depending on the value of the third column, which is given by <code>color(angle)</code>.</p>
+<pre class=\"prettyprint\">
+load 'moreland.pal'
+set style fill solid 0.0 border
+limit360(x) = x<1?x+360:x
+color(x) = x>180?360-x:x
+amplitude_scaling = 200
+plot for [angle=360:0:-2] 'head_related_impulse_responses.txt' \\
+u 1:(amplitude_scaling*column(limit360(angle)+1)+angle):(color(angle)) \\
+w filledcu y1=-360 lc palette lw 0.5
+</pre>
+<p>To achieve the waterfall plot, we start with the largest angle of 360° and loop through all angles until we reach 0°. The <code>column</code> command gives us the corresponding column the data is stored in the data file, <code>amplitude_scaling</code> modifies the amplitude of the single responses, and <code>+angle</code> shifts the data of the single responses along the y-axis to achieve the waterfall.</p>
+<p>Even though the changing color in the waterfall plot looks nice you should always think if it really adds some additional information to the plot. If not, a single color should be used. In the following the same plot is repeated, but only with black lines and different angle resolutions which also have a big influence on the final appearance of the plot.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/colored_waterfall2.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> Waterfall plot of head related impulse responses with a resolution of 5°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/colored_waterfall3.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+<strong>Fig. 3 </strong> Waterfall plot of head related impulse responses with a resolution of 2°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall3.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/colored_waterfall4.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+<strong>Fig. 4 </strong> Waterfall plot of head related impulse responses with a resolution of 1°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall4.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>" "http://www.gnuplotting.org/waterfall-plots-with-changing-color/" (21545 15169) old 4 nil nil ((title nil "Waterfall plots with changing color") (link nil "http://www.gnuplotting.org/waterfall-plots-with-changing-color/") (comments nil "http://www.gnuplotting.org/waterfall-plots-with-changing-color/#comments") (pubDate nil "Mon, 29 Sep 2014 10:58:09 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "fill") (category nil "filledcurves") (category nil "for") (category nil "iteration") (category nil "palette") (category nil "style") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1957") (description nil "Some time ago I introduced already a waterfall plot, which I named a pseudo-3D-plot. In the meantime, I have been asked several times for a colored version of such a plot. In this post we will revisit the waterfall plot and add some color to it. Fig. 1 Waterfall plot of head related impulse responses. [&#8230;]") (encoded nil "<p>Some time ago I introduced already a waterfall plot, which I named a <a href=\"http://www.gnuplotting.org/creating-pseudo-3d-plots/\">pseudo-3D-plot</a>. In the meantime, I have been asked several times for a colored version of such a plot. In this post we will revisit the waterfall plot and add some color to it.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall1.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Waterfall plot of head related impulse responses. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/moreland.pal\" rel=\"nofollow\">color palette</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>In Fig. 1 the same <a href=\"http://en.wikipedia.org/wiki/Head-related_transfer_function\">head related impulse responses</a> we <a href=\"http://www.gnuplotting.org/animation-iii-video-revisited/\">animated</a> already are displayed in a slightly different way. They describe the transmission of sound from a source to a receiver placed in the ear canal dependent on the position of the source. Here, we show the responses for all incident angles of the sound at once. At 0° the source was placed at the same side of the head as the receiver.</p>
+<p>The color is added by applying the <a href=\"https://github.com/Gnuplotting/gnuplot-palettes/blob/master/moreland.pal\">Moreland</a> color palette, which we <a href=\"http://www.gnuplotting.org/default-color-map/\">discussed earlier</a>. The palette is defined in an extra file and loaded, this enables easy reuse of defined palettes. In the plotting command the palette is enabled with the <code>lc palette</code> command, that tells gnuplot to use the palette as line color depending on the value of the third column, which is given by <code>color(angle)</code>.</p>
+<pre class=\"prettyprint\">
+load 'moreland.pal'
+set style fill solid 0.0 border
+limit360(x) = x<1?x+360:x
+color(x) = x>180?360-x:x
+amplitude_scaling = 200
+plot for [angle=360:0:-2] 'head_related_impulse_responses.txt' \\
+    u 1:(amplitude_scaling*column(limit360(angle)+1)+angle):(color(angle)) \\
+    w filledcu y1=-360 lc palette lw 0.5
+</pre>
+<p>To achieve the waterfall plot, we start with the largest angle of 360° and loop through all angles until we reach 0°. The <code>column</code> command gives us the corresponding column the data is stored in the data file, <code>amplitude_scaling</code> modifies the amplitude of the single responses, and <code>+angle</code> shifts the data of the single responses along the y-axis to achieve the waterfall.</p>
+<p>Even though the changing color in the waterfall plot looks nice you should always think if it really adds some additional information to the plot. If not, a single color should be used. In the following the same plot is repeated, but only with black lines and different angle resolutions which also have a big influence on the final appearance of the plot.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall2.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Waterfall plot of head related impulse responses with a resolution of 5°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall3.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 3 </strong> Waterfall plot of head related impulse responses with a resolution of 2°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall3.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/colored_waterfall4.png\" alt=\"Colored waterfall plot\"/>
+<p class=\"caption\">
+        <strong>Fig. 4 </strong> Waterfall plot of head related impulse responses with a resolution of 1°. (<a href=\"http://www.gnuplotting.org/code/colored_waterfall4.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/head_related_impulse_responses.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+") (commentRss nil "http://www.gnuplotting.org/waterfall-plots-with-changing-color/feed/") (comments nil "4"))) ("Zooming in with multiplot" "<p>Occasionally it is a good idea to create a zoom of some part of your main plot, especially if you have a small part of your plot where the data is hiding each other.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/zoom_plot.png\" alt=\"Including a zoom with multiplot\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Including a zoom into your figure to emphasize some data. (<a href=\"http://www.gnuplotting.org/code/zoom_plot.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/itd.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>In Fig. 1 the <a href=\"http://en.wikipedia.org/wiki/Interaural_time_difference\">interaural time difference</a> between a sound signal reaching the two ears of a listener is <a href=\"http://www.gnuplotting.org/multiple-lines-with-different-colors/\">plotted with different colors for different frequencies</a>. The data is very dense around 0°, so we include a zoom into this region in the same figure at a free place.</p>
+<p>This can be done via <code>multiplot</code> and the plotting of the same data in a smaller figure.</p>
+<pre class=\"prettyprint\">
+set origin 0.12,0.17
+set size 0.45,0.4
+set xrange [-10:0]
+set yrange [0:0.1]
+plot for [n=2:13] 'itd.txt' u 1:(column(n)*1000) w lines ls n
+</pre>
+<p>The tricky part is that we have a grid in our main figure and if we do nothing the grid will also be visible in the zoomed in version as shown in Fig. 2.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/zoom_plot_grid.png\" alt=\"Including a zoom with multiplot without grid correction\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> Including a zoom into your figure, without correcting the grid. (<a href=\"http://www.gnuplotting.org/code/zoom_plot_grid.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/itd.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>To avoid this we have to hide the grid in the background of the zoomed graph. This is done with the trick of placing an empty white rectangle at the place the zoom plot should appear in the figure.</p>
+<pre class=\"prettyprint\">
+set object 1 rect from -88,0.03 to -49,0.41
+set object 1 rect fc rgb 'white' fillstyle solid 0.0 noborder
+</pre>
+<p>This will then finally lead to the desired result presented in Fig. 1.</p>" "http://www.gnuplotting.org/zooming-in-with-multiplot/" (21416 15154) old 5 nil nil ((title nil "Zooming in with multiplot") (link nil "http://www.gnuplotting.org/zooming-in-with-multiplot/") (comments nil "http://www.gnuplotting.org/zooming-in-with-multiplot/#comments") (pubDate nil "Mon, 23 Jun 2014 14:35:30 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "grid") (category nil "multiplot") (category nil "object") (category nil "rectangle") (category nil "zoom") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1948") (description nil "Occasionally it is a good idea to create a zoom of some part of your main plot, especially if you have a small part of your plot where the data is hiding each other. Fig. 1 Including a zoom into your figure to emphasize some data. (code to produce this figure, data) In Fig. 1 [&#8230;]") (encoded nil "<p>Occasionally it is a good idea to create a zoom of some part of your main plot, especially if you have a small part of your plot where the data is hiding each other.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/zoom_plot.png\" alt=\"Including a zoom with multiplot\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Including a zoom into your figure to emphasize some data. (<a href=\"http://www.gnuplotting.org/code/zoom_plot.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/itd.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>In Fig. 1 the <a href=\"http://en.wikipedia.org/wiki/Interaural_time_difference\">interaural time difference</a> between a sound signal reaching the two ears of a listener is <a href=\"http://www.gnuplotting.org/multiple-lines-with-different-colors/\">plotted with different colors for different frequencies</a>. The data is very dense around 0°, so we include a zoom into this region in the same figure at a free place.</p>
+<p>This can be done via <code>multiplot</code> and the plotting of the same data in a smaller figure.</p>
+<pre class=\"prettyprint\">
+set origin 0.12,0.17
+set size 0.45,0.4
+set xrange [-10:0]
+set yrange [0:0.1]
+plot for [n=2:13] 'itd.txt' u 1:(column(n)*1000) w lines ls n
+</pre>
+<p>The tricky part is that we have a grid in our main figure and if we do nothing the grid will also be visible in the zoomed in version as shown in Fig. 2.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/zoom_plot_grid.png\" alt=\"Including a zoom with multiplot without grid correction\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Including a zoom into your figure, without correcting the grid. (<a href=\"http://www.gnuplotting.org/code/zoom_plot_grid.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/itd.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>To avoid this we have to hide the grid in the background of the zoomed graph. This is done with the trick of placing an empty white rectangle at the place the zoom plot should appear in the figure.</p>
+<pre class=\"prettyprint\">
+set object 1 rect from -88,0.03 to -49,0.41
+set object 1 rect fc rgb 'white' fillstyle solid 0.0 noborder
+</pre>
+<p>This will then finally lead to the desired result presented in Fig. 1.</p>
+") (commentRss nil "http://www.gnuplotting.org/zooming-in-with-multiplot/feed/") (comments nil "8"))) ("Plotting relative data" "<p>Suppose we have a file containing the following data from the <a href=\"http://www.gnuplotting.org/plotting-data/\">plotting data tutorial</a>:</p>
+<pre>
+# absolute_data.txt
+# X   Y
+1   2
+2   3
+3   2
+4   1
+</pre>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/absolute_data.png\" alt=\"Plotting absolute data\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Plotting absolute data points. (<a href=\"http://www.gnuplotting.org/code/absolute_data.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/absolute_data.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>This can be plotted in a straightforward manner and will result in Fig. 1. Now suppose we have the same data points stored as relative coordinates in our data file, resulting in:</p>
+<pre>
+# relative_data.txt
+# deltaX deltaY
+1   2
+1   1
+1   -1
+1   -1
+</pre>
+<p>If we want to plot that data in gnuplot we have to keep track of the current position manually by storing its (x,y) value as variables by</p>
+<pre class=\"prettyprint\">
+x=0.; y=0.
+plot 'relative_data.txt' u (x=x+$1):(y=y+$2) w p ls 1
+</pre>
+<p>Here, we define the starting point to be (0,0) and add to it the values from the first and second column for every line of the data file. By doing so, this results again in Fig. 1. Note, that the addition is always performed first, before the resulting point is plotted which means we get no point at (0,0). Now assume that we also want to add steps going from point to point as shown in Fig. 2. Gnuplot has the <code>steps</code> plotting style to achieve this, but we have to be carefully regarding our (x,y) variables.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/relative_data.png\" alt=\"Plotting relative data\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> Plotting relative data points. (<a href=\"http://www.gnuplotting.org/code/relative_data.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/relative_data.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>Every single line of a plotting command is executed after each other which means our (x,y) pair will not be set to (0,0), but to (4,1) at the beginning of the second line of the plotting command. To avoid this we introduce another (a,b) pair for the second line and get finally.</p>
+<pre class=\"prettyprint\">
+x=0.; y=0.
+a=0.; b=0.
+plot 'relative_data.txt' u (x=x+$1):(y=y+$2) w steps ls 2,\\
+''                  u (a=a+$1):(b=b+$2) w points ls 1
+</pre>" "http://www.gnuplotting.org/plotting-relative-data/" (21389 53589) old 6 nil nil ((title nil "Plotting relative data") (link nil "http://www.gnuplotting.org/plotting-relative-data/") (comments nil "http://www.gnuplotting.org/plotting-relative-data/#comments") (pubDate nil "Tue, 03 Jun 2014 13:44:53 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "points") (category nil "relative") (category nil "steps") (category nil "variable") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1938") (description nil "Suppose we have a file containing the following data from the plotting data tutorial: # absolute_data.txt # X Y 1 2 2 3 3 2 4 1 Fig. 1 Plotting absolute data points. (code to produce this figure, data) This can be plotted in a straightforward manner and will result in Fig. 1. Now suppose [&#8230;]") (encoded nil "<p>Suppose we have a file containing the following data from the <a href=\"http://www.gnuplotting.org/plotting-data/\">plotting data tutorial</a>:</p>
+<pre>
+# absolute_data.txt
+# X   Y
+1   2
+2   3
+3   2
+4   1
+</pre>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/absolute_data.png\" alt=\"Plotting absolute data\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Plotting absolute data points. (<a href=\"http://www.gnuplotting.org/code/absolute_data.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/absolute_data.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>This can be plotted in a straightforward manner and will result in Fig. 1. Now suppose we have the same data points stored as relative coordinates in our data file, resulting in:</p>
+<pre>
+# relative_data.txt
+# deltaX deltaY
+1   2
+1   1
+1   -1
+1   -1
+</pre>
+<p>If we want to plot that data in gnuplot we have to keep track of the current position manually by storing its (x,y) value as variables by</p>
+<pre class=\"prettyprint\">
+x=0.; y=0.
+plot 'relative_data.txt' u (x=x+$1):(y=y+$2) w p ls 1
+</pre>
+<p>Here, we define the starting point to be (0,0) and add to it the values from the first and second column for every line of the data file. By doing so, this results again in Fig. 1. Note, that the addition is always performed first, before the resulting point is plotted which means we get no point at (0,0). Now assume that we also want to add steps going from point to point as shown in Fig. 2. Gnuplot has the <code>steps</code> plotting style to achieve this, but we have to be carefully regarding our (x,y) variables.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/relative_data.png\" alt=\"Plotting relative data\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Plotting relative data points. (<a href=\"http://www.gnuplotting.org/code/relative_data.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/relative_data.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>Every single line of a plotting command is executed after each other which means our (x,y) pair will not be set to (0,0), but to (4,1) at the beginning of the second line of the plotting command. To avoid this we introduce another (a,b) pair for the second line and get finally.</p>
+<pre class=\"prettyprint\">
+x=0.; y=0.
+a=0.; b=0.
+plot 'relative_data.txt' u (x=x+$1):(y=y+$2) w steps ls 2,\\
+     ''                  u (a=a+$1):(b=b+$2) w points ls 1
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/plotting-relative-data/feed/") (comments nil "0"))) ("Calculating histograms" "<p>Gnuplot comes with the possibility of <a href=\"http://www.gnuplotting.org/manpage-gnuplot-4-6/#Q1-1-147\">plotting histograms</a>, but this requires that the data in the individual bins was already calculated. Here, we start with an one dimensional set of data that we want to count and plot as an histogram, similar to the <code>hist()</code> function we find in Octave.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/histogram1.png\" alt=\"Histogram of angle data\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Two different distributions of measured angles. (<a href=\"http://www.gnuplotting.org/code/histogram1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/hist.fct\" rel=\"nofollow\">hist.fct</a>, <a href=\"http://www.gnuplotting.org/data/histogram.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>In Fig. 1 you see two different distributions of measured angles. They were both given as one dimensional data and plotted with a defined macro that is doing the histogram calculation. The macro is defined in an additional file <code>hist.fct</code> and loaded before the plotting command.</p>
+<pre class=\"prettyprint\">
+binwidth = 4
+binstart = -100
+load 'hist.fct'
+plot 'histogram.txt' i 0 @hist ls 1,\\
+''              i 1 @hist ls 2
+</pre>
+<p>The content of <code>hist.fct</code>, including the definition of <code>@hist</code> looks like this</p>
+<pre class=\"prettyprint\">
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+# define macro for plotting the histogram
+hist = 'u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0) smooth freq w boxes'
+</pre>
+<p>For a detailed discussion on why <code>@hist</code> calculates a histogram you should have a look at <a href=\"http://stackoverflow.com/questions/2471884/histogram-using-gnuplot\">this discussion</a> and the documentation about the <a href=\"http://www.gnuplotting.org/manpage-gnuplot-4-6/#Q1-1-300\" class=\"manpage\">smooth freq</a> which basically counts points with the same x-value. The other settings in the file define the width of a single bin plotted as a box and its fill style.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/histogram2.png\" alt=\"Histogram of angle data\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> Two different distributions of measured angles. The bins of the histograms are shifted to be centered around 0°. (<a href=\"http://www.gnuplotting.org/code/histogram2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/hist.fct\" rel=\"nofollow\">hist.fct</a>, <a href=\"http://www.gnuplotting.org/data/histogram.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>It is important that the two values <code>binwidth</code> and <code>binstart</code> are defined before loading the <code>hist.fct</code> file. These define the width of the single bins and at what position the left border of a single bin should be positioned. For example, let us assume that we want to have the bins centered around 0° as shown in Fig. 2. This can be achieved by settings the binstart to half the binwidth:</p>
+<pre class=\"prettyprint\">
+binwidth = 4
+binstart = -2
+load 'hist.fct'
+plot 'histogram.txt' i 0 @hist ls 1,\\
+''              i 1 @hist ls 2
+</pre>" "http://www.gnuplotting.org/calculating-histograms/" (21326 21652) old 7 nil nil ((title nil "Calculating histograms") (link nil "http://www.gnuplotting.org/calculating-histograms/") (comments nil "http://www.gnuplotting.org/calculating-histograms/#comments") (pubDate nil "Wed, 16 Apr 2014 09:59:48 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "boxes") (category nil "histogram") (category nil "index") (category nil "load") (category nil "macros") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1924") (description nil "Gnuplot comes with the possibility of plotting histograms, but this requires that the data in the individual bins was already calculated. Here, we start with an one dimensional set of data that we want to count and plot as an histogram, similar to the hist() function we find in Octave. Fig. 1 Two different distributions [&#8230;]") (encoded nil "<p>Gnuplot comes with the possibility of <a href=\"http://www.gnuplotting.org/manpage-gnuplot-4-6/#Q1-1-147\">plotting histograms</a>, but this requires that the data in the individual bins was already calculated. Here, we start with an one dimensional set of data that we want to count and plot as an histogram, similar to the <code>hist()</code> function we find in Octave.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/histogram1.png\" alt=\"Histogram of angle data\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Two different distributions of measured angles. (<a href=\"http://www.gnuplotting.org/code/histogram1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/hist.fct\" rel=\"nofollow\">hist.fct</a>, <a href=\"http://www.gnuplotting.org/data/histogram.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>In Fig. 1 you see two different distributions of measured angles. They were both given as one dimensional data and plotted with a defined macro that is doing the histogram calculation. The macro is defined in an additional file <code>hist.fct</code> and loaded before the plotting command.</p>
+<pre class=\"prettyprint\">
+binwidth = 4
+binstart = -100
+load 'hist.fct'
+plot 'histogram.txt' i 0 @hist ls 1,\\
+     ''              i 1 @hist ls 2
+</pre>
+<p>The content of <code>hist.fct</code>, including the definition of <code>@hist</code> looks like this</p>
+<pre class=\"prettyprint\">
+# set width of single bins in histogram
+set boxwidth 0.9*binwidth
+# set fill style of bins
+set style fill solid 0.5
+# define macro for plotting the histogram
+hist = 'u (binwidth*(floor(($1-binstart)/binwidth)+0.5)+binstart):(1.0) smooth freq w boxes'
+</pre>
+<p>For a detailed discussion on why <code>@hist</code> calculates a histogram you should have a look at <a href=\"http://stackoverflow.com/questions/2471884/histogram-using-gnuplot\">this discussion</a> and the documentation about the <a href=\"http://www.gnuplotting.org/manpage-gnuplot-4-6/#Q1-1-300\" class=\"manpage\">smooth freq</a> which basically counts points with the same x-value. The other settings in the file define the width of a single bin plotted as a box and its fill style.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/histogram2.png\" alt=\"Histogram of angle data\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Two different distributions of measured angles. The bins of the histograms are shifted to be centered around 0°. (<a href=\"http://www.gnuplotting.org/code/histogram2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/code/hist.fct\" rel=\"nofollow\">hist.fct</a>, <a href=\"http://www.gnuplotting.org/data/histogram.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>It is important that the two values <code>binwidth</code> and <code>binstart</code> are defined before loading the <code>hist.fct</code> file. These define the width of the single bins and at what position the left border of a single bin should be positioned. For example, let us assume that we want to have the bins centered around 0° as shown in Fig. 2. This can be achieved by settings the binstart to half the binwidth:</p>
+<pre class=\"prettyprint\">
+binwidth = 4
+binstart = -2
+load 'hist.fct'
+plot 'histogram.txt' i 0 @hist ls 1,\\
+     ''              i 1 @hist ls 2
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/calculating-histograms/feed/") (comments nil "5"))) ("Arrow with T-shaped head" "<p>For the measurement of distances T-shaped arrows are often used to highlight the length. In gnuplot there is an easy way to achieve this.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/diffraction.png\" alt=\"Diffraction on a slit\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Diffraction of light for a slit with the length <em>d</em>. (<a href=\"http://www.gnuplotting.org/code/diffraction.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>)
+</p>
+</div>
+<p>Have a look at Fig. 1 which tries to explain the diffraction phenomenon of a slit with the length <em>d</em>. At a distance <em>a</em> the diffraction pattern is drawn. The different distances, the distance between the first minima of the diffraction pattern, and the wave length are indicated by T-shaped arrows. This kind of arrays can be achieved in gnuplot with the following code.</p>
+<pre class=\"prettyprint\">
+Theads = 'heads size 0.5,90 front ls 201'
+set arrow from -24,-2 to -24, 2       @Theads
+set arrow from -22, 2 to -21.44,1.92  @Theads
+set arrow from 1.5,-pi to 1.5,pi      @Theads
+set arrow from -22,2.5*pi to 0,2.5*pi @Theads
+</pre>
+<p>Here, <code>90</code> is the relevant entry after <code>size</code> as it describes the opening angle of the arrow head.<br />
+In addition, an open circle is drawn to indicate the angle <em>&theta;</em>. This is achieved by specifying the opening angle for the circle object.</p>
+<pre class=\"prettyprint\">
+set object circle at -22,0 size 6 arc [-8:0]
+</pre>" "http://www.gnuplotting.org/arrow-with-t-shaped-head/" (21255 53380) old 8 nil nil ((title nil "Arrow with T-shaped head") (link nil "http://www.gnuplotting.org/arrow-with-t-shaped-head/") (comments nil "http://www.gnuplotting.org/arrow-with-t-shaped-head/#comments") (pubDate nil "Fri, 21 Feb 2014 22:17:40 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "arrow") (category nil "circle") (category nil "head") (category nil "italic") (category nil "object") (category nil "table") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1910") (description nil "For the measurement of distances T-shaped arrows are often used to highlight the length. In gnuplot there is an easy way to achieve this. Fig. 1 Diffraction of light for a slit with the length d. (code to produce this figure) Have a look at Fig. 1 which tries to explain the diffraction phenomenon of [&#8230;]") (encoded nil "<p>For the measurement of distances T-shaped arrows are often used to highlight the length. In gnuplot there is an easy way to achieve this.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/diffraction.png\" alt=\"Diffraction on a slit\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Diffraction of light for a slit with the length <em>d</em>. (<a href=\"http://www.gnuplotting.org/code/diffraction.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>)
+    </p>
+</div>
+<p>Have a look at Fig. 1 which tries to explain the diffraction phenomenon of a slit with the length <em>d</em>. At a distance <em>a</em> the diffraction pattern is drawn. The different distances, the distance between the first minima of the diffraction pattern, and the wave length are indicated by T-shaped arrows. This kind of arrays can be achieved in gnuplot with the following code.</p>
+<pre class=\"prettyprint\">
+Theads = 'heads size 0.5,90 front ls 201'
+set arrow from -24,-2 to -24, 2       @Theads
+set arrow from -22, 2 to -21.44,1.92  @Theads
+set arrow from 1.5,-pi to 1.5,pi      @Theads
+set arrow from -22,2.5*pi to 0,2.5*pi @Theads
+</pre>
+<p>Here, <code>90</code> is the relevant entry after <code>size</code> as it describes the opening angle of the arrow head.<br />
+In addition, an open circle is drawn to indicate the angle <em>&theta;</em>. This is achieved by specifying the opening angle for the circle object.</p>
+<pre class=\"prettyprint\">
+set object circle at -22,0 size 6 arc [-8:0]
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/arrow-with-t-shaped-head/feed/") (comments nil "5"))) ("Plotting raster data from Natural Earth" "<p>And <a href=\"http://www.gnuplotting.org/plotting-the-world-revisited/\">another</a> plot of the world. This time we are dealing with the <a href=\"http://www.naturalearthdata.com/downloads/50m-raster-data/\">raster data</a> from Natural Earth. This data is normally available as tif-files. To use them in gnuplot we have to convert them first, then we can create a plot as shown in Fig. 1.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/world_color.png\" alt=\"Cross-blended Hypsometric Tints\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Cross-blended hypsometric tint plot of the world. (<a href=\"http://www.gnuplotting.org/code/world_color.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/HYP_50M_SR_W_350px.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>The conversion is done by the <a href=\"http://www.gnuplotting.org/code/convert_natural_earth\">convert_natural_earth</a> script. There the tif-file is first scaled down to the desired resolution using <a href=\"http://www.imagemagick.org\">imagemagick</a>. Afterwards it is converted to a text file and reordered for the <code>splot</code> command of gnuplot. The text file includes the longitude, latitude and three rgb color values.<br />
+You have to invoke the script in the following way.</p>
+<pre class=\"prettyprint\">
+$ ./convert_natural_earth $RES $FILE
+</pre>
+<p>where <code>$RES</code> is the desired resolution in pixel of your gnuplot plot and <code>$FILE</code> the input tif-file.<br />
+After finished we can plot the resulting text file simply by</p>
+<pre class=\"prettyprint\">
+set datafile separator ','
+set size ratio -1
+plot 'HYP_50M_SR_W_350px.txt' w rgbimage
+</pre>
+<p>which results in Fig. 1.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/world_color_3d.png\" alt=\"Natural Earth II Shaded Relief and Water\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> Natural Earth II shaded relief and water plot of the world. (<a href=\"http://www.gnuplotting.org/code/world_color_3d.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/NE2_50M_SR_W_700px.txt\" rel=\"nofollow\">data</a>)
+</p>
+</div>
+<p>The image can also be projected on a 3D figure of the world as shown in Fig. 2. To achieve this the three rgb values have to be summarized in one value and the <code>rgb variable</code> line color option has to be chosen together with <code>pm3d</code>.</p>
+<pre class=\"prettyprint\">
+rgb(r,g,b) = 65536 * int(r) + 256 * int(g) + int(b)
+set mapping spherical
+set angles degrees
+splot 'NE2_50M_SR_W_700px.txt' u 1:2:(1):(rgb($3,$4,$5)) w pm3d lc rgb variable
+</pre>" "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/" (21228 9906) old 9 nil nil ((title nil "Plotting raster data from Natural Earth") (link nil "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/") (comments nil "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/#comments") (pubDate nil "Fri, 31 Jan 2014 22:41:54 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "angles") (category nil "datafile") (category nil "pm3d") (category nil "rgb") (category nil "rgbimage") (category nil "sphere") (category nil "splot") (category nil "tif") (category nil "variable") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1877") (description nil "And another plot of the world. This time we are dealing with the raster data from Natural Earth. This data is normally available as tif-files. To use them in gnuplot we have to convert them first, then we can create a plot as shown in Fig. 1. Fig. 1 Cross-blended hypsometric tint plot of the [&#8230;]") (encoded nil "<p>And <a href=\"http://www.gnuplotting.org/plotting-the-world-revisited/\">another</a> plot of the world. This time we are dealing with the <a href=\"http://www.naturalearthdata.com/downloads/50m-raster-data/\">raster data</a> from Natural Earth. This data is normally available as tif-files. To use them in gnuplot we have to convert them first, then we can create a plot as shown in Fig. 1.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/world_color.png\" alt=\"Cross-blended Hypsometric Tints\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Cross-blended hypsometric tint plot of the world. (<a href=\"http://www.gnuplotting.org/code/world_color.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/HYP_50M_SR_W_350px.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>The conversion is done by the <a href=\"http://www.gnuplotting.org/code/convert_natural_earth\">convert_natural_earth</a> script. There the tif-file is first scaled down to the desired resolution using <a href=\"http://www.imagemagick.org\">imagemagick</a>. Afterwards it is converted to a text file and reordered for the <code>splot</code> command of gnuplot. The text file includes the longitude, latitude and three rgb color values.<br />
+You have to invoke the script in the following way.</p>
+<pre class=\"prettyprint\">
+$ ./convert_natural_earth $RES $FILE
+</pre>
+<p>where <code>$RES</code> is the desired resolution in pixel of your gnuplot plot and <code>$FILE</code> the input tif-file.<br />
+After finished we can plot the resulting text file simply by</p>
+<pre class=\"prettyprint\">
+set datafile separator ','
+set size ratio -1
+plot 'HYP_50M_SR_W_350px.txt' w rgbimage
+</pre>
+<p>which results in Fig. 1.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/world_color_3d.png\" alt=\"Natural Earth II Shaded Relief and Water\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Natural Earth II shaded relief and water plot of the world. (<a href=\"http://www.gnuplotting.org/code/world_color_3d.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/NE2_50M_SR_W_700px.txt\" rel=\"nofollow\">data</a>)
+    </p>
+</div>
+<p>The image can also be projected on a 3D figure of the world as shown in Fig. 2. To achieve this the three rgb values have to be summarized in one value and the <code>rgb variable</code> line color option has to be chosen together with <code>pm3d</code>.</p>
+<pre class=\"prettyprint\">
+rgb(r,g,b) = 65536 * int(r) + 256 * int(g) + int(b)
+set mapping spherical
+set angles degrees
+splot 'NE2_50M_SR_W_700px.txt' u 1:2:(1):(rgb($3,$4,$5)) w pm3d lc rgb variable
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/plotting-raster-data-from-natural-earth/feed/") (comments nil "2"))) ("U.S. states and election results" "<p>After <a href=\"http://www.gnuplotting.org/plotting-the-world-revisited/\">plotting the world</a> <a href=\"http://www.gnuplotting.org/mercator-projection/\">several times</a> we will concentrate on a smaller level this time. Ben Johnson was so kind to convert the part dealing with the USA of the <a href=\"http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/\">10m states and provinces data set from natural earth</a> to something useful for gnuplot. The result is stored in the file <a href=\"http://www.gnuplotting.org/data/usa.txt\">usa.txt</a>.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/election1.png\" alt=\"USA election\"/>
+<p class=\"caption\">
+<strong>Fig. 1 </strong> Election results of single U.S. states. (<a href=\"http://www.gnuplotting.org/code/election1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/usa.txt\" rel=\"nofollow\">USA data</a>, <a href=\"http://www.gnuplotting.org/data/election.txt\" rel=\"nofollow\">election data</a>)
+</p>
+</div>
+<p>Two double lines divide the single states. This allows us to plot a single state with the help of the <code>index</code> command. At the end of this post the corresponding index numbers for every state are listed.<br />
+In addition to the <a href=\"http://www.gnuplotting.org/data/usa.txt\">state border data</a> we have <a href=\"http://www.gnuplotting.org/data/election.txt\">another file</a> that includes results from an example election and strings with the names of the states. The election result can be 1 or 2 – corresponding to blue and red. With the help of these two data sets we are able to create Fig. 1 and Fig. 2.<br />
+For drawing a single state in red or blue we first collect the results for every single state in the string variable <code>ELEC</code>. The <code>stats</code> command is suitable for this, because it parses all the data but doesn’t try to plot any of them. During the parsing of every line the election result stored in the second column will be added at the end of the <code>ELEC</code> variable. </p>
+<pre class=\"prettyprint\">
+ELEC=''
+stats 'election.txt' u 1:(ELEC = ELEC.sprintf('%i',$2))
+</pre>
+<p>In a second step we plot the state borders and color the states with the help of the <code>ELEC</code>string. <code>ELEC[1:1]</code> will return the election result for the state with the index 0.</p>
+<pre class=\"prettyprint\">
+plot for [idx=0:48] 'usa.txt' i idx u 2:1 w filledcurves ls ELEC[idx+1:idx+1],\\
+''              u 2:1 w l ls 3
+</pre>
+<p>Alaska and Hawaii are then added with additional plot commands and the help of <code>multiplot</code>.</p>
+<p>The <a href=\"http://www.gnuplotting.org/data/election.txt\">data file with the election results</a> includes also the names of the single states and a coordinates to place them. This allows us to put them in the map as well, as you can see in Fig. 2.</p>
+<div class=\"figure\">
+<img src=\"http://www.gnuplotting.org/figs/election2.png\" alt=\"USA election\"/>
+<p class=\"caption\">
+<strong>Fig. 2 </strong> Names and election results of single U.S. states. (<a href=\"http://www.gnuplotting.org/code/election2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/usa.txt\" rel=\"nofollow\">USA data</a>, <a href=\"http://www.gnuplotting.org/data/election.txt\" rel=\"nofollow\">election data</a>)
+</p>
+</div>
+<p>The plotting of the state names is easily achieved by the <code>labels</code> plotting style:</p>
+<pre class=\"prettyprint\">
+plot for [idx=0:48] 'usa.txt' i idx u 2:1 w filledcurves ls ELEC[idx+1:idx+1],\\
+''              u 2:1 w l ls 3,\\
+'election.txt'  u 6:5:3 w labels tc ls 3
+</pre>
+<p>At the end we provide the list with the index numbers and the corresponding states. If you want to plot a subset of states – as in Fig. 2 – you should adjust the <code>xrange</code> and <code>yrange</code> values accordingly.</p>
+<pre>
+0  Massachusetts
+1  Minnesota
+2  Montana
+3  North Dakota
+4  Idaho
+5  Washington
+6  Arizona
+7  California
+8  Colorado
+9  Nevada
+10 New Mexico
+11 Oregon
+12 Utah
+13 Wyoming
+14 Arkansas
+15 Iowa
+16 Kansas
+17 Missouri
+18 Nebraska
+19 Oklahoma
+20 South Dakota
+21 Louisiana
+22 Texas
+23 Connecticut
+24 New Hampshire
+25 Rhode Island
+26 Vermont
+27 Alabama
+28 Florida
+29 Georgia
+30 Mississippi
+31 South Carolina
+32 Illinois
+33 Indiana
+34 Kentucky
+35 North Carolina
+36 Ohio
+37 Tennessee
+38 Virginia
+39 Wisconsin
+40 West Virginia
+41 Delaware
+42 District of Columbia
+43 Maryland
+44 New Jersey
+45 New York
+46 Pennsylvania
+47 Maine
+48 Michigan
+49 Hawaii
+50 Alaska
+</pre>" "http://www.gnuplotting.org/us-states-and-election-results/" (21174 7124) old 10 nil nil ((title nil "U.S. states and election results") (link nil "http://www.gnuplotting.org/us-states-and-election-results/") (comments nil "http://www.gnuplotting.org/us-states-and-election-results/#comments") (pubDate nil "Sat, 21 Dec 2013 22:53:08 +0000") (creator nil "hagen") (category nil "Uncategorized") (category nil "data") (category nil "filledcurves") (category nil "for") (category nil "index") (category nil "labels") (category nil "multiplot") (category nil "stats") (category nil "string") (guid ((isPermaLink . "false")) "http://www.gnuplotting.org/?p=1852") (description nil "After plotting the world several times we will concentrate on a smaller level this time. Ben Johnson was so kind to convert the part dealing with the USA of the 10m states and provinces data set from natural earth to something useful for gnuplot. The result is stored in the file usa.txt. Fig. 1 Election [&#8230;]") (encoded nil "<p>After <a href=\"http://www.gnuplotting.org/plotting-the-world-revisited/\">plotting the world</a> <a href=\"http://www.gnuplotting.org/mercator-projection/\">several times</a> we will concentrate on a smaller level this time. Ben Johnson was so kind to convert the part dealing with the USA of the <a href=\"http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/\">10m states and provinces data set from natural earth</a> to something useful for gnuplot. The result is stored in the file <a href=\"http://www.gnuplotting.org/data/usa.txt\">usa.txt</a>.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/election1.png\" alt=\"USA election\"/>
+<p class=\"caption\">
+        <strong>Fig. 1 </strong> Election results of single U.S. states. (<a href=\"http://www.gnuplotting.org/code/election1.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/usa.txt\" rel=\"nofollow\">USA data</a>, <a href=\"http://www.gnuplotting.org/data/election.txt\" rel=\"nofollow\">election data</a>)
+    </p>
+</div>
+<p>Two double lines divide the single states. This allows us to plot a single state with the help of the <code>index</code> command. At the end of this post the corresponding index numbers for every state are listed.<br />
+In addition to the <a href=\"http://www.gnuplotting.org/data/usa.txt\">state border data</a> we have <a href=\"http://www.gnuplotting.org/data/election.txt\">another file</a> that includes results from an example election and strings with the names of the states. The election result can be 1 or 2 &#8211; corresponding to blue and red. With the help of these two data sets we are able to create Fig. 1 and Fig. 2.<br />
+For drawing a single state in red or blue we first collect the results for every single state in the string variable <code>ELEC</code>. The <code>stats</code> command is suitable for this, because it parses all the data but doesn&#8217;t try to plot any of them. During the parsing of every line the election result stored in the second column will be added at the end of the <code>ELEC</code> variable. </p>
+<pre class=\"prettyprint\">
+ELEC=''
+stats 'election.txt' u 1:(ELEC = ELEC.sprintf('%i',$2))
+</pre>
+<p>In a second step we plot the state borders and color the states with the help of the <code>ELEC</code>string. <code>ELEC[1:1]</code> will return the election result for the state with the index 0.</p>
+<pre class=\"prettyprint\">
+plot for [idx=0:48] 'usa.txt' i idx u 2:1 w filledcurves ls ELEC[idx+1:idx+1],\\
+                    ''              u 2:1 w l ls 3
+</pre>
+<p>Alaska and Hawaii are then added with additional plot commands and the help of <code>multiplot</code>.</p>
+<p>The <a href=\"http://www.gnuplotting.org/data/election.txt\">data file with the election results</a> includes also the names of the single states and a coordinates to place them. This allows us to put them in the map as well, as you can see in Fig. 2.</p>
+<div class=\"figure\">
+    <img src=\"http://www.gnuplotting.org/figs/election2.png\" alt=\"USA election\"/>
+<p class=\"caption\">
+        <strong>Fig. 2 </strong> Names and election results of single U.S. states. (<a href=\"http://www.gnuplotting.org/code/election2.gnu\" type=\"text/plain\" rel=\"nofollow\">code to produce this figure</a>, <a href=\"http://www.gnuplotting.org/data/usa.txt\" rel=\"nofollow\">USA data</a>, <a href=\"http://www.gnuplotting.org/data/election.txt\" rel=\"nofollow\">election data</a>)
+    </p>
+</div>
+<p>The plotting of the state names is easily achieved by the <code>labels</code> plotting style:</p>
+<pre class=\"prettyprint\">
+plot for [idx=0:48] 'usa.txt' i idx u 2:1 w filledcurves ls ELEC[idx+1:idx+1],\\
+                    ''              u 2:1 w l ls 3,\\
+                    'election.txt'  u 6:5:3 w labels tc ls 3
+</pre>
+<p>At the end we provide the list with the index numbers and the corresponding states. If you want to plot a subset of states &#8211; as in Fig. 2 &#8211; you should adjust the <code>xrange</code> and <code>yrange</code> values accordingly.</p>
+<pre>
+0  Massachusetts
+1  Minnesota
+2  Montana
+3  North Dakota
+4  Idaho
+5  Washington
+6  Arizona
+7  California
+8  Colorado
+9  Nevada
+10 New Mexico
+11 Oregon
+12 Utah
+13 Wyoming
+14 Arkansas
+15 Iowa
+16 Kansas
+17 Missouri
+18 Nebraska
+19 Oklahoma
+20 South Dakota
+21 Louisiana
+22 Texas
+23 Connecticut
+24 New Hampshire
+25 Rhode Island
+26 Vermont
+27 Alabama
+28 Florida
+29 Georgia
+30 Mississippi
+31 South Carolina
+32 Illinois
+33 Indiana
+34 Kentucky
+35 North Carolina
+36 Ohio
+37 Tennessee
+38 Virginia
+39 Wisconsin
+40 West Virginia
+41 Delaware
+42 District of Columbia
+43 Maryland
+44 New Jersey
+45 New York
+46 Pennsylvania
+47 Maine
+48 Michigan
+49 Hawaii
+50 Alaska
+</pre>
+") (commentRss nil "http://www.gnuplotting.org/us-states-and-election-results/feed/") (comments nil "2"))))

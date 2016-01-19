@@ -1,0 +1,9 @@
+#!/bin/sh -e
+echo "Adding 4.3.3-ARCH entry to grub.cfg"
+cat << EOF
+menuentry "Arch Linux 4.3.3-ARCH"{
+set root=(hd0,msdos7)
+linux /boot/vmlinuz root=/dev/sda7
+initrd /boot/image.img
+}
+EOF

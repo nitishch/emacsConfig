@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: telugu-org-drill
+# key: tel
+# --
+Item :drill:
+$1
+*** Now Telugu
+$2
+** 

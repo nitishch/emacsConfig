@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: str
+# key: incm
+# --
+#include <map>
+$0

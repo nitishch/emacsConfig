@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: for
+# key: for
+# --
+for (${1:int i = 0}; ${1:$(extractVar yas-text)} ${2:< n}; ${1:$(extractVar yas-text)}${3:++}) {
+    $0

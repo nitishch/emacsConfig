@@ -1,0 +1,1376 @@
+;; -*- coding: utf-8 -*-
+(("EmacsMovies.org" nil nil (22137 16577 952961 513000) feed 0 nil nil ((title nil "EmacsMovies.org") (link ((href . "http://emacsmovies.org/atom.xml") (rel . "self"))) (link ((href . "http://emacsmovies.org/"))) (updated nil "2013-11-08T18:59:00+05:30") (id nil "http://emacsmovies.org/") (author nil (name nil "Noufal Ibrahim") (email nil "noufal@emacsmovies.org")) (generator ((uri . "http://octopress.org/")) "Octopress") (entry nil (title ((type . "html")) "Gnus part 3") (link ((href . "http://emacsmovies.org/blog/2013/11/07/gnus_part_3/"))) (updated nil "2013-11-07T14:34:01+05:30") (id nil "http://emacsmovies.org/blog/2013/11/07/gnus_part_3") (content ((type . "html")) "<p>This is the third installment of the Gnus series where we discuss <a href=\"http://www.gnus.org/manual/gnus_255.html#SEC255\">scoring</a>. It&#8217;s a little complex and this screencast is just an overview of the possibilities rather than an in depth tutorial.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.3-episode-gnus-3.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<h2>Summary</h2>
+
+<ol>
+<li><code>V S</code> - View score of current article</li>
+<li><code>V s</code> - Set score of current article (requires prefix argument)</li>
+<li><code>V R</code> - Re compute score for current article</li>
+<li><code>V t</code> - Show score rules for current article</li>
+<li><code>V C</code> - Customise score rules for current group.</li>
+<li><code>L</code> - Create new rule to lower scores (based on current article)</li>
+<li><code>I</code> - Create new rule to increase scores (based on current article)</li>
+<li><code>gnus-use-adaptive-scoring</code> - Change this to <code>t</code> to use adaptive scoring.</li>
+<li><code>gnus-default-adaptive-score-alist</code> - Specify scoring rules in here.</li>
+<li><code>gnus-thread-sort-functions</code> - List of functions to sort threads in a group. Primary sort key should be the last function. Refer documentation for details.</li>
+<li><code>gnus-article-sort-functions</code> - Same as above. In effect when threading is disabled.</li>
+<li><code>gnus-thread-sort-by-*</code> - Various pre defined functions which can be put in the <code>gnus-thread-sort-functions</code> list.</li>
+<li><code>gnus-article-sort-by-*</code> - Various pre defined functions which can be put in the <code>gnus-article-sort-functions</code> list.</li>
+</ol>
+
+")) (entry nil (title ((type . "html")) "Gnus part 2") (link ((href . "http://emacsmovies.org/blog/2013/07/17/gnus_part_2/"))) (updated nil "2013-07-17T19:50:22+05:30") (id nil "http://emacsmovies.org/blog/2013/07/17/gnus_part_2") (content ((type . "html")) "<p>This is the second part of the screencasts discussing Gnus. The general idea was to cover &#8220;reading&#8221; email and news articles but the screencast ended becoming 30 minutes long. I broke it down into two pieces so that it&#8217;s more convenient to download.</p>
+
+<p>It discusses the Group buffer where you can see your groups and manage them, the Summary buffer where you can actually see the articles in the group and finally, the Article buffer where you can actually read the email.</p>
+
+<p>Part 1</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.2-episode-gnus-2.1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Part 2</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.2-episode-gnus-2.2.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<p>The keys that are covered in these two episodes are as follows.</p>
+
+<h2>Summary</h2>
+
+<p>In the Groups buffer:</p>
+
+<ol>
+<li><code>F</code> - Checks for new newgroups</li>
+<li><code>t</code> - toggle topics</li>
+<li><code>g</code> - Refresh</li>
+<li><code>c</code> - catchup</li>
+<li><code>n</code> - Jump to next group with unread articles</li>
+<li><code>.</code> - Jump to first group with unread articles</li>
+<li><code>U</code> - Subscribe</li>
+<li><code>S k</code> - Kill group</li>
+<li><code>#</code> - Mark group</li>
+<li><code>L</code> - Show all Groups</li>
+<li><code>l</code> - Shows groups with unread articles</li>
+<li><code>G c</code> - customise group parameters</li>
+<li><code>F</code> - Search for new newsgroups</li>
+<li><code>b</code> - Cleanup groups</li>
+<li><code>RET</code> - Enter group</li>
+</ol>
+
+
+<p>Summary buffer:</p>
+
+<ol>
+<li><code>RET</code> - Read article (and scroll by one line)</li>
+<li><code>SPACE</code> - Scroll down by one page</li>
+<li><code>Backspace</code> - Scroll up by one page</li>
+<li><code>s</code> - Incremental Search</li>
+<li><code>h</code> - Move between summary and article buffers</li>
+<li><code>B Backspace</code> - Delete article</li>
+<li><code>B m</code> - Move</li>
+<li><code>B r</code> - Respool</li>
+<li><code>B t</code> - Trace</li>
+<li><code>#</code> - Process mark</li>
+<li><code>MPr</code> - Mark region</li>
+<li><code>MPg</code> - unmark region</li>
+<li><code>MPR</code> - Mark articles matching regexp</li>
+<li><code>MPG</code> - Unmark articles matching regexp</li>
+<li><code>!</code> - Tick article</li>
+<li><code>M-u</code> - Remove all marks</li>
+<li><code>/</code> - Narrow based on criteria (/ . removes narrowing)</li>
+<li><code>C-M-t</code> - Toggle threading</li>
+<li><code>T-o</code> - Jump to thread parent</li>
+<li><code>K-b</code> - Display MIME buttons</li>
+<li><code>M-t</code> - Toggle MIME button display (permanent)</li>
+<li><code>q</code> - Exit summary buffer</li>
+</ol>
+
+
+<p>For further reference, there&#8217;s the <a href=\"http://gnus.org/manual/gnus_toc.html\">Gnus manual</a>.</p>
+
+<p>Thanks for your patience and continued support.</p>
+")) (entry nil (title ((type . "html")) "Gnus part 1") (link ((href . "http://emacsmovies.org/blog/2013/04/29/gnus_part_1/"))) (updated nil "2013-04-29T21:48:48+05:30") (id nil "http://emacsmovies.org/blog/2013/04/29/gnus_part_1") (content ((type . "html")) "<p>I&#8217;ve picked up something this time which I&#8217;ve always wanted to study properly &#8211; <a href=\"http://gnus.org/\"><em>Gnus</em></a>. The Emacs news and email reader. This is going to be a multipart episode since Gnus is so big. I don&#8217;t know how many exactly but as of now, I&#8217;ve got a 3 part thing planned.</p>
+
+<p>Also, the hiatus was unexpected. Things should be smoother now.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.1-episode-gnus-1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<p>Comments welcome.</p>
+
+<h2>Summary</h2>
+
+<ol>
+<li>The <code>gnus-select-method</code> variable decides where to pick news from.</li>
+<li><code>M-x gnus</code> starts gnus.</li>
+<li><code>g</code> refreshes subsribed groups.</li>
+<li><code>F</code> looks for new groups.</li>
+<li><code>^</code> takes you into the server buffer.</li>
+<li><code>RET</code> will do different things depending on where you are. On a group, it will show you articles in the group.</li>
+<li><code>t</code> toggles topics in the Groups buffer.</li>
+<li><code>L</code> shows all groups (including ones with no unread articles).</li>
+<li><code>l</code> shows only groups with no unread articles.</li>
+<li><code>c</code> catches up a group marking all articles as read.</li>
+<li><code>U</code> is used to subscribe to a group.</li>
+<li>Information on groups and articles in cached in the <code>.newsrc.eld</code> file which you shouldn&#8217;t delete.</li>
+<li>Gnus uses <code>.gnus</code> as a startup file.</li>
+<li><code>gnus-secondary-select-methods</code> is the variable that controls sources other than the primary one mentioned in <code>gnus-select-method</code>. Mail sources usually come here.</li>
+<li>The <code>mail-sources</code> variable specify where the mail backends should pick data up from.</li>
+<li>The <code>nnmail-split-methods</code> function can be used to split mail depending on criteria like sender etc.</li>
+</ol>
+
+
+<h2>Further reading</h2>
+
+<ol>
+<li>The <a href=\"http://gnus.org/manual.html\">Gnus manual</a>.</li>
+<li>The <a href=\"http://www.emacswiki.org/CategoryGnus\">Gnus category on emacswiki</a> for lots of tips and tricks.</li>
+</ol>
+
+
+<h2>Extras</h2>
+
+<ol>
+<li>The <a href=\"http://code.activestate.com/recipes/578514-create-a-temporary-mailbox/?in=user-4173873\">recipe</a> used to generate the mailbox.</li>
+</ol>
+
+")) (entry nil (title ((type . "html")) "Dired") (link ((href . "http://emacsmovies.org/blog/2012/12/04/dired/"))) (updated nil "2012-12-04T01:20:51+05:30") (id nil "http://emacsmovies.org/blog/2012/12/04/dired") (content ((type . "html")) "<p>I&#8217;ve started &#8220;Season&#8221; 2 of the series with a screencast on <a href=\"http://www.gnu.org/s/emacs/manual/html_node/emacs/Dired.html\">dired</a>. It&#8217;s Emacs&#8217; &#8220;file browser&#8221; and can be used to manage files. Performing operations on a large number of them at once and also providing such facilities to other modes.</p>
+
+<p>I apologise for the hiatus but I&#8217;ve been very busy in my real life. I expect more delays till the end of January but I&#8217;ll do what I can.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/11-episode-dired.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<p>Comments welcome.</p>
+
+<h2>Keys mentioned</h2>
+
+<ol>
+<li><code>C-x d</code> to start dired with a directory. <code>find-name-dired</code> and <code>find-dired</code> can be used to select different files for the initial dired buffer.</li>
+<li><code>s</code> to toggle sorting order (by date or normal).</li>
+<li><code>i</code> to insert a directory into the current dired buffer.</li>
+<li><code>&lt;</code> and <code>&gt;</code> to navigate directories in the buffer.</li>
+<li><code>C-M-n</code> and <code>C-M-p</code> to navigate dirlines.</li>
+<li><code>RET</code> to visit the current item in a new buffer. <code>o</code> does the same thing but does so after splitting the current window into two so that the dired buffer is still visible.</li>
+<li><code>^</code> Goes one directory up. It&#8217;s the opposite of <code>RET</code>. If the parent directory has a dired buffer visiting it, it will be reused. Otherwise, a new one will be created.</li>
+<li><code>$</code> toggles the visibility of the file list under a dirline. <code>M-$</code> does so for all the dirlines in the current buffer.</li>
+<li><code>T</code> touches the current or all the marked files. <code>R</code> is to rename files. <code>S</code> to symblink. <code>Z</code> is to compress or decompress.</li>
+<li><code>D</code> marks for deletion and <code>X</code> expunges.</li>
+<li><code>m</code> marks files and <code>u</code> unmarks. <code>U</code> unmarks all files.</li>
+<li><code>M-s a C-s</code> searches incrementally through all marked files.</li>
+<li><code>C-t C-t</code> displays image thumbnails. <code>C-t i</code> displays a scaled version of the image in a new window.</li>
+<li><code>% g</code> marks files based on whether they contain a provided regular expression. Other <code>%</code> commands are available under the <em>Regexp</em> menu.</li>
+<li><code>* /</code> marks all directories and <code>t</code> toggles marked/unmarked files. The <em>Mark</em> menu has other such commands to make marking easy.</li>
+<li><code>+</code> creates new directories and <code>w</code> copies marked (or current) items into the kill ring.</li>
+<li>If you&#8217;re using <code>gnus</code>, you can run <code>turn-on-gnus-dired-mode</code> and get keybindings like <code>C-c C-m C-a</code> to attach marked files into a new email and go to the composer.</li>
+<li><code>C-x</code> <code>C-q</code> to enter wdired which makes the file names in the buffer editable. You can make changes and then hit <code>C-c</code> <code>C-c</code> to save them.</li>
+</ol>
+
+
+<h2>Further reading</h2>
+
+<ol>
+<li>The <a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html\">Dired manual page</a> along with <a href=\"http://www.gnu.org/software/emacs/manual/html_node/dired-x/index.html#Top\">Dired-X</a> (which I might cover later in a future screencast).</li>
+<li><a href=\"http://ergoemacs.org/emacs/file_management.html\">Xah Lee&#8217;s dired tutorial</a>.</li>
+</ol>
+
+")) (entry nil (title ((type . "html")) "Section 2 ") (link ((href . "http://emacsmovies.org/blog/2012/09/20/section_2_/"))) (updated nil "2012-09-20T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/09/20/section_2_") (content ((type . "html")) "<p>The first section that describes how to use Emacs to get your daily work done is over. The second section is going to focus on &#8220;applications&#8221; that are written in Emacs. These are different from programming modes and other niceties that will be useful specifically programmers. Those are scheduled for section three. They also need to be sufficiently big and self contained to qualify. Libraries which allow hooking into external programs (e.g. D-BUS support) don&#8217;t come in here.</p>
+
+<p>I&#8217;m going to use this blog entry to create a dump of what I have in mind. Suggestions are welcome.</p>
+
+<p>List of modes to discuss. These are not listed in any order.</p>
+
+<ol>
+<li>dired - Directory editor inside Emacs.</li>
+<li>org-mode - Outliner, PIM and authoring mode</li>
+<li>eshell - A shell implemented in elisp</li>
+<li>diary - Personal diary</li>
+<li>calc - RPN calculator</li>
+<li>ediff - Merge tool</li>
+<li>Gnus - News reader</li>
+<li>VMail - Mail reader</li>
+<li>Erc - IRC client</li>
+<li>BBDB - Rolodex style address book</li>
+<li>Info - Mode to read Info pages</li>
+</ol>
+
+
+<p>I think this covers most of the stuff that I use on a regular basis (and a few more which I&#8217;m going to have to learn). Any other suggestions are welcome.</p>
+
+<p>Also, I have a new intro and outro sequence for this part which should be interested to atleast some of the people following this series. Stay tuned.</p>
+")) (entry nil (title ((type . "html")) "Keyboard macros") (link ((href . "http://emacsmovies.org/blog/2012/09/17/keyboard_macros/"))) (updated nil "2012-09-17T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/09/17/keyboard_macros") (content ((type . "html")) "<p>A little late but it&#8217;s finally up. We&#8217;re discussing keyboard macros in this episode.</p>
+
+<p><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html#Keyboard-Macros\">Keyboard macros</a> are Emacs&#8217; way of recording and playing back a series of keys. It&#8217;s a useful feature that many people don&#8217;t sufficiently use. The excellent <a href=\"http://emacsrocks.com/\">Emacs Rocks</a> series of screencasts has <a href=\"http://emacsrocks.com/e02.html\">some episodes</a> on clever macro usage to reduce the number of keys needed to perform some kind of task.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/10-episode-keyboard_macros.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/10-episode-keyboard_macros.mkv\">http://archive.org/download/EmacsMovies/10-episode-keyboard_macros.mkv</a>.</p>
+
+<h2>Topics covered</h2>
+
+<ol>
+<li><code>C-x (</code> and <code>C-x )</code> to start and stop recording macros. With prefix arguments <code>C-u</code> and <code>C-u C-u</code>, you can append to existing macros.</li>
+<li><code>C-x e</code> to replay macros. You can do this a number of times in one shot using prefix arguments. Also, the <code>apply-macro-to-region-lines</code> function to apply a macro to all lines in a region.</li>
+<li>The <code>C-x</code> <code>C-k</code> <code>C-i</code> chord to insert the macro counter while recording a macro. Modifying the macro counter using <code>C-x</code> <code>C-k</code> <code>C-a</code> and <code>C-x</code> <code>C-k</code> <code>C-c</code>.</li>
+<li>The <code>C-x</code> <code>q</code> command to stop while playing back a macro so that you can enter some text or make minor variations.</li>
+<li>The <code>C-x</code> <code>C-k</code> <code>n</code> to name the last macro and <code>C-x</code> <code>C-k</code> <code>b</code> to bind the last entered macro to a key. Finally, <code>insert-kbd-macro</code> to actually insert a macro as elisp into your current buffer so that you can save it for future use.</li>
+</ol>
+
+
+<p>The <code>F3</code> and <code>F4</code> keys offer a convenient combination of the basic macro record and playback functions.</p>
+
+<p><code>F3</code> stands for <code>kmacro-start-macro-or-insert-counter</code>. When it is hit the first time, the effect is the same as <code>C-x</code> <code>(</code> (i.e. start recording a macro). While this is going on, if it is hit again, it will work like you hit <code>C-x</code> <code>C-k</code> <code>C-i</code> (i.e. insert the macro counter).
+<code>F4</code> is bound to <code>kmacro-end-or-call-macro</code>. This will, if hit while a macro is being recorded, end the recording process. Here, it is similar to <code>C-x</code> <code>)</code>. If hit while a macro is not being recorded, it will work like <code>C-x</code> <code>e</code> and call the last recorded macro.</p>
+
+<p>Macros are a little expansive so I took some liberties filtering out some of the features that I thought were not that useful. These are</p>
+
+<ol>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Edit-Keyboard-Macro.html#Edit-Keyboard-Macro\">Editing macros</a>.</li>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macro-Step_002dEdit.html#Keyboard-Macro-Step_002dEdit\">Interactively editing macros</a></li>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macro-Ring.html#Keyboard-Macro-Ring\">The macro ring</a> which contains all the macros created so far.</li>
+</ol>
+
+
+<p>I might do another screencast describing these but the manual page is explanatory and the things which I have covered will suffice for day to day usage.</p>
+
+<h2>Futher reading</h2>
+
+<ol>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html#Keyboard-Macros\">The emacs manual page on macros</a></li>
+<li><a href=\"http://emacswiki.org\">The wiki</a> has <a href=\"http://emacswiki.org/emacs/KeyboardMacros\">a page</a> on macros that contains a lot of useful snippets and other little goodies that can improve your experience.</li>
+<li>Xah Lee has a <a href=\"http://ergoemacs.org/emacs/emacs_macro_example.html\">page on macros</a> with some practical examples that he uses.</li>
+<li>The <a href=\"http://emacsrocks.com/\">Emacs Rocks</a> series of screencasts has some nice examples of macro magic.</li>
+</ol>
+
+")) (entry nil (title ((type . "html")) "Customisation Part 2") (link ((href . "http://emacsmovies.org/blog/2012/08/25/customisation_part_2/"))) (updated nil "2012-08-25T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/08/25/customisation_part_2") (content ((type . "html")) "<p>This is the second part of the customisation episode.</p>
+
+<p>This episode covers a little more elisp focusing on common things that people tweak in their init files.</p>
+
+<p>It&#8217;s a little longer than usual. I was feeling tired so I didn&#8217;t time myself like I usually do. Also, due to some screw up with my mic jack, there&#8217;s a crackling sound throughout the recording. It&#8217;s not <em>that</em> bad but it would be nice have gotten it without that. You can also hear me coughing once or twice. My apologies.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/08.2-episode-customisation-2.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/08.2-episode-customisation-2.mkv\">http://archive.org/download/EmacsMovies/08.2-episode-customisation-2.mkv</a>. This one is rather huge (302 MB or so). If it&#8217;s prohibitive, you can visit the <a href=\"http://archive.org/details/EmacsMovies\">archive details page</a> which has links to an mp4 and an ogg version that are much smaller.</p>
+
+<p>Here&#8217;s a summary of what is covered along with a few extras.</p>
+
+<ol>
+<li>Locations of the init files - <code>~/.emacs</code>, <code>~/.emacs.el</code>, <code>~/.emacs.d/init.el</code>.</li>
+<li><code>set-foreground-color</code> and <code>set-background-color</code> to change foreground and background.</li>
+<li><p>The <code>visible-bell</code> variable to control the method in which alarms are displayed. Following are a few extras.    You can get information on these and any other variables using the the <code>describe-variable</code> function.</p>
+
+<ul>
+<li><p><code>global-auto-revert-mode</code> which will watch visited files for
+changes and reload if necessary.</p></li>
+<li><p><code>require-final-newline</code> adds a newline to the end of a file
+automatically if it doesn&#8217;t have one when saving.</p></li>
+<li><p><code>debug-on-error</code> and <code>debug-on-quit</code> when the debugger should
+get invoked.</p></li>
+<li><p><code>inhibit-startup-message</code> will control whether the
+welcome message should be displayed on startup.</p></li>
+</ul>
+</li>
+<li><p>Some functions that are commonly seen in <code>.emacs</code> files are <code>tool-bar-mode</code>, <code>blink-cursor-mode</code> and <code>show-paren-mode</code>.</p></li>
+<li>Some functions which are defined in files that are not parts of Emacs need to be <code>require</code>d before they can be used. An example is <code>bar-cursor</code> which, on Debian, comes in the <code>emacs-goodies</code> package. It provides <code>bar-cursor-mode</code>.</li>
+<li>For files which you&#8217;ve downloaded yourself and not in the default load path, you can use <code>add-to-list</code> and add the directory to the <code>load-path</code> before requiring. We do this with a <code>rect-mark</code> file that we have.</li>
+<li>To associate file name patterns with major modes, you can add a tuple to <code>auto-mode-alist</code> using <code>add-to-list</code>. We do this for <code>markdown-mode</code>.</li>
+<li>We add global keybindings using <code>global-set-key</code>. We make bindings for <code>M-up</code> and <code>M-down</code>. We then create a custom command and bind it to <code>f7</code>.</li>
+<li>We also add mode specific keybindings using <code>define-key</code>.</li>
+<li>We add hooks to a major mode to trigger some actions when that mode is activated. We turn on <code>flyspell-mode</code> when we enter <code>markdown-mode</code> to demonstrate this.</li>
+<li>We talk about the customisation system using <code>M-x customize</code>.</li>
+</ol>
+
+
+<p>One extra thing that I&#8217;d like to mention is the <code>set-face-attribute</code> function which allows you to modify aspects of a &#8220;face&#8221;. A face is a font along with some other settings like colour, weight, size etc. that you can save and reuse. So, for example, there will be a <code>comment-face</code> used to syntax highlight all comments in the buffer. The following command will set the <code>height</code> attribute of the default face to <code>135</code>. This is a setting that essentially controls text size.</p>
+
+<pre><code>(set-face-attribute 'default nil :height 135)
+</code></pre>
+
+<p>That&#8217;s essentially it. Feedback welcome.</p>
+")) (entry nil (title ((type . "html")) "Customisation Part 1") (link ((href . "http://emacsmovies.org/blog/2012/08/05/customisation_part_1/"))) (updated nil "2012-08-05T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/08/05/customisation_part_1") (content ((type . "html")) "<p>This is the first of a two part episode that discusses how to do basic customisation of Emacs.</p>
+
+<p>This episode covers some basic <a href=\"https://en.wikipedia.org/wiki/Emacs_Lisp\">elisp</a> which is the language that you can extend and modify Emacs with.</p>
+
+<p>I do have an entire section dedicated to teaching Emacs lisp. This is a quick intro solely for the purpose of doing basic customisations.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/08.1-episode-customisation-1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/08.1-episode-customisation-1.mkv\">http://archive.org/download/EmacsMovies/08.1-episode-customisation-1.mkv</a>.</p>
+
+<p>The main things which are covered are</p>
+
+<ol>
+<li>A super fast overview of elisp - <a href=\"https://en.wikipedia.org/wiki/S-expression\">sexp</a>s and prefix notation.</li>
+<li><code>C-x C-e</code> and <code>C-j</code> to evaluate sexps.</li>
+<li>Simple expressions like <code>(+ 2 2 )</code></li>
+<li>The <code>'</code> operator.</li>
+<li>Assigning values to symbols using <code>set</code> and <code>setq</code>.</li>
+<li>Executing simple functions like <code>set-background-color</code>.</li>
+<li>Changing the value of variables like <code>line-spacing</code>.</li>
+<li>Writing simple functions.</li>
+<li>Using <code>C-h f</code> and <code>C-h v</code> to get documentation on functions and variables.</li>
+</ol>
+
+
+<h2>Further reading</h2>
+
+<ul>
+<li>Steve Yegges <a href=\"http://steve-yegge.blogspot.in/2008/01/emergency-elisp.html\">Emergency Elisp</a> is a quick primer for those who want to learn useful basics.</li>
+<li>Xah Lee&#8217;s <a href=\"http://ergoemacs.org/emacs/elisp.html\">Emacs lisp tutorial</a> is another more detailed tutorial for the language.</li>
+<li>The official Gnu <a href=\"http://www.gnu.org/software/emacs/emacs-lisp-intro/html_node/index.html\">An Introduction to Programming in Emacs Lisp</a> is an elisp tutorial for non programmers.</li>
+<li>The official <a href=\"http://www.gnu.org/software/emacs/manual/html_node/elisp/index.html\">Emacs lisp reference</a> is more thorough guide which is not very useful as a tutorial but handy to have around when you&#8217;re actually coding in elisp.</li>
+</ul>
+
+")) (entry nil (title ((type . "html")) "Minor modes") (link ((href . "http://emacsmovies.org/blog/2012/07/14/minor_modes/"))) (updated nil "2012-07-14T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/07/14/minor_modes") (content ((type . "html")) "<p>This episode talks about minor modes and shows a few of the commonly used ones.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/07-episode-minor-modes.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/07-episode-minor-modes.mkv\">http://archive.org/download/EmacsMovies/07-episode-minor-modes.mkv</a>. (This is uploading as I write this post and for a while will be a broken link).</p>
+
+<p><a href=\"mailto:noufal@emacsmovies.org\">Feedback welcome</a>.</p>
+")) (entry nil (title ((type . "html")) "Topics for the first section") (link ((href . "http://emacsmovies.org/blog/2012/07/08/topics_for_the_first_section/"))) (updated nil "2012-07-08T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/07/08/topics_for_the_first_section") (content ((type . "html")) "<p>These are the topics I&#8217;m planning to cover in the first <em>section</em>. I&#8217;m posting this up to solicit feedback on content as well as order</p>
+
+<ol>
+<li>Registers and bookmarks</li>
+<li>A bunch of minor modes (auto-fill, flyspell etc.)</li>
+<li>Basic customisation (probably a multi part episode)
+
+<ul>
+<li>Very basic elisp.</li>
+<li>Simple settings like colours, font size etc.</li>
+<li>Minor modes</li>
+<li>Mode hooks</li>
+<li>Key bindings</li>
+<li>The <code>customize</code> system</li>
+<li>Organising your <code>.emacs</code> file.</li>
+</ul>
+</li>
+<li>Keyboard macros</li>
+</ol>
+
+
+<p>I think this should cover it. I might make changes based on how the episodes turn out but this sounds like a decent starting point.</p>
+
+<p>The other three sections will cover applications like <code>dired</code> etc., programming modes and utilities and finally, elisp. I&#8217;ll worry about those when I get there.</p>
+
+<p>This is a call for feedback so please let me know.</p>
+")) (entry nil (title ((type . "html")) "Registers and bookmarks") (link ((href . "http://emacsmovies.org/blog/2012/07/08/registers_and_bookmarks/"))) (updated nil "2012-07-08T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/07/08/registers_and_bookmarks") (content ((type . "html")) "<p>This episode describes Emacs registers and bookmarks. How to use and manipulate them.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/06-episode-registers-and-bookmarks.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/06-episode-registers-and-bookmarks.mkv\">http://archive.org/download/EmacsMovies/06-episode-registers-and-bookmarks.mkv</a>. (This is uploading as I write this post and for a while will be a broken link).</p>
+
+<p>Feedback welcome.</p>
+")) (entry nil (title ((type . "html")) "Buffers") (link ((href . "http://emacsmovies.org/blog/2012/06/24/buffers/"))) (updated nil "2012-06-24T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/06/24/buffers") (content ((type . "html")) "<p>This episode describes buffers and how to use them.</p>
+
+<p>I&#8217;m sorry about the gap but my real life got a little hectic and I had to take a couple of weeks off.</p>
+
+<p>I&#8217;ve also changed the video bitrate for the mkv file to something much lesser. I can&#8217;t see a video quality degradation but the file size is much smaller now. Do let me know if you experience any problems.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/05-episode-buffers.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/05-episode-buffers.mkv\">http://archive.org/download/EmacsMovies/05-episode-buffers.mkv</a>.</p>
+
+<p>Feedback, as always, is welcome.</p>
+")) (entry nil (title ((type . "html")) "The region") (link ((href . "http://emacsmovies.org/blog/2012/05/01/the_region/"))) (updated nil "2012-05-01T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/05/01/the_region") (content ((type . "html")) "<p>This post discusses the <code>region</code>, the <code>point</code>, the <code>mark</code> and related matters. It generally deals with the business of cutting and pasting within Emacs. It&#8217;s a little longer than the others and a little less structured but I think the future screencasts are going to be that way anyway.</p>
+
+<p>The video sizes are unnaturally huge this time. I&#8217;ll probably scale them down from now.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/04-episode-region.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/04-episode-region.mkv\">http://archive.org/download/EmacsMovies/04-episode-region.mkv</a>.</p>
+
+<p>Comments and feedback are, as always, welcome.</p>
+")) (entry nil (title ((type . "html")) "Editing") (link ((href . "http://emacsmovies.org/blog/2012/04/23/editing/"))) (updated nil "2012-04-23T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/04/23/editing") (content ((type . "html")) "<p>Today&#8217;s screencast is on editing. We discuss basic editing as well as a handful of commands that allow you to manipulate text efficiently.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/03-episode-editing.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/03-episode-editing.mkv\">http://archive.org/download/EmacsMovies/03-episode-editing.mkv</a>.</p>
+
+<p>This is the <a href=\"http://emacsmovies.org/assets/douglass2.txt\">sample file</a> which I used for the presentation.</p>
+
+<p><em>Update:</em> There are two more keys which I wanted to mention but missed. The first is <code>C-backspace</code> which deletes the previous word. It is like <code>backspace</code> but for the previous word. The other is the numeric prefix command which we saw in the navigation video. If you want to, for example, draw a line of <code>-</code> signs, you can type <code>M-40 -</code> and Emacs will repeat the insertion of <code>-</code> 40 times creating a line.</p>
+")) (entry nil (title ((type . "html")) "Book updates") (link ((href . "http://emacsmovies.org/blog/2012/04/16/book_updates/"))) (updated nil "2012-04-16T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/04/16/book_updates") (content ((type . "html")) "<p>My original plan was to put out one chapter of the companion book I&#8217;m writing for this series along with each screencast but I don&#8217;t think that&#8217;s realistic anymore. Firstly, they don&#8217;t map very well. A chapter covering a 10 minute screencast will be too small to be a respectable chapter. Multiple screencasts might be the subject of a single chapter. Secondly, it&#8217;s a lot more effort writing chapters than making screencasts (which is not as easy as I was led to believe either).</p>
+
+<p>Either way, I won&#8217;t be putting up book chapters along with each screencast. It&#8217;ll mess up my schedule and I won&#8217;t be able to deliver. I&#8217;ll try to keep one screencast coming every week and when I feel that a logical point has been reached, I&#8217;ll take a week off, write up a chapter and put it out.</p>
+
+<p>As always, if you have any feedback, please email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a> or tweet to @emacsmovies.</p>
+
+<p>Thank you.</p>
+")) (entry nil (title ((type . "html")) "Navigation") (link ((href . "http://emacsmovies.org/blog/2012/04/15/navigation/"))) (updated nil "2012-04-15T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/04/15/navigation") (content ((type . "html")) "<p>This episode shows basic keyboard navigation in Emacs. The commands discussed here and the ones people use to move around in the editor. There are more advanced ones used in special contexts like finding definitions of functions etc. but those are valid only in specific circumstances. The commands discussed here are the basics.</p>
+
+<p>I&#8217;ve changed the <code>showkeys</code> program to make the font a little larger and more prominent. A few people complained about how it wasn&#8217;t visible the last time.</p>
+
+<p>I&#8217;ve included a link to a version of the video encoded using an h.264 video and vorbis audio codec inside a matroska container. I did this to make the file display properly on iOS devices. Please let me know if it works. The embedded video might not since the player doesn&#8217;t support the format but the link below the embedded player should get you the h.264 video directly and that should work on iOS devices.</p>
+
+<p>Finally, the delay in uploading was because the VM on which I was creating the screencasts for some reason started creating choppy video. It looked like it was because it wasn&#8217;t powerful enough so I moved to a bare metal machine and the quality improved.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/02-episode-navigation.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/02-episode-navigation.mkv\">http://archive.org/download/EmacsMovies/02-episode-navigation.mkv</a>.</p>
+
+<p>This is the <a href=\"http://emacsmovies.org/assets/douglass.txt\">sample file</a> which I used for the presentation.</p>
+")) (entry nil (title ((type . "html")) "Terminology") (link ((href . "http://emacsmovies.org/blog/2012/03/24/terminology/"))) (updated nil "2012-03-24T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/03/24/terminology") (content ((type . "html")) "<p>This is a screencast that introduces the basics of the editor and talks about the special meanings of terms like &#8220;window&#8221;, &#8220;frame&#8221; etc. that are often used in Emacs.</p>
+
+<p>It&#8217;s the first one which I&#8217;ve done so feedback is welcome. Please email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a> or tweet to <a href=\"http://twitter.com/emacsmovies\">@emacsmovies</a> to let me know what you think.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/01-episode-terminology.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>Enjoy!</p>
+
+<p>(P.S.: I will post the link to the relevant chapter in the companion book as soon as I&#8217;m done with it. A day or two at the most).</p>
+
+<p><strong>Update: </strong> The relevant chapter of the book is at <a href=\"http://emacsmovies.org/book/25_ch_terminology.html\">book/25_ch_terminology.html</a>.</p>
+")) (entry nil (title ((type . "html")) "Companion book") (link ((href . "http://emacsmovies.org/blog/2012/03/24/companion_book/"))) (updated nil "2012-03-24T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/03/24/companion_book") (content ((type . "html")) "<p>I&#8217;m working on a book that should serve the same purpose as this series of screencasts but for an audience that prefers reading rather than watching screencasts.</p>
+
+<p>This whole project is as much for my own education as it is to spread the word. It is also a &#8220;work in progress&#8221;. Once I upload a video, it&#8217;s unlikely that I&#8217;ll &#8220;fix&#8221; any mistakes in it. I&#8217;ll update errata in the blog post but will not redo the video. However, the book will undergo changes repeatedly till I&#8217;m satisfied. I also hope that the quality of the videos will improve over time.</p>
+
+<p>The book is tentatively titles &#8220;Emacs : A programmers editor&#8221; and my plan is to break it down into four parts.</p>
+
+<p>Part 1 will dvelve on basics like terminology, navigation, basic customisation etc. Part 2 on &#8220;applications&#8221; which are things which you can use Emacs for like keeping your diary, editing directories, as a PIM, as a shell etc. Part 3 is going to be where I talk about programmers and things which benefit them. I&#8217;ll dive into a few of the popular major modes and also into things like version control integration etc. Finally, part 4 is going to focus on elisp and how to make Emacs do your bidding.</p>
+
+<p>I haven&#8217;t finalised where and how I&#8217;m going to release or put up the book. Right now, my plan is to put the book in the <a href=\"http://emacsmovies.org/book\">/book</a> subdirectory with some kind of an index but this is tentative so don&#8217;t rely on the URLs being permanent.</p>
+
+<p>With that, <a href=\"http://emacsmovies.org/book/10_intro-chapter.html\">here</a> is the introductory chapter.</p>
+
+<p>Feedback is welcome and you can email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a>.</p>
+")) (entry nil (title ((type . "html")) "Welcome to emacsmovies.org") (link ((href . "http://emacsmovies.org/blog/2012/01/21/welcome_to_emacsmovies.org/"))) (updated nil "2012-01-21T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/01/21/welcome_to_emacsmovies.org") (content ((type . "html")) "<p>Welcome to Emacs Movies.</p>
+
+<p>This is a blog where I plan to post screencasts to teach people how to use the programmers editor <a href=\"http://www.gnu.org/software/emacs/\">Gnu Emacs</a>.</p>
+
+<h2>Production workflow</h2>
+
+<p>The videos are recorded by me and then encoded and uploaded. I&#8217;m not doing any editing and so small mistakes will be left in there. I do plan to make a script and do a trial run before recording the final version so there&#8217;s some &#8220;pre editing&#8221;.</p>
+
+<p>I use this makefile to automate the entire process</p>
+
+<script src=\"https://gist.github.com/2466292.js?file=gistfile1.mak\"></script>
+
+
+<p>I use something like <code>make number=01 name=introduction</code> to create <code>01-episode-introduction.mkv</code> and <code>01-episode-introduction.webm</code>. The former is for ios devices and the latter for streaming. Make is surprisingly efficient for this since it can resume if things are interrupted and can automatically do things in parallel if a <code>-j</code> is passed. For example, it will transcode the <code>webm</code> and <code>mkv</code> files as two processes if I ask it to. Once that&#8217;s done and I&#8217;m happy, I do a <code>make number=01 name=introduction upload</code> and the generated files are uploaded to the archives web servers using its implementation of the Amazon S3 API. This allows the whole flow to be non-interactive and smooth. I&#8217;m not much of a GUI man and prefer to have things run in a console.</p>
+
+<p>These files are uploaded to the internet archive in the <a href=\"http://www.archive.org/details/EmacsMovies\">EmacsMovies collection</a>. I prefer using the archive to other video hosting websites because they allow you to download the original files directly. Also, their mission to preserve data for ever rather than to make money off user generated content appeals to me.</p>
+
+<h2>Software used</h2>
+
+<p>I&#8217;ve already mentioned <a href=\"http://ffmpeg.org\">ffmpeg</a> in the workflow.</p>
+
+<p>During the recording, I use my <a href=\"https://github.com/nibrahim/showkeys\">showkeys</a> application to display keystrokes on the side. I didn&#8217;t use this instead of more mature programs like <a href=\"http://code.google.com/p/key-mon/\">key-mon</a> for a <a href=\"http://nibrahim.net.in/2011/11/30/showkeys.html\">number of reasons</a>.</p>
+
+<p>The blog is generated using <a href=\"http://octopress.org/\">Octopress</a> which is a set of plugins and spiffy templates for the <a href=\"http://jekyllrb.com/\">jekyll</a> static blog generator. I use my own emacs mode <a href=\"https://github.com/nibrahim/Hyde\">hyde.el</a> to maintain the blog. It is maintained on github at <a href=\"https://github.com/nibrahim/emacsmovies.org\">https://github.com/nibrahim/emacsmovies.org</a>. The emacsmovies.org website is hosted currently on <a href=\"http://hcoop.net/\">the Internet hosting cooperative</a>.</p>
+
+<p>I&#8217;m mentioning all this so that people can offer suggestions on how to improve the workflow.</p>
+
+<p>On a side note, I&#8217;m a Python developer in my day job and I wanted to do this entire project without using Python at all and I was able to.</p>
+
+<h2>Long term plans</h2>
+
+<blockquote>
+<p>Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)</p>
+<footer>delYsid on #emacs</footer>
+</blockquote>
+
+
+<p>It is definitely not possible to cover <em>all</em> of Emacs. My plan as of now is to start off with a few screencasts on basic editing and navigation. After this, a few on basic customisation. Then I plan to do emacs &#8220;applications&#8221; (e.g. dired, Gnus, org-mode) etc. I&#8217;ll probably loosely structure it around the <a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/index.html\">emacs manual</a>.</p>
+
+<p>I had a conversation with Zed Shaw about his <a href=\"http://learncodethehardway.org/\">learn code the hard way</a> series of books and video tutorials. He suggested that I supplement the screencasts with a book and I&#8217;ve started work on that too. Right now, my feeling is that each screencast will be the contents of one chapter condensed. I hope to keep all the screencasts under 15 minutes long each.</p>
+
+<p>I hope to do at least one a month. If you have any comments or suggestions, please email me - <code>noufal at emacsmovies.org</code>.</p>
+
+<h2>Support and feedback</h2>
+
+<p>For any fixes in the software mentioned above or corrections on the website, please use the <a href=\"https://github.com/nibrahim/emacsmovies.org/issues\">github issue tracker</a>. If you&#8217;re interested in doing a screencast for the website, please email me at <code>noufal at emacsmovies.org</code> and we can work something out.</p>
+
+<h2>Licensing</h2>
+
+<p>All the software which I&#8217;ve written to make this possible are released under the GNU GPL version 3.</p>
+
+<p>The actual videos are licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>
+
+<p>I will occasionally link to videos created by other people. These are owned by the people who made them and are might have different licensing terms.</p>
+
+<h2>Following emacsmovies.org</h2>
+
+<p>I have a twitter account setup for this website. You can follow <a href=\"https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A4000%2F&region=follow_link&screen_name=emacsmovies&source=followbutton&variant=2.0\">@emacsmovies</a> on twitter to stay up to date or subscribe to the <a href=\"http://emacsmovies.org/atom.xml\">atom feed</a>.</p>
+")))) ("Gnus part 3" "<p>This is the third installment of the Gnus series where we discuss <a href=\"http://www.gnus.org/manual/gnus_255.html#SEC255\">scoring</a>. It’s a little complex and this screencast is just an overview of the possibilities rather than an in depth tutorial.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.3-episode-gnus-3.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>.</p>
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+<h2>Summary</h2>
+<ol>
+<li><code>V S</code> - View score of current article</li>
+<li><code>V s</code> - Set score of current article (requires prefix argument)</li>
+<li><code>V R</code> - Re compute score for current article</li>
+<li><code>V t</code> - Show score rules for current article</li>
+<li><code>V C</code> - Customise score rules for current group.</li>
+<li><code>L</code> - Create new rule to lower scores (based on current article)</li>
+<li><code>I</code> - Create new rule to increase scores (based on current article)</li>
+<li><code>gnus-use-adaptive-scoring</code> - Change this to <code>t</code> to use adaptive scoring.</li>
+<li><code>gnus-default-adaptive-score-alist</code> - Specify scoring rules in here.</li>
+<li><code>gnus-thread-sort-functions</code> - List of functions to sort threads in a group. Primary sort key should be the last function. Refer documentation for details.</li>
+<li><code>gnus-article-sort-functions</code> - Same as above. In effect when threading is disabled.</li>
+<li><code>gnus-thread-sort-by-*</code> - Various pre defined functions which can be put in the <code>gnus-thread-sort-functions</code> list.</li>
+<li><code>gnus-article-sort-by-*</code> - Various pre defined functions which can be put in the <code>gnus-article-sort-functions</code> list.</li>
+</ol>" "http://emacsmovies.org/blog/2013/11/07/gnus_part_3/" (21115 22401) new 1 nil nil ((guid nil "http://emacsmovies.org/blog/2013/11/07/gnus_part_3") (title ((type . "html")) "Gnus part 3") (link ((href . "http://emacsmovies.org/blog/2013/11/07/gnus_part_3/"))) (updated nil "2013-11-07T14:34:01+05:30") (id nil "http://emacsmovies.org/blog/2013/11/07/gnus_part_3") (content ((type . "html")) "<p>This is the third installment of the Gnus series where we discuss <a href=\"http://www.gnus.org/manual/gnus_255.html#SEC255\">scoring</a>. It&#8217;s a little complex and this screencast is just an overview of the possibilities rather than an in depth tutorial.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.3-episode-gnus-3.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<h2>Summary</h2>
+
+<ol>
+<li><code>V S</code> - View score of current article</li>
+<li><code>V s</code> - Set score of current article (requires prefix argument)</li>
+<li><code>V R</code> - Re compute score for current article</li>
+<li><code>V t</code> - Show score rules for current article</li>
+<li><code>V C</code> - Customise score rules for current group.</li>
+<li><code>L</code> - Create new rule to lower scores (based on current article)</li>
+<li><code>I</code> - Create new rule to increase scores (based on current article)</li>
+<li><code>gnus-use-adaptive-scoring</code> - Change this to <code>t</code> to use adaptive scoring.</li>
+<li><code>gnus-default-adaptive-score-alist</code> - Specify scoring rules in here.</li>
+<li><code>gnus-thread-sort-functions</code> - List of functions to sort threads in a group. Primary sort key should be the last function. Refer documentation for details.</li>
+<li><code>gnus-article-sort-functions</code> - Same as above. In effect when threading is disabled.</li>
+<li><code>gnus-thread-sort-by-*</code> - Various pre defined functions which can be put in the <code>gnus-thread-sort-functions</code> list.</li>
+<li><code>gnus-article-sort-by-*</code> - Various pre defined functions which can be put in the <code>gnus-article-sort-functions</code> list.</li>
+</ol>
+
+"))) ("Gnus part 2" "<p>This is the second part of the screencasts discussing Gnus. The general idea was to cover “reading” email and news articles but the screencast ended becoming 30 minutes long. I broke it down into two pieces so that it’s more convenient to download.</p>
+<p>It discusses the Group buffer where you can see your groups and manage them, the Summary buffer where you can actually see the articles in the group and finally, the Article buffer where you can actually read the email.</p>
+<p>Part 1</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.2-episode-gnus-2.1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>.</p>
+<p>Part 2</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.2-episode-gnus-2.2.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>.</p>
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+<p>The keys that are covered in these two episodes are as follows.</p>
+<h2>Summary</h2>
+<p>In the Groups buffer:</p>
+<ol>
+<li><code>F</code> - Checks for new newgroups</li>
+<li><code>t</code> - toggle topics</li>
+<li><code>g</code> - Refresh</li>
+<li><code>c</code> - catchup</li>
+<li><code>n</code> - Jump to next group with unread articles</li>
+<li><code>.</code> - Jump to first group with unread articles</li>
+<li><code>U</code> - Subscribe</li>
+<li><code>S k</code> - Kill group</li>
+<li><code>#</code> - Mark group</li>
+<li><code>L</code> - Show all Groups</li>
+<li><code>l</code> - Shows groups with unread articles</li>
+<li><code>G c</code> - customise group parameters</li>
+<li><code>F</code> - Search for new newsgroups</li>
+<li><code>b</code> - Cleanup groups</li>
+<li><code>RET</code> - Enter group</li>
+</ol>
+<p>Summary buffer:</p>
+<ol>
+<li><code>RET</code> - Read article (and scroll by one line)</li>
+<li><code>SPACE</code> - Scroll down by one page</li>
+<li><code>Backspace</code> - Scroll up by one page</li>
+<li><code>s</code> - Incremental Search</li>
+<li><code>h</code> - Move between summary and article buffers</li>
+<li><code>B Backspace</code> - Delete article</li>
+<li><code>B m</code> - Move</li>
+<li><code>B r</code> - Respool</li>
+<li><code>B t</code> - Trace</li>
+<li><code>#</code> - Process mark</li>
+<li><code>MPr</code> - Mark region</li>
+<li><code>MPg</code> - unmark region</li>
+<li><code>MPR</code> - Mark articles matching regexp</li>
+<li><code>MPG</code> - Unmark articles matching regexp</li>
+<li><code>!</code> - Tick article</li>
+<li><code>M-u</code> - Remove all marks</li>
+<li><code>/</code> - Narrow based on criteria (/ . removes narrowing)</li>
+<li><code>C-M-t</code> - Toggle threading</li>
+<li><code>T-o</code> - Jump to thread parent</li>
+<li><code>K-b</code> - Display MIME buttons</li>
+<li><code>M-t</code> - Toggle MIME button display (permanent)</li>
+<li><code>q</code> - Exit summary buffer</li>
+</ol>
+<p>For further reference, there’s the <a href=\"http://gnus.org/manual/gnus_toc.html\">Gnus manual</a>.</p>
+<p>Thanks for your patience and continued support.</p>" "http://emacsmovies.org/blog/2013/07/17/gnus_part_2/" (20966 43046) new 2 nil nil ((guid nil "http://emacsmovies.org/blog/2013/07/17/gnus_part_2") (title ((type . "html")) "Gnus part 2") (link ((href . "http://emacsmovies.org/blog/2013/07/17/gnus_part_2/"))) (updated nil "2013-07-17T19:50:22+05:30") (id nil "http://emacsmovies.org/blog/2013/07/17/gnus_part_2") (content ((type . "html")) "<p>This is the second part of the screencasts discussing Gnus. The general idea was to cover &#8220;reading&#8221; email and news articles but the screencast ended becoming 30 minutes long. I broke it down into two pieces so that it&#8217;s more convenient to download.</p>
+
+<p>It discusses the Group buffer where you can see your groups and manage them, the Summary buffer where you can actually see the articles in the group and finally, the Article buffer where you can actually read the email.</p>
+
+<p>Part 1</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.2-episode-gnus-2.1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Part 2</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.2-episode-gnus-2.2.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<p>The keys that are covered in these two episodes are as follows.</p>
+
+<h2>Summary</h2>
+
+<p>In the Groups buffer:</p>
+
+<ol>
+<li><code>F</code> - Checks for new newgroups</li>
+<li><code>t</code> - toggle topics</li>
+<li><code>g</code> - Refresh</li>
+<li><code>c</code> - catchup</li>
+<li><code>n</code> - Jump to next group with unread articles</li>
+<li><code>.</code> - Jump to first group with unread articles</li>
+<li><code>U</code> - Subscribe</li>
+<li><code>S k</code> - Kill group</li>
+<li><code>#</code> - Mark group</li>
+<li><code>L</code> - Show all Groups</li>
+<li><code>l</code> - Shows groups with unread articles</li>
+<li><code>G c</code> - customise group parameters</li>
+<li><code>F</code> - Search for new newsgroups</li>
+<li><code>b</code> - Cleanup groups</li>
+<li><code>RET</code> - Enter group</li>
+</ol>
+
+
+<p>Summary buffer:</p>
+
+<ol>
+<li><code>RET</code> - Read article (and scroll by one line)</li>
+<li><code>SPACE</code> - Scroll down by one page</li>
+<li><code>Backspace</code> - Scroll up by one page</li>
+<li><code>s</code> - Incremental Search</li>
+<li><code>h</code> - Move between summary and article buffers</li>
+<li><code>B Backspace</code> - Delete article</li>
+<li><code>B m</code> - Move</li>
+<li><code>B r</code> - Respool</li>
+<li><code>B t</code> - Trace</li>
+<li><code>#</code> - Process mark</li>
+<li><code>MPr</code> - Mark region</li>
+<li><code>MPg</code> - unmark region</li>
+<li><code>MPR</code> - Mark articles matching regexp</li>
+<li><code>MPG</code> - Unmark articles matching regexp</li>
+<li><code>!</code> - Tick article</li>
+<li><code>M-u</code> - Remove all marks</li>
+<li><code>/</code> - Narrow based on criteria (/ . removes narrowing)</li>
+<li><code>C-M-t</code> - Toggle threading</li>
+<li><code>T-o</code> - Jump to thread parent</li>
+<li><code>K-b</code> - Display MIME buttons</li>
+<li><code>M-t</code> - Toggle MIME button display (permanent)</li>
+<li><code>q</code> - Exit summary buffer</li>
+</ol>
+
+
+<p>For further reference, there&#8217;s the <a href=\"http://gnus.org/manual/gnus_toc.html\">Gnus manual</a>.</p>
+
+<p>Thanks for your patience and continued support.</p>
+"))) ("Gnus part 1" "<p>I’ve picked up something this time which I’ve always wanted to study properly – <a href=\"http://gnus.org/\"><em>Gnus</em></a>. The Emacs news and email reader. This is going to be a multipart episode since Gnus is so big. I don’t know how many exactly but as of now, I’ve got a 3 part thing planned.</p>
+<p>Also, the hiatus was unexpected. Things should be smoother now.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.1-episode-gnus-1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>.</p>
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+<p>Comments welcome.</p>
+<h2>Summary</h2>
+<ol>
+<li>The <code>gnus-select-method</code> variable decides where to pick news from.</li>
+<li><code>M-x gnus</code> starts gnus.</li>
+<li><code>g</code> refreshes subsribed groups.</li>
+<li><code>F</code> looks for new groups.</li>
+<li><code>^</code> takes you into the server buffer.</li>
+<li><code>RET</code> will do different things depending on where you are. On a group, it will show you articles in the group.</li>
+<li><code>t</code> toggles topics in the Groups buffer.</li>
+<li><code>L</code> shows all groups (including ones with no unread articles).</li>
+<li><code>l</code> shows only groups with no unread articles.</li>
+<li><code>c</code> catches up a group marking all articles as read.</li>
+<li><code>U</code> is used to subscribe to a group.</li>
+<li>Information on groups and articles in cached in the <code>.newsrc.eld</code> file which you shouldn’t delete.</li>
+<li>Gnus uses <code>.gnus</code> as a startup file.</li>
+<li><code>gnus-secondary-select-methods</code> is the variable that controls sources other than the primary one mentioned in <code>gnus-select-method</code>. Mail sources usually come here.</li>
+<li>The <code>mail-sources</code> variable specify where the mail backends should pick data up from.</li>
+<li>The <code>nnmail-split-methods</code> function can be used to split mail depending on criteria like sender etc.</li>
+</ol>
+<h2>Further reading</h2>
+<ol>
+<li>The <a href=\"http://gnus.org/manual.html\">Gnus manual</a>.</li>
+<li>The <a href=\"http://www.emacswiki.org/CategoryGnus\">Gnus category on emacswiki</a> for lots of tips and tricks.</li>
+</ol>
+<h2>Extras</h2>
+<ol>
+<li>The <a href=\"http://code.activestate.com/recipes/578514-create-a-temporary-mailbox/?in=user-4173873\">recipe</a> used to generate the mailbox.</li>
+</ol>" "http://emacsmovies.org/blog/2013/04/29/gnus_part_1/" (20862 40296) new 3 nil nil ((guid nil "http://emacsmovies.org/blog/2013/04/29/gnus_part_1") (title ((type . "html")) "Gnus part 1") (link ((href . "http://emacsmovies.org/blog/2013/04/29/gnus_part_1/"))) (updated nil "2013-04-29T21:48:48+05:30") (id nil "http://emacsmovies.org/blog/2013/04/29/gnus_part_1") (content ((type . "html")) "<p>I&#8217;ve picked up something this time which I&#8217;ve always wanted to study properly &#8211; <a href=\"http://gnus.org/\"><em>Gnus</em></a>. The Emacs news and email reader. This is going to be a multipart episode since Gnus is so big. I don&#8217;t know how many exactly but as of now, I&#8217;ve got a 3 part thing planned.</p>
+
+<p>Also, the hiatus was unexpected. Things should be smoother now.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/12.1-episode-gnus-1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<p>Comments welcome.</p>
+
+<h2>Summary</h2>
+
+<ol>
+<li>The <code>gnus-select-method</code> variable decides where to pick news from.</li>
+<li><code>M-x gnus</code> starts gnus.</li>
+<li><code>g</code> refreshes subsribed groups.</li>
+<li><code>F</code> looks for new groups.</li>
+<li><code>^</code> takes you into the server buffer.</li>
+<li><code>RET</code> will do different things depending on where you are. On a group, it will show you articles in the group.</li>
+<li><code>t</code> toggles topics in the Groups buffer.</li>
+<li><code>L</code> shows all groups (including ones with no unread articles).</li>
+<li><code>l</code> shows only groups with no unread articles.</li>
+<li><code>c</code> catches up a group marking all articles as read.</li>
+<li><code>U</code> is used to subscribe to a group.</li>
+<li>Information on groups and articles in cached in the <code>.newsrc.eld</code> file which you shouldn&#8217;t delete.</li>
+<li>Gnus uses <code>.gnus</code> as a startup file.</li>
+<li><code>gnus-secondary-select-methods</code> is the variable that controls sources other than the primary one mentioned in <code>gnus-select-method</code>. Mail sources usually come here.</li>
+<li>The <code>mail-sources</code> variable specify where the mail backends should pick data up from.</li>
+<li>The <code>nnmail-split-methods</code> function can be used to split mail depending on criteria like sender etc.</li>
+</ol>
+
+
+<h2>Further reading</h2>
+
+<ol>
+<li>The <a href=\"http://gnus.org/manual.html\">Gnus manual</a>.</li>
+<li>The <a href=\"http://www.emacswiki.org/CategoryGnus\">Gnus category on emacswiki</a> for lots of tips and tricks.</li>
+</ol>
+
+
+<h2>Extras</h2>
+
+<ol>
+<li>The <a href=\"http://code.activestate.com/recipes/578514-create-a-temporary-mailbox/?in=user-4173873\">recipe</a> used to generate the mailbox.</li>
+</ol>
+
+"))) ("Dired" "<p>I’ve started “Season” 2 of the series with a screencast on <a href=\"http://www.gnu.org/s/emacs/manual/html_node/emacs/Dired.html\">dired</a>. It’s Emacs’ “file browser” and can be used to manage files. Performing operations on a large number of them at once and also providing such facilities to other modes.</p>
+<p>I apologise for the hiatus but I’ve been very busy in my real life. I expect more delays till the end of January but I’ll do what I can.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/11-episode-dired.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>.</p>
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+<p>Comments welcome.</p>
+<h2>Keys mentioned</h2>
+<ol>
+<li><code>C-x d</code> to start dired with a directory. <code>find-name-dired</code> and <code>find-dired</code> can be used to select different files for the initial dired buffer.</li>
+<li><code>s</code> to toggle sorting order (by date or normal).</li>
+<li><code>i</code> to insert a directory into the current dired buffer.</li>
+<li><code>&lt;</code> and <code>&gt;</code> to navigate directories in the buffer.</li>
+<li><code>C-M-n</code> and <code>C-M-p</code> to navigate dirlines.</li>
+<li><code>RET</code> to visit the current item in a new buffer. <code>o</code> does the same thing but does so after splitting the current window into two so that the dired buffer is still visible.</li>
+<li><code>^</code> Goes one directory up. It’s the opposite of <code>RET</code>. If the parent directory has a dired buffer visiting it, it will be reused. Otherwise, a new one will be created.</li>
+<li><code>$</code> toggles the visibility of the file list under a dirline. <code>M-$</code> does so for all the dirlines in the current buffer.</li>
+<li><code>T</code> touches the current or all the marked files. <code>R</code> is to rename files. <code>S</code> to symblink. <code>Z</code> is to compress or decompress.</li>
+<li><code>D</code> marks for deletion and <code>X</code> expunges.</li>
+<li><code>m</code> marks files and <code>u</code> unmarks. <code>U</code> unmarks all files.</li>
+<li><code>M-s a C-s</code> searches incrementally through all marked files.</li>
+<li><code>C-t C-t</code> displays image thumbnails. <code>C-t i</code> displays a scaled version of the image in a new window.</li>
+<li><code>% g</code> marks files based on whether they contain a provided regular expression. Other <code>%</code> commands are available under the <em>Regexp</em> menu.</li>
+<li><code>* /</code> marks all directories and <code>t</code> toggles marked/unmarked files. The <em>Mark</em> menu has other such commands to make marking easy.</li>
+<li><code>+</code> creates new directories and <code>w</code> copies marked (or current) items into the kill ring.</li>
+<li>If you’re using <code>gnus</code>, you can run <code>turn-on-gnus-dired-mode</code> and get keybindings like <code>C-c C-m C-a</code> to attach marked files into a new email and go to the composer.</li>
+<li><code>C-x</code> <code>C-q</code> to enter wdired which makes the file names in the buffer editable. You can make changes and then hit <code>C-c</code> <code>C-c</code> to save them.</li>
+</ol>
+<h2>Further reading</h2>
+<ol>
+<li>The <a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html\">Dired manual page</a> along with <a href=\"http://www.gnu.org/software/emacs/manual/html_node/dired-x/index.html#Top\">Dired-X</a> (which I might cover later in a future screencast).</li>
+<li><a href=\"http://ergoemacs.org/emacs/file_management.html\">Xah Lee’s dired tutorial</a>.</li>
+</ol>" "http://emacsmovies.org/blog/2012/12/04/dired/" (20669 667) new 4 nil nil ((guid nil "http://emacsmovies.org/blog/2012/12/04/dired") (title ((type . "html")) "Dired") (link ((href . "http://emacsmovies.org/blog/2012/12/04/dired/"))) (updated nil "2012-12-04T01:20:51+05:30") (id nil "http://emacsmovies.org/blog/2012/12/04/dired") (content ((type . "html")) "<p>I&#8217;ve started &#8220;Season&#8221; 2 of the series with a screencast on <a href=\"http://www.gnu.org/s/emacs/manual/html_node/emacs/Dired.html\">dired</a>. It&#8217;s Emacs&#8217; &#8220;file browser&#8221; and can be used to manage files. Performing operations on a large number of them at once and also providing such facilities to other modes.</p>
+
+<p>I apologise for the hiatus but I&#8217;ve been very busy in my real life. I expect more delays till the end of January but I&#8217;ll do what I can.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/11-episode-dired.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>.</p>
+
+<p>Other formats are available on the <a href=\"http://archive.org/details/EmacsMovies\">Archive.org page</a>.</p>
+
+<p>Comments welcome.</p>
+
+<h2>Keys mentioned</h2>
+
+<ol>
+<li><code>C-x d</code> to start dired with a directory. <code>find-name-dired</code> and <code>find-dired</code> can be used to select different files for the initial dired buffer.</li>
+<li><code>s</code> to toggle sorting order (by date or normal).</li>
+<li><code>i</code> to insert a directory into the current dired buffer.</li>
+<li><code>&lt;</code> and <code>&gt;</code> to navigate directories in the buffer.</li>
+<li><code>C-M-n</code> and <code>C-M-p</code> to navigate dirlines.</li>
+<li><code>RET</code> to visit the current item in a new buffer. <code>o</code> does the same thing but does so after splitting the current window into two so that the dired buffer is still visible.</li>
+<li><code>^</code> Goes one directory up. It&#8217;s the opposite of <code>RET</code>. If the parent directory has a dired buffer visiting it, it will be reused. Otherwise, a new one will be created.</li>
+<li><code>$</code> toggles the visibility of the file list under a dirline. <code>M-$</code> does so for all the dirlines in the current buffer.</li>
+<li><code>T</code> touches the current or all the marked files. <code>R</code> is to rename files. <code>S</code> to symblink. <code>Z</code> is to compress or decompress.</li>
+<li><code>D</code> marks for deletion and <code>X</code> expunges.</li>
+<li><code>m</code> marks files and <code>u</code> unmarks. <code>U</code> unmarks all files.</li>
+<li><code>M-s a C-s</code> searches incrementally through all marked files.</li>
+<li><code>C-t C-t</code> displays image thumbnails. <code>C-t i</code> displays a scaled version of the image in a new window.</li>
+<li><code>% g</code> marks files based on whether they contain a provided regular expression. Other <code>%</code> commands are available under the <em>Regexp</em> menu.</li>
+<li><code>* /</code> marks all directories and <code>t</code> toggles marked/unmarked files. The <em>Mark</em> menu has other such commands to make marking easy.</li>
+<li><code>+</code> creates new directories and <code>w</code> copies marked (or current) items into the kill ring.</li>
+<li>If you&#8217;re using <code>gnus</code>, you can run <code>turn-on-gnus-dired-mode</code> and get keybindings like <code>C-c C-m C-a</code> to attach marked files into a new email and go to the composer.</li>
+<li><code>C-x</code> <code>C-q</code> to enter wdired which makes the file names in the buffer editable. You can make changes and then hit <code>C-c</code> <code>C-c</code> to save them.</li>
+</ol>
+
+
+<h2>Further reading</h2>
+
+<ol>
+<li>The <a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html\">Dired manual page</a> along with <a href=\"http://www.gnu.org/software/emacs/manual/html_node/dired-x/index.html#Top\">Dired-X</a> (which I might cover later in a future screencast).</li>
+<li><a href=\"http://ergoemacs.org/emacs/file_management.html\">Xah Lee&#8217;s dired tutorial</a>.</li>
+</ol>
+
+"))) ("Section 2" "<p>The first section that describes how to use Emacs to get your daily work done is over. The second section is going to focus on “applications” that are written in Emacs. These are different from programming modes and other niceties that will be useful specifically programmers. Those are scheduled for section three. They also need to be sufficiently big and self contained to qualify. Libraries which allow hooking into external programs (e.g. D-BUS support) don’t come in here.</p>
+<p>I’m going to use this blog entry to create a dump of what I have in mind. Suggestions are welcome.</p>
+<p>List of modes to discuss. These are not listed in any order.</p>
+<ol>
+<li>dired - Directory editor inside Emacs.</li>
+<li>org-mode - Outliner, PIM and authoring mode</li>
+<li>eshell - A shell implemented in elisp</li>
+<li>diary - Personal diary</li>
+<li>calc - RPN calculator</li>
+<li>ediff - Merge tool</li>
+<li>Gnus - News reader</li>
+<li>VMail - Mail reader</li>
+<li>Erc - IRC client</li>
+<li>BBDB - Rolodex style address book</li>
+<li>Info - Mode to read Info pages</li>
+</ol>
+<p>I think this covers most of the stuff that I use on a regular basis (and a few more which I’m going to have to learn). Any other suggestions are welcome.</p>
+<p>Also, I have a new intro and outro sequence for this part which should be interested to atleast some of the people following this series. Stay tuned.</p>" "http://emacsmovies.org/blog/2012/09/20/section_2_/" (20570 3880) new 5 nil nil ((guid nil "http://emacsmovies.org/blog/2012/09/20/section_2_") (title ((type . "html")) "Section 2 ") (link ((href . "http://emacsmovies.org/blog/2012/09/20/section_2_/"))) (updated nil "2012-09-20T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/09/20/section_2_") (content ((type . "html")) "<p>The first section that describes how to use Emacs to get your daily work done is over. The second section is going to focus on &#8220;applications&#8221; that are written in Emacs. These are different from programming modes and other niceties that will be useful specifically programmers. Those are scheduled for section three. They also need to be sufficiently big and self contained to qualify. Libraries which allow hooking into external programs (e.g. D-BUS support) don&#8217;t come in here.</p>
+
+<p>I&#8217;m going to use this blog entry to create a dump of what I have in mind. Suggestions are welcome.</p>
+
+<p>List of modes to discuss. These are not listed in any order.</p>
+
+<ol>
+<li>dired - Directory editor inside Emacs.</li>
+<li>org-mode - Outliner, PIM and authoring mode</li>
+<li>eshell - A shell implemented in elisp</li>
+<li>diary - Personal diary</li>
+<li>calc - RPN calculator</li>
+<li>ediff - Merge tool</li>
+<li>Gnus - News reader</li>
+<li>VMail - Mail reader</li>
+<li>Erc - IRC client</li>
+<li>BBDB - Rolodex style address book</li>
+<li>Info - Mode to read Info pages</li>
+</ol>
+
+
+<p>I think this covers most of the stuff that I use on a regular basis (and a few more which I&#8217;m going to have to learn). Any other suggestions are welcome.</p>
+
+<p>Also, I have a new intro and outro sequence for this part which should be interested to atleast some of the people following this series. Stay tuned.</p>
+"))) ("Keyboard macros" "<p>A little late but it’s finally up. We’re discussing keyboard macros in this episode.</p>
+<p><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html#Keyboard-Macros\">Keyboard macros</a> are Emacs’ way of recording and playing back a series of keys. It’s a useful feature that many people don’t sufficiently use. The excellent <a href=\"http://emacsrocks.com/\">Emacs Rocks</a> series of screencasts has <a href=\"http://emacsrocks.com/e02.html\">some episodes</a> on clever macro usage to reduce the number of keys needed to perform some kind of task.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/10-episode-keyboard_macros.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/10-episode-keyboard_macros.mkv\">http://archive.org/download/EmacsMovies/10-episode-keyboard_macros.mkv</a>.</p>
+<h2>Topics covered</h2>
+<ol>
+<li><code>C-x (</code> and <code>C-x )</code> to start and stop recording macros. With prefix arguments <code>C-u</code> and <code>C-u C-u</code>, you can append to existing macros.</li>
+<li><code>C-x e</code> to replay macros. You can do this a number of times in one shot using prefix arguments. Also, the <code>apply-macro-to-region-lines</code> function to apply a macro to all lines in a region.</li>
+<li>The <code>C-x</code> <code>C-k</code> <code>C-i</code> chord to insert the macro counter while recording a macro. Modifying the macro counter using <code>C-x</code> <code>C-k</code> <code>C-a</code> and <code>C-x</code> <code>C-k</code> <code>C-c</code>.</li>
+<li>The <code>C-x</code> <code>q</code> command to stop while playing back a macro so that you can enter some text or make minor variations.</li>
+<li>The <code>C-x</code> <code>C-k</code> <code>n</code> to name the last macro and <code>C-x</code> <code>C-k</code> <code>b</code> to bind the last entered macro to a key. Finally, <code>insert-kbd-macro</code> to actually insert a macro as elisp into your current buffer so that you can save it for future use.</li>
+</ol>
+<p>The <code>F3</code> and <code>F4</code> keys offer a convenient combination of the basic macro record and playback functions.</p>
+<p><code>F3</code> stands for <code>kmacro-start-macro-or-insert-counter</code>. When it is hit the first time, the effect is the same as <code>C-x</code> <code>(</code> (i.e. start recording a macro). While this is going on, if it is hit again, it will work like you hit <code>C-x</code> <code>C-k</code> <code>C-i</code> (i.e. insert the macro counter).
+<code>F4</code> is bound to <code>kmacro-end-or-call-macro</code>. This will, if hit while a macro is being recorded, end the recording process. Here, it is similar to <code>C-x</code> <code>)</code>. If hit while a macro is not being recorded, it will work like <code>C-x</code> <code>e</code> and call the last recorded macro.</p>
+<p>Macros are a little expansive so I took some liberties filtering out some of the features that I thought were not that useful. These are</p>
+<ol>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Edit-Keyboard-Macro.html#Edit-Keyboard-Macro\">Editing macros</a>.</li>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macro-Step_002dEdit.html#Keyboard-Macro-Step_002dEdit\">Interactively editing macros</a></li>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macro-Ring.html#Keyboard-Macro-Ring\">The macro ring</a> which contains all the macros created so far.</li>
+</ol>
+<p>I might do another screencast describing these but the manual page is explanatory and the things which I have covered will suffice for day to day usage.</p>
+<h2>Futher reading</h2>
+<ol>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html#Keyboard-Macros\">The emacs manual page on macros</a></li>
+<li><a href=\"http://emacswiki.org\">The wiki</a> has <a href=\"http://emacswiki.org/emacs/KeyboardMacros\">a page</a> on macros that contains a lot of useful snippets and other little goodies that can improve your experience.</li>
+<li>Xah Lee has a <a href=\"http://ergoemacs.org/emacs/emacs_macro_example.html\">page on macros</a> with some practical examples that he uses.</li>
+<li>The <a href=\"http://emacsrocks.com/\">Emacs Rocks</a> series of screencasts has some nice examples of macro magic.</li>
+</ol>" "http://emacsmovies.org/blog/2012/09/17/keyboard_macros/" (20566 6824) new 6 nil nil ((guid nil "http://emacsmovies.org/blog/2012/09/17/keyboard_macros") (title ((type . "html")) "Keyboard macros") (link ((href . "http://emacsmovies.org/blog/2012/09/17/keyboard_macros/"))) (updated nil "2012-09-17T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/09/17/keyboard_macros") (content ((type . "html")) "<p>A little late but it&#8217;s finally up. We&#8217;re discussing keyboard macros in this episode.</p>
+
+<p><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html#Keyboard-Macros\">Keyboard macros</a> are Emacs&#8217; way of recording and playing back a series of keys. It&#8217;s a useful feature that many people don&#8217;t sufficiently use. The excellent <a href=\"http://emacsrocks.com/\">Emacs Rocks</a> series of screencasts has <a href=\"http://emacsrocks.com/e02.html\">some episodes</a> on clever macro usage to reduce the number of keys needed to perform some kind of task.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/10-episode-keyboard_macros.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/10-episode-keyboard_macros.mkv\">http://archive.org/download/EmacsMovies/10-episode-keyboard_macros.mkv</a>.</p>
+
+<h2>Topics covered</h2>
+
+<ol>
+<li><code>C-x (</code> and <code>C-x )</code> to start and stop recording macros. With prefix arguments <code>C-u</code> and <code>C-u C-u</code>, you can append to existing macros.</li>
+<li><code>C-x e</code> to replay macros. You can do this a number of times in one shot using prefix arguments. Also, the <code>apply-macro-to-region-lines</code> function to apply a macro to all lines in a region.</li>
+<li>The <code>C-x</code> <code>C-k</code> <code>C-i</code> chord to insert the macro counter while recording a macro. Modifying the macro counter using <code>C-x</code> <code>C-k</code> <code>C-a</code> and <code>C-x</code> <code>C-k</code> <code>C-c</code>.</li>
+<li>The <code>C-x</code> <code>q</code> command to stop while playing back a macro so that you can enter some text or make minor variations.</li>
+<li>The <code>C-x</code> <code>C-k</code> <code>n</code> to name the last macro and <code>C-x</code> <code>C-k</code> <code>b</code> to bind the last entered macro to a key. Finally, <code>insert-kbd-macro</code> to actually insert a macro as elisp into your current buffer so that you can save it for future use.</li>
+</ol>
+
+
+<p>The <code>F3</code> and <code>F4</code> keys offer a convenient combination of the basic macro record and playback functions.</p>
+
+<p><code>F3</code> stands for <code>kmacro-start-macro-or-insert-counter</code>. When it is hit the first time, the effect is the same as <code>C-x</code> <code>(</code> (i.e. start recording a macro). While this is going on, if it is hit again, it will work like you hit <code>C-x</code> <code>C-k</code> <code>C-i</code> (i.e. insert the macro counter).
+<code>F4</code> is bound to <code>kmacro-end-or-call-macro</code>. This will, if hit while a macro is being recorded, end the recording process. Here, it is similar to <code>C-x</code> <code>)</code>. If hit while a macro is not being recorded, it will work like <code>C-x</code> <code>e</code> and call the last recorded macro.</p>
+
+<p>Macros are a little expansive so I took some liberties filtering out some of the features that I thought were not that useful. These are</p>
+
+<ol>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Edit-Keyboard-Macro.html#Edit-Keyboard-Macro\">Editing macros</a>.</li>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macro-Step_002dEdit.html#Keyboard-Macro-Step_002dEdit\">Interactively editing macros</a></li>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macro-Ring.html#Keyboard-Macro-Ring\">The macro ring</a> which contains all the macros created so far.</li>
+</ol>
+
+
+<p>I might do another screencast describing these but the manual page is explanatory and the things which I have covered will suffice for day to day usage.</p>
+
+<h2>Futher reading</h2>
+
+<ol>
+<li><a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html#Keyboard-Macros\">The emacs manual page on macros</a></li>
+<li><a href=\"http://emacswiki.org\">The wiki</a> has <a href=\"http://emacswiki.org/emacs/KeyboardMacros\">a page</a> on macros that contains a lot of useful snippets and other little goodies that can improve your experience.</li>
+<li>Xah Lee has a <a href=\"http://ergoemacs.org/emacs/emacs_macro_example.html\">page on macros</a> with some practical examples that he uses.</li>
+<li>The <a href=\"http://emacsrocks.com/\">Emacs Rocks</a> series of screencasts has some nice examples of macro magic.</li>
+</ol>
+
+"))) ("Customisation Part 2" "<p>This is the second part of the customisation episode.</p>
+<p>This episode covers a little more elisp focusing on common things that people tweak in their init files.</p>
+<p>It’s a little longer than usual. I was feeling tired so I didn’t time myself like I usually do. Also, due to some screw up with my mic jack, there’s a crackling sound throughout the recording. It’s not <em>that</em> bad but it would be nice have gotten it without that. You can also hear me coughing once or twice. My apologies.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/08.2-episode-customisation-2.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/08.2-episode-customisation-2.mkv\">http://archive.org/download/EmacsMovies/08.2-episode-customisation-2.mkv</a>. This one is rather huge (302 MB or so). If it’s prohibitive, you can visit the <a href=\"http://archive.org/details/EmacsMovies\">archive details page</a> which has links to an mp4 and an ogg version that are much smaller.</p>
+<p>Here’s a summary of what is covered along with a few extras.</p>
+<ol>
+<li>Locations of the init files - <code>~/.emacs</code>, <code>~/.emacs.el</code>, <code>~/.emacs.d/init.el</code>.</li>
+<li><code>set-foreground-color</code> and <code>set-background-color</code> to change foreground and background.</li>
+<li><p>The <code>visible-bell</code> variable to control the method in which alarms are displayed. Following are a few extras.    You can get information on these and any other variables using the the <code>describe-variable</code> function.</p>
+<ul>
+<li><p><code>global-auto-revert-mode</code> which will watch visited files for
+changes and reload if necessary.</p></li>
+<li><p><code>require-final-newline</code> adds a newline to the end of a file
+automatically if it doesn’t have one when saving.</p></li>
+<li><p><code>debug-on-error</code> and <code>debug-on-quit</code> when the debugger should
+get invoked.</p></li>
+<li><p><code>inhibit-startup-message</code> will control whether the
+welcome message should be displayed on startup.</p></li>
+</ul>
+</li>
+<li><p>Some functions that are commonly seen in <code>.emacs</code> files are <code>tool-bar-mode</code>, <code>blink-cursor-mode</code> and <code>show-paren-mode</code>.</p></li>
+<li>Some functions which are defined in files that are not parts of Emacs need to be <code>require</code>d before they can be used. An example is <code>bar-cursor</code> which, on Debian, comes in the <code>emacs-goodies</code> package. It provides <code>bar-cursor-mode</code>.</li>
+<li>For files which you’ve downloaded yourself and not in the default load path, you can use <code>add-to-list</code> and add the directory to the <code>load-path</code> before requiring. We do this with a <code>rect-mark</code> file that we have.</li>
+<li>To associate file name patterns with major modes, you can add a tuple to <code>auto-mode-alist</code> using <code>add-to-list</code>. We do this for <code>markdown-mode</code>.</li>
+<li>We add global keybindings using <code>global-set-key</code>. We make bindings for <code>M-up</code> and <code>M-down</code>. We then create a custom command and bind it to <code>f7</code>.</li>
+<li>We also add mode specific keybindings using <code>define-key</code>.</li>
+<li>We add hooks to a major mode to trigger some actions when that mode is activated. We turn on <code>flyspell-mode</code> when we enter <code>markdown-mode</code> to demonstrate this.</li>
+<li>We talk about the customisation system using <code>M-x customize</code>.</li>
+</ol>
+<p>One extra thing that I’d like to mention is the <code>set-face-attribute</code> function which allows you to modify aspects of a “face”. A face is a font along with some other settings like colour, weight, size etc. that you can save and reuse. So, for example, there will be a <code>comment-face</code> used to syntax highlight all comments in the buffer. The following command will set the <code>height</code> attribute of the default face to <code>135</code>. This is a setting that essentially controls text size.</p>
+<pre><code>(set-face-attribute 'default nil :height 135)
+</code></pre>
+<p>That’s essentially it. Feedback welcome.</p>" "http://emacsmovies.org/blog/2012/08/25/customisation_part_2/" (20535 51240) new 7 nil nil ((guid nil "http://emacsmovies.org/blog/2012/08/25/customisation_part_2") (title ((type . "html")) "Customisation Part 2") (link ((href . "http://emacsmovies.org/blog/2012/08/25/customisation_part_2/"))) (updated nil "2012-08-25T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/08/25/customisation_part_2") (content ((type . "html")) "<p>This is the second part of the customisation episode.</p>
+
+<p>This episode covers a little more elisp focusing on common things that people tweak in their init files.</p>
+
+<p>It&#8217;s a little longer than usual. I was feeling tired so I didn&#8217;t time myself like I usually do. Also, due to some screw up with my mic jack, there&#8217;s a crackling sound throughout the recording. It&#8217;s not <em>that</em> bad but it would be nice have gotten it without that. You can also hear me coughing once or twice. My apologies.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/08.2-episode-customisation-2.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/08.2-episode-customisation-2.mkv\">http://archive.org/download/EmacsMovies/08.2-episode-customisation-2.mkv</a>. This one is rather huge (302 MB or so). If it&#8217;s prohibitive, you can visit the <a href=\"http://archive.org/details/EmacsMovies\">archive details page</a> which has links to an mp4 and an ogg version that are much smaller.</p>
+
+<p>Here&#8217;s a summary of what is covered along with a few extras.</p>
+
+<ol>
+<li>Locations of the init files - <code>~/.emacs</code>, <code>~/.emacs.el</code>, <code>~/.emacs.d/init.el</code>.</li>
+<li><code>set-foreground-color</code> and <code>set-background-color</code> to change foreground and background.</li>
+<li><p>The <code>visible-bell</code> variable to control the method in which alarms are displayed. Following are a few extras.    You can get information on these and any other variables using the the <code>describe-variable</code> function.</p>
+
+<ul>
+<li><p><code>global-auto-revert-mode</code> which will watch visited files for
+changes and reload if necessary.</p></li>
+<li><p><code>require-final-newline</code> adds a newline to the end of a file
+automatically if it doesn&#8217;t have one when saving.</p></li>
+<li><p><code>debug-on-error</code> and <code>debug-on-quit</code> when the debugger should
+get invoked.</p></li>
+<li><p><code>inhibit-startup-message</code> will control whether the
+welcome message should be displayed on startup.</p></li>
+</ul>
+</li>
+<li><p>Some functions that are commonly seen in <code>.emacs</code> files are <code>tool-bar-mode</code>, <code>blink-cursor-mode</code> and <code>show-paren-mode</code>.</p></li>
+<li>Some functions which are defined in files that are not parts of Emacs need to be <code>require</code>d before they can be used. An example is <code>bar-cursor</code> which, on Debian, comes in the <code>emacs-goodies</code> package. It provides <code>bar-cursor-mode</code>.</li>
+<li>For files which you&#8217;ve downloaded yourself and not in the default load path, you can use <code>add-to-list</code> and add the directory to the <code>load-path</code> before requiring. We do this with a <code>rect-mark</code> file that we have.</li>
+<li>To associate file name patterns with major modes, you can add a tuple to <code>auto-mode-alist</code> using <code>add-to-list</code>. We do this for <code>markdown-mode</code>.</li>
+<li>We add global keybindings using <code>global-set-key</code>. We make bindings for <code>M-up</code> and <code>M-down</code>. We then create a custom command and bind it to <code>f7</code>.</li>
+<li>We also add mode specific keybindings using <code>define-key</code>.</li>
+<li>We add hooks to a major mode to trigger some actions when that mode is activated. We turn on <code>flyspell-mode</code> when we enter <code>markdown-mode</code> to demonstrate this.</li>
+<li>We talk about the customisation system using <code>M-x customize</code>.</li>
+</ol>
+
+
+<p>One extra thing that I&#8217;d like to mention is the <code>set-face-attribute</code> function which allows you to modify aspects of a &#8220;face&#8221;. A face is a font along with some other settings like colour, weight, size etc. that you can save and reuse. So, for example, there will be a <code>comment-face</code> used to syntax highlight all comments in the buffer. The following command will set the <code>height</code> attribute of the default face to <code>135</code>. This is a setting that essentially controls text size.</p>
+
+<pre><code>(set-face-attribute 'default nil :height 135)
+</code></pre>
+
+<p>That&#8217;s essentially it. Feedback welcome.</p>
+"))) ("Customisation Part 1" "<p>This is the first of a two part episode that discusses how to do basic customisation of Emacs.</p>
+<p>This episode covers some basic <a href=\"https://en.wikipedia.org/wiki/Emacs_Lisp\">elisp</a> which is the language that you can extend and modify Emacs with.</p>
+<p>I do have an entire section dedicated to teaching Emacs lisp. This is a quick intro solely for the purpose of doing basic customisations.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/08.1-episode-customisation-1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/08.1-episode-customisation-1.mkv\">http://archive.org/download/EmacsMovies/08.1-episode-customisation-1.mkv</a>.</p>
+<p>The main things which are covered are</p>
+<ol>
+<li>A super fast overview of elisp - <a href=\"https://en.wikipedia.org/wiki/S-expression\">sexp</a>s and prefix notation.</li>
+<li><code>C-x C-e</code> and <code>C-j</code> to evaluate sexps.</li>
+<li>Simple expressions like <code>(+ 2 2 )</code></li>
+<li>The <code>'</code> operator.</li>
+<li>Assigning values to symbols using <code>set</code> and <code>setq</code>.</li>
+<li>Executing simple functions like <code>set-background-color</code>.</li>
+<li>Changing the value of variables like <code>line-spacing</code>.</li>
+<li>Writing simple functions.</li>
+<li>Using <code>C-h f</code> and <code>C-h v</code> to get documentation on functions and variables.</li>
+</ol>
+<h2>Further reading</h2>
+<ul>
+<li>Steve Yegges <a href=\"http://steve-yegge.blogspot.in/2008/01/emergency-elisp.html\">Emergency Elisp</a> is a quick primer for those who want to learn useful basics.</li>
+<li>Xah Lee’s <a href=\"http://ergoemacs.org/emacs/elisp.html\">Emacs lisp tutorial</a> is another more detailed tutorial for the language.</li>
+<li>The official Gnu <a href=\"http://www.gnu.org/software/emacs/emacs-lisp-intro/html_node/index.html\">An Introduction to Programming in Emacs Lisp</a> is an elisp tutorial for non programmers.</li>
+<li>The official <a href=\"http://www.gnu.org/software/emacs/manual/html_node/elisp/index.html\">Emacs lisp reference</a> is more thorough guide which is not very useful as a tutorial but handy to have around when you’re actually coding in elisp.</li>
+</ul>" "http://emacsmovies.org/blog/2012/08/05/customisation_part_1/" (20509 27176) new 8 nil nil ((guid nil "http://emacsmovies.org/blog/2012/08/05/customisation_part_1") (title ((type . "html")) "Customisation Part 1") (link ((href . "http://emacsmovies.org/blog/2012/08/05/customisation_part_1/"))) (updated nil "2012-08-05T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/08/05/customisation_part_1") (content ((type . "html")) "<p>This is the first of a two part episode that discusses how to do basic customisation of Emacs.</p>
+
+<p>This episode covers some basic <a href=\"https://en.wikipedia.org/wiki/Emacs_Lisp\">elisp</a> which is the language that you can extend and modify Emacs with.</p>
+
+<p>I do have an entire section dedicated to teaching Emacs lisp. This is a quick intro solely for the purpose of doing basic customisations.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/08.1-episode-customisation-1.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/08.1-episode-customisation-1.mkv\">http://archive.org/download/EmacsMovies/08.1-episode-customisation-1.mkv</a>.</p>
+
+<p>The main things which are covered are</p>
+
+<ol>
+<li>A super fast overview of elisp - <a href=\"https://en.wikipedia.org/wiki/S-expression\">sexp</a>s and prefix notation.</li>
+<li><code>C-x C-e</code> and <code>C-j</code> to evaluate sexps.</li>
+<li>Simple expressions like <code>(+ 2 2 )</code></li>
+<li>The <code>'</code> operator.</li>
+<li>Assigning values to symbols using <code>set</code> and <code>setq</code>.</li>
+<li>Executing simple functions like <code>set-background-color</code>.</li>
+<li>Changing the value of variables like <code>line-spacing</code>.</li>
+<li>Writing simple functions.</li>
+<li>Using <code>C-h f</code> and <code>C-h v</code> to get documentation on functions and variables.</li>
+</ol>
+
+
+<h2>Further reading</h2>
+
+<ul>
+<li>Steve Yegges <a href=\"http://steve-yegge.blogspot.in/2008/01/emergency-elisp.html\">Emergency Elisp</a> is a quick primer for those who want to learn useful basics.</li>
+<li>Xah Lee&#8217;s <a href=\"http://ergoemacs.org/emacs/elisp.html\">Emacs lisp tutorial</a> is another more detailed tutorial for the language.</li>
+<li>The official Gnu <a href=\"http://www.gnu.org/software/emacs/emacs-lisp-intro/html_node/index.html\">An Introduction to Programming in Emacs Lisp</a> is an elisp tutorial for non programmers.</li>
+<li>The official <a href=\"http://www.gnu.org/software/emacs/manual/html_node/elisp/index.html\">Emacs lisp reference</a> is more thorough guide which is not very useful as a tutorial but handy to have around when you&#8217;re actually coding in elisp.</li>
+</ul>
+
+"))) ("Minor modes" "<p>This episode talks about minor modes and shows a few of the commonly used ones.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/07-episode-minor-modes.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/07-episode-minor-modes.mkv\">http://archive.org/download/EmacsMovies/07-episode-minor-modes.mkv</a>. (This is uploading as I write this post and for a while will be a broken link).</p>
+<p><a href=\"mailto:noufal@emacsmovies.org\">Feedback welcome</a>.</p>" "http://emacsmovies.org/blog/2012/07/14/minor_modes/" (20480 26920) new 9 nil nil ((guid nil "http://emacsmovies.org/blog/2012/07/14/minor_modes") (title ((type . "html")) "Minor modes") (link ((href . "http://emacsmovies.org/blog/2012/07/14/minor_modes/"))) (updated nil "2012-07-14T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/07/14/minor_modes") (content ((type . "html")) "<p>This episode talks about minor modes and shows a few of the commonly used ones.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/07-episode-minor-modes.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/07-episode-minor-modes.mkv\">http://archive.org/download/EmacsMovies/07-episode-minor-modes.mkv</a>. (This is uploading as I write this post and for a while will be a broken link).</p>
+
+<p><a href=\"mailto:noufal@emacsmovies.org\">Feedback welcome</a>.</p>
+"))) ("Topics for the first section" "<p>These are the topics I’m planning to cover in the first <em>section</em>. I’m posting this up to solicit feedback on content as well as order</p>
+<ol>
+<li>Registers and bookmarks</li>
+<li>A bunch of minor modes (auto-fill, flyspell etc.)</li>
+<li>Basic customisation (probably a multi part episode)
+<ul>
+<li>Very basic elisp.</li>
+<li>Simple settings like colours, font size etc.</li>
+<li>Minor modes</li>
+<li>Mode hooks</li>
+<li>Key bindings</li>
+<li>The <code>customize</code> system</li>
+<li>Organising your <code>.emacs</code> file.</li>
+</ul>
+</li>
+<li>Keyboard macros</li>
+</ol>
+<p>I think this should cover it. I might make changes based on how the episodes turn out but this sounds like a decent starting point.</p>
+<p>The other three sections will cover applications like <code>dired</code> etc., programming modes and utilities and finally, elisp. I’ll worry about those when I get there.</p>
+<p>This is a call for feedback so please let me know.</p>" "http://emacsmovies.org/blog/2012/07/08/topics_for_the_first_section/" (20472 32808) new 10 nil nil ((guid nil "http://emacsmovies.org/blog/2012/07/08/topics_for_the_first_section") (title ((type . "html")) "Topics for the first section") (link ((href . "http://emacsmovies.org/blog/2012/07/08/topics_for_the_first_section/"))) (updated nil "2012-07-08T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/07/08/topics_for_the_first_section") (content ((type . "html")) "<p>These are the topics I&#8217;m planning to cover in the first <em>section</em>. I&#8217;m posting this up to solicit feedback on content as well as order</p>
+
+<ol>
+<li>Registers and bookmarks</li>
+<li>A bunch of minor modes (auto-fill, flyspell etc.)</li>
+<li>Basic customisation (probably a multi part episode)
+
+<ul>
+<li>Very basic elisp.</li>
+<li>Simple settings like colours, font size etc.</li>
+<li>Minor modes</li>
+<li>Mode hooks</li>
+<li>Key bindings</li>
+<li>The <code>customize</code> system</li>
+<li>Organising your <code>.emacs</code> file.</li>
+</ul>
+</li>
+<li>Keyboard macros</li>
+</ol>
+
+
+<p>I think this should cover it. I might make changes based on how the episodes turn out but this sounds like a decent starting point.</p>
+
+<p>The other three sections will cover applications like <code>dired</code> etc., programming modes and utilities and finally, elisp. I&#8217;ll worry about those when I get there.</p>
+
+<p>This is a call for feedback so please let me know.</p>
+"))) ("Registers and bookmarks" "<p>This episode describes Emacs registers and bookmarks. How to use and manipulate them.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/06-episode-registers-and-bookmarks.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/06-episode-registers-and-bookmarks.mkv\">http://archive.org/download/EmacsMovies/06-episode-registers-and-bookmarks.mkv</a>. (This is uploading as I write this post and for a while will be a broken link).</p>
+<p>Feedback welcome.</p>" "http://emacsmovies.org/blog/2012/07/08/registers_and_bookmarks/" (20472 32808) new 11 nil nil ((guid nil "http://emacsmovies.org/blog/2012/07/08/registers_and_bookmarks") (title ((type . "html")) "Registers and bookmarks") (link ((href . "http://emacsmovies.org/blog/2012/07/08/registers_and_bookmarks/"))) (updated nil "2012-07-08T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/07/08/registers_and_bookmarks") (content ((type . "html")) "<p>This episode describes Emacs registers and bookmarks. How to use and manipulate them.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/06-episode-registers-and-bookmarks.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/06-episode-registers-and-bookmarks.mkv\">http://archive.org/download/EmacsMovies/06-episode-registers-and-bookmarks.mkv</a>. (This is uploading as I write this post and for a while will be a broken link).</p>
+
+<p>Feedback welcome.</p>
+"))) ("Buffers" "<p>This episode describes buffers and how to use them.</p>
+<p>I’m sorry about the gap but my real life got a little hectic and I had to take a couple of weeks off.</p>
+<p>I’ve also changed the video bitrate for the mkv file to something much lesser. I can’t see a video quality degradation but the file size is much smaller now. Do let me know if you experience any problems.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/05-episode-buffers.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/05-episode-buffers.mkv\">http://archive.org/download/EmacsMovies/05-episode-buffers.mkv</a>.</p>
+<p>Feedback, as always, is welcome.</p>" "http://emacsmovies.org/blog/2012/06/24/buffers/" (20454 2856) new 12 nil nil ((guid nil "http://emacsmovies.org/blog/2012/06/24/buffers") (title ((type . "html")) "Buffers") (link ((href . "http://emacsmovies.org/blog/2012/06/24/buffers/"))) (updated nil "2012-06-24T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/06/24/buffers") (content ((type . "html")) "<p>This episode describes buffers and how to use them.</p>
+
+<p>I&#8217;m sorry about the gap but my real life got a little hectic and I had to take a couple of weeks off.</p>
+
+<p>I&#8217;ve also changed the video bitrate for the mkv file to something much lesser. I can&#8217;t see a video quality degradation but the file size is much smaller now. Do let me know if you experience any problems.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/05-episode-buffers.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/05-episode-buffers.mkv\">http://archive.org/download/EmacsMovies/05-episode-buffers.mkv</a>.</p>
+
+<p>Feedback, as always, is welcome.</p>
+"))) ("The region" "<p>This post discusses the <code>region</code>, the <code>point</code>, the <code>mark</code> and related matters. It generally deals with the business of cutting and pasting within Emacs. It’s a little longer than the others and a little less structured but I think the future screencasts are going to be that way anyway.</p>
+<p>The video sizes are unnaturally huge this time. I’ll probably scale them down from now.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/04-episode-region.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/04-episode-region.mkv\">http://archive.org/download/EmacsMovies/04-episode-region.mkv</a>.</p>
+<p>Comments and feedback are, as always, welcome.</p>" "http://emacsmovies.org/blog/2012/05/01/the_region/" (20382 55848) new 13 nil nil ((guid nil "http://emacsmovies.org/blog/2012/05/01/the_region") (title ((type . "html")) "The region") (link ((href . "http://emacsmovies.org/blog/2012/05/01/the_region/"))) (updated nil "2012-05-01T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/05/01/the_region") (content ((type . "html")) "<p>This post discusses the <code>region</code>, the <code>point</code>, the <code>mark</code> and related matters. It generally deals with the business of cutting and pasting within Emacs. It&#8217;s a little longer than the others and a little less structured but I think the future screencasts are going to be that way anyway.</p>
+
+<p>The video sizes are unnaturally huge this time. I&#8217;ll probably scale them down from now.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/04-episode-region.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/04-episode-region.mkv\">http://archive.org/download/EmacsMovies/04-episode-region.mkv</a>.</p>
+
+<p>Comments and feedback are, as always, welcome.</p>
+"))) ("Editing" "<p>Today’s screencast is on editing. We discuss basic editing as well as a handful of commands that allow you to manipulate text efficiently.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/03-episode-editing.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/03-episode-editing.mkv\">http://archive.org/download/EmacsMovies/03-episode-editing.mkv</a>.</p>
+<p>This is the <a href=\"http://emacsmovies.org/assets/douglass2.txt\">sample file</a> which I used for the presentation.</p>
+<p><em>Update:</em> There are two more keys which I wanted to mention but missed. The first is <code>C-backspace</code> which deletes the previous word. It is like <code>backspace</code> but for the previous word. The other is the numeric prefix command which we saw in the navigation video. If you want to, for example, draw a line of <code>-</code> signs, you can type <code>M-40 -</code> and Emacs will repeat the insertion of <code>-</code> 40 times creating a line.</p>" "http://emacsmovies.org/blog/2012/04/23/editing/" (20372 20008) new 14 nil nil ((guid nil "http://emacsmovies.org/blog/2012/04/23/editing") (title ((type . "html")) "Editing") (link ((href . "http://emacsmovies.org/blog/2012/04/23/editing/"))) (updated nil "2012-04-23T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/04/23/editing") (content ((type . "html")) "<p>Today&#8217;s screencast is on editing. We discuss basic editing as well as a handful of commands that allow you to manipulate text efficiently.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/03-episode-editing.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/03-episode-editing.mkv\">http://archive.org/download/EmacsMovies/03-episode-editing.mkv</a>.</p>
+
+<p>This is the <a href=\"http://emacsmovies.org/assets/douglass2.txt\">sample file</a> which I used for the presentation.</p>
+
+<p><em>Update:</em> There are two more keys which I wanted to mention but missed. The first is <code>C-backspace</code> which deletes the previous word. It is like <code>backspace</code> but for the previous word. The other is the numeric prefix command which we saw in the navigation video. If you want to, for example, draw a line of <code>-</code> signs, you can type <code>M-40 -</code> and Emacs will repeat the insertion of <code>-</code> 40 times creating a line.</p>
+"))) ("Book updates" "<p>My original plan was to put out one chapter of the companion book I’m writing for this series along with each screencast but I don’t think that’s realistic anymore. Firstly, they don’t map very well. A chapter covering a 10 minute screencast will be too small to be a respectable chapter. Multiple screencasts might be the subject of a single chapter. Secondly, it’s a lot more effort writing chapters than making screencasts (which is not as easy as I was led to believe either).</p>
+<p>Either way, I won’t be putting up book chapters along with each screencast. It’ll mess up my schedule and I won’t be able to deliver. I’ll try to keep one screencast coming every week and when I feel that a logical point has been reached, I’ll take a week off, write up a chapter and put it out.</p>
+<p>As always, if you have any feedback, please email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a> or tweet to @emacsmovies.</p>
+<p>Thank you.</p>" "http://emacsmovies.org/blog/2012/04/16/book_updates/" (20363 5032) new 15 nil nil ((guid nil "http://emacsmovies.org/blog/2012/04/16/book_updates") (title ((type . "html")) "Book updates") (link ((href . "http://emacsmovies.org/blog/2012/04/16/book_updates/"))) (updated nil "2012-04-16T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/04/16/book_updates") (content ((type . "html")) "<p>My original plan was to put out one chapter of the companion book I&#8217;m writing for this series along with each screencast but I don&#8217;t think that&#8217;s realistic anymore. Firstly, they don&#8217;t map very well. A chapter covering a 10 minute screencast will be too small to be a respectable chapter. Multiple screencasts might be the subject of a single chapter. Secondly, it&#8217;s a lot more effort writing chapters than making screencasts (which is not as easy as I was led to believe either).</p>
+
+<p>Either way, I won&#8217;t be putting up book chapters along with each screencast. It&#8217;ll mess up my schedule and I won&#8217;t be able to deliver. I&#8217;ll try to keep one screencast coming every week and when I feel that a logical point has been reached, I&#8217;ll take a week off, write up a chapter and put it out.</p>
+
+<p>As always, if you have any feedback, please email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a> or tweet to @emacsmovies.</p>
+
+<p>Thank you.</p>
+"))) ("Navigation" "<p>This episode shows basic keyboard navigation in Emacs. The commands discussed here and the ones people use to move around in the editor. There are more advanced ones used in special contexts like finding definitions of functions etc. but those are valid only in specific circumstances. The commands discussed here are the basics.</p>
+<p>I’ve changed the <code>showkeys</code> program to make the font a little larger and more prominent. A few people complained about how it wasn’t visible the last time.</p>
+<p>I’ve included a link to a version of the video encoded using an h.264 video and vorbis audio codec inside a matroska container. I did this to make the file display properly on iOS devices. Please let me know if it works. The embedded video might not since the player doesn’t support the format but the link below the embedded player should get you the h.264 video directly and that should work on iOS devices.</p>
+<p>Finally, the delay in uploading was because the VM on which I was creating the screencasts for some reason started creating choppy video. It looked like it was because it wasn’t powerful enough so I moved to a bare metal machine and the quality improved.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/02-episode-navigation.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/02-episode-navigation.mkv\">http://archive.org/download/EmacsMovies/02-episode-navigation.mkv</a>.</p>
+<p>This is the <a href=\"http://emacsmovies.org/assets/douglass.txt\">sample file</a> which I used for the presentation.</p>" "http://emacsmovies.org/blog/2012/04/15/navigation/" (20361 49704) new 16 nil nil ((guid nil "http://emacsmovies.org/blog/2012/04/15/navigation") (title ((type . "html")) "Navigation") (link ((href . "http://emacsmovies.org/blog/2012/04/15/navigation/"))) (updated nil "2012-04-15T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/04/15/navigation") (content ((type . "html")) "<p>This episode shows basic keyboard navigation in Emacs. The commands discussed here and the ones people use to move around in the editor. There are more advanced ones used in special contexts like finding definitions of functions etc. but those are valid only in specific circumstances. The commands discussed here are the basics.</p>
+
+<p>I&#8217;ve changed the <code>showkeys</code> program to make the font a little larger and more prominent. A few people complained about how it wasn&#8217;t visible the last time.</p>
+
+<p>I&#8217;ve included a link to a version of the video encoded using an h.264 video and vorbis audio codec inside a matroska container. I did this to make the file display properly on iOS devices. Please let me know if it works. The embedded video might not since the player doesn&#8217;t support the format but the link below the embedded player should get you the h.264 video directly and that should work on iOS devices.</p>
+
+<p>Finally, the delay in uploading was because the VM on which I was creating the screencasts for some reason started creating choppy video. It looked like it was because it wasn&#8217;t powerful enough so I moved to a bare metal machine and the quality improved.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/02-episode-navigation.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>The H.264 version of the video for iOS devices is at <a href=\"http://archive.org/download/EmacsMovies/02-episode-navigation.mkv\">http://archive.org/download/EmacsMovies/02-episode-navigation.mkv</a>.</p>
+
+<p>This is the <a href=\"http://emacsmovies.org/assets/douglass.txt\">sample file</a> which I used for the presentation.</p>
+"))) ("Terminology" "<p>This is a screencast that introduces the basics of the editor and talks about the special meanings of terms like “window”, “frame” etc. that are often used in Emacs.</p>
+<p>It’s the first one which I’ve done so feedback is welcome. Please email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a> or tweet to <a href=\"http://twitter.com/emacsmovies\">@emacsmovies</a> to let me know what you think.</p>
+<iframe src=\"http://archive.org/embed/EmacsMovies/01-episode-terminology.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+<p>Enjoy!</p>
+<p>(P.S.: I will post the link to the relevant chapter in the companion book as soon as I’m done with it. A day or two at the most).</p>
+<p><strong>Update: </strong> The relevant chapter of the book is at <a href=\"http://emacsmovies.org/book/25_ch_terminology.html\">book/25_ch_terminology.html</a>.</p>" "http://emacsmovies.org/blog/2012/03/24/terminology/" (20332 49448) new 17 nil nil ((guid nil "http://emacsmovies.org/blog/2012/03/24/terminology") (title ((type . "html")) "Terminology") (link ((href . "http://emacsmovies.org/blog/2012/03/24/terminology/"))) (updated nil "2012-03-24T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/03/24/terminology") (content ((type . "html")) "<p>This is a screencast that introduces the basics of the editor and talks about the special meanings of terms like &#8220;window&#8221;, &#8220;frame&#8221; etc. that are often used in Emacs.</p>
+
+<p>It&#8217;s the first one which I&#8217;ve done so feedback is welcome. Please email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a> or tweet to <a href=\"http://twitter.com/emacsmovies\">@emacsmovies</a> to let me know what you think.</p>
+
+<iframe src=\"http://archive.org/embed/EmacsMovies/01-episode-terminology.webm\" width=\"640\" height=\"480\" frameborder=\"0\"></iframe>
+
+
+<p>Enjoy!</p>
+
+<p>(P.S.: I will post the link to the relevant chapter in the companion book as soon as I&#8217;m done with it. A day or two at the most).</p>
+
+<p><strong>Update: </strong> The relevant chapter of the book is at <a href=\"http://emacsmovies.org/book/25_ch_terminology.html\">book/25_ch_terminology.html</a>.</p>
+"))) ("Companion book" "<p>I’m working on a book that should serve the same purpose as this series of screencasts but for an audience that prefers reading rather than watching screencasts.</p>
+<p>This whole project is as much for my own education as it is to spread the word. It is also a “work in progress”. Once I upload a video, it’s unlikely that I’ll “fix” any mistakes in it. I’ll update errata in the blog post but will not redo the video. However, the book will undergo changes repeatedly till I’m satisfied. I also hope that the quality of the videos will improve over time.</p>
+<p>The book is tentatively titles “Emacs : A programmers editor” and my plan is to break it down into four parts.</p>
+<p>Part 1 will dvelve on basics like terminology, navigation, basic customisation etc. Part 2 on “applications” which are things which you can use Emacs for like keeping your diary, editing directories, as a PIM, as a shell etc. Part 3 is going to be where I talk about programmers and things which benefit them. I’ll dive into a few of the popular major modes and also into things like version control integration etc. Finally, part 4 is going to focus on elisp and how to make Emacs do your bidding.</p>
+<p>I haven’t finalised where and how I’m going to release or put up the book. Right now, my plan is to put the book in the <a href=\"http://emacsmovies.org/book\">/book</a> subdirectory with some kind of an index but this is tentative so don’t rely on the URLs being permanent.</p>
+<p>With that, <a href=\"http://emacsmovies.org/book/10_intro-chapter.html\">here</a> is the introductory chapter.</p>
+<p>Feedback is welcome and you can email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a>.</p>" "http://emacsmovies.org/blog/2012/03/24/companion_book/" (20332 49448) new 18 nil nil ((guid nil "http://emacsmovies.org/blog/2012/03/24/companion_book") (title ((type . "html")) "Companion book") (link ((href . "http://emacsmovies.org/blog/2012/03/24/companion_book/"))) (updated nil "2012-03-24T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/03/24/companion_book") (content ((type . "html")) "<p>I&#8217;m working on a book that should serve the same purpose as this series of screencasts but for an audience that prefers reading rather than watching screencasts.</p>
+
+<p>This whole project is as much for my own education as it is to spread the word. It is also a &#8220;work in progress&#8221;. Once I upload a video, it&#8217;s unlikely that I&#8217;ll &#8220;fix&#8221; any mistakes in it. I&#8217;ll update errata in the blog post but will not redo the video. However, the book will undergo changes repeatedly till I&#8217;m satisfied. I also hope that the quality of the videos will improve over time.</p>
+
+<p>The book is tentatively titles &#8220;Emacs : A programmers editor&#8221; and my plan is to break it down into four parts.</p>
+
+<p>Part 1 will dvelve on basics like terminology, navigation, basic customisation etc. Part 2 on &#8220;applications&#8221; which are things which you can use Emacs for like keeping your diary, editing directories, as a PIM, as a shell etc. Part 3 is going to be where I talk about programmers and things which benefit them. I&#8217;ll dive into a few of the popular major modes and also into things like version control integration etc. Finally, part 4 is going to focus on elisp and how to make Emacs do your bidding.</p>
+
+<p>I haven&#8217;t finalised where and how I&#8217;m going to release or put up the book. Right now, my plan is to put the book in the <a href=\"http://emacsmovies.org/book\">/book</a> subdirectory with some kind of an index but this is tentative so don&#8217;t rely on the URLs being permanent.</p>
+
+<p>With that, <a href=\"http://emacsmovies.org/book/10_intro-chapter.html\">here</a> is the introductory chapter.</p>
+
+<p>Feedback is welcome and you can email me at <a href=\"mailto:noufal@emacsmovies.org\">noufal@emacsmovies.org</a>.</p>
+"))) ("Welcome to emacsmovies.org" "<p>Welcome to Emacs Movies.</p>
+<p>This is a blog where I plan to post screencasts to teach people how to use the programmers editor <a href=\"http://www.gnu.org/software/emacs/\">Gnu Emacs</a>.</p>
+<h2>Production workflow</h2>
+<p>The videos are recorded by me and then encoded and uploaded. I’m not doing any editing and so small mistakes will be left in there. I do plan to make a script and do a trial run before recording the final version so there’s some “pre editing”.</p>
+<p>I use this makefile to automate the entire process</p>
+<script src=\"https://gist.github.com/2466292.js?file=gistfile1.mak\"></script>
+<p>I use something like <code>make number=01 name=introduction</code> to create <code>01-episode-introduction.mkv</code> and <code>01-episode-introduction.webm</code>. The former is for ios devices and the latter for streaming. Make is surprisingly efficient for this since it can resume if things are interrupted and can automatically do things in parallel if a <code>-j</code> is passed. For example, it will transcode the <code>webm</code> and <code>mkv</code> files as two processes if I ask it to. Once that’s done and I’m happy, I do a <code>make number=01 name=introduction upload</code> and the generated files are uploaded to the archives web servers using its implementation of the Amazon S3 API. This allows the whole flow to be non-interactive and smooth. I’m not much of a GUI man and prefer to have things run in a console.</p>
+<p>These files are uploaded to the internet archive in the <a href=\"http://www.archive.org/details/EmacsMovies\">EmacsMovies collection</a>. I prefer using the archive to other video hosting websites because they allow you to download the original files directly. Also, their mission to preserve data for ever rather than to make money off user generated content appeals to me.</p>
+<h2>Software used</h2>
+<p>I’ve already mentioned <a href=\"http://ffmpeg.org\">ffmpeg</a> in the workflow.</p>
+<p>During the recording, I use my <a href=\"https://github.com/nibrahim/showkeys\">showkeys</a> application to display keystrokes on the side. I didn’t use this instead of more mature programs like <a href=\"http://code.google.com/p/key-mon/\">key-mon</a> for a <a href=\"http://nibrahim.net.in/2011/11/30/showkeys.html\">number of reasons</a>.</p>
+<p>The blog is generated using <a href=\"http://octopress.org/\">Octopress</a> which is a set of plugins and spiffy templates for the <a href=\"http://jekyllrb.com/\">jekyll</a> static blog generator. I use my own emacs mode <a href=\"https://github.com/nibrahim/Hyde\">hyde.el</a> to maintain the blog. It is maintained on github at <a href=\"https://github.com/nibrahim/emacsmovies.org\">https://github.com/nibrahim/emacsmovies.org</a>. The emacsmovies.org website is hosted currently on <a href=\"http://hcoop.net/\">the Internet hosting cooperative</a>.</p>
+<p>I’m mentioning all this so that people can offer suggestions on how to improve the workflow.</p>
+<p>On a side note, I’m a Python developer in my day job and I wanted to do this entire project without using Python at all and I was able to.</p>
+<h2>Long term plans</h2>
+<blockquote>
+<p>Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)</p>
+<footer>delYsid on #emacs</footer>
+</blockquote>
+<p>It is definitely not possible to cover <em>all</em> of Emacs. My plan as of now is to start off with a few screencasts on basic editing and navigation. After this, a few on basic customisation. Then I plan to do emacs “applications” (e.g. dired, Gnus, org-mode) etc. I’ll probably loosely structure it around the <a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/index.html\">emacs manual</a>.</p>
+<p>I had a conversation with Zed Shaw about his <a href=\"http://learncodethehardway.org/\">learn code the hard way</a> series of books and video tutorials. He suggested that I supplement the screencasts with a book and I’ve started work on that too. Right now, my feeling is that each screencast will be the contents of one chapter condensed. I hope to keep all the screencasts under 15 minutes long each.</p>
+<p>I hope to do at least one a month. If you have any comments or suggestions, please email me - <code>noufal at emacsmovies.org</code>.</p>
+<h2>Support and feedback</h2>
+<p>For any fixes in the software mentioned above or corrections on the website, please use the <a href=\"https://github.com/nibrahim/emacsmovies.org/issues\">github issue tracker</a>. If you’re interested in doing a screencast for the website, please email me at <code>noufal at emacsmovies.org</code> and we can work something out.</p>
+<h2>Licensing</h2>
+<p>All the software which I’ve written to make this possible are released under the GNU GPL version 3.</p>
+<p>The actual videos are licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>
+<p>I will occasionally link to videos created by other people. These are owned by the people who made them and are might have different licensing terms.</p>
+<h2>Following emacsmovies.org</h2>
+<p>I have a twitter account setup for this website. You can follow <a href=\"https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A4000%2F&region=follow_link&screen_name=emacsmovies&source=followbutton&variant=2.0\">@emacsmovies</a> on twitter to stay up to date or subscribe to the <a href=\"http://emacsmovies.org/atom.xml\">atom feed</a>.</p>" "http://emacsmovies.org/blog/2012/01/21/welcome_to_emacsmovies.org/" (20249 45736) new 19 nil nil ((guid nil "http://emacsmovies.org/blog/2012/01/21/welcome_to_emacsmovies.org") (title ((type . "html")) "Welcome to emacsmovies.org") (link ((href . "http://emacsmovies.org/blog/2012/01/21/welcome_to_emacsmovies.org/"))) (updated nil "2012-01-21T00:00:00+05:30") (id nil "http://emacsmovies.org/blog/2012/01/21/welcome_to_emacsmovies.org") (content ((type . "html")) "<p>Welcome to Emacs Movies.</p>
+
+<p>This is a blog where I plan to post screencasts to teach people how to use the programmers editor <a href=\"http://www.gnu.org/software/emacs/\">Gnu Emacs</a>.</p>
+
+<h2>Production workflow</h2>
+
+<p>The videos are recorded by me and then encoded and uploaded. I&#8217;m not doing any editing and so small mistakes will be left in there. I do plan to make a script and do a trial run before recording the final version so there&#8217;s some &#8220;pre editing&#8221;.</p>
+
+<p>I use this makefile to automate the entire process</p>
+
+<script src=\"https://gist.github.com/2466292.js?file=gistfile1.mak\"></script>
+
+
+<p>I use something like <code>make number=01 name=introduction</code> to create <code>01-episode-introduction.mkv</code> and <code>01-episode-introduction.webm</code>. The former is for ios devices and the latter for streaming. Make is surprisingly efficient for this since it can resume if things are interrupted and can automatically do things in parallel if a <code>-j</code> is passed. For example, it will transcode the <code>webm</code> and <code>mkv</code> files as two processes if I ask it to. Once that&#8217;s done and I&#8217;m happy, I do a <code>make number=01 name=introduction upload</code> and the generated files are uploaded to the archives web servers using its implementation of the Amazon S3 API. This allows the whole flow to be non-interactive and smooth. I&#8217;m not much of a GUI man and prefer to have things run in a console.</p>
+
+<p>These files are uploaded to the internet archive in the <a href=\"http://www.archive.org/details/EmacsMovies\">EmacsMovies collection</a>. I prefer using the archive to other video hosting websites because they allow you to download the original files directly. Also, their mission to preserve data for ever rather than to make money off user generated content appeals to me.</p>
+
+<h2>Software used</h2>
+
+<p>I&#8217;ve already mentioned <a href=\"http://ffmpeg.org\">ffmpeg</a> in the workflow.</p>
+
+<p>During the recording, I use my <a href=\"https://github.com/nibrahim/showkeys\">showkeys</a> application to display keystrokes on the side. I didn&#8217;t use this instead of more mature programs like <a href=\"http://code.google.com/p/key-mon/\">key-mon</a> for a <a href=\"http://nibrahim.net.in/2011/11/30/showkeys.html\">number of reasons</a>.</p>
+
+<p>The blog is generated using <a href=\"http://octopress.org/\">Octopress</a> which is a set of plugins and spiffy templates for the <a href=\"http://jekyllrb.com/\">jekyll</a> static blog generator. I use my own emacs mode <a href=\"https://github.com/nibrahim/Hyde\">hyde.el</a> to maintain the blog. It is maintained on github at <a href=\"https://github.com/nibrahim/emacsmovies.org\">https://github.com/nibrahim/emacsmovies.org</a>. The emacsmovies.org website is hosted currently on <a href=\"http://hcoop.net/\">the Internet hosting cooperative</a>.</p>
+
+<p>I&#8217;m mentioning all this so that people can offer suggestions on how to improve the workflow.</p>
+
+<p>On a side note, I&#8217;m a Python developer in my day job and I wanted to do this entire project without using Python at all and I was able to.</p>
+
+<h2>Long term plans</h2>
+
+<blockquote>
+<p>Emacs is like a brain, at maximum you can only utilize about 10% of its real power :)</p>
+<footer>delYsid on #emacs</footer>
+</blockquote>
+
+
+<p>It is definitely not possible to cover <em>all</em> of Emacs. My plan as of now is to start off with a few screencasts on basic editing and navigation. After this, a few on basic customisation. Then I plan to do emacs &#8220;applications&#8221; (e.g. dired, Gnus, org-mode) etc. I&#8217;ll probably loosely structure it around the <a href=\"http://www.gnu.org/software/emacs/manual/html_node/emacs/index.html\">emacs manual</a>.</p>
+
+<p>I had a conversation with Zed Shaw about his <a href=\"http://learncodethehardway.org/\">learn code the hard way</a> series of books and video tutorials. He suggested that I supplement the screencasts with a book and I&#8217;ve started work on that too. Right now, my feeling is that each screencast will be the contents of one chapter condensed. I hope to keep all the screencasts under 15 minutes long each.</p>
+
+<p>I hope to do at least one a month. If you have any comments or suggestions, please email me - <code>noufal at emacsmovies.org</code>.</p>
+
+<h2>Support and feedback</h2>
+
+<p>For any fixes in the software mentioned above or corrections on the website, please use the <a href=\"https://github.com/nibrahim/emacsmovies.org/issues\">github issue tracker</a>. If you&#8217;re interested in doing a screencast for the website, please email me at <code>noufal at emacsmovies.org</code> and we can work something out.</p>
+
+<h2>Licensing</h2>
+
+<p>All the software which I&#8217;ve written to make this possible are released under the GNU GPL version 3.</p>
+
+<p>The actual videos are licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>
+
+<p>I will occasionally link to videos created by other people. These are owned by the people who made them and are might have different licensing terms.</p>
+
+<h2>Following emacsmovies.org</h2>
+
+<p>I have a twitter account setup for this website. You can follow <a href=\"https://twitter.com/intent/follow?original_referer=http%3A%2F%2Flocalhost%3A4000%2F&region=follow_link&screen_name=emacsmovies&source=followbutton&variant=2.0\">@emacsmovies</a> on twitter to stay up to date or subscribe to the <a href=\"http://emacsmovies.org/atom.xml\">atom feed</a>.</p>
+"))))

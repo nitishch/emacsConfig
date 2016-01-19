@@ -1,0 +1,970 @@
+;; -*- coding: utf-8 -*-
+(("Pragmatic Emacs" "practical tips for everyday emacs" "" (22171 46973 252495 606000) feed 0 nil nil ((title nil "Pragmatic Emacs") (link ((href . "http://pragmaticemacs.com/feed/") (rel . "self") (type . "application/rss+xml"))) (link nil "http://pragmaticemacs.com") (description nil "practical tips for everyday emacs") (lastBuildDate nil "Mon, 12 Oct 2015 21:48:47 +0000") (language nil "en") (updatePeriod nil "hourly") (updateFrequency nil "1") (generator nil "http://wordpress.org/?v=4.3.1") (image nil (url nil "http://i1.wp.com/pragmaticemacs.com/wp-content/uploads/2015/05/blog-logo-55532ec6v1_site_icon.png?fit=32%2C32") (title nil "Pragmatic Emacs") (link nil "http://pragmaticemacs.com") (width nil "32") (height nil "32")) (item nil (title nil "Wrap text in custom characters") (link nil "http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/") (comments nil "http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/#comments") (pubDate nil "Mon, 12 Oct 2015 21:32:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=340") (description nil "I posted recently about wrapping text in an org-mode block, and decided I wanted a quick way to wrap text in other formatting strings. I quickly came across the excellent wrap-region package which does just this. For example, with a quick bit of setup you can highlight some words like foo bar in an org-mode [&#8230;]") (encoded nil "<p> I posted recently about <a href=\"http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/\">wrapping text in an org-mode block</a>, and decided I wanted a quick way to wrap text in other <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/\">formatting strings</a>. I quickly came across the excellent <a href=\"https://github.com/rejeep/wrap-region.el\">wrap-region</a> package which does just this. </p>
+<p> For example, with a quick bit of setup you can highlight some words like <code>foo bar</code> in an org-mode buffer and hit <code>*</code> which wraps the words with that character to give <code>*foo bar*</code>, rendering them in boldface. It supports various parentheses out of the box, so hitting <code>(</code> will wrap the highlighted region in <code>()</code>. </p>
+<p> This works really well with <a href=\"http://pragmaticemacs.com/emacs/expand-region/\">expand-region</a> to quickly highlight a word or sentence before wrapping it. </p>
+<p> You can <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> the wrap-region package through MELPA. I added the following lines to my <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> to configure it </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">wrap-region</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">use-package</span> <span style=\"color: #BFEBBF;\">wrap-region</span>
+  <span style=\"color: #DCDCCC; font-weight: bold;\">:ensure</span> t
+  <span style=\"color: #DCDCCC; font-weight: bold;\">:config</span>
+  <span style=\"color: #BFEBBF;\">(</span>wrap-region-add-wrappers
+   '<span style=\"color: #D0BF8F;\">(</span><span style=\"color: #93E0E3;\">(</span><span style=\"color: #CC9393;\">\"*\"</span> <span style=\"color: #CC9393;\">\"*\"</span> nil org-mode<span style=\"color: #93E0E3;\">)</span>
+     <span style=\"color: #93E0E3;\">(</span><span style=\"color: #CC9393;\">\"~\"</span> <span style=\"color: #CC9393;\">\"~\"</span> nil org-mode<span style=\"color: #93E0E3;\">)</span>
+     <span style=\"color: #93E0E3;\">(</span><span style=\"color: #CC9393;\">\"/\"</span> <span style=\"color: #CC9393;\">\"/\"</span> nil org-mode<span style=\"color: #93E0E3;\">)</span>
+     <span style=\"color: #93E0E3;\">(</span><span style=\"color: #CC9393;\">\"=\"</span> <span style=\"color: #CC9393;\">\"=\"</span> nil org-mode<span style=\"color: #93E0E3;\">)</span>
+     <span style=\"color: #93E0E3;\">(</span><span style=\"color: #CC9393;\">\"_\"</span> <span style=\"color: #CC9393;\">\"_\"</span> nil org-mode<span style=\"color: #93E0E3;\">)</span>
+     <span style=\"color: #93E0E3;\">(</span><span style=\"color: #CC9393;\">\"$\"</span> <span style=\"color: #CC9393;\">\"$\"</span> nil <span style=\"color: #9FC59F;\">(</span>org-mode latex-mode<span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #BFEBBF;\">(</span>add-hook 'org-mode-hook 'wrap-region-mode<span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #BFEBBF;\">(</span>add-hook 'latex-mode-hook 'wrap-region-mode<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> This sets up the common org-mode delimiters and adds <code>$</code> delimiters for org-mode and latex-mode. I then use the hooks so that wrap-region is only active in org-mode and latex-mode buffers. </p>
+<p> Note that in this configuration I have made use of <a href=\"https://github.com/jwiegley/use-package\">use-package</a> which is a nice way of organising your installed packages and their configuration. I&#8217;ll write more about that in due course, but for now, if you want to use the code above in your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> then you need to <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> use-package and add </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">use-package</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> to the top of your config file. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/feed/") (comments nil "0")) (item nil (title nil "Org-mode basics V: Exporting your notes") (link nil "http://pragmaticemacs.com/emacs/org-mode-basics-v-exporting-your-notes/") (comments nil "http://pragmaticemacs.com/emacs/org-mode-basics-v-exporting-your-notes/#comments") (pubDate nil "Fri, 09 Oct 2015 15:51:00 +0000") (creator nil "Ben Maughan") (category nil "beginner") (category nil "emacs") (category nil "org") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=337") (description nil "In this final post of my short series on using org-mode to write rich, structured notes, we will look at exporting the notes as a web page or pdf document. The previous posts covered structuring your notes and adding tables and links and images, and formatting text and source code. If you have been following [&#8230;]") (encoded nil "<p> In this final post of my short series on using org-mode to write rich, structured notes, we will look at exporting the notes as a web page or pdf document. The previous posts covered <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-structuring-your-notes/\">structuring your notes</a> and adding <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-ii-use-simple-tables-in-your-notes/\">tables</a> and <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-iii-add-links-and-images-to-you-notes/\">links and images</a>, and <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/\">formatting text and source code</a>. </p>
+<p> If you have been following along, you should have an org file containing all of the notes on org-mode from the previous posts. We&#8217;ll now look at exporting that file. </p>
+<p> One strength of org-mode is the ability to export to multiple formats. Probably the most useful to begin with are web pages and pdf (via latex) but more are available; to quote the <a href=\"http://orgmode.org/manual/Exporting.html#Exporting\">org manual</a> </p>
+<blockquote>
+<p> ASCII export produces a readable and simple version of an Org file for printing and sharing notes. HTML export allows you to easily publish notes on the web, or to build full-fledged websites. LaTeX export lets you use Org mode and its structured editing functions to create arbitrarily complex LaTeX files for any kind of document. OpenDocument Text (ODT) export allows seamless collaboration across organizational boundaries. Markdown export lets you seamlessly collaborate with other developers. Finally, iCal export can extract entries with deadlines or appointments to produce a file in the iCalendar format. </p>
+</blockquote>
+<p> To export your org file to a web page, type <code>C-c C-e</code> to start the exporter and then press <code>h</code> to select html and <code>o</code> to select open. A new web page should now open in your browser. </p>
+<p> Similarly, typing <code>l</code> and <code>o</code> in the exporter will convert the org file to latex and then compile it to produce a pdf and display that. Try both of these. </p>
+<p> It is possible to add many customisations to the export process. For example, go to the top of the buffer (using <code>M-&lt;</code>) and use <code>C-c C-e</code> and then <code>#</code> to insert an export template. You can then choose to add html or latex (or other) templates (press <code>TAB</code> to see the list). </p>
+<p> As an example, add the following to the top of your org file to tweak the appearance of the exported documents. </p>
+<pre class=\"example\">
+#+LaTeX_CLASS: bjmarticle
+#+TITLE:     Org-mode Basics
+#+AUTHOR: Ben Maughan
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t
+#+OPTIONS: html5-fancy:nil tex:t
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_CONTAINER: div
+#+DESCRIPTION:
+#+KEYWORDS:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+HTML_HEAD: &lt;link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.star.bris.ac.uk/bjm/css/bjm.css\" /&gt;
+#+HTML_HEAD_EXTRA:
+#+SUBTITLE:
+#+INFOJS_OPT:
+#+CREATOR: &lt;a href=\"http://www.gnu.org/software/emacs/\"&gt;Emacs&lt;/a&gt; 24.4.1 (&lt;a href=\"http://orgmode.org\"&gt;Org&lt;/a&gt; mode 8.3.2)
+#+LATEX_HEADER:
+</pre>
+<p> This is the default html export template with a couple of tweaks. </p>
+<ul class=\"org-ul\">
+<li>I have added a link to a style sheet to style the html</li>
+<li>I have added a latex class <code>bjmarticle</code> to control the appearance of the generated pdf</li>
+</ul>
+<p> The latex class is defined in my <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> with the following </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>add-to-list 'org-latex-classes
+             '<span style=\"color: #BFEBBF;\">(</span><span style=\"color: #CC9393;\">\"bjmarticle\"</span>
+               <span style=\"color: #CC9393;\">\"\\\\documentclass{article}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage[utf8]{inputenc}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage[T1]{fontenc}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{graphicx}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{longtable}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{hyperref}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{natbib}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{amssymb}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{amsmath}</span>
+<span style=\"color: #CC9393;\">\\\\usepackage{geometry}</span>
+<span style=\"color: #CC9393;\">\\\\geometry{a4paper,left=2.5cm,top=2cm,right=2.5cm,bottom=2cm,marginparsep=7pt, marginparwidth=.6in}\"</span>
+               <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"\\\\section{%s}\"</span> . <span style=\"color: #CC9393;\">\"\\\\section*{%s}\"</span><span style=\"color: #D0BF8F;\">)</span>
+               <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"\\\\subsection{%s}\"</span> . <span style=\"color: #CC9393;\">\"\\\\subsection*{%s}\"</span><span style=\"color: #D0BF8F;\">)</span>
+               <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"\\\\subsubsection{%s}\"</span> . <span style=\"color: #CC9393;\">\"\\\\subsubsection*{%s}\"</span><span style=\"color: #D0BF8F;\">)</span>
+               <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"\\\\paragraph{%s}\"</span> . <span style=\"color: #CC9393;\">\"\\\\paragraph*{%s}\"</span><span style=\"color: #D0BF8F;\">)</span>
+               <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"\\\\subparagraph{%s}\"</span> . <span style=\"color: #CC9393;\">\"\\\\subparagraph*{%s}\"</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> You&#8217;ll need some experience of LaTeX to make significant changes here, but the sky is the limit. </p>
+<p> I have compiled the series of posts on org-mode basics into a single org file, and exported it with this set of export options. </p>
+<ul class=\"org-ul\">
+<li>The org file is <a href=\"http://www.star.bris.ac.uk/bjm/org-basics.org\">here</a></li>
+<li>The exported web page is <a href=\"http://www.star.bris.ac.uk/bjm/org-basics.html\">here</a></li>
+<li>The exported pdf is <a href=\"http://www.star.bris.ac.uk/bjm/org-basics.pdf\">here</a></li>
+</ul>
+<p> The wrapping of the example and code blocks in the pdf needs to be fixed, but overall we get some pretty nice looking documents with minimal effort. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/org-mode-basics-v-exporting-your-notes/feed/") (comments nil "0")) (item nil (title nil "Transpose characters") (link nil "http://pragmaticemacs.com/emacs/transpose-characters/") (comments nil "http://pragmaticemacs.com/emacs/transpose-characters/#comments") (pubDate nil "Tue, 06 Oct 2015 11:58:00 +0000") (creator nil "Ben Maughan") (category nil "beginner") (category nil "elisp") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=334") (description nil "You can use C-t to run transpose-chars to switch the character at the cursor position with the previous character. Repeated uses have the effect of dragging the character behind the point to the right. I have found that I prefer the behaviour to be that the previous two characters before the point are switched, as [&#8230;]") (encoded nil "<p> You can use <code>C-t</code> to run <code>transpose-chars</code> to switch the character at the cursor position with the previous character. Repeated uses have the effect of dragging the character <i>behind</i> the point to the right. </p>
+<p> I have found that I prefer the behaviour to be that the previous two characters before the point are switched, as I usually want to do this if I spot I have just made a typo. This is what <code>transpose-chars</code> does if you are at the end of a line, but not if you are somewhere in the middle of the line. To modify the behaviour in this way, I use </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">adjust transpose-chars to switch previous two characters</span>
+<span style=\"color: #DCDCCC;\">(</span>global-set-key <span style=\"color: #BFEBBF;\">(</span>kbd <span style=\"color: #CC9393;\">\"C-t\"</span><span style=\"color: #BFEBBF;\">)</span>
+                <span style=\"color: #BFEBBF;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">lambda</span> <span style=\"color: #D0BF8F;\">()</span> <span style=\"color: #D0BF8F;\">(</span>interactive<span style=\"color: #D0BF8F;\">)</span>
+                  <span style=\"color: #D0BF8F;\">(</span>backward-char<span style=\"color: #D0BF8F;\">)</span>
+                  <span style=\"color: #D0BF8F;\">(</span>transpose-chars 1<span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> As an example, with the modified behaviour, using <code>C-t</code> with the point at the end of the string <code>teh</code> changes it to <code>the</code>, while the original behaviour gives you <code>te h</code> (unless you are at the end of a line, in which case you get <code>the</code>). Repeated use of the modified version simply toggles back and forth. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/transpose-characters/feed/") (comments nil "4")) (item nil (title nil "Wrap text in an org-mode block") (link nil "http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/") (comments nil "http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/#comments") (pubDate nil "Fri, 02 Oct 2015 10:00:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "org") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=331") (description nil "In my most recent post on org-mode, I talked about using blocks to mark text as being latex, or source code and so on. I mentioned using the shortcuts like &#60;e then TAB on a new line to create an empty block. Sometimes it is handy to wrap existing text in a block, and the [&#8230;]") (encoded nil "<p> In my <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/\">most recent post</a> on org-mode, I talked about using blocks to mark text as being latex, or source code and so on. I mentioned using the shortcuts like <code>&lt;e</code> then <code>TAB</code> on a new line to create an empty block. Sometimes it is handy to wrap existing text in a block, and the following function does that for the text you have selected. </p>
+<p> This has been in my config file for ages and I can&#8217;t remember where it came from &#8211; I know I didn&#8217;t write it! A bit of googleing suggests <a href=\"https://github.com/chrisdone/chrisdone-emacs/blob/master/config/org.el\">this</a> could be the origin, but if anyone knows different, let me know. </p>
+<p> I bind the function to <code>C-&lt;</code> because it reminds me of the <code>&lt;</code> shortcuts to create the blocks, and I don&#8217;t use the <code>org-cycle-agenda-files</code> that is usually bound to that key combo. </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">function to wrap blocks of text in org templates                       ;;</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">e.g. latex or src etc                                                  ;;</span>
+<span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">org-begin-template</span> <span style=\"color: #BFEBBF;\">()</span>
+  <span style=\"color: #9FC59F;\">\"Make a template at point.\"</span>
+  <span style=\"color: #BFEBBF;\">(</span>interactive<span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #BFEBBF;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">if</span> <span style=\"color: #D0BF8F;\">(</span>org-at-table-p<span style=\"color: #D0BF8F;\">)</span>
+      <span style=\"color: #D0BF8F;\">(</span>call-interactively 'org-table-rotate-recalc-marks<span style=\"color: #D0BF8F;\">)</span>
+    <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">let*</span> <span style=\"color: #93E0E3;\">(</span><span style=\"color: #9FC59F;\">(</span>choices '<span style=\"color: #94BFF3;\">(</span><span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"s\"</span> . <span style=\"color: #CC9393;\">\"SRC\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"e\"</span> . <span style=\"color: #CC9393;\">\"EXAMPLE\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"q\"</span> . <span style=\"color: #CC9393;\">\"QUOTE\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"v\"</span> . <span style=\"color: #CC9393;\">\"VERSE\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"c\"</span> . <span style=\"color: #CC9393;\">\"CENTER\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"l\"</span> . <span style=\"color: #CC9393;\">\"LaTeX\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"h\"</span> . <span style=\"color: #CC9393;\">\"HTML\"</span><span style=\"color: #E0CF9F;\">)</span>
+                      <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #CC9393;\">\"a\"</span> . <span style=\"color: #CC9393;\">\"ASCII\"</span><span style=\"color: #E0CF9F;\">)</span><span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span>
+           <span style=\"color: #9FC59F;\">(</span>key
+            <span style=\"color: #94BFF3;\">(</span>key-description
+             <span style=\"color: #E0CF9F;\">(</span>vector
+              <span style=\"color: #8FB28F;\">(</span>read-key
+               <span style=\"color: #6CA0A3;\">(</span>concat <span style=\"color: #DCDCCC;\">(</span>propertize <span style=\"color: #CC9393;\">\"Template type: \"</span> 'face 'minibuffer-prompt<span style=\"color: #DCDCCC;\">)</span>
+                       <span style=\"color: #DCDCCC;\">(</span>mapconcat <span style=\"color: #BFEBBF;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">lambda</span> <span style=\"color: #D0BF8F;\">(</span>choice<span style=\"color: #D0BF8F;\">)</span>
+                                    <span style=\"color: #D0BF8F;\">(</span>concat <span style=\"color: #93E0E3;\">(</span>propertize <span style=\"color: #9FC59F;\">(</span>car choice<span style=\"color: #9FC59F;\">)</span> 'face 'font-lock-type-face<span style=\"color: #93E0E3;\">)</span>
+                                            <span style=\"color: #CC9393;\">\": \"</span>
+                                            <span style=\"color: #93E0E3;\">(</span>cdr choice<span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span>
+                                  choices
+                                  <span style=\"color: #CC9393;\">\", \"</span><span style=\"color: #DCDCCC;\">)</span><span style=\"color: #6CA0A3;\">)</span><span style=\"color: #8FB28F;\">)</span><span style=\"color: #E0CF9F;\">)</span><span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span>
+      <span style=\"color: #93E0E3;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">let</span> <span style=\"color: #9FC59F;\">(</span><span style=\"color: #94BFF3;\">(</span>result <span style=\"color: #E0CF9F;\">(</span>assoc key choices<span style=\"color: #E0CF9F;\">)</span><span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span>
+        <span style=\"color: #9FC59F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> result
+          <span style=\"color: #94BFF3;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">let</span> <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #8FB28F;\">(</span>choice <span style=\"color: #6CA0A3;\">(</span>cdr result<span style=\"color: #6CA0A3;\">)</span><span style=\"color: #8FB28F;\">)</span><span style=\"color: #E0CF9F;\">)</span>
+            <span style=\"color: #E0CF9F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">cond</span>
+             <span style=\"color: #8FB28F;\">(</span><span style=\"color: #6CA0A3;\">(</span>region-active-p<span style=\"color: #6CA0A3;\">)</span>
+              <span style=\"color: #6CA0A3;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">let</span> <span style=\"color: #DCDCCC;\">(</span><span style=\"color: #BFEBBF;\">(</span>start <span style=\"color: #D0BF8F;\">(</span>region-beginning<span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span>
+                    <span style=\"color: #BFEBBF;\">(</span>end <span style=\"color: #D0BF8F;\">(</span>region-end<span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+                <span style=\"color: #DCDCCC;\">(</span>goto-char end<span style=\"color: #DCDCCC;\">)</span>
+                <span style=\"color: #DCDCCC;\">(</span>insert <span style=\"color: #CC9393;\">\"#+END_\"</span> choice <span style=\"color: #CC9393;\">\"\\n\"</span><span style=\"color: #DCDCCC;\">)</span>
+                <span style=\"color: #DCDCCC;\">(</span>goto-char start<span style=\"color: #DCDCCC;\">)</span>
+                <span style=\"color: #DCDCCC;\">(</span>insert <span style=\"color: #CC9393;\">\"#+BEGIN_\"</span> choice <span style=\"color: #CC9393;\">\"\\n\"</span><span style=\"color: #DCDCCC;\">)</span><span style=\"color: #6CA0A3;\">)</span><span style=\"color: #8FB28F;\">)</span>
+             <span style=\"color: #8FB28F;\">(</span>t
+              <span style=\"color: #6CA0A3;\">(</span>insert <span style=\"color: #CC9393;\">\"#+BEGIN_\"</span> choice <span style=\"color: #CC9393;\">\"\\n\"</span><span style=\"color: #6CA0A3;\">)</span>
+              <span style=\"color: #6CA0A3;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">save-excursion</span> <span style=\"color: #DCDCCC;\">(</span>insert <span style=\"color: #CC9393;\">\"#+END_\"</span> choice<span style=\"color: #DCDCCC;\">)</span><span style=\"color: #6CA0A3;\">)</span><span style=\"color: #8FB28F;\">)</span><span style=\"color: #E0CF9F;\">)</span><span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">bind to key</span>
+<span style=\"color: #DCDCCC;\">(</span>define-key org-mode-map <span style=\"color: #BFEBBF;\">(</span>kbd <span style=\"color: #CC9393;\">\"C-&lt;\"</span><span style=\"color: #BFEBBF;\">)</span> 'org-begin-template<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+") (commentRss nil "http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/feed/") (comments nil "5")) (item nil (title nil "Search with OS X Spotlight from emacs") (link nil "http://pragmaticemacs.com/emacs/search-with-os-x-spotlight-from-emacs/") (comments nil "http://pragmaticemacs.com/emacs/search-with-os-x-spotlight-from-emacs/#comments") (pubDate nil "Tue, 29 Sep 2015 19:44:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "mac") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=328") (description nil "I wrote previously about an idea to use the spotlight search tool in Mac OS X from within emacs. At the time, I put together some pretty crude code to do this, but I have now improved it into a package that I am quite pleased with. The package is spotlight and is available now [&#8230;]") (encoded nil "<p> I <a href=\"http://pragmaticemacs.com/emacs/super-spotlight-search-with-counsel/\">wrote previously</a> about an idea to use the spotlight search tool in Mac OS X from within emacs. At the time, I put together some pretty crude code to do this, but I have now improved it into a package that I am quite pleased with. </p>
+<p> The package is <a href=\"https://github.com/benmaughan/spotlight.el\">spotlight</a> and is available now to <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> through MELPA. </p>
+<p> The package gives you a powerful way to call spotlight from emacs. You can do a live search for a string in the text of a file, filter the file list by file name and then open the selected file with a <a href=\"https://github.com/abo-abo/swiper\">swiper</a> search for your query text. </p>
+<p> Here is an example of my using it. In the animation below, I use <code>M-x spotlight</code> to run a spotlight search for &#8220;tomatoes&#8221;. Notice how the number of matches updates as I type or delete the last couple of characters. I then use <code>M-RET</code> to narrow the list of matching files using the string &#8220;docs org$&#8221; which narrows the list to files with &#8220;doc&#8221; in their full name, and with names ending in &#8220;org&#8221;. Finally once I select the file I want, <code>swiper</code> takes me to the matches of my original &#8220;tomatoes&#8221; query. </p>
+<div class=\"figure\">
+<p><img src=\"http://i2.wp.com/pragmaticemacs.com/wp-content/uploads/2015/09/wpid-spotlight.gif?w=620\" alt=\"spotlight.gif\" data-recalc-dims=\"1\" /> </p>
+</p></div>
+<p> See the <a href=\"https://github.com/benmaughan/spotlight.el\">README</a> on github for more details. </p>
+<p> The package relies on the excellent <a href=\"https://github.com/abo-abo/swiper\">ivy and swiper</a> libraries to do the hard work, and benefited greatly from useful comments by redditors at <a href=\"https://www.reddit.com/r/emacs/\">/r/emacs</a>. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/search-with-os-x-spotlight-from-emacs/feed/") (comments nil "0")) (item nil (title nil "Org-mode basics IV: formatting text and source code") (link nil "http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/") (comments nil "http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/#comments") (pubDate nil "Fri, 25 Sep 2015 14:45:00 +0000") (creator nil "Ben Maughan") (category nil "beginner") (category nil "emacs") (category nil "org") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=322") (description nil "This is a continuation of my series of introductory posts on org-mode that are focussed on simple text-based notes. We looked already at structuring your notes and adding tables and links and images to your notes. In this post we will look at formatting the text in your notes. For today we will look at [&#8230;]") (encoded nil "<p> This is a continuation of my series of introductory posts on org-mode that are focussed on simple text-based notes. We looked already at <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-structuring-your-notes/\">structuring your notes</a> and adding <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-ii-use-simple-tables-in-your-notes/\">tables</a> and <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-iii-add-links-and-images-to-you-notes/\">links and images</a> to your notes. In this post we will look at formatting the text in your notes. </p>
+<p> For today we will look at the effect of formatting on the plain text view of your notes, but very soon we will come to exporting your notes to html and pdf and we&#8217;ll see that the formatting is applied to the exported documents very nicely. </p>
+<p> We will also look at including executable code in your notes. Hopefully you can see that by putting all these pieces together you can build a very powerful document of your research containing your data, notes, relevant links, source code and results. </p>
+<p> As before I suggest adding the notes below to your growing org file. For technical reasons I have to display the notes as plain text below but if you paste them into your org file you&#8217;ll see them nicely formatted and coloured like this: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #DFAF8F;\">* Formatting text</span>
+<span style=\"color: #BFEBBF;\">** Simple formatting</span>
+You can apply simple formatting to your text by enclosing words in
+special characters. These include
+ - <span style=\"font-style: italic;\">/italicised text/</span>
+ - <span style=\"font-weight: bold;\">*bold text*</span>
+ - <span style=\"text-decoration: underline;\">_underlines_</span>
+ - <span style=\"color: #b3b3b3;\">=literal text=</span>
+ - <span style=\"color: #b3b3b3;\">~code~</span> (generally appears the same as literal text)
+</pre>
+</div>
+<p> Here are the full notes: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-text\">* Formatting text
+** Simple formatting
+You can apply simple formatting to your text by enclosing words in
+special characters. These include
+ - /italicised text/
+ - *bold text*
+ - _underlines_
+ - =literal text=
+ - ~code~ (generally appears the same as literal text)
+
+** Formatted blocks of text
+For longer pieces of text you can enclose the text in blocks marking
+it as a specific sort of text. I commonly use these ones
+
+#+BEGIN_EXAMPLE
+This is an example block into which you can type text that you don't want org to mess with like a [[link]]. This will typically be rendered in a monospace font when exported.
+#+END_EXAMPLE
+
+#+BEGIN_QUOTE
+This block encloses text that you want to appear as a quotation.
+#+END_QUOTE
+
+#+BEGIN_CENTER
+This text will be centred when it is exported.
+#+END_CENTER
+
+You can save time typing out the block wrapper by using shortcuts. Go
+to the start of a new line and type &lt;e and press TAB and it will
+expand to an example block. The same works for &lt;q for quote and &lt;c for
+centre.
+
+** LaTeX
+Org-mode does a good job of understanding snippets of LaTeX (a
+[[https://www.latex-project.org/][powerful typesetting language]] used in scientific and other technical
+documents). For example, it will correctly export simple superscripts
+x^2 or subscripts x_0 or symbols like \\alpha, \\beta, \\gamma.
+
+Org also understands more complex LaTeX like this
+
+\\begin{eqnarray}
+x^2 + \\left(\\frac{y}{z}\\right)^4 = 0
+\\end{eqnarray}
+
+but for longer bits of LaTeX it is better to use a LaTeX block. You
+start one with &lt;l and TAB
+
+#+BEGIN_LaTeX
+LaTeX code goes here
+#+END_LaTeX
+
+** Source code blocks
+It is also handy to include source code in your notes - on a new line
+type &lt;s and TAB to create a source block. You can tell org what type
+of code is contained - in this case we'll put in some simple shell
+code, so well put \"sh\" at the top of the block.
+
+#+BEGIN_SRC sh
+  echo \"Hello $USER! Today is `date`\"
+  exit
+#+END_SRC
+
+You can get org to syntax highlight the text in the block by adding
+the following to your [[http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/][emacs config file]] (without the source block
+wrapper of course).
+
+#+BEGIN_SRC elisp
+;;syntax highlight code blocks
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+What is more, when the cursor is inside a SRC block, you can use C-c '
+to create a new temporary buffer in the major mode of the programming
+language you have specified. Type some code in, and then type C-c '
+again to come back to this buffer.
+
+** Executing source code blocks
+Org-mode can execute your source code blocks and add the output to
+your file. This part of org-mode is called babel. I'll write more
+about this later, but it is too cool not to mention here.
+
+For example, take the simple code block we had above:
+
+#+BEGIN_SRC sh
+  echo \"Hello $USER! Today is `date`\"
+  exit
+#+END_SRC
+
+Put the cursor inside the block and hit C-c C-c to execute it. You
+will be asked to confirm and then you should see the output appear
+like this:
+
+#+RESULTS:
+#+begin_example
+Hello bjm! Today is Fri 25 Sep 2015 15:03:12 BST
+#+end_example
+
+You can do much more with this, like reading input data from a table
+in the same file, creating images that appear in the file, extracting
+(tangling) all the code snippets into one or more files to be executed
+separately, and much more. [[http://orgmode.org/worg/org-contrib/babel/intro.html][Here are some nice examples]].
+
+You can tell org-mode which programming languages to support by adding
+something like the following to your [[http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/][emacs config file]]:
+
+#+BEGIN_SRC elisp
+;; Some initial languages we want org-babel to support
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)
+   (python . t)
+   (R . t)
+   (ditaa . t)
+   (perl . t)
+   (gnuplot t)
+   ))
+#+END_SRC
+</pre>
+</div>
+") (commentRss nil "http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/feed/") (comments nil "10")) (item nil (title nil "Indent region") (link nil "http://pragmaticemacs.com/emacs/indent-region/") (comments nil "http://pragmaticemacs.com/emacs/indent-region/#comments") (pubDate nil "Wed, 23 Sep 2015 11:54:00 +0000") (creator nil "Ben Maughan") (category nil "beginner") (category nil "editing") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=317") (description nil "If you need to indent all of the lines in a region correctly (mainly useful for writing code), then select a region and use C-M-\\ to indent it. TAB will often work too, but may behave differently in some modes. Remember you can select the whole buffer with C-x h or use expand region to [&#8230;]") (encoded nil "<p> If you need to indent all of the lines in a region correctly (mainly useful for writing code), then select a region and use <code>C-M-\\</code> to indent it. <code>TAB</code> will often work too, but may behave differently in some modes. </p>
+<p> Remember you can select the whole buffer with <code>C-x h</code> or use <a href=\"http://pragmaticemacs.com/emacs/expand-region/\">expand region</a> to semantically expand your selection. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/indent-region/feed/") (comments nil "2")) (item nil (title nil "Quick calculations in emacs") (link nil "http://pragmaticemacs.com/emacs/quick-calculations-in-emacs/") (comments nil "http://pragmaticemacs.com/emacs/quick-calculations-in-emacs/#comments") (pubDate nil "Fri, 18 Sep 2015 13:57:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "misc") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=314") (description nil "Emacs has a full featured calculator built in, but I only tend to use it for quick calculations. Use C-x * q to run quick-calc and start the calculator in the minibuffer at the bottom of the screen, and then enter your calculation. When you hit enter, the calculation is performed and the answer is [&#8230;]") (encoded nil "<p> Emacs has a <a href=\"https://www.gnu.org/software/emacs/manual/html_node/calc/Tutorial.html\">full featured calculator</a> built in, but I only tend to use it for quick calculations. Use <code>C-x * q</code> to run <code>quick-calc</code> and start the calculator in the minibuffer at the bottom of the screen, and then enter your calculation. </p>
+<p> When you hit enter, the calculation is performed and the answer is shown. It is also saved to your clipboard so you can use <code>C-y</code> to paste it into your document if needed. </p>
+<p> I found the default keybinding hard to remember so I set it to <code>C-c b c</code> by adding the following to my <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a>: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">calculator                                                             ;;</span>
+<span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #DCDCCC;\">(</span>global-set-key <span style=\"color: #BFEBBF;\">(</span>kbd <span style=\"color: #CC9393;\">\"C-c b c\"</span><span style=\"color: #BFEBBF;\">)</span> 'quick-calc<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> I tend to use <code>C-c b</code> as the starting point for my own customised commands, so this makes sense for me. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/quick-calculations-in-emacs/feed/") (comments nil "1")) (item nil (title nil "Make all prompts y or n") (link nil "http://pragmaticemacs.com/emacs/make-all-prompts-y-or-n/") (comments nil "http://pragmaticemacs.com/emacs/make-all-prompts-y-or-n/#comments") (pubDate nil "Tue, 15 Sep 2015 10:12:00 +0000") (creator nil "Ben Maughan") (category nil "beginner") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=312") (description nil "Emacs prompts you at various times to answer yes or no to something. If you add the following to your emacs config file, you will only have to hit y or n saving you countless seconds! ;; change all prompts to y or n (fset 'yes-or-no-p 'y-or-n-p) This basically aliases the built in &#8220;yes or [&#8230;]") (encoded nil "<p> Emacs prompts you at various times to answer yes or no to something. If you add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a>, you will only have to hit y or n saving you countless seconds! </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">change all prompts to y or n</span>
+<span style=\"color: #DCDCCC;\">(</span>fset 'yes-or-no-p 'y-or-n-p<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> This basically aliases the built in &#8220;yes or no&#8221; prompt function to the built in &#8220;y or n&#8221; prompt function so that the latter is always used. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/make-all-prompts-y-or-n/feed/") (comments nil "0")) (item nil (title nil "Org-mode basics III: add links and images to your notes") (link nil "http://pragmaticemacs.com/emacs/org-mode-basics-iii-add-links-and-images-to-you-notes/") (comments nil "http://pragmaticemacs.com/emacs/org-mode-basics-iii-add-links-and-images-to-you-notes/#comments") (pubDate nil "Fri, 11 Sep 2015 20:44:00 +0000") (creator nil "Ben Maughan") (category nil "beginner") (category nil "emacs") (category nil "org") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=303") (description nil "In this series of introductory posts on org-mode we have been focussing on simple text-based notes. We looked at structuring your notes and adding tables to your notes. Next we will look at adding links and images. Links can be to files, URLs or locations in the current org document. If the link is to [&#8230;]") (encoded nil "<p> In this series of introductory posts on org-mode we have been focussing on simple text-based notes. We looked at <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-structuring-your-notes/\">structuring your notes</a> and <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-ii-use-simple-tables-in-your-notes/\">adding tables to your notes</a>. Next we will look at adding links and images. Links can be to files, URLs or locations in the current org document. If the link is to an image then emacs can display it inline in the org document. This is handy for enhancing your notes and will also be useful when we come to look at exporting to different formats. </p>
+<p> As before I suggest adding the notes below to your growing org file. Note that below I have formatted the notes as plain text because org-mode changes the appearance of links, such as hiding the <code>[]</code> around links, which is nice in your org-mode document but makes it harder for me to show you what is going on! </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-text\">* Links and images
+Org mode supports links to files, URLs, and to other points in the org
+file. In this example let's use an image from my website. First copy
+it to the current directory. You can do this within emacs but for now
+just run this command in your terminal.
+
+curl http://www.star.bris.ac.uk/bjm/superman_cluster.gif -o superman_cluster.gif
+
+To add a link to a file use C-u C-c C-l and type the name of a file.
+Use tab-completion to select the image we just copied and you will
+then be asked for a description - you can press enter to leave this
+blank. This will create a link that looks like this
+
+[[file:superman_cluster.gif]]
+
+If you do this in your org file, you wont see the [[ ]] above, instead
+you'll see the text as a clickable link.
+
+Since the file we have linked to is an image, we can tell emacs to the
+image in the document using C-c C-x C-v and use the same command to
+turn the image off again.
+
+You can also click the link with the mouse, or use C-c C-o to follow
+it, which might open your web browser, an image viewer or open a file
+in emacs depending on the target of the link.
+
+The structure of a link in org mode looks like this
+
+#+BEGIN_EXAMPLE
+[[link address][description]]
+#+END_EXAMPLE
+
+(I've enclosed the link in an example block which prevents org-mode
+from trying to interpret as a real link, for the purpose of showing
+its structure - we'll come back to blocks like this later.)
+
+The link address is the URL or file name, and the description is the
+text that is displayed, so we can replace our superman link with
+something tidier like [[file:superman_cluster.gif][this]].
+
+Links to web pages are easy - just put the http address in as the link
+address. Use C-c C-l as a quick way to add such a link (remember we
+used C-u C-c C-l is for adding a link to a file).
+
+Links to other parts of the org file are added easily like [[Links and
+images][this link]]. Because the address part of the link matches a
+headline in this document, then org-mode points the link to that part
+of the file. Clicking it will move the cursor there.
+
+Finally, we can add a caption and a name to our image like this
+
+#+CAPTION: Superman and a galaxy cluster
+#+NAME: fig.super
+[[file:superman_cluster.gif]]
+
+which means we can refer to our image later with a link like this one
+[[fig.super]]
+</pre>
+</div>
+<p> That&#8217;s all for now. Next time I think we&#8217;ll look at some simple text formatting. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/org-mode-basics-iii-add-links-and-images-to-you-notes/feed/") (comments nil "4")))) ("Get pop-up help for keybindings with which-key" "<p> In my post on <a href=\"http://pragmaticemacs.com/emacs/show-unfinished-keystrokes-early\">showing unfinished keybindings early</a>, commenter <i>hmelman</i> points out <a href=\"https://github.com/justbur/emacs-which-key\">which-key</a> which is a package that give you pop-up help for partially completed keystrokes. Simply <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> the package from MELPA and add </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>which-key-mode<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a>. Now type a prefix key like <code>C-x</code> and wait one second (this delay can be customised) and a new window will open with a summary of the possible completions for that prefix. There are some nice screenshots at the <a href=\"https://github.com/justbur/emacs-which-key\">project web page</a> so look at those to get the idea. </p>
+<p> This is a great way to remind yourself of commands or discover new ones. For example try <code>C-x 8</code> and wait to see what pops up – I’m sure you’ll find some commands under that prefix that you didn’t know about!</p>" "http://pragmaticemacs.com/emacs/get-pop-up-help-for-keybindings-with-which-key/" (22104 48456) old 10 nil nil ((title nil "Get pop-up help for keybindings with which-key") (link nil "http://pragmaticemacs.com/emacs/get-pop-up-help-for-keybindings-with-which-key/") (comments nil "http://pragmaticemacs.com/emacs/get-pop-up-help-for-keybindings-with-which-key/#comments") (pubDate nil "Fri, 27 Nov 2015 20:30:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=396") (description nil "In my post on showing unfinished keybindings early, commenter hmelman points out which-key which is a package that give you pop-up help for partially completed keystrokes. Simply install the package from MELPA and add (which-key-mode) to your emacs config file. Now type a prefix key like C-x and wait one second (this delay can be [&#8230;]") (encoded nil "<p> In my post on <a href=\"http://pragmaticemacs.com/emacs/show-unfinished-keystrokes-early\">showing unfinished keybindings early</a>, commenter <i>hmelman</i> points out <a href=\"https://github.com/justbur/emacs-which-key\">which-key</a> which is a package that give you pop-up help for partially completed keystrokes. Simply <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> the package from MELPA and add </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>which-key-mode<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a>. Now type a prefix key like <code>C-x</code> and wait one second (this delay can be customised) and a new window will open with a summary of the possible completions for that prefix. There are some nice screenshots at the <a href=\"https://github.com/justbur/emacs-which-key\">project web page</a> so look at those to get the idea. </p>
+<p> This is a great way to remind yourself of commands or discover new ones. For example try <code>C-x 8</code> and wait to see what pops up &#8211; I&#8217;m sure you&#8217;ll find some commands under that prefix that you didn&#8217;t know about!</p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/get-pop-up-help-for-keybindings-with-which-key/feed/") (comments nil "0"))) ("Naming and saving macros for repetitive tasks" "<p> Any time you find yourself doing a repetitive task in emacs, you should stop and think about whether you could be using a macro to automate it. To use a macro you start a recording and do whatever edits or other commands you need for your task, then stop the macro and execute it to repeat the task as many times as you like. There is a great introduction and overview of macros at <a href=\"http://emacs-fu.blogspot.co.uk/2010/07/keyboard-macros.html\">emacs-fu</a>. </p>
+<p> I wanted to pick out from that article a useful feature of macros that I have neglected until recently. Normally a macro is saved until you record a new one, in which case it is overwritten. However it is possible to give your macro and name and then save it for future use. </p>
+<p> At the moment I am rewriting some LaTeX notes into org mode to use in lecture slides. This involves several repetitive tasks, like converting a section heading like this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-latex\"><span style=\"color: #F0DFAF; font-weight: bold;\">\\subsection</span>{<span style=\"color: #CC9393; font-size: 121%; font-weight: bold;\">Object on vertical spring</span>}
+</pre>
+</div>
+<p> into this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #BFEBBF;\">** Object on vertical spring</span>
+</pre>
+</div>
+<p> The trick to making a good macro is to make it as general as possible, like searching to move to a character instead of just moving the cursor. In this case I did the following: </p>
+<ol class=\"org-ol\">
+<li>Start with the cursor somewhere on the line containing the subsection and hit <code>C-x C-(</code> to start the macro recording</li>
+<li><code>C-a</code> to go to the start of the line</li>
+<li><code>C-SPC</code> to set the mark</li>
+<li><code>C-s {</code> to search forward to the “{” character</li>
+<li><code>RET</code> to exit the search</li>
+<li><code>C-d</code> to delete the region</li>
+<li>Type “** ” to add my org style heading</li>
+<li><code>C-e</code> to move to the end of the line</li>
+<li><code>BACKSPACE</code> to get rid of the last “}”</li>
+<li><code>C-x )</code> to end the recording</li>
+</ol>
+<p> Now I can replay my macro with <code>C-x e</code> but I know I’ll need this again many times in the future so I use <code>M-x name-last-kbd-macro</code> and enter a name for the macro (e.g. <code>bjm/sec-to-star</code>). Now I go to my <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> and add the following </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">macro to convert latex sections to org-mode subheadings</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">use M-x insert-kbd-macro to add the following line</span>
+<span style=\"color: #DCDCCC;\">(</span>fset 'bjm/sec-to-star
+<span style=\"color: #BFEBBF;\">[</span>?\\C-a ?\\C-  ?\\C-s ?\\{ return ?\\C-d ?* ?* ?  ?\\C-e backspace ?\\C-x<span style=\"color: #BFEBBF;\">]</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">bind this to a key</span>
+<span style=\"color: #DCDCCC;\">(</span>global-set-key <span style=\"color: #BFEBBF;\">(</span>kbd <span style=\"color: #CC9393;\">\"C-c b *\"</span><span style=\"color: #BFEBBF;\">)</span> 'bjm/sec-to-star<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> Where the <code>fset</code> line was added by using <code>M-x insert-kbd-macro</code> and then selecting the macro name I just used to save the macro. Finally I bind this to a key for ease of use in the future. </p>
+<p> You can use <code>M-x edit-named-kbd-macro</code> to see a nicer view of your macro and tweak it if needed. </p>
+<p> Finally, note that macros are not limited to simple editing commands. You can e.g. create, edit and save new files or do other more complex procedures within a macro. </p>" "http://pragmaticemacs.com/emacs/naming-and-saving-macros-for-repetitive-tasks/" (22113 17712) old 9 nil nil ((title nil "Naming and saving macros for repetitive tasks") (link nil "http://pragmaticemacs.com/emacs/naming-and-saving-macros-for-repetitive-tasks/") (comments nil "http://pragmaticemacs.com/emacs/naming-and-saving-macros-for-repetitive-tasks/#comments") (pubDate nil "Fri, 04 Dec 2015 07:48:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=399") (description nil "Any time you find yourself doing a repetitive task in emacs, you should stop and think about whether you could be using a macro to automate it. To use a macro you start a recording and do whatever edits or other commands you need for your task, then stop the macro and execute it to [&#8230;]") (encoded nil "<p> Any time you find yourself doing a repetitive task in emacs, you should stop and think about whether you could be using a macro to automate it. To use a macro you start a recording and do whatever edits or other commands you need for your task, then stop the macro and execute it to repeat the task as many times as you like. There is a great introduction and overview of macros at <a href=\"http://emacs-fu.blogspot.co.uk/2010/07/keyboard-macros.html\">emacs-fu</a>. </p>
+<p> I wanted to pick out from that article a useful feature of macros that I have neglected until recently. Normally a macro is saved until you record a new one, in which case it is overwritten. However it is possible to give your macro and name and then save it for future use. </p>
+<p> At the moment I am rewriting some LaTeX notes into org mode to use in lecture slides. This involves several repetitive tasks, like converting a section heading like this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-latex\"><span style=\"color: #F0DFAF; font-weight: bold;\">\\subsection</span>{<span style=\"color: #CC9393; font-size: 121%; font-weight: bold;\">Object on vertical spring</span>}
+</pre>
+</div>
+<p> into this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #BFEBBF;\">** Object on vertical spring</span>
+</pre>
+</div>
+<p> The trick to making a good macro is to make it as general as possible, like searching to move to a character instead of just moving the cursor. In this case I did the following: </p>
+<ol class=\"org-ol\">
+<li>Start with the cursor somewhere on the line containing the subsection and hit <code>C-x C-(</code> to start the macro recording</li>
+<li><code>C-a</code> to go to the start of the line</li>
+<li><code>C-SPC</code> to set the mark</li>
+<li><code>C-s {</code> to search forward to the &#8220;{&#8221; character</li>
+<li><code>RET</code> to exit the search</li>
+<li><code>C-d</code> to delete the region</li>
+<li>Type &#8220;** &#8221; to add my org style heading</li>
+<li><code>C-e</code> to move to the end of the line</li>
+<li><code>BACKSPACE</code> to get rid of the last &#8220;}&#8221;</li>
+<li><code>C-x )</code> to end the recording</li>
+</ol>
+<p> Now I can replay my macro with <code>C-x e</code> but I know I&#8217;ll need this again many times in the future so I use <code>M-x name-last-kbd-macro</code> and enter a name for the macro (e.g. <code>bjm/sec-to-star</code>). Now I go to my <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> and add the following </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">macro to convert latex sections to org-mode subheadings</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">use M-x insert-kbd-macro to add the following line</span>
+<span style=\"color: #DCDCCC;\">(</span>fset 'bjm/sec-to-star
+   <span style=\"color: #BFEBBF;\">[</span>?\\C-a ?\\C-  ?\\C-s ?\\{ return ?\\C-d ?* ?* ?  ?\\C-e backspace ?\\C-x<span style=\"color: #BFEBBF;\">]</span><span style=\"color: #DCDCCC;\">)</span>
+
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">bind this to a key</span>
+<span style=\"color: #DCDCCC;\">(</span>global-set-key <span style=\"color: #BFEBBF;\">(</span>kbd <span style=\"color: #CC9393;\">\"C-c b *\"</span><span style=\"color: #BFEBBF;\">)</span> 'bjm/sec-to-star<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> Where the <code>fset</code> line was added by using <code>M-x insert-kbd-macro</code> and then selecting the macro name I just used to save the macro. Finally I bind this to a key for ease of use in the future. </p>
+<p> You can use <code>M-x edit-named-kbd-macro</code> to see a nicer view of your macro and tweak it if needed. </p>
+<p> Finally, note that macros are not limited to simple editing commands. You can e.g. create, edit and save new files or do other more complex procedures within a macro. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/naming-and-saving-macros-for-repetitive-tasks/feed/") (comments nil "0"))) ("Org-mode basics VII: A TODO list with schedules and deadlines" "<p> In this post we’ll build on the <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-vi-a-simple-todo-list/\">simple todo list</a> that we put together previously and add schedules and deadlines to our tasks to build a powerful agenda. </p>
+<p> When adding a task (with <code>C-c c t</code>) you can add a scheduled date to it with <code>C-c C-s</code> or a deadline date with <code>C-c C-d</code>, or both. These will pop up a calendar which you can navigate using shift and the arrow keys. </p>
+<p> I prefer to schedule all new tasks to today’s date as a default, so I update the <code>org-capture-templates</code> variable to </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>setq org-capture-templates
+'<span style=\"color: #BFEBBF;\">(</span><span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"t\"</span> <span style=\"color: #CC9393;\">\"todo\"</span> entry <span style=\"color: #93E0E3;\">(</span>file+headline <span style=\"color: #CC9393;\">\"~/todo.org\"</span> <span style=\"color: #CC9393;\">\"Tasks\"</span><span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #CC9393;\">\"* TODO [#A] %?\\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \\\"+0d\\\"))\\n\"</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> Now when you add a task, you will see a scheduled field like this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+</pre>
+</div>
+<p> You can edit the date by putting the cursor in it and using shift + arrow keys. </p>
+<p> Now instead of using <code>C-c a t</code> to view your list of tasks, we will use <code>C-c a n</code> to display a list of your scheduled tasks and then any unscheduled tasks below it. </p>
+<p> I have several configuration options that I recommend. Add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> if you like the look of them: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">org-mode agenda options                                                ;;</span>
+<span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">open agenda in current window</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-window-setup <span style=\"color: #BFEBBF;\">(</span>quote current-window<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">warn me of any deadlines in next 7 days</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-deadline-warning-days 7<span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">show me tasks scheduled or due in next fortnight</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-span <span style=\"color: #BFEBBF;\">(</span>quote fortnight<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">don't show tasks as scheduled if they are already shown as a deadline</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-skip-scheduled-if-deadline-is-shown t<span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">don't give awarning colour to tasks with impending deadlines</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">if they are scheduled to be done</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-skip-deadline-prewarning-if-scheduled <span style=\"color: #BFEBBF;\">(</span>quote pre-scheduled<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">don't show tasks that are scheduled or have deadlines in the</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">normal todo list</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-todo-ignore-deadlines <span style=\"color: #BFEBBF;\">(</span>quote all<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-todo-ignore-scheduled <span style=\"color: #BFEBBF;\">(</span>quote all<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">sort tasks in order of when they are due and then by priority</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-sorting-strategy
+<span style=\"color: #BFEBBF;\">(</span>quote
+<span style=\"color: #D0BF8F;\">(</span><span style=\"color: #93E0E3;\">(</span>agenda deadline-up priority-down<span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #93E0E3;\">(</span>todo priority-down category-keep<span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #93E0E3;\">(</span>tags priority-down category-keep<span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #93E0E3;\">(</span>search category-keep<span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> With these options we get a really useful view of our tasks when using <code>C-c a n</code>. For example, here is a <code>todo.org</code> file with a mixture of tasks with and without schedules and deadlines </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #DFAF8F;\">* Tasks</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> do this today</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> do this tomorrow</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-09 Wed&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> this task is not scheduled</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #b0c4de;\">[#B]</span><span style=\"color: #BFEBBF;\"> scheduled for today, priority B</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> scheduled today and deadline in 2 days</span>
+<span style=\"color: #7F9F7F;\">DEADLINE:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-10 Thu&gt;</span> <span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> deadline in 2 days and not scheduled</span>
+<span style=\"color: #7F9F7F;\">DEADLINE:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-10 Thu&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> scheduled for monday</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-14 Mon&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #6b8e23;\">[#C]</span><span style=\"color: #BFEBBF;\"> do this today if I get time</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #b0c4de;\">[#B]</span><span style=\"color: #BFEBBF;\"> neither is this one</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #6b8e23;\">[#C]</span><span style=\"color: #BFEBBF;\"> or this one</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> deadline in 10 days and not scheduled</span>
+<span style=\"color: #7F9F7F;\">DEADLINE:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-18 Fri&gt;</span>
+</pre>
+</div>
+<p> When I view the agenda associated with this file I see this </p>
+<div class=\"figure\">
+<p><img src=\"http://i0.wp.com/pragmaticemacs.com/wp-content/uploads/2015/12/wpid-example-agenda.png?w=620\" alt=\"example-agenda.png\" data-recalc-dims=\"1\" /> </p>
+</p></div>" "http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/" (22118 57052) old 8 nil nil ((title nil "Org-mode basics VII: A TODO list with schedules and deadlines") (link nil "http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/") (comments nil "http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/#comments") (pubDate nil "Tue, 08 Dec 2015 13:45:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "org") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=405") (description nil "In this post we&#8217;ll build on the simple todo list that we put together previously and add schedules and deadlines to our tasks to build a powerful agenda. When adding a task (with C-c c t) you can add a scheduled date to it with C-c C-s or a deadline date with C-c C-d, or [&#8230;]") (encoded nil "<p> In this post we&#8217;ll build on the <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-vi-a-simple-todo-list/\">simple todo list</a> that we put together previously and add schedules and deadlines to our tasks to build a powerful agenda. </p>
+<p> When adding a task (with <code>C-c c t</code>) you can add a scheduled date to it with <code>C-c C-s</code> or a deadline date with <code>C-c C-d</code>, or both. These will pop up a calendar which you can navigate using shift and the arrow keys. </p>
+<p> I prefer to schedule all new tasks to today&#8217;s date as a default, so I update the <code>org-capture-templates</code> variable to </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>setq org-capture-templates
+      '<span style=\"color: #BFEBBF;\">(</span><span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"t\"</span> <span style=\"color: #CC9393;\">\"todo\"</span> entry <span style=\"color: #93E0E3;\">(</span>file+headline <span style=\"color: #CC9393;\">\"~/todo.org\"</span> <span style=\"color: #CC9393;\">\"Tasks\"</span><span style=\"color: #93E0E3;\">)</span>
+         <span style=\"color: #CC9393;\">\"* TODO [#A] %?\\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \\\"+0d\\\"))\\n\"</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> Now when you add a task, you will see a scheduled field like this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+</pre>
+</div>
+<p> You can edit the date by putting the cursor in it and using shift + arrow keys. </p>
+<p> Now instead of using <code>C-c a t</code> to view your list of tasks, we will use <code>C-c a n</code> to display a list of your scheduled tasks and then any unscheduled tasks below it. </p>
+<p> I have several configuration options that I recommend. Add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> if you like the look of them: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">org-mode agenda options                                                ;;</span>
+<span style=\"color: #5F7F5F;\">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">open agenda in current window</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-window-setup <span style=\"color: #BFEBBF;\">(</span>quote current-window<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">warn me of any deadlines in next 7 days</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-deadline-warning-days 7<span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">show me tasks scheduled or due in next fortnight</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-span <span style=\"color: #BFEBBF;\">(</span>quote fortnight<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">don't show tasks as scheduled if they are already shown as a deadline</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-skip-scheduled-if-deadline-is-shown t<span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">don't give awarning colour to tasks with impending deadlines</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">if they are scheduled to be done</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-skip-deadline-prewarning-if-scheduled <span style=\"color: #BFEBBF;\">(</span>quote pre-scheduled<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">don't show tasks that are scheduled or have deadlines in the</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">normal todo list</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-todo-ignore-deadlines <span style=\"color: #BFEBBF;\">(</span>quote all<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-todo-ignore-scheduled <span style=\"color: #BFEBBF;\">(</span>quote all<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">sort tasks in order of when they are due and then by priority</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-agenda-sorting-strategy
+  <span style=\"color: #BFEBBF;\">(</span>quote
+   <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #93E0E3;\">(</span>agenda deadline-up priority-down<span style=\"color: #93E0E3;\">)</span>
+    <span style=\"color: #93E0E3;\">(</span>todo priority-down category-keep<span style=\"color: #93E0E3;\">)</span>
+    <span style=\"color: #93E0E3;\">(</span>tags priority-down category-keep<span style=\"color: #93E0E3;\">)</span>
+    <span style=\"color: #93E0E3;\">(</span>search category-keep<span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> With these options we get a really useful view of our tasks when using <code>C-c a n</code>. For example, here is a <code>todo.org</code> file with a mixture of tasks with and without schedules and deadlines </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-org\"><span style=\"color: #DFAF8F;\">* Tasks</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> do this today</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> do this tomorrow</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-09 Wed&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> this task is not scheduled</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #b0c4de;\">[#B]</span><span style=\"color: #BFEBBF;\"> scheduled for today, priority B</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> scheduled today and deadline in 2 days</span>
+<span style=\"color: #7F9F7F;\">DEADLINE:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-10 Thu&gt;</span> <span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> deadline in 2 days and not scheduled</span>
+<span style=\"color: #7F9F7F;\">DEADLINE:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-10 Thu&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> scheduled for monday</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-14 Mon&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #6b8e23;\">[#C]</span><span style=\"color: #BFEBBF;\"> do this today if I get time</span>
+<span style=\"color: #7F9F7F;\">SCHEDULED:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-08 Tue&gt;</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #b0c4de;\">[#B]</span><span style=\"color: #BFEBBF;\"> neither is this one</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #6b8e23;\">[#C]</span><span style=\"color: #BFEBBF;\"> or this one</span>
+<span style=\"color: #BFEBBF;\">** </span><span style=\"color: #CC9393; font-weight: bold;\">TODO</span><span style=\"color: #BFEBBF;\"> </span><span style=\"color: #F0DFAF; font-weight: bold;\">[#A]</span><span style=\"color: #BFEBBF;\"> deadline in 10 days and not scheduled</span>
+<span style=\"color: #7F9F7F;\">DEADLINE:</span> <span style=\"color: #8CD0D3; text-decoration: underline;\">&lt;2015-12-18 Fri&gt;</span>
+</pre>
+</div>
+<p> When I view the agenda associated with this file I see this </p>
+<div class=\"figure\">
+<p><img src=\"http://i0.wp.com/pragmaticemacs.com/wp-content/uploads/2015/12/wpid-example-agenda.png?w=620\" alt=\"example-agenda.png\" data-recalc-dims=\"1\" /> </p>
+</p></div>
+") (commentRss nil "http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/feed/") (comments nil "0"))) ("Show current file in dired with dired-jump" "<p> Use <code>dired-jump</code>, which is bound to <code>C-x C-j</code> by default to show the current file in a dired buffer. The command is part of <code>dired-x</code> which is built in to emacs, but you may need to add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> to activate it. </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">dired-x</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>" "http://pragmaticemacs.com/emacs/show-current-file-in-dired-with-dired-jump/" (-948157 55552) old 7 nil nil ((title nil "Show current file in dired with dired-jump") (link nil "http://pragmaticemacs.com/emacs/show-current-file-in-dired-with-dired-jump/") (comments nil "http://pragmaticemacs.com/emacs/show-current-file-in-dired-with-dired-jump/#respond") (pubDate nil "Wed, 30 Nov -0001 00:00:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "dired") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=407") (description nil "Use dired-jump, which is bound to C-x C-j by default to show the current file in a dired buffer. The command is part of dired-x which is built in to emacs, but you may need to add the following to your emacs config file to activate it. (require 'dired-x)") (encoded nil "<p> Use <code>dired-jump</code>, which is bound to <code>C-x C-j</code> by default to show the current file in a dired buffer. The command is part of <code>dired-x</code> which is built in to emacs, but you may need to add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> to activate it. </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">dired-x</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+") (commentRss nil "http://pragmaticemacs.com/emacs/show-current-file-in-dired-with-dired-jump/feed/") (comments nil "0"))) ("Emacs does the star wars crawl" "<p> Marcin Norkowski has a <a href=\"http://mbork.pl/2015-12-18_Star_Wars_crawl_in_Emacs\">fun example</a> of some smart lisp coding to emulate the famous opening crawl of the Star Wars films. Here it is in action: </p>
+<div class=\"figure\">
+<p><img src=\"http://i2.wp.com/pragmaticemacs.com/wp-content/uploads/2015/12/star-wars-crawl.gif?w=620\" alt=\"star-wars-crawl.gif\" data-recalc-dims=\"1\" /> </p>
+</p></div>" "http://pragmaticemacs.com/emacs/emacs-does-the-star-wars-crawl/" (-948157 55552) old 5 nil nil ((title nil "Emacs does the star wars crawl") (link nil "http://pragmaticemacs.com/emacs/emacs-does-the-star-wars-crawl/") (comments nil "http://pragmaticemacs.com/emacs/emacs-does-the-star-wars-crawl/#respond") (pubDate nil "Wed, 30 Nov -0001 00:00:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "fun") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=415") (description nil "Marcin Norkowski has a fun example of some smart lisp coding to emulate the famous opening crawl of the Star Wars films. Here it is in action:") (encoded nil "<p> Marcin Norkowski has a <a href=\"http://mbork.pl/2015-12-18_Star_Wars_crawl_in_Emacs\">fun example</a> of some smart lisp coding to emulate the famous opening crawl of the Star Wars films. Here it is in action: </p>
+<div class=\"figure\">
+<p><img src=\"http://i2.wp.com/pragmaticemacs.com/wp-content/uploads/2015/12/star-wars-crawl.gif?w=620\" alt=\"star-wars-crawl.gif\" data-recalc-dims=\"1\" /> </p>
+</p></div>
+") (commentRss nil "http://pragmaticemacs.com/emacs/emacs-does-the-star-wars-crawl/feed/") (comments nil "0"))) ("Master your inbox with mu4e and org-mode" "<p> In the following I will drone on a bit about my philosophy on handling emails and then show how this is realised in emacs using <a href=\"http://www.djcbsoftware.nl/code/mu/mu4e.html\">mu4e</a> and org-mode. </p>
+<p> I couple of years ago I read an <a href=\"http://timharford.com/2013/09/3180/\">article by the economist Tim Harford</a> which hugely influenced the way I handle my emails. The ideas in the article are not unique but they really struck a chord with me. My email philosophy can be distilled down to one key concept: </p>
+<blockquote>
+<p> your inbox is not a todo list </p>
+</blockquote>
+<p> Like many people I used to keep emails in my inbox as a way of reminding me of something I needed to do, but the fact is that an inbox is a rubbish todo list. </p>
+<p> I also had folders for putting emails in and I would occasionally have a painful cleanout of my towering inbox, agonising over which folder to put an email in, or whether I should create a new folder for it. No more! As long as your email programme has a good search, then it is quicker to search than to use a filing system. </p>
+<p> Now when I check my emails, I do one of the following </p>
+<ul class=\"org-ul\">
+<li><i>delete</i> if it is rubbish</li>
+<li><i>read and delete</i> if it is not something I’ll need to revisit</li>
+<li><i>read and archive</i> if it is something I might need to look up again</li>
+<li><i>reply and archive</i> if it is something that will take less than a couple of minutes to reply to and I have the time</li>
+<li><i>add to todo list and archive</i> if it is something that requires an action or just needs a longer reply than I have time to write</li>
+</ul>
+<p> To use this system effectively, all you really need is: <i>(i)</i> an email client with a good search function so you can archive all mail in the same folder and not worry about filing it neatly, and <i>(ii)</i> a good system for adding tasks from your emails to a todo list. </p>
+<p> The mu4e email client in emacs, combined with org-mode for todo organisation is the perfect way to do both of these things. There is very good documentation on how to set up mu4e on the <a href=\"http://www.djcbsoftware.nl/code/mu/mu4e.html\">project web page</a>, including configuring it to work well with gmail, so I won’t go over that here. What I will say is that mu4e is built on mu, a powerful email indexer so it has all of your search needs covered. </p>
+<p> Apart from searching, mu4e integrates very well with org-mode to make it seamless to generate todo items from emails. To set this up, add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">store org-mode links to messages</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">org-mu4e</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">store link to message if in header view, not to header query</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-mu4e-link-query-in-headers-mode nil<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> Now update your <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/\">org-mode capture template</a> to something like this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>setq org-capture-templates
+'<span style=\"color: #BFEBBF;\">(</span><span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"t\"</span> <span style=\"color: #CC9393;\">\"todo\"</span> entry <span style=\"color: #93E0E3;\">(</span>file+headline <span style=\"color: #CC9393;\">\"~/todo.org\"</span> <span style=\"color: #CC9393;\">\"Tasks\"</span><span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #CC9393;\">\"* TODO [#A] %?\\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \\\"+0d\\\"))\\n%a\\n\"</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> This looks like the version we had before, but the extra <code>%a</code> adds a link to the file you are visiting when you invoke the capture template. </p>
+<p> The beauty of this is that hitting <code>C-c c t</code> now generates a todo item that contains <i>a link to the email you are currently viewing</i>. So you have zero friction in creating a todo item to e.g. reply to an email by a certain deadline, and you can happily archive that email knowing that clicking the link in the todo item will take you directly back to it. </p>
+<p> I moved from thunderbird to mu4e a couple of months ago and really haven’t looked back. The things I missed at first were some of the extensions I was using to: create email templates; remind me about attachments; and add a delay to outgoing email so that I could have an “undo send” functionality. Happily I’ve found solutions to all of these in mu4e and I’ll be covering them in future posts. </p>" "http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/" (22131 15932) old 6 nil nil ((title nil "Master your inbox with mu4e and org-mode") (link nil "http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/") (comments nil "http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/#comments") (pubDate nil "Thu, 17 Dec 2015 22:59:08 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "email") (category nil "mu4e") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=409") (description nil "In the following I will drone on a bit about my philosophy on handling emails and then show how this is realised in emacs using mu4e and org-mode. I couple of years ago I read an article by the economist Tim Harford which hugely influenced the way I handle my emails. The ideas in the [&#8230;]") (encoded nil "<p> In the following I will drone on a bit about my philosophy on handling emails and then show how this is realised in emacs using <a href=\"http://www.djcbsoftware.nl/code/mu/mu4e.html\">mu4e</a> and org-mode. </p>
+<p> I couple of years ago I read an <a href=\"http://timharford.com/2013/09/3180/\">article by the economist Tim Harford</a> which hugely influenced the way I handle my emails. The ideas in the article are not unique but they really struck a chord with me. My email philosophy can be distilled down to one key concept: </p>
+<blockquote>
+<p> your inbox is not a todo list </p>
+</blockquote>
+<p> Like many people I used to keep emails in my inbox as a way of reminding me of something I needed to do, but the fact is that an inbox is a rubbish todo list. </p>
+<p> I also had folders for putting emails in and I would occasionally have a painful cleanout of my towering inbox, agonising over which folder to put an email in, or whether I should create a new folder for it. No more! As long as your email programme has a good search, then it is quicker to search than to use a filing system. </p>
+<p> Now when I check my emails, I do one of the following </p>
+<ul class=\"org-ul\">
+<li><i>delete</i> if it is rubbish</li>
+<li><i>read and delete</i> if it is not something I&#8217;ll need to revisit</li>
+<li><i>read and archive</i> if it is something I might need to look up again</li>
+<li><i>reply and archive</i> if it is something that will take less than a couple of minutes to reply to and I have the time</li>
+<li><i>add to todo list and archive</i> if it is something that requires an action or just needs a longer reply than I have time to write</li>
+</ul>
+<p> To use this system effectively, all you really need is: <i>(i)</i> an email client with a good search function so you can archive all mail in the same folder and not worry about filing it neatly, and <i>(ii)</i> a good system for adding tasks from your emails to a todo list. </p>
+<p> The mu4e email client in emacs, combined with org-mode for todo organisation is the perfect way to do both of these things. There is very good documentation on how to set up mu4e on the <a href=\"http://www.djcbsoftware.nl/code/mu/mu4e.html\">project web page</a>, including configuring it to work well with gmail, so I won&#8217;t go over that here. What I will say is that mu4e is built on mu, a powerful email indexer so it has all of your search needs covered. </p>
+<p> Apart from searching, mu4e integrates very well with org-mode to make it seamless to generate todo items from emails. To set this up, add the following to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">store org-mode links to messages</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">org-mu4e</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">store link to message if in header view, not to header query</span>
+<span style=\"color: #DCDCCC;\">(</span>setq org-mu4e-link-query-in-headers-mode nil<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> Now update your <a href=\"http://pragmaticemacs.com/emacs/org-mode-basics-vii-a-todo-list-with-schedules-and-deadlines/\">org-mode capture template</a> to something like this </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span>setq org-capture-templates
+      '<span style=\"color: #BFEBBF;\">(</span><span style=\"color: #D0BF8F;\">(</span><span style=\"color: #CC9393;\">\"t\"</span> <span style=\"color: #CC9393;\">\"todo\"</span> entry <span style=\"color: #93E0E3;\">(</span>file+headline <span style=\"color: #CC9393;\">\"~/todo.org\"</span> <span style=\"color: #CC9393;\">\"Tasks\"</span><span style=\"color: #93E0E3;\">)</span>
+         <span style=\"color: #CC9393;\">\"* TODO [#A] %?\\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \\\"+0d\\\"))\\n%a\\n\"</span><span style=\"color: #D0BF8F;\">)</span><span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> This looks like the version we had before, but the extra <code>%a</code> adds a link to the file you are visiting when you invoke the capture template. </p>
+<p> The beauty of this is that hitting <code>C-c c t</code> now generates a todo item that contains <i>a link to the email you are currently viewing</i>. So you have zero friction in creating a todo item to e.g. reply to an email by a certain deadline, and you can happily archive that email knowing that clicking the link in the todo item will take you directly back to it. </p>
+<p> I moved from thunderbird to mu4e a couple of months ago and really haven&#8217;t looked back. The things I missed at first were some of the extensions I was using to: create email templates; remind me about attachments; and add a delay to outgoing email so that I could have an &#8220;undo send&#8221; functionality. Happily I&#8217;ve found solutions to all of these in mu4e and I&#8217;ll be covering them in future posts. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/feed/") (comments nil "10"))) ("Smart text templates with yasnippet" "<p> We looked before at <a href=\"http://pragmaticemacs.com/emacs/use-abbreviations-to-expand-text/\">expanding text with abbreviations</a> which is great for simple things, but you can do a whole lot more using <a href=\"https://github.com/capitaomorte/yasnippet\">yasnippet</a>. This is a smart template system for emacs, which is best explained with a simple example. </p>
+<p> In the animation below I first of all use a snippet to write a fraction in latex by typing <code>frac</code> and hitting <code>TAB</code> which expands to <code>\\frac{numerator}{denominator}</code> and places the cursor in the <code>numerator</code> field. I then type <code>1</code> and <code>TAB</code> to get to the next field and type <code>2</code> and <code>TAB</code> again to exit the snippet. </p>
+<div class=\"figure\">
+<p><img src=\"http://i1.wp.com/pragmaticemacs.com/wp-content/uploads/2016/01/smart-text-templates-yasnippet.gif?w=620\" alt=\"smart-text-templates-yasnippet.gif\" data-recalc-dims=\"1\" /> </p>
+</p></div>
+<p> In the second part of the animation I typed <code>begin</code> and hit <code>TAB</code> to expand the snippet, creating a latex environment. In this example, note how the environment field is mirrored in the <code>begin</code> and <code>end</code> lines so I only type <code>itemize</code> once. </p>
+<p> If you use my <a href=\"http://pragmaticemacs.com/installing-and-setting-up-emacs\">recommended</a> setup, <a href=\"http://batsov.com/prelude/\">prelude</a> then you already have yasnippet installed as well as a bunch of useful snippets, so you can get started right away. Otherwise you can <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> yasnippet from one of the package repositories. In either case you can add </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">yasnippet</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #DCDCCC;\">(</span>yas-global-mode 1<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> to turn on yasnippet globally so it works in all buffers. </p>
+<p> If you install from one of the repositories, you won’t get many snippets, but you can download sets of them from <a href=\"https://github.com/AndreaCrotti/yasnippet-snippets\">the official git repository</a> and write your own (see below). Snippets are defined in simple text files that you put (by default) in <code>~/.emacs.d/snippets/</code> in subdirectories named after the major mode for those snippets. So e.g. <code>~/.emacs.d/snippets/latex-mode/</code> contains my snippets that will be active in latex mode. </p>
+<p> Writing a snippet is really simple. The fraction snippet I used above looks like this: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: frac</span>
+<span style=\"color: #7F9F7F;\"># key: frac</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+\\frac{<span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>numerator<span style=\"color: #F0DFAF; font-weight: bold;\">}}</span>{<span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">2</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>denominator<span style=\"color: #F0DFAF; font-weight: bold;\">}}$</span><span style=\"color: #CC9393;\">0</span>
+</pre>
+</div>
+<p> The <code>name</code> can be whatever you like, but the <code>key</code> is the thing you type and <code>TAB</code> to expand out the snippet. You can see that the <code>${1:numerator}</code> represents the first field the cursor moves to, with the placeholder text, and similarly for the second field. <code>$0</code> indicates where the cursor goes when the final <code>TAB</code> exits the snippet. </p>
+<p> The snippet for the latex environment in the second example is similarly simple: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: begin</span>
+<span style=\"color: #7F9F7F;\"># key: begin</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+\\begin{<span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>environment<span style=\"color: #F0DFAF; font-weight: bold;\">}}</span>
+<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">0</span>
+\\end{<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">}</span>
+</pre>
+</div>
+<p> The repeated <code>$1</code> mirrors the environment field. </p>
+<p> After you have written a snippet, it should also be saved with the <code>key</code> as the file name in the appropriate subdirectory for the major mode you want. You’ll then need to use the commands <code>yas-recompile-all</code> and <code>yas-reload-all</code> to load the new snippets. </p>
+<p> These are simple examples and yasnippet can do a lot more, such as include lisp code that is activated when the snippet expands. I’ll show an example of using this to generate email templates in a future post. There are some other sophisticated examples in <a href=\"http://emacsrocks.com/e06.html\">this video from emacs rocks</a>. </p>" "http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/" (22154 59888) old 4 nil nil ((title nil "Smart text templates with yasnippet") (link nil "http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/") (comments nil "http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/#respond") (pubDate nil "Mon, 04 Jan 2016 21:53:52 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "beginner") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=418") (description nil "We looked before at expanding text with abbreviations which is great for simple things, but you can do a whole lot more using yasnippet. This is a smart template system for emacs, which is best explained with a simple example. In the animation below I first of all use a snippet to write a fraction [&#8230;]") (encoded nil "<p> We looked before at <a href=\"http://pragmaticemacs.com/emacs/use-abbreviations-to-expand-text/\">expanding text with abbreviations</a> which is great for simple things, but you can do a whole lot more using <a href=\"https://github.com/capitaomorte/yasnippet\">yasnippet</a>. This is a smart template system for emacs, which is best explained with a simple example. </p>
+<p> In the animation below I first of all use a snippet to write a fraction in latex by typing <code>frac</code> and hitting <code>TAB</code> which expands to <code>\\frac{numerator}{denominator}</code> and places the cursor in the <code>numerator</code> field. I then type <code>1</code> and <code>TAB</code> to get to the next field and type <code>2</code> and <code>TAB</code> again to exit the snippet. </p>
+<div class=\"figure\">
+<p><img src=\"http://i1.wp.com/pragmaticemacs.com/wp-content/uploads/2016/01/smart-text-templates-yasnippet.gif?w=620\" alt=\"smart-text-templates-yasnippet.gif\" data-recalc-dims=\"1\" /> </p>
+</p></div>
+<p> In the second part of the animation I typed <code>begin</code> and hit <code>TAB</code> to expand the snippet, creating a latex environment. In this example, note how the environment field is mirrored in the <code>begin</code> and <code>end</code> lines so I only type <code>itemize</code> once. </p>
+<p> If you use my <a href=\"http://pragmaticemacs.com/installing-and-setting-up-emacs\">recommended</a> setup, <a href=\"http://batsov.com/prelude/\">prelude</a> then you already have yasnippet installed as well as a bunch of useful snippets, so you can get started right away. Otherwise you can <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">install</a> yasnippet from one of the package repositories. In either case you can add </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">require</span> '<span style=\"color: #BFEBBF;\">yasnippet</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #DCDCCC;\">(</span>yas-global-mode 1<span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> to your <a href=\"http://pragmaticemacs.com/emacs/editing-your-emacs-config-file/\">emacs config file</a> to turn on yasnippet globally so it works in all buffers. </p>
+<p> If you install from one of the repositories, you won&#8217;t get many snippets, but you can download sets of them from <a href=\"https://github.com/AndreaCrotti/yasnippet-snippets\">the official git repository</a> and write your own (see below). Snippets are defined in simple text files that you put (by default) in <code>~/.emacs.d/snippets/</code> in subdirectories named after the major mode for those snippets. So e.g. <code>~/.emacs.d/snippets/latex-mode/</code> contains my snippets that will be active in latex mode. </p>
+<p> Writing a snippet is really simple. The fraction snippet I used above looks like this: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: frac</span>
+<span style=\"color: #7F9F7F;\"># key: frac</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+\\frac{<span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>numerator<span style=\"color: #F0DFAF; font-weight: bold;\">}}</span>{<span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">2</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>denominator<span style=\"color: #F0DFAF; font-weight: bold;\">}}$</span><span style=\"color: #CC9393;\">0</span>
+</pre>
+</div>
+<p> The <code>name</code> can be whatever you like, but the <code>key</code> is the thing you type and <code>TAB</code> to expand out the snippet. You can see that the <code>${1:numerator}</code> represents the first field the cursor moves to, with the placeholder text, and similarly for the second field. <code>$0</code> indicates where the cursor goes when the final <code>TAB</code> exits the snippet. </p>
+<p> The snippet for the latex environment in the second example is similarly simple: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: begin</span>
+<span style=\"color: #7F9F7F;\"># key: begin</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+\\begin{<span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>environment<span style=\"color: #F0DFAF; font-weight: bold;\">}}</span>
+<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">0</span>
+\\end{<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">}</span>
+</pre>
+</div>
+<p> The repeated <code>$1</code> mirrors the environment field. </p>
+<p> After you have written a snippet, it should also be saved with the <code>key</code> as the file name in the appropriate subdirectory for the major mode you want. You&#8217;ll then need to use the commands <code>yas-recompile-all</code> and <code>yas-reload-all</code> to load the new snippets. </p>
+<p> These are simple examples and yasnippet can do a lot more, such as include lisp code that is activated when the snippet expands. I&#8217;ll show an example of using this to generate email templates in a future post. There are some other sophisticated examples in <a href=\"http://emacsrocks.com/e06.html\">this video from emacs rocks</a>. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/feed/") (comments nil "0"))) ("Open recent directories in dired" "<p> I find myself doing more and more of my file system tasks in emacs with <a href=\"http://pragmaticemacs.com/emacs/dired-emacs-as-a-file-browser/\">dired</a>. The package <a href=\"http://www.emacswiki.org/emacs/DiredPlus\">dired+</a> adds some extra features to dired, one of which I discovered today. </p>
+<p> The command <code>diredp-dired-recent-dirs</code>, bound to <code>C-x R</code> by default, presents you with a list of recent directories that you can then choose to open in dired. I have found to be a really quick way to find the directory I want to open, especially when combined with <a href=\"http://oremacs.com/2015/04/16/ivy-mode/\">ivy-mode</a> (or one of the other completion packages). </p>
+<p> Dired+ can be <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">installed</a> from the normal package repositories. </p>" "http://pragmaticemacs.com/emacs/open-recent-directories-in-dired/" (-948157 55552) old 3 nil nil ((title nil "Open recent directories in dired") (link nil "http://pragmaticemacs.com/emacs/open-recent-directories-in-dired/") (comments nil "http://pragmaticemacs.com/emacs/open-recent-directories-in-dired/#respond") (pubDate nil "Wed, 30 Nov -0001 00:00:00 +0000") (creator nil "Ben Maughan") (category nil "dired") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=422") (description nil "I find myself doing more and more of my file system tasks in emacs with dired. The package dired+ adds some extra features to dired, one of which I discovered today. The command diredp-dired-recent-dirs, bound to C-x R by default, presents you with a list of recent directories that you can then choose to open [&#8230;]") (encoded nil "<p> I find myself doing more and more of my file system tasks in emacs with <a href=\"http://pragmaticemacs.com/emacs/dired-emacs-as-a-file-browser/\">dired</a>. The package <a href=\"http://www.emacswiki.org/emacs/DiredPlus\">dired+</a> adds some extra features to dired, one of which I discovered today. </p>
+<p> The command <code>diredp-dired-recent-dirs</code>, bound to <code>C-x R</code> by default, presents you with a list of recent directories that you can then choose to open in dired. I have found to be a really quick way to find the directory I want to open, especially when combined with <a href=\"http://oremacs.com/2015/04/16/ivy-mode/\">ivy-mode</a> (or one of the other completion packages). </p>
+<p> Dired+ can be <a href=\"http://pragmaticemacs.com/emacs/install-packages/\">installed</a> from the normal package repositories. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/open-recent-directories-in-dired/feed/") (comments nil "0"))) ("Email templates in mu4e with yasnippet" "<p> This is the second in a <a href=\"http://pragmaticemacs.com/mu4e-tutorials/\">series of posts</a> on using <code>mu4e</code> for email in emacs. When I <a href=\"http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/\">moved from thunderbird to mu4e</a>, there were some thunderbird extensions that I missed. One was quicktext which I used to create simple email templates for common sorts of emails. This is easily replicated in emacs using <a href=\"http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/\">yasnippet</a>. </p>
+<p> As a simple example, I made a snippet to expand the key <code>all</code> into </p>
+<blockquote>
+<p> Hi all, </p>
+<p> <img src=\"http://s.w.org/images/core/emoji/72x72/2026.png\" alt=\"&#x2026;\" class=\"wp-smiley\" style=\"height: 1em; max-height: 1em;\" /> </p>
+<p> Cheers, </p>
+<p> Ben </p>
+</blockquote>
+<p> The snippet is </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: hi all</span>
+<span style=\"color: #7F9F7F;\"># key: all</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+Hi all,
+<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">0</span>
+Cheers,
+Ben
+</pre>
+</div>
+<p> This snippet is saved in the <code>message-mode</code> subdirectory of my <code>snippets</code> directory, since <code>message-mode</code> is the major mode for email composition in <code>mu4e</code>. </p>
+<p> We can be a bit smarter than this with a snippet that takes the name of the email recipient and adds that to the template. The following is close to <a href=\"http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html\">binchen’s instructions</a> with a few small modifications. There are two parts to this: a snippet that expands out as normal, and a lisp function that it calls when it expands to extract the recipient’s name. </p>
+<p> First, the lisp function </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">Function to return first name of email recipient</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">Used by yasnippet</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">Based closely on</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">my-yas-get-first-name-from-to-field</span> <span style=\"color: #BFEBBF;\">()</span>
+<span style=\"color: #BFEBBF;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">let</span> <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #93E0E3;\">(</span>rlt <span style=\"color: #CC9393;\">\"NAME\"</span><span style=\"color: #93E0E3;\">)</span> str rlt2<span style=\"color: #D0BF8F;\">)</span>
+<span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">save-excursion</span>
+<span style=\"color: #93E0E3;\">(</span>goto-char <span style=\"color: #9FC59F;\">(</span>point-min<span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">first line in email could be some hidden line containing NO to field</span>
+<span style=\"color: #93E0E3;\">(</span>setq str <span style=\"color: #9FC59F;\">(</span>buffer-substring-no-properties <span style=\"color: #94BFF3;\">(</span>point-min<span style=\"color: #94BFF3;\">)</span> <span style=\"color: #94BFF3;\">(</span>point-max<span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">take name from TO field</span>
+<span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> <span style=\"color: #93E0E3;\">(</span>string-match <span style=\"color: #CC9393;\">\"^To: \\\"?</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">[</span><span style=\"color: #F0DFAF; font-weight: bold;\">^</span><span style=\"color: #CC9393;\"> ,]+</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">\"</span> str<span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #93E0E3;\">(</span>setq rlt <span style=\"color: #9FC59F;\">(</span>match-string 1 str<span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">get name in FROM field if available</span>
+<span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> <span style=\"color: #93E0E3;\">(</span>string-match <span style=\"color: #CC9393;\">\"^</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">[</span><span style=\"color: #F0DFAF; font-weight: bold;\">^</span><span style=\"color: #CC9393;\"> ,\\n]+</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">.+writes:$\"</span> str<span style=\"color: #93E0E3;\">)</span>
+<span style=\"color: #93E0E3;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">progn</span> <span style=\"color: #9FC59F;\">(</span>setq rlt2 <span style=\"color: #94BFF3;\">(</span>match-string 1 str<span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span>
+<span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">prefer name in FROM field if TO field has \"@\"</span>
+<span style=\"color: #9FC59F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> <span style=\"color: #94BFF3;\">(</span>string-match <span style=\"color: #CC9393;\">\"@\"</span> rlt<span style=\"color: #94BFF3;\">)</span>
+<span style=\"color: #94BFF3;\">(</span>setq rlt rlt2<span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span>
+<span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span>
+<span style=\"color: #D0BF8F;\">(</span>message <span style=\"color: #CC9393;\">\"rlt=%s\"</span> rlt<span style=\"color: #D0BF8F;\">)</span>
+rlt<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> This function takes the first name of the email recipient from the “To:” field of the message. It also looks for a name in the “Joe Bloggs writes:” text that mu4e generates when you reply to an email. This is populated from the “From:” field of the email being replied to and sometimes gives a better match for the name. The function compares the two name strings and prefers the “To:” name unless it contains an “@” in which case it chooses the “From:” name (this is the addition I made to <i>binchen</i>‘s version). You could make this more sophisticated but it works pretty well for me as is. </p>
+<p> Now we need a snippet to expand: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: dear name</span>
+<span style=\"color: #7F9F7F;\"># key: dear</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+Dear <span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>`(my-yas-get-first-name-from-to-field)`<span style=\"color: #F0DFAF; font-weight: bold;\">}</span>,
+<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">0</span>
+Best wishes,
+Ben
+</pre>
+</div>
+<p> Note how our function is straightforwardly called by the snippet to give “Dear NAME”. </p>
+<p> Hopefully this gives you some ideas of how to make useful email templates with yasnippet. In future posts I’ll talk about how I have added attachment reminders and delayed sending features to mu4e. </p>" "http://pragmaticemacs.com/emacs/email-templates-in-mu4e-with-yasnippet/" (22164 5736) old 2 nil nil ((title nil "Email templates in mu4e with yasnippet") (link nil "http://pragmaticemacs.com/emacs/email-templates-in-mu4e-with-yasnippet/") (comments nil "http://pragmaticemacs.com/emacs/email-templates-in-mu4e-with-yasnippet/#respond") (pubDate nil "Mon, 11 Jan 2016 20:54:00 +0000") (creator nil "Ben Maughan") (category nil "emacs") (category nil "email") (category nil "mu4e") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=428") (description nil "This is the second in a series of posts on using mu4e for email in emacs. When I moved from thunderbird to mu4e, there were some thunderbird extensions that I missed. One was quicktext which I used to create simple email templates for common sorts of emails. This is easily replicated in emacs using yasnippet. [&#8230;]") (encoded nil "<p> This is the second in a <a href=\"http://pragmaticemacs.com/mu4e-tutorials/\">series of posts</a> on using <code>mu4e</code> for email in emacs. When I <a href=\"http://pragmaticemacs.com/emacs/master-your-inbox-with-mu4e-and-org-mode/\">moved from thunderbird to mu4e</a>, there were some thunderbird extensions that I missed. One was quicktext which I used to create simple email templates for common sorts of emails. This is easily replicated in emacs using <a href=\"http://pragmaticemacs.com/emacs/smart-text-templates-with-yasnippet/\">yasnippet</a>. </p>
+<p> As a simple example, I made a snippet to expand the key <code>all</code> into </p>
+<blockquote>
+<p> Hi all, </p>
+<p> <img src=\"http://s.w.org/images/core/emoji/72x72/2026.png\" alt=\"&#x2026;\" class=\"wp-smiley\" style=\"height: 1em; max-height: 1em;\" /> </p>
+<p> Cheers, </p>
+<p> Ben </p>
+</blockquote>
+<p> The snippet is </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: hi all</span>
+<span style=\"color: #7F9F7F;\"># key: all</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+Hi all,
+
+<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">0</span>
+
+Cheers,
+ Ben
+</pre>
+</div>
+<p> This snippet is saved in the <code>message-mode</code> subdirectory of my <code>snippets</code> directory, since <code>message-mode</code> is the major mode for email composition in <code>mu4e</code>. </p>
+<p> We can be a bit smarter than this with a snippet that takes the name of the email recipient and adds that to the template. The following is close to <a href=\"http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html\">binchen&#8217;s instructions</a> with a few small modifications. There are two parts to this: a snippet that expands out as normal, and a lisp function that it calls when it expands to extract the recipient&#8217;s name. </p>
+<p> First, the lisp function </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">Function to return first name of email recipient</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">Used by yasnippet</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">Based closely on</span>
+<span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">my-yas-get-first-name-from-to-field</span> <span style=\"color: #BFEBBF;\">()</span>
+  <span style=\"color: #BFEBBF;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">let</span> <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #93E0E3;\">(</span>rlt <span style=\"color: #CC9393;\">\"NAME\"</span><span style=\"color: #93E0E3;\">)</span> str rlt2<span style=\"color: #D0BF8F;\">)</span>
+    <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">save-excursion</span>
+      <span style=\"color: #93E0E3;\">(</span>goto-char <span style=\"color: #9FC59F;\">(</span>point-min<span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span>
+      <span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">first line in email could be some hidden line containing NO to field</span>
+      <span style=\"color: #93E0E3;\">(</span>setq str <span style=\"color: #9FC59F;\">(</span>buffer-substring-no-properties <span style=\"color: #94BFF3;\">(</span>point-min<span style=\"color: #94BFF3;\">)</span> <span style=\"color: #94BFF3;\">(</span>point-max<span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span>
+    <span style=\"color: #5F7F5F;\">;; </span><span style=\"color: #7F9F7F;\">take name from TO field</span>
+    <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> <span style=\"color: #93E0E3;\">(</span>string-match <span style=\"color: #CC9393;\">\"^To: \\\"?</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">[</span><span style=\"color: #F0DFAF; font-weight: bold;\">^</span><span style=\"color: #CC9393;\"> ,]+</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">\"</span> str<span style=\"color: #93E0E3;\">)</span>
+      <span style=\"color: #93E0E3;\">(</span>setq rlt <span style=\"color: #9FC59F;\">(</span>match-string 1 str<span style=\"color: #9FC59F;\">)</span><span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span>
+    <span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">get name in FROM field if available</span>
+    <span style=\"color: #D0BF8F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> <span style=\"color: #93E0E3;\">(</span>string-match <span style=\"color: #CC9393;\">\"^</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">[</span><span style=\"color: #F0DFAF; font-weight: bold;\">^</span><span style=\"color: #CC9393;\"> ,\\n]+</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">.+writes:$\"</span> str<span style=\"color: #93E0E3;\">)</span>
+      <span style=\"color: #93E0E3;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">progn</span> <span style=\"color: #9FC59F;\">(</span>setq rlt2 <span style=\"color: #94BFF3;\">(</span>match-string 1 str<span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span>
+             <span style=\"color: #5F7F5F;\">;;</span><span style=\"color: #7F9F7F;\">prefer name in FROM field if TO field has \"@\"</span>
+             <span style=\"color: #9FC59F;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">when</span> <span style=\"color: #94BFF3;\">(</span>string-match <span style=\"color: #CC9393;\">\"@\"</span> rlt<span style=\"color: #94BFF3;\">)</span>
+               <span style=\"color: #94BFF3;\">(</span>setq rlt rlt2<span style=\"color: #94BFF3;\">)</span><span style=\"color: #9FC59F;\">)</span>
+             <span style=\"color: #93E0E3;\">)</span><span style=\"color: #D0BF8F;\">)</span>
+    <span style=\"color: #D0BF8F;\">(</span>message <span style=\"color: #CC9393;\">\"rlt=%s\"</span> rlt<span style=\"color: #D0BF8F;\">)</span>
+    rlt<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+<p> This function takes the first name of the email recipient from the &#8220;To:&#8221; field of the message. It also looks for a name in the &#8220;Joe Bloggs writes:&#8221; text that mu4e generates when you reply to an email. This is populated from the &#8220;From:&#8221; field of the email being replied to and sometimes gives a better match for the name. The function compares the two name strings and prefers the &#8220;To:&#8221; name unless it contains an &#8220;@&#8221; in which case it chooses the &#8220;From:&#8221; name (this is the addition I made to <i>binchen</i>&#8216;s version). You could make this more sophisticated but it works pretty well for me as is. </p>
+<p> Now we need a snippet to expand: </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-snippet\"><span style=\"color: #7F9F7F;\"># -*- mode: snippet -*-</span>
+<span style=\"color: #7F9F7F;\"># name: dear name</span>
+<span style=\"color: #7F9F7F;\"># key: dear</span>
+<span style=\"color: #7F9F7F;\"># --</span>
+Dear <span style=\"color: #F0DFAF; font-weight: bold;\">${</span><span style=\"color: #ff0000; font-weight: bold;\">1</span><span style=\"color: #F0DFAF; font-weight: bold;\">:</span>`(my-yas-get-first-name-from-to-field)`<span style=\"color: #F0DFAF; font-weight: bold;\">}</span>,
+
+<span style=\"color: #F0DFAF; font-weight: bold;\">$</span><span style=\"color: #CC9393;\">0</span>
+
+Best wishes,
+ Ben
+</pre>
+</div>
+<p> Note how our function is straightforwardly called by the snippet to give &#8220;Dear NAME&#8221;. </p>
+<p> Hopefully this gives you some ideas of how to make useful email templates with yasnippet. In future posts I&#8217;ll talk about how I have added attachment reminders and delayed sending features to mu4e. </p>
+") (commentRss nil "http://pragmaticemacs.com/emacs/email-templates-in-mu4e-with-yasnippet/feed/") (comments nil "0"))) ("Aligning text" "<p> Emacs has a flexible tool, <code>align-regexp</code>, for aligning text but it is surprisingly fiddly to use. For example to align a section of text like this: </p>
+<pre class=\"example\">
+the quick brown fox
+jumped over the lazy
+dogs the quick brown
+</pre>
+<p> into columns like this: </p>
+<pre class=\"example\">
+the     quick  brown  fox
+jumped  over   the    lazy
+dogs    the    quick  brown
+</pre>
+<p> you would highlight the text and use <code>C-u M-x align-regexp \\(\\s-*\\)\\s- RET 1 RET 0 RET y</code>. See what I mean! </p>
+<p> To make life easier, I wrote a couple of simple wrappers around <code>align-regexp</code> for common tasks. The first aligns on whitespace, and the second aligns on <code>&amp;</code> (useful for LaTeX tables). </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">bjm/align-whitespace</span> <span style=\"color: #BFEBBF;\">(</span>start end<span style=\"color: #BFEBBF;\">)</span>
+<span style=\"color: #9FC59F;\">\"Align columns by whitespace\"</span>
+<span style=\"color: #BFEBBF;\">(</span>interactive <span style=\"color: #CC9393;\">\"r\"</span><span style=\"color: #BFEBBF;\">)</span>
+<span style=\"color: #BFEBBF;\">(</span>align-regexp start end
+<span style=\"color: #CC9393;\">\"</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">\\\\s-*</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">\\\\s-\"</span> 1 0 t<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">bjm/align-&amp;</span> <span style=\"color: #BFEBBF;\">(</span>start end<span style=\"color: #BFEBBF;\">)</span>
+<span style=\"color: #9FC59F;\">\"Align columns by ampersand\"</span>
+<span style=\"color: #BFEBBF;\">(</span>interactive <span style=\"color: #CC9393;\">\"r\"</span><span style=\"color: #BFEBBF;\">)</span>
+<span style=\"color: #BFEBBF;\">(</span>align-regexp start end
+<span style=\"color: #CC9393;\">\"</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">\\\\s-*</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">\\\\&amp;\"</span> 1 1 t<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>" "http://pragmaticemacs.com/emacs/aligning-text/" (22170 47820) old 1 nil nil ((title nil "Aligning text") (link nil "http://pragmaticemacs.com/emacs/aligning-text/") (comments nil "http://pragmaticemacs.com/emacs/aligning-text/#comments") (pubDate nil "Sat, 16 Jan 2016 21:49:00 +0000") (creator nil "Ben Maughan") (category nil "editing") (category nil "emacs") (guid ((isPermaLink . "false")) "http://pragmaticemacs.com/?p=444") (description nil "Emacs has a flexible tool, align-regexp, for aligning text but it is surprisingly fiddly to use. For example to align a section of text like this: the quick brown fox jumped over the lazy dogs the quick brown into columns like this: the quick brown fox jumped over the lazy dogs the quick brown you [&#8230;]") (encoded nil "<p> Emacs has a flexible tool, <code>align-regexp</code>, for aligning text but it is surprisingly fiddly to use. For example to align a section of text like this: </p>
+<pre class=\"example\">
+the quick brown fox
+jumped over the lazy
+dogs the quick brown
+</pre>
+<p> into columns like this: </p>
+<pre class=\"example\">
+the     quick  brown  fox
+jumped  over   the    lazy
+dogs    the    quick  brown
+</pre>
+<p> you would highlight the text and use <code>C-u M-x align-regexp \\(\\s-*\\)\\s- RET 1 RET 0 RET y</code>. See what I mean! </p>
+<p> To make life easier, I wrote a couple of simple wrappers around <code>align-regexp</code> for common tasks. The first aligns on whitespace, and the second aligns on <code>&amp;</code> (useful for LaTeX tables). </p>
+<div class=\"org-src-container\">
+<pre class=\"src src-elisp\"><span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">bjm/align-whitespace</span> <span style=\"color: #BFEBBF;\">(</span>start end<span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #9FC59F;\">\"Align columns by whitespace\"</span>
+  <span style=\"color: #BFEBBF;\">(</span>interactive <span style=\"color: #CC9393;\">\"r\"</span><span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #BFEBBF;\">(</span>align-regexp start end
+                <span style=\"color: #CC9393;\">\"</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">\\\\s-*</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">\\\\s-\"</span> 1 0 t<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+
+<span style=\"color: #DCDCCC;\">(</span><span style=\"color: #F0DFAF; font-weight: bold;\">defun</span> <span style=\"color: #93E0E3;\">bjm/align-&amp;</span> <span style=\"color: #BFEBBF;\">(</span>start end<span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #9FC59F;\">\"Align columns by ampersand\"</span>
+  <span style=\"color: #BFEBBF;\">(</span>interactive <span style=\"color: #CC9393;\">\"r\"</span><span style=\"color: #BFEBBF;\">)</span>
+  <span style=\"color: #BFEBBF;\">(</span>align-regexp start end
+                <span style=\"color: #CC9393;\">\"</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">(</span><span style=\"color: #CC9393;\">\\\\s-*</span><span style=\"color: #7F9F7F; font-weight: bold;\">\\\\</span><span style=\"color: #F0DFAF; font-weight: bold;\">)</span><span style=\"color: #CC9393;\">\\\\&amp;\"</span> 1 1 t<span style=\"color: #BFEBBF;\">)</span><span style=\"color: #DCDCCC;\">)</span>
+</pre>
+</div>
+") (commentRss nil "http://pragmaticemacs.com/emacs/aligning-text/feed/") (comments nil "4"))))

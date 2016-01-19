@@ -1,0 +1,137 @@
+;; -*- coding: utf-8 -*-
+(("Welcome to Placement Blog 2015-16" "This has to be your homepage.!" "" (22174 13620 430356 661000) feed 0 nil nil ((title nil "Welcome to Placement Blog 2015-16") (link ((href . "http://placements.iitb.ac.in/blog/?feed=rss2") (rel . "self") (type . "application/rss+xml"))) (link nil "http://placements.iitb.ac.in/blog") (description nil "This has to be your homepage.!") (lastBuildDate nil "Sat, 21 Nov 2015 23:04:19 +0000") (language nil "en-US") (updatePeriod nil "hourly") (updateFrequency nil "1") (generator nil "http://wordpress.org/?v=3.4.1") (item nil (title nil "Infineon JAFs Job Descriptions and E-PPT") (link nil "http://placements.iitb.ac.in/blog/?p=3511") (comments nil "http://placements.iitb.ac.in/blog/?p=3511#comments") (pubDate nil "Sat, 21 Nov 2015 21:55:51 +0000") (creator nil "ipt-member") (category nil "Announcements") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3511") (description nil "JAF 01 Job descriptions : IFIN ATV SW Automotive Embedded Engineer_Bangalore IFIN ATV PSV Validation Engineer_Bangalore IFIN PMM IMC_Embedded SW Engineer_Bangalore JAF 02 job description and E-PPT will be shared here by tomorrow..") (encoded nil "<p>JAF 01 Job descriptions :</p>
+<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/IFIN-ATV-SW-Automotive-Embedded-Engineer_Bangalore.pdf\">IFIN ATV SW Automotive Embedded Engineer_Bangalore</a></p>
+<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/IFIN-ATV-PSV-Validation-Engineer_Bangalore.pdf\">IFIN ATV PSV Validation Engineer_Bangalore</a></p>
+<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/IFIN-PMM-IMC_Embedded-SW-Engineer_Bangalore.pdf\">IFIN PMM IMC_Embedded SW Engineer_Bangalore</a></p>
+<p>JAF 02 job description and E-PPT will be shared here by tomorrow..</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3511") (comments nil "0")) (item nil (title nil "JAF Open – Fine Finish Organics Pvt. Ltd.") (link nil "http://placements.iitb.ac.in/blog/?p=3503") (comments nil "http://placements.iitb.ac.in/blog/?p=3503#comments") (pubDate nil "Sat, 21 Nov 2015 17:43:35 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3503") (description nil "Deadline – Monday, Nov 23, 11:59PM") (encoded nil "<p>Deadline – Monday, Nov 23, 11:59PM</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3503") (comments nil "0")) (item nil (title nil "JAF Open – App Dynamics") (link nil "http://placements.iitb.ac.in/blog/?p=3498") (comments nil "http://placements.iitb.ac.in/blog/?p=3498#comments") (pubDate nil "Sat, 21 Nov 2015 17:39:51 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3498") (description nil "Deadline – Monday, Nov 23, 11:59PM Please visit following link for ePPT and company Video: http://placements.iitb.ac.in/blog/?p=2687 There will be online test on Thursday, Nov 26, all students who sign the JAF are eligible. Please find detailed Job Description: App Dynamics Presentation Material") (encoded nil "<p>Deadline – Monday, Nov 23, 11:59PM</p>
+<p>Please visit following link for ePPT and company Video:</p>
+<p>http://placements.iitb.ac.in/blog/?p=2687</p>
+<p>There will be online test on Thursday, Nov 26, all students who sign the JAF are eligible.</p>
+<p>Please find detailed Job Description: <a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/App-Dynamics-Presentation-Material.rar\">App Dynamics Presentation Material</a></p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3498") (comments nil "0")) (item nil (title nil "Infineon JAF’s opened") (link nil "http://placements.iitb.ac.in/blog/?p=3481") (comments nil "http://placements.iitb.ac.in/blog/?p=3481#comments") (pubDate nil "Sat, 21 Nov 2015 16:23:50 +0000") (creator nil "ipt-member") (category nil "Announcements") (category nil "JAF opening") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3481") (description nil "Deadline : 23rd Nov 2015, 11.59 pm") (encoded nil "<p>Deadline : 23rd Nov 2015, 11.59 pm</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3481") (comments nil "0")) (item nil (title nil "Hewlett Packard JAF opened") (link nil "http://placements.iitb.ac.in/blog/?p=3418") (comments nil "http://placements.iitb.ac.in/blog/?p=3418#comments") (pubDate nil "Sat, 21 Nov 2015 16:22:03 +0000") (creator nil "ipt-member") (category nil "Announcements") (category nil "JAF opening") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3418") (description nil "Deadline : 23rd nov 2015, 11.59 pm") (encoded nil "<p>Deadline : 23rd nov 2015, 11.59 pm</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3418") (comments nil "0")) (item nil (title nil "MathWorks Test Shortlist") (link nil "http://placements.iitb.ac.in/blog/?p=3465") (comments nil "http://placements.iitb.ac.in/blog/?p=3465#comments") (pubDate nil "Sat, 21 Nov 2015 14:44:23 +0000") (creator nil "ipt-member") (category nil "Announcements") (category nil "Interview Shortlists") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3465") (description nil "MathWorks_IIT Bombay_2015-16 Please note: For the students having highlighted columns, please follow the instructions written therein (regarding conveying us the preferred Track and language choices for the test) positively by tomorrow (November 22nd) 7:00 PM without delay. We have also sent mails to the same highlighted students from the id &#8216;placementcell@iitb.ac.in&#8217; and they are requested [...]") (encoded nil "<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/IIT-Bombay-2015-16.xlsx\">MathWorks_IIT Bombay_2015-16</a></p>
+<p><strong>Please note:</strong> For the students having highlighted columns, please follow the instructions written therein (regarding conveying us the preferred Track and language choices for the test) positively by tomorrow (November 22nd) 7:00 PM <strong>without delay</strong>. We have also sent mails to the same highlighted students from the id &#8216;placementcell@iitb.ac.in&#8217; and they are requested to reply back to us on the same mail itself (and not send us any new mail).</p>
+<p>Also in the Test, different Tracks will encompass the questions from the topics as mentioned follows:</p>
+<p><strong><span style=\"text-decoration: underline\">Computer Science Track </span></strong></p>
+<p>•         Basic math &#8211; discrete math, computation, and algorithm theory</p>
+<p>•         Programming concepts – OOP, data structures, and operating systems</p>
+<p>•         Programming Languages – Syntax and design questions in the 3 languages chosen (C,C++,Java,Jscript,  MATLAB)</p>
+<p>•         MATLAB &#8211; basic MATLAB syntax, data and programming concepts</p>
+<p>&nbsp;</p>
+<p><strong><span style=\"text-decoration: underline\">Embedded Systems Track</span></strong></p>
+<p>•         Basic math &#8211; calculus, differential equations, and linear algebra</p>
+<p>•         Programming concepts &#8211; syntax and how languages work</p>
+<p>•         Programming language – Syntax and design questions in the languages chosen</p>
+<p>•         MATLAB &#8211; basic MATLAB syntax, data and programming concepts</p>
+<p>•         Embedded Systems &#8211; Real Time Operating Systems, Scheduling, and General OS Concepts</p>
+<p><strong><span style=\"text-decoration: underline\"> </span></strong></p>
+<p><strong><span style=\"text-decoration: underline\">Signal Processing Track</span></strong></p>
+<p>•         Basic math &#8211; calculus, differential equations, and linear algebra</p>
+<p>•         Programming concepts &#8211; syntax and how languages work</p>
+<p>•         Programming language – Syntax and design questions in the language chosen</p>
+<p>•         MATLAB &#8211; basic MATLAB syntax, data and programming concepts</p>
+<p>•         Signal Processing concepts</p>
+<p>&nbsp;</p>
+<p><strong><span style=\"text-decoration: underline\">Control Theory Track</span></strong></p>
+<p>•         Basic math &#8211; calculus, differential equations, and linear algebra;</p>
+<p>•         Programming concepts  &#8211; syntax and how languages work;</p>
+<p>•         Programming language – Syntax and design questions in the language chosen</p>
+<p>•         MATLAB &#8211; basic MATLAB syntax, data and programming concepts;</p>
+<p>•         Controls  –  classical control, modern control, and non-linear systems</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3465") (comments nil "0")) (item nil (title nil "ITC JAF signing: Important instructions") (link nil "http://placements.iitb.ac.in/blog/?p=3466") (comments nil "http://placements.iitb.ac.in/blog/?p=3466#comments") (pubDate nil "Sat, 21 Nov 2015 14:38:45 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3466") (description nil "Application template -Tech Finals 2016 ITC Instructions Please go through the instructions provided to apply for ITC. Note: Application template submission deadline: 25/11/2015 (8am) Upload only 1 page Tech. resume on the placement portal before 24/11/2015 (11:59pm).  Any request will not be entertained on missing the deadline.") (encoded nil "<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/Application-template-Tech-Finals-2016.doc\">Application template -Tech Finals 2016</a></p>
+<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2015/11/ITC-Instructions.pdf\">ITC Instructions</a></p>
+<p>Please go through the instructions provided to apply for ITC.</p>
+<p><strong>Note:</strong> <strong>Application template</strong> submission deadline: <strong>25/11/2015 (8am)</strong></p>
+<p>Upload only <strong>1 page Tech. resume</strong> on the placement portal before <strong>24/11/2015 (11:59pm). </strong></p>
+<p>Any request will not be entertained on missing the deadline.</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3466") (comments nil "0")) (item nil (title nil "Cityflo JAF 1") (link nil "http://placements.iitb.ac.in/blog/?p=3459") (comments nil "http://placements.iitb.ac.in/blog/?p=3459#comments") (pubDate nil "Sat, 21 Nov 2015 11:36:57 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3459") (description nil "Now opened for GNR and IEOR department also") (encoded nil "<p>Now opened for GNR and IEOR department also <img src='http://placements.iitb.ac.in/blog/wp-includes/images/smilies/icon_smile.gif' alt=':-)' class='wp-smiley' /> </p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3459") (comments nil "0")) (item nil (title nil "Regarding Airbus Jaf") (link nil "http://placements.iitb.ac.in/blog/?p=3455") (comments nil "http://placements.iitb.ac.in/blog/?p=3455#comments") (pubDate nil "Sat, 21 Nov 2015 11:18:05 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3455") (description nil "Please mention the Job title as mentioned  in the Jafs in the form.") (encoded nil "<p>Please mention the Job title as mentioned  in the Jafs in the form.</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3455") (comments nil "0")) (item nil (title nil "Airbus Jaf Preference Reopen") (link nil "http://placements.iitb.ac.in/blog/?p=3449") (comments nil "http://placements.iitb.ac.in/blog/?p=3449#comments") (pubDate nil "Sat, 21 Nov 2015 10:49:04 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=3449") (description nil "All the eligible students can apply for multiple Jafs. They have to give their preference order by filling all the details in following link. In the form Position implies Job Title mentioned in the JAF. https://docs.google.com/forms/d/1qeunALENpHN59c5iuwiuC2Z841tm7nKtfZn4p52b44Y/viewform?usp=send_form &#160; Closing Date for JAF : 22 November 2015     11:55 PM") (encoded nil "<p>All the eligible students can apply for multiple Jafs. They have to give their preference order by filling all the details in following link.</p>
+<p>In the form <strong>Position implies Job Title</strong> mentioned in the JAF.</p>
+<p><strong>https://docs.google.com/forms/d/1qeunALENpHN59c5iuwiuC2Z841tm7nKtfZn4p52b44Y/viewform?usp=send_form</strong></p>
+<p>&nbsp;</p>
+<p>Closing Date for JAF : <strong>22 November 2015     11:55 PM</strong></p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=3449") (comments nil "0")))) ("PERI India JAF open" "<p>Last Date 22/01/2016, 11:59 PM</p>" "http://placements.iitb.ac.in/blog/?p=11112" (22174 9257) old 1 nil nil ((title nil "PERI India JAF open") (link nil "http://placements.iitb.ac.in/blog/?p=11112") (comments nil "http://placements.iitb.ac.in/blog/?p=11112#comments") (pubDate nil "Tue, 19 Jan 2016 11:55:21 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11112") (description nil "Last Date 22/01/2016, 11:59 PM") (encoded nil "<p>Last Date 22/01/2016, 11:59 PM</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11112") (comments nil "0"))) ("Hikal Ltd. : JAF Open" "<p>JAF closes on January 20, 2015 @ 11.59 PM.</p>" "http://placements.iitb.ac.in/blog/?p=11109" (22174 5759) old 2 nil nil ((title nil "Hikal Ltd. : JAF Open") (link nil "http://placements.iitb.ac.in/blog/?p=11109") (comments nil "http://placements.iitb.ac.in/blog/?p=11109#comments") (pubDate nil "Tue, 19 Jan 2016 10:57:03 +0000") (creator nil "ipt-member") (category nil "Announcements") (category nil "JAF opening") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11109") (description nil "JAF closes on January 20, 2015 @ 11.59 PM.") (encoded nil "<p>JAF closes on January 20, 2015 @ 11.59 PM.</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11109") (comments nil "0"))) ("ION Trading Online Test" "<p>Online Test at LC 001 from 8:00 PM</p>
+<p>Please carry laptops.</p>" "http://placements.iitb.ac.in/blog/?p=11107" (22174 3595) old 3 nil nil ((title nil "ION Trading Online Test") (link nil "http://placements.iitb.ac.in/blog/?p=11107") (comments nil "http://placements.iitb.ac.in/blog/?p=11107#comments") (pubDate nil "Tue, 19 Jan 2016 10:20:59 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11107") (description nil "Online Test at LC 001 from 8:00 PM Please carry laptops.") (encoded nil "<p>Online Test at LC 001 from 8:00 PM</p>
+<p>Please carry laptops.</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11107") (comments nil "0"))) ("PPT Venue ION Trading" "<p>LC 001</p>
+<p>From 12:30 PM</p>" "http://placements.iitb.ac.in/blog/?p=11104" (22173 46585) old 4 nil nil ((title nil "PPT Venue ION Trading") (link nil "http://placements.iitb.ac.in/blog/?p=11104") (comments nil "http://placements.iitb.ac.in/blog/?p=11104#comments") (pubDate nil "Tue, 19 Jan 2016 04:05:13 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11104") (description nil "LC 001 From 12:30 PM") (encoded nil "<p>LC 001</p>
+<p>From 12:30 PM</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11104") (comments nil "0"))) ("Fabtech Technologies JAF Open for all B Tech and Dual Degree" "<p>JAF closes at 11:59 pm on 19th January</p>" "http://placements.iitb.ac.in/blog/?p=11102" (22173 45141) old 5 nil nil ((title nil "Fabtech Technologies JAF Open for all B Tech and Dual Degree") (link nil "http://placements.iitb.ac.in/blog/?p=11102") (comments nil "http://placements.iitb.ac.in/blog/?p=11102#comments") (pubDate nil "Tue, 19 Jan 2016 03:41:09 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11102") (description nil "JAF closes at 11:59 pm on 19th January") (encoded nil "<p>JAF closes at 11:59 pm on 19th January</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11102") (comments nil "0"))) ("Hikal ltd ppt" "<p>Find ppt in the following link.</p>
+<p><a href=\"https://drive.google.com/file/d/0B1ddVoSPzJ5SVGk1QjZRaXVWVFU/view?usp=sharing\">https://drive.google.com/file/d/0B1ddVoSPzJ5SVGk1QjZRaXVWVFU/view?usp=sharing</a></p>" "http://placements.iitb.ac.in/blog/?p=11098" (22172 51355) old 6 nil nil ((title nil "Hikal ltd ppt") (link nil "http://placements.iitb.ac.in/blog/?p=11098") (comments nil "http://placements.iitb.ac.in/blog/?p=11098#comments") (pubDate nil "Mon, 18 Jan 2016 11:12:27 +0000") (creator nil "ipt-member") (category nil "Announcements") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11098") (description nil "Find ppt in the following link. https://drive.google.com/file/d/0B1ddVoSPzJ5SVGk1QjZRaXVWVFU/view?usp=sharing") (encoded nil "<p>Find ppt in the following link.</p>
+<p><a href=\"https://drive.google.com/file/d/0B1ddVoSPzJ5SVGk1QjZRaXVWVFU/view?usp=sharing\">https://drive.google.com/file/d/0B1ddVoSPzJ5SVGk1QjZRaXVWVFU/view?usp=sharing</a></p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11098") (comments nil "0"))) ("Coal India Shortlist !" "<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2016/01/Coal-India-Shortlisted-Candidates-for-Campus-selctions-at-IIT-Bombay.xlsx\">Coal India Shortlisted Candidates for Campus selctions at IIT Bombay</a></p>
+<p>Shortlisted candidates have received a mail on 15th Jan(Friday) from placement cell. Following students are requested to fill the form shared with you and respond to the mail immediately.</p>
+<p>Deven Mehetre<br />
+JAYANT RAJ<br />
+Aravind P<br />
+SHEES ALI<br />
+Himanshu Meena<br />
+Denzil Couto<br />
+Siddharth Annasa Kshatriya<br />
+PRAVEEN CHAUHAN<br />
+Anamika Aich<br />
+Sanghamitra jena<br />
+SUJIT KUMAR JENA</p>
+<p>Those who have already replied to the mail need not reply again.</p>
+<p>last date: Today(18/1/16, @ 11:59pm)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>" "http://placements.iitb.ac.in/blog/?p=11095" (22172 51247) old 7 nil nil ((title nil "Coal India Shortlist !") (link nil "http://placements.iitb.ac.in/blog/?p=11095") (comments nil "http://placements.iitb.ac.in/blog/?p=11095#comments") (pubDate nil "Mon, 18 Jan 2016 11:10:39 +0000") (creator nil "ipt-member") (category nil "Announcements") (category nil "Interview Shortlists") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11095") (description nil "Coal India Shortlisted Candidates for Campus selctions at IIT Bombay Shortlisted candidates have received a mail on 15th Jan(Friday) from placement cell. Following students are requested to fill the form shared with you and respond to the mail immediately. Deven Mehetre JAYANT RAJ Aravind P SHEES ALI Himanshu Meena Denzil Couto Siddharth Annasa Kshatriya PRAVEEN CHAUHAN [...]") (encoded nil "<p><a href=\"http://placements.iitb.ac.in/blog/wp-content/uploads/2016/01/Coal-India-Shortlisted-Candidates-for-Campus-selctions-at-IIT-Bombay.xlsx\">Coal India Shortlisted Candidates for Campus selctions at IIT Bombay</a></p>
+<p>Shortlisted candidates have received a mail on 15th Jan(Friday) from placement cell. Following students are requested to fill the form shared with you and respond to the mail immediately.</p>
+<p>Deven Mehetre<br />
+JAYANT RAJ<br />
+Aravind P<br />
+SHEES ALI<br />
+Himanshu Meena<br />
+Denzil Couto<br />
+Siddharth Annasa Kshatriya<br />
+PRAVEEN CHAUHAN<br />
+Anamika Aich<br />
+Sanghamitra jena<br />
+SUJIT KUMAR JENA</p>
+<p>Those who have already replied to the mail need not reply again.</p>
+<p>last date: Today(18/1/16, @ 11:59pm)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11095") (comments nil "0"))) ("ION Trading selection procedure" "<ul>
+<li>On 19/1/2016 there will be a PPT from 12:30 PM.</li>
+<li>Students who filled the JAF are asked to attend the PPT.</li>
+<li>The online test will be held on 19/1/2016 at 8:00 PM.</li>
+<li>Shortlisted students from the test have to visit the Delhi office of the company for final round interview.</li>
+<li>Flight ticket and accommodation will be provided by the company to all those who are selected for final interviews.</li>
+<li>Keep checking the blog for further updates.</li>
+</ul>" "http://placements.iitb.ac.in/blog/?p=11093" (22172 41139) old 8 nil nil ((title nil "ION Trading selection procedure") (link nil "http://placements.iitb.ac.in/blog/?p=11093") (comments nil "http://placements.iitb.ac.in/blog/?p=11093#comments") (pubDate nil "Mon, 18 Jan 2016 08:22:11 +0000") (creator nil "ipt-member") (category nil "Uncategorized") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11093") (description nil "On 19/1/2016 there will be a PPT from 12:30 PM. Students who filled the JAF are asked to attend the PPT. The online test will be held on 19/1/2016 at 8:00 PM. Shortlisted students from the test have to visit the Delhi office of the company for final round interview. Flight ticket and accommodation will [...]") (encoded nil "<ul>
+<li>On 19/1/2016 there will be a PPT from 12:30 PM.</li>
+<li>Students who filled the JAF are asked to attend the PPT.</li>
+<li>The online test will be held on 19/1/2016 at 8:00 PM.</li>
+<li>Shortlisted students from the test have to visit the Delhi office of the company for final round interview.</li>
+<li>Flight ticket and accommodation will be provided by the company to all those who are selected for final interviews.</li>
+<li>Keep checking the blog for further updates.</li>
+</ul>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11093") (comments nil "0"))) ("L&T ECC FINAL SELECTIONS" "<ol>
+<li>Michael C Joseph</li>
+<li>Naresh Chenghani</li>
+<li>Kameshwar Patel</li>
+<li>Arihant Jain</li>
+<li>Vishwas Singhal</li>
+<li>Sanjay Singh</li>
+</ol>
+<p>Please note that above selections are subject to being declared <strong>medically FIT in the pre-employment medical checkup</strong> &amp; passing the qualifying exam  in FIRST attempt with FIRST division ( 65% and above).</p>" "http://placements.iitb.ac.in/blog/?p=11088" (22172 33804) old 9 nil nil ((title nil "L&T ECC FINAL SELECTIONS") (link nil "http://placements.iitb.ac.in/blog/?p=11088") (comments nil "http://placements.iitb.ac.in/blog/?p=11088#comments") (pubDate nil "Mon, 18 Jan 2016 06:19:56 +0000") (creator nil "ipt-member") (category nil "Announcements") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11088") (description nil "Michael C Joseph Naresh Chenghani Kameshwar Patel Arihant Jain Vishwas Singhal Sanjay Singh Please note that above selections are subject to being declared medically FIT in the pre-employment medical checkup &#38; passing the qualifying exam  in FIRST attempt with FIRST division ( 65% and above).") (encoded nil "<ol>
+<li>Michael C Joseph</li>
+<li>Naresh Chenghani</li>
+<li>Kameshwar Patel</li>
+<li>Arihant Jain</li>
+<li>Vishwas Singhal</li>
+<li>Sanjay Singh</li>
+</ol>
+<p>Please note that above selections are subject to being declared <strong>medically FIT in the pre-employment medical checkup</strong> &amp; passing the qualifying exam  in FIRST attempt with FIRST division ( 65% and above).</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11088") (comments nil "0"))) ("Pipavav Interviews" "<p>Time: 2 pm</p>
+<p>Venue: Placement Office</p>" "http://placements.iitb.ac.in/blog/?p=11086" (22172 33508) old 10 nil nil ((title nil "Pipavav Interviews") (link nil "http://placements.iitb.ac.in/blog/?p=11086") (comments nil "http://placements.iitb.ac.in/blog/?p=11086#comments") (pubDate nil "Mon, 18 Jan 2016 06:15:00 +0000") (creator nil "ipt-member") (category nil "Announcements") (guid ((isPermaLink . "false")) "http://placements.iitb.ac.in/blog/?p=11086") (description nil "Time: 2 pm Venue: Placement Office") (encoded nil "<p>Time: 2 pm</p>
+<p>Venue: Placement Office</p>
+") (commentRss nil "http://placements.iitb.ac.in/blog/?feed=rss2&p=11086") (comments nil "0"))))

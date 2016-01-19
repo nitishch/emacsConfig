@@ -1,0 +1,44 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '(("www.linuxinsider.com"
+  [url-cookie "Apache" "103.21.126.78.86721437547143438" "21 Jul 16 06:39:03 [GMT]" "/" "www.linuxinsider.com" nil])
+ (".quantamagazine.org"
+  [url-cookie "HttpOnly" nil "29 Dec 16 06:32:40 [GMT]" "/" ".quantamagazine.org" nil]
+  [url-cookie "__cfduid" "d33a215217404521741f91b1af9cb42b51451457160" "29 Dec 16 06:32:40 [GMT]" "/" ".quantamagazine.org" nil])
+ ("pragmaticemacs.com"
+  [url-cookie "httponly" nil "18-Jan-2016 15:50:38.00 GMT" "/" "pragmaticemacs.com" nil]
+  [url-cookie "_clef_state" "WU7mDJ5bfKIPF5bRVQHLiJTe" "18-Jan-2016 15:50:38.00 GMT" "/" "pragmaticemacs.com" nil])
+ (".stackexchange.com"
+  [url-cookie "prov" "ac23d54a-0ff5-400b-9f2c-db83af5f31f4" "01-Jan-2055 00:00:00.00 GMT" "/" ".stackexchange.com" nil]
+  [url-cookie "HttpOnly" nil "01-Jan-2055 00:00:00.00 GMT" "/" ".stackexchange.com" nil]
+  [url-cookie "__cfduid" "d32b1f6ddf2af73c81ca5526aadcbd6201440994554" "30 Aug 16 04:15:54 [GMT]" "/" ".stackexchange.com" nil])
+ (".realtimerendering.com"
+  [url-cookie "__cfduid" "d8e4f151d4c8781e832c67820c693d2be1440225887" "21 Aug 16 06:44:47 [GMT]" "/" ".realtimerendering.com" nil]
+  [url-cookie "HttpOnly" nil "21 Aug 16 06:44:47 [GMT]" "/" ".realtimerendering.com" nil])
+ (".duolingo.com"
+  [url-cookie "lang" "en" "30-Aug-2016 05:17:10.00 GMT" "/" ".duolingo.com" nil]
+  [url-cookie "Max-Age" "31536000" "30-Aug-2016 05:17:10.00 GMT" "/" ".duolingo.com" nil]
+  [url-cookie "duo_ab" "511696fa05a5e5adc28a26c6ccebac0866a273e2eyJ3ZWJfc2Nob29sc19zcGxhc2hfZXhwZXJpbWVudCI6IGZhbHNlLCAiY291cnNlX3RpdGxlX2V4cGVyaW1lbnQiOiBmYWxzZSwgImNvdXJzZV9idXR0b25fZXhwZXJpbWVudDIiOiBmYWxzZSwgInNpZ251cF9tb2RhbF9idXR0b25zX2V4cGVyaW1lbnQiOiB0cnVlLCAibG9naW5fbW9kYWxfZXhwZXJpbWVudCI6IGZhbHNlfQ\\075\\075" "30-Aug-2016 05:17:10.00 GMT" "/" ".duolingo.com" nil])
+ ("www.wikipedia.com"
+  [url-cookie "WMF-Last-Access" "13-Jan-2016" "Sun, 14 Feb 2016 00:00:00 GMT" "/" "www.wikipedia.com" nil]
+  [url-cookie "HttpOnly" nil "Sun, 14 Feb 2016 00:00:00 GMT" "/" "www.wikipedia.com" nil])
+ ("www.wikipedia.org"
+  [url-cookie "WMF-Last-Access" "13-Jan-2016" "Sun, 14 Feb 2016 00:00:00 GMT" "/" "www.wikipedia.org" nil]
+  [url-cookie "HttpOnly" nil "Sun, 14 Feb 2016 00:00:00 GMT" "/" "www.wikipedia.org" nil])
+ ("de.wikipedia.org"
+  [url-cookie "WMF-Last-Access" "13-Jan-2016" "Sun, 14 Feb 2016 00:00:00 GMT" "/" "de.wikipedia.org" nil]
+  [url-cookie "HttpOnly" nil "Sun, 14 Feb 2016 00:00:00 GMT" "/" "de.wikipedia.org" nil])
+ (".google.co.in"
+  [url-cookie "HttpOnly" nil "06-Feb-2016 12:16:52.00 GMT" "/" ".google.co.in" nil]
+  [url-cookie "NID" "70=fUp0M68rHdDUGE31G7R9j-l0m5FQBlo4BxV_xExJmKf-OW-Jy76WMmfE0FRm1-oxUM55-Y8Q6LhjbhkCsFhmH35ZDk8nNAEIt6_mDAl7FgsXG04CwUdYMl46_vOt93xu" "06-Feb-2016 12:16:52.00 GMT" "/" ".google.co.in" nil]
+  [url-cookie "PREF" "ID=1111111111111111:FF=0:TM=1438949812:LM=1438949812:V=1:S=uTBv8KT-V0wnFvgk" "06-Aug-2017 12:16:52.00 GMT" "/" ".google.co.in" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:
